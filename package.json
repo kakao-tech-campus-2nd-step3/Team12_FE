@@ -10,7 +10,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@typescript-eslint/eslint-plugin": "7.0.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },
@@ -19,6 +18,7 @@
     "@types/eslint-plugin-jsx-a11y": "^6",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
+    "@typescript-eslint/eslint-plugin": "^8.6.0",
     "@typescript-eslint/parser": "^8.6.0",
     "@vitejs/plugin-react-swc": "^3.5.0",
     "eslint": "8.57.0",
@@ -32,7 +32,8 @@
     "globals": "^15.9.0",
     "typescript": "^5.5.3",
     "typescript-eslint": "^8.0.1",
-    "vite": "^5.4.1"
+    "vite": "^5.4.1",
+    "vite-tsconfig-paths": "^5.0.1"
   },
   "packageManager": "yarn@4.5.0+sha512.837566d24eec14ec0f5f1411adb544e892b3454255e61fdef8fd05f3429480102806bac7446bc9daff3896b01ae4b62d00096c7e989f1596f2af10b927532f39"
 }
