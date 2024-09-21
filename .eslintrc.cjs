@@ -6,7 +6,7 @@ module.exports = {
   "extends": [
     "airbnb", "airbnb/hooks", "airbnb-typescript"
   ],
-  "ignorePatterns": ["*.pnp.*", "*.config.ts", "node_modules", ".yarn"],
+  "ignorePatterns": ["*.pnp.*", "*.config.ts", "node_modules", ".yarn", ".eslintrc.cjs"],
   "overrides": [
     {
       "env": {
