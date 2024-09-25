@@ -4,7 +4,7 @@ module.exports = {
     "es2021": true
   },
   "extends": [
-    "airbnb", "airbnb/hooks", "airbnb-typescript"
+    "airbnb", "airbnb/hooks", "airbnb-typescript", "@feature-sliced"
   ],
   "ignorePatterns": ["*.pnp.*", "*.config.ts", "node_modules", ".yarn", ".eslintrc.cjs"],
   "overrides": [
@@ -30,6 +30,13 @@ module.exports = {
     "@typescript-eslint",
     "react"
   ],
+  "settings": {
+    "import/resolver": {
+      "typescript": {
+        "alwaysTryTypes": true
+      }
+    },
+  },
   "rules": {
     "react/react-in-jsx-scope": 'off',
     'import/extensions': [
@@ -42,6 +49,12 @@ module.exports = {
         'ts': 'never',
         'tsx': 'never'
       }
+    ],
+    'import/no-internal-modules': [
+      'error',
+      {
+        forbid: ["@*/**/*"],
+      },
     ],
   }
 }
