@@ -17,9 +17,8 @@ jobs:
         uses: 'actions/setup-node@v4'
         with:
           node-version: '20'
-          cache: yarn
       - name: yarn berry setup
-        run: yarn set version berry
+        run: corepack enable && yarn set version berry
       - name: install dependencies
         run: yarn
       - name: run test
