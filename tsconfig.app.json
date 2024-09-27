@@ -23,12 +23,12 @@
     "baseUrl": "src",
     "paths": {
       "@/*": ["*"],
-      "@app/*": ["*"],
-      "@pages/*": ["*"],
-      "@widgets/*": ["*"],
-      "@features/*": ["*"],
-      "@entities/*": ["*"],
-      "@shared/*": ["*"]
+      "@app/*": ["app/*"],
+      "@pages/*": ["pages/*"],
+      "@widgets/*": ["widgets/*"],
+      "@features/*": ["features/*"],
+      "@entities/*": ["entities/*"],
+      "@shared/*": ["shared/*"]
     }
   },
   "include": ["src"]
