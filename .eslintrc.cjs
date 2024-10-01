@@ -4,7 +4,11 @@ module.exports = {
     "es2021": true
   },
   "extends": [
-    "airbnb", "airbnb/hooks", "airbnb-typescript", "@feature-sliced"
+    "airbnb",
+    "airbnb/hooks",
+    "airbnb-typescript",
+    "@feature-sliced",
+    "plugin:storybook/recommended"
   ],
   "ignorePatterns": ["*.pnp.*", "*.config.ts", "node_modules", ".yarn", ".eslintrc.cjs"],
   "overrides": [
