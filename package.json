@@ -13,10 +13,14 @@
     "ci": "yarn lint && yarn test:ci && yarn build"
   },
   "dependencies": {
+    "@emotion/react": "^11.13.3",
+    "@emotion/styled": "^11.13.0",
+    "emotion-normalize": "^11.0.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },
   "devDependencies": {
+    "@emotion/babel-plugin": "^11.12.0",
     "@eslint/js": "^9.9.0",
     "@feature-sliced/eslint-config": "^0.1.1",
     "@types/eslint-plugin-jsx-a11y": "^6",
@@ -42,5 +46,5 @@
     "vite-tsconfig-paths": "^5.0.1",
     "vitest": "^2.1.1"
   },
-  "packageManager": "yarn@4.5.0+sha512.837566d24eec14ec0f5f1411adb544e892b3454255e61fdef8fd05f3429480102806bac7446bc9daff3896b01ae4b62d00096c7e989f1596f2af10b927532f39"
+  "packageManager": "yarn@4.5.0"
 }
