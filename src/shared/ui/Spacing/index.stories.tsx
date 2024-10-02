@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Spacing } from '.';
+import Spacing from '.';
 
 /* eslint-disable */
 

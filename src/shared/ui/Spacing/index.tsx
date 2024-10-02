@@ -17,10 +17,6 @@ type Props = {
   backgroundColor?: string;
 } & React.HTMLAttributes<HTMLDivElement>;
 
-export function Spacing({ height, backgroundColor = 'inherit', ...props }: Props) {
-  return <Wrapper height={height} backgroundColor={backgroundColor} {...props} />;
-}
-
 const Wrapper = styled.div<Pick<Props, 'height' | 'backgroundColor'>>(
   {
     width: '100%',
@@ -39,3 +35,8 @@ const Wrapper = styled.div<Pick<Props, 'height' | 'backgroundColor'>>(
       .join(' ');
   },
 );
+
+export default function Spacing({ height, backgroundColor = 'inherit', ...props }: Props) {
+  // eslint-disable-next-line react/jsx-props-no-spreading
+  return <Wrapper height={height} backgroundColor={backgroundColor} {...props} />;
+}
