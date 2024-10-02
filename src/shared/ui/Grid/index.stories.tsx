@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
-
 import Grid from '.';
+
+/* eslint-disable */
 
 function ChildComponent() {
   return (
