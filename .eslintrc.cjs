@@ -10,7 +10,7 @@ module.exports = {
     "@feature-sliced",
     "plugin:storybook/recommended"
   ],
-  "ignorePatterns": ["*.pnp.*", "*.config.ts", "node_modules", ".yarn", ".eslintrc.cjs"],
+  "ignorePatterns": ["*.pnp.*", "*.config.ts", "node_modules", ".yarn", ".eslintrc.cjs", "dist/**", "**/*.stories.tsx"],
   "overrides": [
     {
       "env": {
