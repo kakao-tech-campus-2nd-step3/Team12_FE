@@ -21,8 +21,8 @@ const Wrapper = styled.div<Pick<Props, 'height' | 'backgroundColor'>>(
   {
     width: '100%',
   },
-  ({ backgroundColor }: { backgroundColor: string }) => ({ backgroundColor }),
-  ({ height = 16 }) => {
+  ({ backgroundColor }: { backgroundColor?: string }) => ({ backgroundColor: backgroundColor ?? 'inherit' }),
+  ({ height = 16 } : { height?: number | ResponseGridStyle }) => {
     if (typeof height === 'number') {
       return {
         height: `${height}px`,
