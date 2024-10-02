@@ -39,7 +39,7 @@ const Wrapper = styled.div<Pick<Props, 'columns' | 'gap'>>(
   },
 );
 
-function Grid({ children, columns, ...props }: Props): JSX.Element {
+export default function Grid({ children, columns, ...props }: Props): JSX.Element {
   return (
   // eslint-disable-next-line react/jsx-props-no-spreading
     <Wrapper columns={columns} {...props}>
@@ -47,5 +47,3 @@ function Grid({ children, columns, ...props }: Props): JSX.Element {
     </Wrapper>
   );
 }
-
-export default Grid;
