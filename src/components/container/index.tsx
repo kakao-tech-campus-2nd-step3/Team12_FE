@@ -31,7 +31,7 @@ function StyledContainer({
   );
 }
 
-export function Container({
+function Container({
   children, direction, justify, align, width, height, gap,
 }: ContainerProps) {
   return (
@@ -47,3 +47,5 @@ export function Container({
     </StyledContainer>
   );
 }
+
+export default Container;
