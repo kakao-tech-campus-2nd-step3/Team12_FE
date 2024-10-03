@@ -4,7 +4,10 @@ module.exports = {
     "es2021": true
   },
   "extends": [
-    "airbnb", "airbnb/hooks", "airbnb-typescript"
+    "airbnb",
+    "airbnb/hooks",
+    "airbnb-typescript",
+    "plugin:storybook/recommended"
   ],
   "ignorePatterns": ["*.pnp.*", "*.config.ts", "node_modules", ".yarn", ".eslintrc.cjs"],
   "overrides": [
@@ -49,6 +52,8 @@ module.exports = {
       {
         ignore: ['css'],
       }
-    ]
+    ],
+    'react/jsx-props-no-spreading': 'off',
+    '@typescript-eslint/no-use-before-define': 'off'
   },
 }
