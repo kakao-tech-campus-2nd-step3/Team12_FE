@@ -43,5 +43,12 @@ module.exports = {
         'tsx': 'never'
       }
     ],
-  }
+    'react/require-default-props': 'off',
+    'react/no-unknown-property': [
+      'error',
+      {
+        ignore: ['css'],
+      }
+    ]
+  },
 }
