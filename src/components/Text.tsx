@@ -3,10 +3,12 @@ import styled from '@emotion/styled';
 
 export type FontWeight = 'regular' | 'medium' | 'bold' | 'lighter' | 'bolder';
 
-export interface TextProps {
+interface TextProps {
   children: ReactNode;
   weight?: FontWeight;
+  // eslint-disable-next-line react/no-unused-prop-types
   as?: ElementType;
+  // eslint-disable-next-line react/no-unused-prop-types
   fontSize?: string;
 }
 
