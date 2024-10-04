@@ -34,13 +34,6 @@ module.exports = {
     "@typescript-eslint",
     "react"
   ],
-  "settings": {
-    "import/resolver": {
-      "typescript": {
-        "alwaysTryTypes": true
-      }
-    },
-  },
   "rules": {
     "react/react-in-jsx-scope": 'off',
     "react/require-default-props": "off",
@@ -54,12 +47,6 @@ module.exports = {
         'ts': 'never',
         'tsx': 'never'
       }
-    ],
-    'import/no-internal-modules': [
-      'error',
-      {
-        forbid: ["@*/**/*"],
-      },
     ],
   }
 }
