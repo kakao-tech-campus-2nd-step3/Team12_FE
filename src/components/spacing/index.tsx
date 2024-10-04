@@ -9,6 +9,7 @@ const vars = {
 };
 
 type ResponseGridStyle = {
+  // eslint-disable-next-line
   [key in keyof typeof vars]?: number;
 };
 
@@ -37,6 +38,5 @@ const Wrapper = styled.div<Pick<Props, 'height' | 'backgroundColor'>>(
 );
 
 export default function Spacing({ height, backgroundColor = 'inherit', ...props }: Props) {
-  // eslint-disable-next-line react/jsx-props-no-spreading
   return <Wrapper height={height} backgroundColor={backgroundColor} {...props} />;
 }

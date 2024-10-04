@@ -9,6 +9,7 @@ const vars = {
 };
 
 type ResponseGridStyle = {
+  // eslint-disable-next-line
   [key in keyof typeof vars]?: number;
 };
 
@@ -41,7 +42,6 @@ const Wrapper = styled.div<Pick<Props, 'columns' | 'gap'>>(
 
 export default function Grid({ children, columns, ...props }: Props): JSX.Element {
   return (
-  // eslint-disable-next-line react/jsx-props-no-spreading
     <Wrapper columns={columns} {...props}>
       {children}
     </Wrapper>

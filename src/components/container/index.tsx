@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import styled from '@emotion/styled';
+import { css } from '@emotion/react';
 
 export interface ContainerProps {
   children?: ReactNode;
@@ -11,17 +11,27 @@ export interface ContainerProps {
   gap?: string;
 }
 
-const StyledContainer = styled.div<ContainerProps>`
-  display: flex;
-  flex-direction: ${({ direction }) => direction || 'column'};
-  justify-content: ${({ justify }) => justify || 'center'};
-  align-items: ${({ align }) => align || 'center'};
-  width: ${({ width }) => width || '100%'};
-  height: ${({ height }) => height || 'auto'};
-  gap: ${({ gap }) => gap || '0'};
-`;
+function StyledContainer({
+  children, direction, justify, align, width, height, gap,
+}: ContainerProps) {
+  const style = css`
+    display: flex;
+    flex-direction: ${direction || 'column'};
+    justify-content: ${justify || 'center'};
+    align-items: ${align || 'center'};
+    width: ${width || '100%'};
+    height: ${height || 'auto'};
+    gap: ${gap || '0'};
+  `;
 
-export function Container({
+  return (
+    <div css={style}>
+      {children}
+    </div>
+  );
+}
+
+function Container({
   children, direction, justify, align, width, height, gap,
 }: ContainerProps) {
   return (
@@ -37,3 +47,5 @@ export function Container({
     </StyledContainer>
   );
 }
+
+export default Container;
