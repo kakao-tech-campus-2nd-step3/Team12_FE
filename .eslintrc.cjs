@@ -4,9 +4,12 @@ module.exports = {
     "es2021": true
   },
   "extends": [
-    "airbnb", "airbnb/hooks", "airbnb-typescript", "@feature-sliced"
+    "airbnb",
+    "airbnb/hooks",
+    "airbnb-typescript",
+    "plugin:storybook/recommended"
   ],
-  "ignorePatterns": ["*.pnp.*", "*.config.ts", "node_modules", ".yarn", ".eslintrc.cjs"],
+  "ignorePatterns": ["*.pnp.*", "*.config.ts", "node_modules", ".yarn", ".eslintrc.cjs", "dist/**", "**/*.stories.tsx"],
   "overrides": [
     {
       "env": {
@@ -30,13 +33,6 @@ module.exports = {
     "@typescript-eslint",
     "react"
   ],
-  "settings": {
-    "import/resolver": {
-      "typescript": {
-        "alwaysTryTypes": true
-      }
-    },
-  },
   "rules": {
     "react/react-in-jsx-scope": 'off',
     'import/extensions': [
@@ -50,11 +46,14 @@ module.exports = {
         'tsx': 'never'
       }
     ],
-    'import/no-internal-modules': [
+    'react/require-default-props': 'off',
+    'react/no-unknown-property': [
       'error',
       {
-        forbid: ["@*/**/*"],
-      },
+        ignore: ['css'],
+      }
     ],
-  }
+    'react/jsx-props-no-spreading': 'off',
+    '@typescript-eslint/no-use-before-define': 'off'
+  },
 }
