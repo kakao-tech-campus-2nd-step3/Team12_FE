@@ -1,3 +1,5 @@
+import '@emotion/react';
+
 export type ButtonVariants = 'default' | 'dark' | 'light-outlined';
 
 export type TagVariants = 'default' | 'primary';
@@ -51,6 +53,13 @@ export type Theme = {
   colors: Colors;
   corners: Corners;
 };
+
+declare module '@emotion/react' {
+  export interface Theme {
+    colors: Colors;
+    corners: Corners;
+  }
+}
 
 export type Sliced<T> = {
   [K in keyof T]?: Partial<T[K]>
