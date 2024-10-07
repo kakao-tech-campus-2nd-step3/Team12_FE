@@ -2,18 +2,18 @@ import { ButtonHTMLAttributes, forwardRef, ReactNode } from 'react';
 import { CSSObject } from '@emotion/react';
 import DynamicIcon from '@components/internal/dynamic-icon';
 import useButtonStyle from '@components/button/useButtonStyle';
-import { ButtonTheme } from '@/types';
+import { ButtonVariants } from '@/types';
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   css?: CSSObject;
-  buttonTheme?: ButtonTheme;
+  variant?: ButtonVariants;
   icon?: ReactNode | string;
 }
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(({
-  children, buttonTheme = 'default', css, icon, ...rest
+  children, variant = 'default', css, icon, ...rest
 }: ButtonProps, ref) => {
-  const { buttonStyle, buttonIconStyle } = useButtonStyle({ buttonTheme });
+  const { buttonStyle, buttonIconStyle } = useButtonStyle({ variant });
 
   return (
     <button

@@ -4,19 +4,19 @@ import { CSSObject } from '@emotion/react';
 import CloseButton from '@assets/icons/x.svg?react';
 import useTagStyle from '@components/tag/useTagStyle';
 import useTheme from '@hooks/useTheme';
-import { TagTheme } from '@/types';
+import { TagVariants } from '@/types';
 
 interface TagProps {
   icon?: ReactNode | string;
   children?: ReactNode;
   css?: CSSObject;
-  tagTheme?: TagTheme;
+  variant?: TagVariants;
   enableClose?: boolean;
   onClose?: MouseEventHandler<HTMLImageElement>;
 }
 
 function Tag({
-  icon, css, children, tagTheme = 'default', enableClose, onClose,
+  icon, css, children, variant = 'default', enableClose, onClose,
 }: TagProps) {
   const {
     tagContainerStyle,
@@ -24,7 +24,7 @@ function Tag({
     tagStyle,
     closeIconContainerStyle,
   } = useTagStyle({
-    enableClose, tagTheme,
+    enableClose, variant,
   });
   const theme = useTheme();
 
@@ -42,7 +42,7 @@ function Tag({
         enableClose
         && (
           <div css={[closeIconContainerStyle, css]} onClick={onClose} role="presentation">
-            <CloseButton stroke={tagTheme === 'default' ? theme.colors.text.moderate : theme.colors.primary.main} />
+            <CloseButton stroke={variant === 'default' ? theme.colors.text.moderate : theme.colors.primary.main} />
           </div>
         )
       }
