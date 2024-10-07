@@ -19,16 +19,19 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
+    "jsxImportSource": "@emotion/react",
 
     "baseUrl": "src",
     "paths": {
       "@/*": ["*"],
-      "@app/*": ["*"],
-      "@pages/*": ["*"],
-      "@widgets/*": ["*"],
-      "@features/*": ["*"],
-      "@entities/*": ["*"],
-      "@shared/*": ["*"]
+      "@components/*": ["components/*"],
+      "@constants/*": ["constants/*"],
+      "@features/*": ["features/*"],
+      "@hooks/*": ["hooks/*"],
+      "@pages/*": ["pages/*"],
+      "@assets/*": ["assets/*"],
+      "@styles/*": ["styles/*"],
+      "@providers/*": ["providers/*"],
     }
   },
   "include": ["src"]

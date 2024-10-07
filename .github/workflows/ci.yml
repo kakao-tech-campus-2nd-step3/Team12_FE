@@ -1,0 +1,29 @@
+name: ci
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - 'develop/**'
+      - 'weekly/**'
+jobs:
+  init:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout source code
+        uses: 'actions/checkout@v4'
+      - name: init yarn
+        uses: 'actions/setup-node@v4'
+        with:
+          node-version: '20'
+      - name: yarn berry setup
+        run: corepack enable && yarn set version berry
+      - name: install dependencies
+        run: yarn
+      - name: run eslint
+        run: yarn lint
+      - name: run vitest
+        run: yarn test:ci
+      - name: build test
+        run: yarn build
