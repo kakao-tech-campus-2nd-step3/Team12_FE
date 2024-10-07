@@ -3,10 +3,10 @@ import { css } from '@emotion/react';
 import { ButtonTheme } from '@/types';
 
 interface UseButtonStyleProps {
-  buttonTheme?: ButtonTheme;
+  variant?: ButtonTheme;
 }
 
-function useButtonStyle({ buttonTheme = 'default' }: UseButtonStyleProps) {
+function useButtonStyle({ variant = 'default' }: UseButtonStyleProps) {
   const globalTheme = useTheme();
 
   const buttonStyle = css`
@@ -16,7 +16,7 @@ function useButtonStyle({ buttonTheme = 'default' }: UseButtonStyleProps) {
     outline: none;
     padding: 10px 18px;
     border-radius: 100px;
-    color: ${buttonTheme === 'dark' ? globalTheme.colors.primary.main : globalTheme.colors.text.prominent};
+    color: ${variant === 'dark' ? globalTheme.colors.primary.main : globalTheme.colors.text.prominent};
     border: ${getBorderStyle()};
     background-color: ${getBackgroundColor()};
     transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
@@ -35,11 +35,11 @@ function useButtonStyle({ buttonTheme = 'default' }: UseButtonStyleProps) {
   `;
 
   function getBackgroundColor() {
-    if (buttonTheme === 'light-outlined') {
+    if (variant === 'light-outlined') {
       return 'transparent';
     }
 
-    if (buttonTheme === 'dark') {
+    if (variant === 'dark') {
       return globalTheme.colors.text.prominent;
     }
 
@@ -47,21 +47,21 @@ function useButtonStyle({ buttonTheme = 'default' }: UseButtonStyleProps) {
   }
 
   function getBorderStyle() {
-    if (buttonTheme === 'light-outlined') {
+    if (variant === 'light-outlined') {
       return `2px solid ${globalTheme.colors.absolute.black}`;
     }
 
     const baseStyle = '1px solid ';
 
-    return baseStyle + (buttonTheme === 'dark' ? 'transparent' : globalTheme.colors.text.subtle);
+    return baseStyle + (variant === 'dark' ? 'transparent' : globalTheme.colors.text.subtle);
   }
 
   function getHoverBackgroundColor() {
-    if (buttonTheme === 'light-outlined') {
+    if (variant === 'light-outlined') {
       return globalTheme.colors.text.prominent;
     }
 
-    if (buttonTheme === 'dark') {
+    if (variant === 'dark') {
       return globalTheme.colors.primary.main;
     }
 
@@ -69,7 +69,7 @@ function useButtonStyle({ buttonTheme = 'default' }: UseButtonStyleProps) {
   }
 
   function getHoverColor() {
-    if (buttonTheme === 'light-outlined') {
+    if (variant === 'light-outlined') {
       return globalTheme.colors.background.main;
     }
 
@@ -77,11 +77,11 @@ function useButtonStyle({ buttonTheme = 'default' }: UseButtonStyleProps) {
   }
 
   function getHoverBorderColor() {
-    if (buttonTheme === 'light-outlined') {
+    if (variant === 'light-outlined') {
       return globalTheme.colors.absolute.black;
     }
 
-    return buttonTheme === 'dark' ? globalTheme.colors.primary.main : globalTheme.colors.border.prominent;
+    return variant === 'dark' ? globalTheme.colors.primary.main : globalTheme.colors.border.prominent;
   }
 
   return {
