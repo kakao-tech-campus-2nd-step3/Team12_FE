@@ -1,8 +1,9 @@
 import { MouseEventHandler, ReactNode } from 'react';
 import DynamicIcon from '@components/internal/dynamic-icon';
-import { CSSObject, useTheme } from '@emotion/react';
+import { CSSObject } from '@emotion/react';
 import CloseButton from '@assets/icons/x.svg?react';
 import useTagStyle from '@components/tag/useTagStyle';
+import useTheme from '@hooks/useTheme';
 import { TagVariants } from '@/types';
 
 interface TagProps {
