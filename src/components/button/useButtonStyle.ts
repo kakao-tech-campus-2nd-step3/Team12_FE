@@ -1,9 +1,9 @@
 import useTheme from '@hooks/useTheme';
 import { css } from '@emotion/react';
-import { ButtonTheme } from '@/types';
+import { ButtonVariants } from '@/types';
 
 interface UseButtonStyleProps {
-  variant?: ButtonTheme;
+  variant?: ButtonVariants;
 }
 
 function useButtonStyle({ variant = 'default' }: UseButtonStyleProps) {

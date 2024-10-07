@@ -4,13 +4,13 @@ import { CSSObject } from '@emotion/react';
 import CloseButton from '@assets/icons/x.svg?react';
 import useTagStyle from '@components/tag/useTagStyle';
 import useTheme from '@hooks/useTheme';
-import { TagTheme } from '@/types';
+import { TagVariants } from '@/types';
 
 interface TagProps {
   icon?: ReactNode | string;
   children?: ReactNode;
   css?: CSSObject;
-  variant?: TagTheme;
+  variant?: TagVariants;
   enableClose?: boolean;
   onClose?: MouseEventHandler<HTMLImageElement>;
 }

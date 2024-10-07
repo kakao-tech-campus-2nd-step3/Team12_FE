@@ -1,6 +1,6 @@
-export type ButtonTheme = 'default' | 'dark' | 'light-outlined';
+export type ButtonVariants = 'default' | 'dark' | 'light-outlined';
 
-export type TagTheme = 'default' | 'primary';
+export type TagVariants = 'default' | 'primary';
 
 export type Colors = {
   primary: {

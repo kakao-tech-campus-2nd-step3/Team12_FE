@@ -1,10 +1,10 @@
 import { css } from '@emotion/react';
 import useTheme from '@hooks/useTheme';
-import { TagTheme } from '@/types';
+import { TagVariants } from '@/types';
 
 interface UseTagStyleProps {
   enableClose?: boolean;
-  variant?: TagTheme;
+  variant?: TagVariants;
 }
 
 function useTagStyle({ enableClose, variant }: UseTagStyleProps) {
