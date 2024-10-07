@@ -49,11 +49,6 @@ export type Corners = {
   round: string;
 };
 
-export type Theme = {
-  colors: Colors;
-  corners: Corners;
-};
-
 declare module '@emotion/react' {
   export interface Theme {
     colors: Colors;
