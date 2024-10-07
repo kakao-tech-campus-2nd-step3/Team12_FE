@@ -1,5 +1,4 @@
-import useTheme from '@hooks/useTheme';
-import { css } from '@emotion/react';
+import { css, useTheme } from '@emotion/react';
 
 function useCheckboxStyle() {
   const theme = useTheme();

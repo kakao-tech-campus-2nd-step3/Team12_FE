@@ -1,5 +1,4 @@
-import { css } from '@emotion/react';
-import useTheme from '@hooks/useTheme';
+import { css, useTheme } from '@emotion/react';
 
 function useSwitchStyle() {
   const theme = useTheme();
