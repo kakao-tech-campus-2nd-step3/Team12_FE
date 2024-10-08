@@ -1,4 +1,5 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import Test from '@/pages/test';
 
 const router = createBrowserRouter([
   {
@@ -7,6 +8,14 @@ const router = createBrowserRouter([
       <div>Hello World</div>
     ),
   },
+  {
+    path: '/test',
+    element: (
+      <>
+        <Test />
+      </>
+    ),
+  }
 ]);
 
 function BrowserRouterProvider() {
