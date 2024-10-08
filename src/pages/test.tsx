@@ -16,8 +16,33 @@ function Test() {
   return (
     <div>
       <button onClick={() => setShowModal(true)}>Click!!</button>
+      <h1>scroll test!!</h1>
+      <h1>scroll test!!</h1>
+      <h1>scroll test!!</h1>
+      <h1>scroll test!!</h1>
+      <h1>scroll test!!</h1>
+      <h1>scroll test!!</h1>
+      <h1>scroll test!!</h1>
+      <h1>scroll test!!</h1>
+      <h1>scroll test!!</h1>
+      <h1>scroll test!!</h1>
+      <h1>scroll test!!</h1>
+      <h1>scroll test!!</h1>
+      <h1>scroll test!!</h1>
+      <h1>scroll test!!</h1>
+      <h1>scroll test!!</h1>
+      <h1>scroll test!!</h1>
+      <h1>scroll test!!</h1>
+      <h1>scroll test!!</h1>
+      <h1>scroll test!!</h1>
+      <h1>scroll test!!</h1>
+      <h1>scroll test!!</h1>
+      <h1>scroll test!!</h1>
+      <h1>scroll test!!</h1>
+      <h1>scroll test!!</h1>
+      <h1>scroll test!!</h1>
       {showModal && (
-        <Modal onClose={() => setShowModal(false) } width="400px" height="400px">
+        <Modal onClose={() => setShowModal(false) } width="400px" height="400px" open={showModal}>
           <StyledContent>
             <h1>모달창</h1>
             <p>모달 내용</p>

@@ -34,9 +34,19 @@ interface ModalProps {
   children: React.ReactNode;
   width?: string;
   height?: string;
+  open?: boolean;
 }
 
-const Modal: React.FC<ModalProps> = ({ onClose, children, width, height}) => {
+const Modal: React.FC<ModalProps> = ({ onClose, children, width, height, open}) => {
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = "hidden";
+    }
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [open]);
+
   useEffect(() => {
     const preventGoBack = () => {
       history.go(1);
