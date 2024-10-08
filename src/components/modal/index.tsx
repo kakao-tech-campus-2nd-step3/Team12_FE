@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import styled from '@emotion/styled';
 import colorTheme from '@/styles/colors';
@@ -37,6 +37,16 @@ interface ModalProps {
 }
 
 const Modal: React.FC<ModalProps> = ({ onClose, children, width, height}) => {
+  useEffect(() => {
+    const preventGoBack = () => {
+      history.go(1);
+      onClose();
+    };
+    history.pushState(null, "", location.href);
+    window.addEventListener("popstate", preventGoBack);
+
+    return () => window.removeEventListener("popstate", preventGoBack);
+  }, [onClose]);
   return ReactDOM.createPortal(
     <>
       <div className="modal-content">
