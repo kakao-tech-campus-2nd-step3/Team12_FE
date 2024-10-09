@@ -44,7 +44,7 @@ const Modal: React.FC<ModalProps> = ({
 
   const handleModalClick = (e: React.MouseEvent) => {
     e.stopPropagation();
-  }
+  };
 
   return ReactDOM.createPortal(
     <ModalOverlay onClick={handleOverlayClick}>
@@ -65,6 +65,7 @@ const ModalOverlay = styled.div`
   left: 0;
   width: 100vw;
   height: 100vh;
+  z-index: 999;
   background-color: rgba(0, 0, 0, 0.5);
 `;
 
