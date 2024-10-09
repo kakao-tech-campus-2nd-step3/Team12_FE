@@ -39,15 +39,26 @@ const Modal: React.FC<ModalProps> = ({
   }, [onClose, navigate, location]);
 
   return ReactDOM.createPortal(
-    <ModalContainer width={width} height={height}>
-      <Button onClick={onClose}>&times;</Button>
-      <div>{children}</div>
-    </ModalContainer>,
+    <ModalOverlay>
+      <ModalContainer width={width} height={height}>
+        <Button onClick={onClose}>&times;</Button>
+        <div>{children}</div>
+      </ModalContainer>
+    </ModalOverlay>,
     document.getElementById('modal-root') as HTMLElement,
   );
 };
 
 export default Modal;
+
+const ModalOverlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+`;
 
 const ModalContainer = styled.div<{ width?: string, height?: string }>`
   position: fixed;
