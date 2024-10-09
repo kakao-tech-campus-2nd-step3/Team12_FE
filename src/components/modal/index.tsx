@@ -38,9 +38,17 @@ const Modal: React.FC<ModalProps> = ({
     return () => window.removeEventListener('popstate', preventGoBack);
   }, [onClose, navigate, location]);
 
+  const handleOverlayClick = () => {
+    onClose();
+  };
+
+  const handleModalClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+  }
+
   return ReactDOM.createPortal(
-    <ModalOverlay>
-      <ModalContainer width={width} height={height}>
+    <ModalOverlay onClick={handleOverlayClick}>
+      <ModalContainer width={width} height={height} onClick={handleModalClick}>
         <Button onClick={onClose}>&times;</Button>
         <div>{children}</div>
       </ModalContainer>
