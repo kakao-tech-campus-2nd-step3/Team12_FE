@@ -11,11 +11,9 @@ const router = createBrowserRouter([
   {
     path: '/test',
     element: (
-      <>
-        <Test />
-      </>
+      <Test />
     ),
-  }
+  },
 ]);
 
 function BrowserRouterProvider() {

@@ -1,6 +1,6 @@
-import Modal from "@/components/modal";
-import { useState } from "react";
-import styled from "@emotion/styled";
+import { useState } from 'react';
+import styled from '@emotion/styled';
+import Modal from '@/components/modal';
 
 const StyledContent = styled.div`
   display: flex;
@@ -15,7 +15,7 @@ function Test() {
 
   return (
     <div>
-      <button onClick={() => setShowModal(true)}>Click!!</button>
+      <button type="button" onClick={() => setShowModal(true)}>Click!!</button>
       <h1>scroll test!!</h1>
       <h1>scroll test!!</h1>
       <h1>scroll test!!</h1>
@@ -42,7 +42,7 @@ function Test() {
       <h1>scroll test!!</h1>
       <h1>scroll test!!</h1>
       {showModal && (
-        <Modal onClose={() => setShowModal(false) } width="400px" height="400px" open={showModal}>
+        <Modal onClose={() => setShowModal(false)} width="400px" height="400px" open={showModal}>
           <StyledContent>
             <h1>모달창</h1>
             <p>모달 내용</p>

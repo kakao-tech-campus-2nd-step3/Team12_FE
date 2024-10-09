@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import ReactDOM from 'react-dom';
 import styled from '@emotion/styled';
 import colorTheme from '@/styles/colors';
@@ -11,36 +12,38 @@ interface ModalProps {
   open?: boolean;
 }
 
-const Modal: React.FC<ModalProps> = ({ onClose, children, width, height, open}) => {
+const Modal: React.FC<ModalProps> = ({
+  onClose, children, width, height, open,
+}) => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
   useEffect(() => {
     if (open) {
-      document.body.style.overflow = "hidden";
+      document.body.style.overflow = 'hidden';
     }
     return () => {
-      document.body.style.overflow = "auto";
+      document.body.style.overflow = 'auto';
     };
   }, [open]);
-  
+
   useEffect(() => {
     const preventGoBack = () => {
-      history.go(1);
+      navigate(1);
       onClose();
     };
-    history.pushState(null, "", location.href);
-    window.addEventListener("popstate", preventGoBack);
-    
-    return () => window.removeEventListener("popstate", preventGoBack);
-  }, [onClose]);
+    window.history.pushState(null, '', location.pathname);
+    window.addEventListener('popstate', preventGoBack);
+
+    return () => window.removeEventListener('popstate', preventGoBack);
+  }, [onClose, navigate, location]);
+
   return ReactDOM.createPortal(
-    <>
-      <div className="modal-content">
-          <ModalContainer width={width} height={height}>
-          <Button onClick={onClose}>&times;</Button>
-          <div>{children}</div>
-        </ModalContainer>
-      </div>
-    </>,
-    document.getElementById('modal-root') as HTMLElement
+    <ModalContainer width={width} height={height}>
+      <Button onClick={onClose}>&times;</Button>
+      <div>{children}</div>
+    </ModalContainer>,
+    document.getElementById('modal-root') as HTMLElement,
   );
 };
 
