@@ -18,7 +18,7 @@ function StyledContainer({
 }: ContainerProps) {
   const style = css`
     display: flex;
-    flex-direction: ${direction || 'column'};
+    flex-direction: ${direction || 'row'};
     justify-content: ${justify || 'center'};
     align-items: ${align || 'center'};
     width: ${width || '100%'};
