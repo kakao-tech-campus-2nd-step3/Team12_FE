@@ -2,15 +2,18 @@ import Container from '@components/container';
 import Button from '@components/button';
 import Avatar from '@components/avatar';
 import { css } from '@emotion/react';
+import logo from '@assets/logo.svg';
 
 function Header() {
   return (
     <Container
       justify="space-between"
-      overrideCss={css`box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.2);`}
+      padding="0 15px"
+      cssOverride={css`box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+      box-sizing: border-box`}
     >
       <img
-        src="src/assets/logo.svg"
+        src={logo}
         alt="logo"
         css={css`
                width: 80px;
