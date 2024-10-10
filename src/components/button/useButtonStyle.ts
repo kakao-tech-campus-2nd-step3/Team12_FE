@@ -1,5 +1,5 @@
 import { css, useTheme } from '@emotion/react';
-import { ButtonVariants } from '@/types';
+import { ButtonVariants } from '@/styles';
 
 interface UseButtonStyleProps {
   variant?: ButtonVariants;
