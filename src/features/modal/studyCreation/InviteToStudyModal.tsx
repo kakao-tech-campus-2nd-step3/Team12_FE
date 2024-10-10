@@ -22,7 +22,7 @@ export default function InviteToStudyModal({ open, onClose }: StudyCreationProps
     <DefaultPaddedContainer>
       <Modal open={open} onClose={onClose} width="447px">
         <Container padding="30px" direction="column" align="flex-start">
-            <Heading.H3 weight="bold">다른 사람을 스터디에 초대해보세요.</Heading.H3>
+          <Heading.H3 weight="bold">다른 사람을 스터디에 초대해보세요.</Heading.H3>
 
           <Container direction="column" gap="6px" cssOverride={css`font-weight: bold`} padding="30px">
             <Avatar size="large" css={avatarStyle} />
