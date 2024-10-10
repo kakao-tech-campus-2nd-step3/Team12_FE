@@ -1,5 +1,4 @@
 import type { Preview } from "@storybook/react";
-import PassportProvider from '../src/providers/PassportProvider';
 
 const preview: Preview = {
   parameters: {
@@ -12,9 +11,7 @@ const preview: Preview = {
   },
   decorators: [
     (Story) => (
-      <PassportProvider>
-        <Story />
-      </PassportProvider>
+      <Story />
     )
   ],
 };
