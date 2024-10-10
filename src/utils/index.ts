@@ -1,5 +1,6 @@
 import defaultTheme from '@styles/theme';
-import { ExtendedTheme, Theme } from '@/types';
+import { Theme } from '@emotion/react';
+import { ExtendedTheme } from '@/types';
 
 function generateRandomId() {
   return `id-${Math.random().toString(36).substring(2, 11)}-${Date.now()}`;

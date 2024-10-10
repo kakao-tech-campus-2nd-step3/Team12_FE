@@ -1,5 +1,6 @@
 import type { Preview } from "@storybook/react";
-import PassportProvider from '../src/providers/PassportProvider';
+import {ThemeProvider} from '@emotion/react';
+import defaultTheme from '../src/styles/theme';
 
 const preview: Preview = {
   parameters: {
@@ -12,9 +13,9 @@ const preview: Preview = {
   },
   decorators: [
     (Story) => (
-      <PassportProvider>
+      <ThemeProvider theme={defaultTheme}>
         <Story />
-      </PassportProvider>
+      </ThemeProvider>
     )
   ],
 };

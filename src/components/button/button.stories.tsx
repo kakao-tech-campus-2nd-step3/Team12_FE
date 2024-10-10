@@ -7,7 +7,7 @@ const meta: Meta<typeof Button> = {
   component: Button,
   argTypes: {
 
-    buttonTheme: {
+    variant: {
       control: 'radio',
       options: ['default', 'dark', 'light-outlined'],
     },
@@ -25,14 +25,14 @@ type Story = StoryObj<typeof Button>;
 
 export const Default: Story = {
   args: {
-    buttonTheme: 'default',
+    variant: 'default',
     children: 'Default Button',
   },
 };
 
 export const WithIcon: Story = {
   args: {
-    buttonTheme: 'dark',
+    variant: 'dark',
     children: 'Dark Button',
     icon,
   },
@@ -40,7 +40,7 @@ export const WithIcon: Story = {
 
 export const CustomStyled: Story = {
   args: {
-    buttonTheme: 'default',
+    variant: 'default',
     children: 'Custom Styled Button',
     css: {
       backgroundColor: 'lightblue',

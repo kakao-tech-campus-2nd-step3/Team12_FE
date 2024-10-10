@@ -1,13 +1,12 @@
-import { css } from '@emotion/react';
-import useTheme from '@hooks/useTheme';
-import { TagTheme } from '@/types';
+import { css, useTheme } from '@emotion/react';
+import { TagVariants } from '@/types';
 
 interface UseTagStyleProps {
   enableClose?: boolean;
-  tagTheme?: TagTheme;
+  variant?: TagVariants;
 }
 
-function useTagStyle({ enableClose, tagTheme }: UseTagStyleProps) {
+function useTagStyle({ enableClose, variant }: UseTagStyleProps) {
   const theme = useTheme();
   const tagStyle = (
     css`
@@ -59,15 +58,15 @@ function useTagStyle({ enableClose, tagTheme }: UseTagStyleProps) {
   }
 
   function getBorderStyle() {
-    return tagTheme === 'primary' ? 'transparent' : theme.colors.border.subtle;
+    return variant === 'primary' ? 'transparent' : theme.colors.border.subtle;
   }
 
   function getBackgroundColor() {
-    return tagTheme === 'primary' ? theme.colors.primary.passive : 'transparent';
+    return variant === 'primary' ? theme.colors.primary.passive : 'transparent';
   }
 
   function getTextColor() {
-    return tagTheme === 'primary' ? theme.colors.primary.main : theme.colors.text.prominent;
+    return variant === 'primary' ? theme.colors.primary.main : theme.colors.text.prominent;
   }
 
   return {
