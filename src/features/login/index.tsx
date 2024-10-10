@@ -6,6 +6,9 @@ import Button from "@/components/button";
 import Grid from "@/components/grid";
 import BubbleIcon from "@/assets/icons/bubble.svg";
 import { useLoginModalStyles } from "./LoginModal.styles";
+import GithubIcon from '@/assets/github.svg';
+import InstagramIcon from '@/assets/instagram.svg';
+import BlogIcon from '@/assets/blog.svg';
 
 interface LoginModalProps {
   open: boolean;
@@ -13,7 +16,7 @@ interface LoginModalProps {
 }
 
 function LoginModal({open, onClose}: LoginModalProps) {
-	const { kakaoLoginButtonStyle } = useLoginModalStyles();
+	const { kakaoLoginButtonStyle, iconButtonBaseStyle} = useLoginModalStyles();
 	return (
 		<Modal open={open} onClose={onClose}>
 			<DefaultPaddedContainer>
@@ -21,10 +24,10 @@ function LoginModal({open, onClose}: LoginModalProps) {
 				<Paragraph.Medium>함께하면 더 강해진다! <br /> Ditto와 함께 시작하세요.</Paragraph.Medium>
 				<Paragraph.Small>sns로 5초만에 시작하기</Paragraph.Small>
 				<Button icon={BubbleIcon} css={kakaoLoginButtonStyle}>카카오 계정으로 로그인</Button>
-				<Grid columns={3}>
-					<Button variant="default">깃허브</Button>
-					<Button variant="default">인스타</Button>
-					<Button variant="default">블로그</Button>
+				<Grid columns={3} style={{placeItems: 'center'}}>
+					<Button css={iconButtonBaseStyle} style={{backgroundImage: `url(${GithubIcon})`}}></Button>
+					<Button css={iconButtonBaseStyle} style={{backgroundImage: `url(${InstagramIcon})`}}></Button>
+					<Button css={iconButtonBaseStyle} style={{backgroundImage: `url(${BlogIcon})`}}></Button>
 				</Grid>
 			</DefaultPaddedContainer>
 		</Modal>
