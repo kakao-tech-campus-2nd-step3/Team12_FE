@@ -1,5 +1,5 @@
 import { css, useTheme } from '@emotion/react';
-import { TagVariants } from '@/types';
+import { TagVariants } from '@/styles';
 
 interface UseTagStyleProps {
   enableClose?: boolean;

@@ -1,4 +1,4 @@
-import { Corners } from '@/types';
+import { Corners } from '@/styles';
 
 const corners: Corners = {
   small: '4px',
