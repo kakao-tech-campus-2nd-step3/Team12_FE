@@ -10,11 +10,12 @@ export interface ContainerProps {
   height?: string;
   gap?: string;
   padding?: string;
+  boxSizing?: 'border-box' | 'content-box';
   cssOverride?: CSSObject;
 }
 
 function StyledContainer({
-  children, direction, justify, align, width, height, gap, padding, cssOverride,
+  children, direction, justify, align, width, height, gap, padding, boxSizing, cssOverride,
 }: ContainerProps) {
   const style = css`
     display: flex;
@@ -24,7 +25,8 @@ function StyledContainer({
     width: ${width || '100%'};
     height: ${height || 'auto'};
     gap: ${gap || '0'};
-    padding: ${padding || '0'}
+    padding: ${padding || '0'};
+    box-sizing: ${boxSizing || 'border-box'};
   `;
 
   return (
