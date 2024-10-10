@@ -23,17 +23,20 @@ export function PersonalInfoModal({ open, onClose }: PersonalInfoModalProps) {
           <Heading.H3 weight="bold">개인 정보를 입력해주세요.</Heading.H3>
         </Container>
 
-        <Container direction="column">
+        <Container direction="column" gap="12px">
           <Avatar size="large" />
           <Button>프로필 사진 등록</Button>
         </Container>
 
-        <Container>
+        <Container padding="30px">
           <Grid columns={1}>
             <Input label="닉네임" placeholder="디토에서 사용할 닉네임이에요." type={"text"} />
+            <Spacing height={10} />
             <Input label="이메일" placeholder="이메일 주소를 입력해주세요." type={"email"} />
+            <Spacing height={10} />
             <Input label="연락처" placeholder="연락 가능한 번호를 입력해주세요." type={"tel"} />
-            <TextArea label="자기소개" />
+            <Spacing height={10} />
+            <TextArea rows={1} label="자기소개" />
           </Grid>
         </Container>
 
@@ -41,7 +44,11 @@ export function PersonalInfoModal({ open, onClose }: PersonalInfoModalProps) {
           <Checkbox />
           <Paragraph.Small>개인정보 처리방침 및 이용약관에 동의해요.</Paragraph.Small>
         </Container>
-        <Button>가입하기</Button>
+
+        <Container padding="12px">
+          <Button>가입하기</Button>
+        </Container>
+
       </Modal>
     </DefaultPaddedContainer>
   );
