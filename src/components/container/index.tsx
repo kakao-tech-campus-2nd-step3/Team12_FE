@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { css } from '@emotion/react';
+import { css, CSSObject } from '@emotion/react';
 
 export interface ContainerProps {
   children?: ReactNode;
@@ -9,10 +9,12 @@ export interface ContainerProps {
   width?: string;
   height?: string;
   gap?: string;
+  padding?: string;
+  cssOverride?: CSSObject;
 }
 
 function StyledContainer({
-  children, direction, justify, align, width, height, gap,
+  children, direction, justify, align, width, height, gap, padding, cssOverride,
 }: ContainerProps) {
   const style = css`
     display: flex;
@@ -22,26 +24,22 @@ function StyledContainer({
     width: ${width || '100%'};
     height: ${height || 'auto'};
     gap: ${gap || '0'};
+    padding: ${padding || '0'}
   `;
 
   return (
-    <div css={style}>
+    <div css={[style, cssOverride]}>
       {children}
     </div>
   );
 }
 
 function Container({
-  children, direction, justify, align, width, height, gap,
+  children, ...rest
 }: ContainerProps) {
   return (
     <StyledContainer
-      direction={direction}
-      justify={justify}
-      align={align}
-      width={width}
-      height={height}
-      gap={gap}
+      {...rest}
     >
       {children}
     </StyledContainer>
