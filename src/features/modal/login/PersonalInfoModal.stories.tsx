@@ -1,10 +1,10 @@
 import { Meta, StoryObj } from '@storybook/react';
 import { MemoryRouter } from 'react-router-dom';
-import PersonalInfoModal from '@/features/login/PersonalInfoModal';
+import PersonalInfoModal from '@/features/modal/login/PersonalInfoModal';
 import { useState } from 'react';
 
 const meta: Meta<typeof PersonalInfoModal> = {
-  title: 'Features/Login/PersonalInfoModal',
+  title: 'Features/Modal/Login/PersonalInfoModal',
   component: PersonalInfoModal,
   decorators: [
     (Story) => (

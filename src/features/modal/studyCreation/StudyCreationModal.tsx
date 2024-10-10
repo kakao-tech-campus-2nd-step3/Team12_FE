@@ -1,8 +1,8 @@
 import Container from '@/components/container';
 import { DefaultPaddedContainer } from '@/components/container/variants';
 import Modal from '@/components/modal';
-import LeftSection from '@/features/studyCreation/LeftSection';
-import RightSection from '@/features/studyCreation/RightSection';
+import LeftSection from '@/features/modal/studyCreation/LeftSection';
+import RightSection from '@/features/modal/studyCreation/RightSection';
 
 interface StudyCreationProps {
   open: boolean;
