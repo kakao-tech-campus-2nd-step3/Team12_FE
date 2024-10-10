@@ -7,6 +7,7 @@ export const BREAKPOINT_MD = '1024px';
 export const BREAKPOINT_LG = '1280px';
 
 export const breakPoints = {
+  initial: '0',
   xs: BREAKPOINT_XS,
   sm: BREAKPOINT_SM,
   md: BREAKPOINT_MD,

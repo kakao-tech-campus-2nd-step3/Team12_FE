@@ -3,7 +3,7 @@ import DynamicIcon from '@components/internal/dynamic-icon';
 import { CSSObject, useTheme } from '@emotion/react';
 import CloseButton from '@assets/icons/x.svg?react';
 import useTagStyle from '@components/tag/useTagStyle';
-import { TagVariants } from '@/types';
+import { TagVariants } from '@/styles';
 
 interface TagProps {
   icon?: ReactNode | string;
