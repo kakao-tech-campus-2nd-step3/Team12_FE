@@ -53,7 +53,7 @@ const Modal: React.FC<ModalProps> = ({
         <div>{children}</div>
       </ModalContainer>
     </ModalOverlay>,
-    document.getElementById('modal-root') as HTMLElement,
+    document.getElementById('modal-root') || document.body as HTMLElement,
   );
 };
 
