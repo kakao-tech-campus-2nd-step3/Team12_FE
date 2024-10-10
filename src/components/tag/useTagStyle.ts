@@ -19,7 +19,7 @@ function useTagStyle({ enableClose, variant }: UseTagStyleProps) {
       gap: 8px;
       flex-grow: 0;
       border-radius: ${theme.corners.round} ${getRightCorner()} ${getRightCorner()} ${theme.corners.round};
-      border: 2px solid ${getBorderStyle()};
+      border: 1px solid ${getBorderStyle()};
       background-color: ${getBackgroundColor()};
       color: ${getTextColor()};
       font-size: 15px;
@@ -34,7 +34,7 @@ function useTagStyle({ enableClose, variant }: UseTagStyleProps) {
   const closeIconContainerStyle = (
     css`
       border-radius: ${theme.corners.small} ${theme.corners.round} ${theme.corners.round} ${theme.corners.small};
-      border: 2px solid ${getBorderStyle()};
+      border: 1px solid ${getBorderStyle()};
       display: flex;
       align-items: center;
       padding: 0 9px 0 7px;
@@ -57,7 +57,7 @@ function useTagStyle({ enableClose, variant }: UseTagStyleProps) {
   }
 
   function getBorderStyle() {
-    return variant === 'primary' ? 'transparent' : theme.colors.border.subtle;
+    return variant === 'primary' ? 'transparent' : theme.colors.border.prominent;
   }
 
   function getBackgroundColor() {
