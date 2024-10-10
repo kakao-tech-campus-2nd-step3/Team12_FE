@@ -9,11 +9,11 @@ interface StudyCreationProps {
   onClose: () => void;
 }
 
-export default function StudyCreation({ open, onClose }: StudyCreationProps) {
+export default function StudyCreationModal({ open, onClose }: StudyCreationProps) {
   return (
     <DefaultPaddedContainer>
       <Modal open={open} onClose={onClose} width="850px" height="450px">
-        <Container>
+        <Container padding="30px" gap="30px" align="flex-start">
           <LeftSection />
           <RightSection />
         </Container>

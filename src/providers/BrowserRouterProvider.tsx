@@ -1,14 +1,10 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import StudyCreation from '@/features/studyCreation/StudyCreation';
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: (
-      <>
-        <div>Hello World</div>
-        <StudyCreation open onClose={() => {}} />
-      </>
+      <div>Hello World</div>
     ),
   },
 ]);
