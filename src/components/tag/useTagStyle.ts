@@ -10,11 +10,11 @@ function useTagStyle({ enableClose, variant }: UseTagStyleProps) {
   const theme = useTheme();
   const tagStyle = (
     css`
-      padding: 6px 16px;
+      padding: 0 16px;  
       box-sizing: border-box;
       display: flex;
       width: fit-content;
-      height: fit-content;
+      height: 30px;
       align-items: center;
       gap: 8px;
       flex-grow: 0;
@@ -29,8 +29,6 @@ function useTagStyle({ enableClose, variant }: UseTagStyleProps) {
   const tagContainerStyle = css`
     display: flex;
     gap: 3px;
-    width: fit-content;
-    height: fit-content;
   `;
 
   const closeIconContainerStyle = (
@@ -39,12 +37,13 @@ function useTagStyle({ enableClose, variant }: UseTagStyleProps) {
       border: 2px solid ${getBorderStyle()};
       display: flex;
       align-items: center;
-      padding: 7px 9px 7px 7px;
+      padding: 0 9px 0 7px;
       width: fit-content;
-      height: fit-content;
+      height: 30px;
       cursor: pointer;
       user-select: none;
       background-color: ${getBackgroundColor()};
+      box-sizing: border-box;
     `
   );
 
