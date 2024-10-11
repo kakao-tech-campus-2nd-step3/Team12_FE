@@ -1,16 +1,9 @@
 import styled from '@emotion/styled';
-
-const vars = {
-  initial: '0',
-  xs: '520px',
-  sm: '768px',
-  md: '1024px',
-  lg: '1280px',
-};
+import { breakPoints } from '@constants/breakpoints';
 
 type ResponseGridStyle = {
   // eslint-disable-next-line
-  [key in keyof typeof vars]?: number;
+  [key in keyof typeof breakPoints]?: number;
 };
 
 type Props = {
@@ -30,9 +23,9 @@ const Wrapper = styled.div<Pick<Props, 'height' | 'backgroundColor'>>(
       };
     }
 
-    const breakpoints = Object.keys(height) as (keyof typeof vars)[];
-    return breakpoints
-      .map((breakpoint) => `@media screen and (min-width: ${vars[breakpoint]}) { height: ${height[breakpoint]}px; }`)
+    const breakpointKeys = Object.keys(height) as (keyof typeof breakPoints)[];
+    return breakpointKeys
+      .map((breakpoint) => `@media screen and (min-width: ${breakPoints[breakpoint]}) { height: ${height[breakpoint]}px; }`)
       .join(' ');
   },
 );
