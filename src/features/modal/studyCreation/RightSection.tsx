@@ -11,7 +11,7 @@ export default function RightSection() {
   const { creationButtonStyle } = useStudyCreationStyle();
   return (
     <Container direction="column" gap="10px" align="flex-start">
-      <Textarea label="스터디 설명" />
+      <Textarea label="스터디 설명" rows={14} resize="none" />
       <Container cssOverride={css`color: ${colorTheme.text.subtle}`} gap="5px" justify="flex-start" padding="10px">
         <Paragraph.Small>비공개</Paragraph.Small>
         <Switch type="checkbox" defaultChecked />

@@ -22,7 +22,7 @@ export default function PersonalInfoModal({ open, onClose }: PersonalInfoModalPr
   } = usePersonInfoModaStyles();
   return (
     <DefaultPaddedContainer>
-      <Modal open={open} onClose={onClose} width="447px" height="600px">
+      <Modal open={open} onClose={onClose} width="447px">
         <Container padding="30px" direction="column" align="flex-start">
           <Heading.H3 weight="bold">개인 정보를 입력해주세요.</Heading.H3>
         </Container>
@@ -40,7 +40,7 @@ export default function PersonalInfoModal({ open, onClose }: PersonalInfoModalPr
             <Spacing height={10} />
             <Input label="연락처" placeholder="연락 가능한 번호를 입력해주세요." type="tel" />
             <Spacing height={10} />
-            <TextArea rows={1} label="자기소개" />
+            <TextArea rows={1} label="자기소개" resize="vertical" />
           </Grid>
         </Container>
 
@@ -61,6 +61,8 @@ export default function PersonalInfoModal({ open, onClose }: PersonalInfoModalPr
         <Container padding="12px 30px">
           <Button css={signUpButtonStyle}>가입하기</Button>
         </Container>
+
+        <Spacing height={20} />
 
       </Modal>
     </DefaultPaddedContainer>
