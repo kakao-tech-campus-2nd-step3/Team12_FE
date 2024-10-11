@@ -1,6 +1,7 @@
 import { css, useTheme } from '@emotion/react';
+import { type TextareaProps } from '@components/textarea/index';
 
-function useTextAreaStyle() {
+function useTextAreaStyle({ resize }: Pick<TextareaProps, 'resize'>) {
   const theme = useTheme();
   const textAreaStyle = css`
     padding: 10px;
@@ -9,6 +10,7 @@ function useTextAreaStyle() {
     width: 100%;
     box-sizing: border-box;
     font-size: 15px;
+    resize: ${resize};
     
     &:focus {
       outline: none;
