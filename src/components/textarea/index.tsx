@@ -8,19 +8,20 @@ import useTextAreaStyle from '@components/textarea/useTextAreaStyle';
 import Label from '@components/label';
 import { generateRandomId } from '@/utils';
 
-interface TextareaProps extends HTMLAttributes<HTMLTextAreaElement> {
+export interface TextareaProps extends HTMLAttributes<HTMLTextAreaElement> {
   label?: string;
   css?: CSSObject;
   rows?: number;
   cols?: number;
   maxLength?: number;
+  resize?: 'vertical' | 'horizontal' | 'none' | 'both';
 }
 
 const TextArea = forwardRef<HTMLTextAreaElement, TextareaProps>(({
-  onChange, label, css, rows = 4, cols = 50, maxLength, ...rest
+  onChange, label, css, rows = 4, cols = 50, maxLength, resize = 'both', ...rest
 }, ref) => {
   const textareaId = useRef(generateRandomId());
-  const { textAreaStyle } = useTextAreaStyle();
+  const { textAreaStyle } = useTextAreaStyle({ resize });
 
   return (
     <>

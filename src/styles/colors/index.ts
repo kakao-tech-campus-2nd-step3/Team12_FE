@@ -1,4 +1,4 @@
-import { Colors } from '@/types';
+import { Colors } from '@/styles';
 
 const colorTheme: Colors = {
   primary: {
