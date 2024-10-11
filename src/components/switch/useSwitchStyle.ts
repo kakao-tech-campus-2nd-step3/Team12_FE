@@ -21,7 +21,6 @@ function useSwitchStyle() {
       border-radius: ${theme.corners.round};
       position: relative;
       transition: 0.2s;
-      box-sizing: border-box;
       
       .switch-checked + & {
         background-color: ${theme.colors.primary.main};
@@ -42,7 +41,7 @@ function useSwitchStyle() {
       transition: all 0.2s ease-in-out;
       
       .switch-checked + div > & {
-        left: 22px;
+        left: 23px;
         transition: all 0.2s ease-in-out;
       }
     `
