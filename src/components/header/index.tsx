@@ -60,6 +60,7 @@ function Header() {
             alt="dropDown"
             css={css`width: 15px;`}
             onClick={toggleDropdown}
+            role="presentation"
           />
           {isDropdownOpen && (
           <div
