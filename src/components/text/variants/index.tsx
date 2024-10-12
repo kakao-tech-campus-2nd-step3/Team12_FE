@@ -1,7 +1,7 @@
-import Spacing from '@components/spacing';
 import { ErrorText } from '@components/text';
 import { ErrorMessage } from '@hookform/error-message';
 import { FieldErrors } from 'react-hook-form';
+import { css } from '@emotion/react';
 
 interface FormErrorMessageProps {
   errors: FieldErrors;
@@ -11,13 +11,18 @@ interface FormErrorMessageProps {
 // eslint-disable-next-line
 export function FormErrorMessage({ errors, name }: FormErrorMessageProps) {
   return (
-    <>
-      <Spacing height={2} />
-      <ErrorMessage
-        name={name}
-        errors={errors}
-        render={({ message }) => <ErrorText.Small>{message}</ErrorText.Small>}
-      />
-    </>
+    <ErrorMessage
+      name={name}
+      errors={errors}
+      render={({ message }) => (
+        <div css={messageContainerStyle}>
+          <ErrorText.Small>{message}</ErrorText.Small>
+        </div>
+      )}
+    />
   );
 }
+
+const messageContainerStyle = css`
+  padding-top: 3px;
+`;
