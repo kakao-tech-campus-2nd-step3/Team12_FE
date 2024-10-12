@@ -24,19 +24,7 @@ export default function usePersonInfoModaStyles() {
     color: ${colorTheme.text.subtle};
   `;
 
-  const signUpButtonStyle = css`
-    width: 100%;
-    background-color: ${colorTheme.primary.darken};
-    color: ${colorTheme.absolute.white};
-    border: none;
-    border-radius: ${corners.medium};
-    &:hover {
-      background-color: ${colorTheme.absolute.black};
-      color: ${colorTheme.primary.main};
-    }
-  `;
-
   return {
-    selectPhotoButtonStyle, linkTextStyle, textStyle, signUpButtonStyle,
+    selectPhotoButtonStyle, linkTextStyle, textStyle,
   };
 }
