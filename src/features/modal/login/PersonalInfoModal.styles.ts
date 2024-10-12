@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
 import colorTheme from '@/styles/colors';
-import corners from '@/styles/corners';
 
 export default function usePersonInfoModaStyles() {
   const selectPhotoButtonStyle = css`
