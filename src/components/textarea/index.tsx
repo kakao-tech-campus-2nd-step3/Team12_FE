@@ -41,6 +41,7 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextareaProps>(({
         cols={cols}
         maxLength={maxLength}
         ref={ref}
+        onChange={onChange}
         {...rest}
       />
     </>
