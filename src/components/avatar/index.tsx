@@ -10,12 +10,13 @@ interface AvatarProps extends ImgHTMLAttributes<HTMLImageElement> {
   alt?: string;
   css?: CSSObject;
   size?: AvatarSize;
+  bordered?: boolean;
 }
 
 function Avatar({
-  src, alt, css, size, ...rest
+  src, alt, css, size, bordered = false, ...rest
 }: AvatarProps) {
-  const { avatarStyle } = useAvatarStyle({ size });
+  const { avatarStyle } = useAvatarStyle({ size, bordered });
   return (
     <img src={src || defaultAvatar} css={[avatarStyle, css]} alt={alt || 'avatar'} {...rest} />
   );
