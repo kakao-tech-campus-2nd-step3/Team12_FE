@@ -3,10 +3,6 @@ import colorTheme from '@/styles/colors';
 import corners from '@/styles/corners';
 
 export default function usePersonInfoModaStyles() {
-  const avatarStyle = css`
-    border: 2px solid ${colorTheme.absolute.black};
-  `;
-
   const selectPhotoButtonStyle = css`
     border: none;
     color: ${colorTheme.primary.main};
@@ -41,6 +37,6 @@ export default function usePersonInfoModaStyles() {
   `;
 
   return {
-    avatarStyle, selectPhotoButtonStyle, linkTextStyle, textStyle, signUpButtonStyle,
+    selectPhotoButtonStyle, linkTextStyle, textStyle, signUpButtonStyle,
   };
 }

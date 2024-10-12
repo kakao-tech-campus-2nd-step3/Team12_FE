@@ -3,10 +3,6 @@ import colorTheme from '@/styles/colors';
 import corners from '@/styles/corners';
 
 export default function useStudyCreationStyle() {
-  const avatarStyle = css`
-    border: 2px solid ${colorTheme.absolute.black};
-  `;
-
   const selectPhotoButtonStyle = css`
     border: none;
     color: ${colorTheme.primary.main};
@@ -31,6 +27,6 @@ export default function useStudyCreationStyle() {
   color: ${colorTheme.text.subtle};
   `;
   return {
-    avatarStyle, selectPhotoButtonStyle, creationButtonStyle, textStyle,
+    selectPhotoButtonStyle, creationButtonStyle, textStyle,
   };
 }

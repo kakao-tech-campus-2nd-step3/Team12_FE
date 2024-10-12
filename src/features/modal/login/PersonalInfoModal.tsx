@@ -18,7 +18,7 @@ interface PersonalInfoModalProps {
 
 export default function PersonalInfoModal({ open, onClose }: PersonalInfoModalProps) {
   const {
-    avatarStyle, selectPhotoButtonStyle, linkTextStyle, textStyle, signUpButtonStyle,
+    selectPhotoButtonStyle, linkTextStyle, textStyle, signUpButtonStyle,
   } = usePersonInfoModaStyles();
   return (
     <DefaultPaddedContainer>
@@ -28,7 +28,7 @@ export default function PersonalInfoModal({ open, onClose }: PersonalInfoModalPr
         </Container>
 
         <Container direction="column" gap="6px">
-          <Avatar size="large" css={avatarStyle} />
+          <Avatar size="large" bordered />
           <Button css={selectPhotoButtonStyle}>프로필 사진 등록</Button>
         </Container>
 

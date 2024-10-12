@@ -17,7 +17,7 @@ interface StudyCreationProps {
 }
 
 export default function InviteToStudyModal({ open, onClose }: StudyCreationProps) {
-  const { avatarStyle, selectPhotoButtonStyle, creationButtonStyle } = useStudyCreationStyle();
+  const { selectPhotoButtonStyle, creationButtonStyle } = useStudyCreationStyle();
   return (
     <DefaultPaddedContainer>
       <Modal open={open} onClose={onClose} width="447px">
@@ -25,7 +25,7 @@ export default function InviteToStudyModal({ open, onClose }: StudyCreationProps
           <Heading.H3 weight="bold">다른 사람을 스터디에 초대해보세요.</Heading.H3>
 
           <Container direction="column" gap="6px" cssOverride={css`font-weight: bold`} padding="30px">
-            <Avatar size="large" css={avatarStyle} />
+            <Avatar size="large" bordered />
             <Button css={selectPhotoButtonStyle}>Ditto Study</Button>
             <Container direction="column" cssOverride={css`color: ${colorTheme.text.moderate}`}>
               <Paragraph.Small>OOO님이 Ditto Study에 초대했어요!</Paragraph.Small>
