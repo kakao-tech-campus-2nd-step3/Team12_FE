@@ -8,7 +8,7 @@ import Spacing from '@/components/spacing';
 import Grid from '@/components/grid';
 
 export default function LeftSection() {
-  const { avatarStyle, selectPhotoButtonStyle, textStyle } = useStudyCreationStyle();
+  const { selectPhotoButtonStyle, textStyle } = useStudyCreationStyle();
   return (
     <Container direction="column" gap="30px">
       <Container direction="column" align="flex-start">
@@ -16,7 +16,7 @@ export default function LeftSection() {
       </Container>
 
       <Container direction="column" gap="6px">
-        <Avatar size="large" css={avatarStyle} />
+        <Avatar size="large" bordered />
         <Button css={selectPhotoButtonStyle}>스터디 사진 등록</Button>
       </Container>
 
