@@ -1,4 +1,4 @@
-import { css } from '@emotion/react';
+import { css, useTheme } from '@emotion/react';
 import {
   type StudyCreationSectionProps,
 } from '@features/modal/studyCreation/StudyCreationModal';
@@ -9,13 +9,12 @@ import Switch from '@/components/switch';
 import { Paragraph } from '@/components/text';
 import Textarea from '@/components/textarea';
 import colorTheme from '@/styles/colors';
-import useStudyCreationStyle from './StudyCreation.styles';
 
 export default function RightSection({
   register,
   formState: { errors, isValid },
 }: StudyCreationSectionProps) {
-  const { creationButtonStyle } = useStudyCreationStyle();
+  const theme = useTheme();
   return (
     <Container direction="column" align="flex-start">
       <Textarea
@@ -30,7 +29,17 @@ export default function RightSection({
         <Switch type="checkbox" {...register('isOpen')} defaultChecked />
         <Paragraph.Small>공개</Paragraph.Small>
       </Container>
-      <Button css={creationButtonStyle} type="submit" disabled={!isValid}>스터디 생성하기</Button>
+      <Button
+        variant="primary"
+        type="submit"
+        disabled={!isValid}
+        css={{
+          width: '100%',
+          borderRadius: theme.corners.medium,
+        }}
+      >
+        스터디 생성하기
+      </Button>
     </Container>
   );
 }
