@@ -75,6 +75,7 @@ const ModalContainer = styled.div<{ width?: string, height?: string }>`
   height: ${(props) => props.height || 'auto'};
   top: 50%;
   left: 50%;
+  padding: 0 20px;
   transform: translate(-50%, -50%);
   z-index: 1000;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);

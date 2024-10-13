@@ -1,6 +1,6 @@
 import '@emotion/react';
 
-export type ButtonVariants = 'default' | 'dark' | 'light-outlined';
+export type ButtonVariants = 'default' | 'dark' | 'primary';
 
 export type TagVariants = 'default' | 'primary';
 

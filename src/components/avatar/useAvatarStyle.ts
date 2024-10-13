@@ -3,15 +3,17 @@ import { type AvatarSize } from '@components/avatar/index';
 
 interface UseAvatarStyleProps {
   size?: AvatarSize;
+  bordered?: boolean;
 }
 
-function useAvatarStyle({ size }: UseAvatarStyleProps) {
+function useAvatarStyle({ size, bordered }: UseAvatarStyleProps) {
   const theme = useTheme();
 
   const avatarStyle = css`
     border-radius: ${theme.corners.round};
     width: ${getAvatarLength(size)};
     height: ${getAvatarLength(size)};
+    border: ${bordered ? `2px solid ${theme.colors.absolute.black};` : 'none'};
   `;
 
   return { avatarStyle };
