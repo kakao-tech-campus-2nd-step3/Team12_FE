@@ -890,6 +890,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@hookform/error-message@npm:^2.0.1":
+  version: 2.0.1
+  resolution: "@hookform/error-message@npm:2.0.1"
+  peerDependencies:
+    react: ">=16.8.0"
+    react-dom: ">=16.8.0"
+    react-hook-form: ^7.0.0
+  checksum: 10c0/6b608bcdbd797ddb7c6cfc8c42b6bbac40066181a0c582b1f1a342bfa65fa7e8329cdb8e869a76e33988cd46fe8623d521ea597231b9d33e1f0ba3288e36c58e
+  languageName: node
+  linkType: hard
+
 "@humanwhocodes/config-array@npm:^0.11.14":
   version: 0.11.14
   resolution: "@humanwhocodes/config-array@npm:0.11.14"
@@ -3658,6 +3669,7 @@ __metadata:
     "@emotion/styled": "npm:^11.13.0"
     "@eslint/js": "npm:^9.9.0"
     "@feature-sliced/eslint-config": "npm:^0.1.1"
+    "@hookform/error-message": "npm:^2.0.1"
     "@storybook/addon-essentials": "npm:8.3.4"
     "@storybook/addon-interactions": "npm:8.3.4"
     "@storybook/addon-links": "npm:8.3.4"
@@ -3688,6 +3700,7 @@ __metadata:
     globals: "npm:^15.9.0"
     react: "npm:^18.3.1"
     react-dom: "npm:^18.3.1"
+    react-hook-form: "npm:^7.53.0"
     react-router-dom: "npm:^6.26.2"
     reset-css: "npm:^5.0.2"
     storybook: "npm:8.3.4"
@@ -6823,6 +6836,15 @@ __metadata:
     react: ^0.14.8 || ^15.0.1 || ^16.0.0 || ^17.0.1 || ^18.0.0
     react-dom: ^0.14.8 || ^15.0.1 || ^16.0.0 || ^17.0.1 || ^18.0.0
   checksum: 10c0/0d60a0ea758529c32a706d0c69d70b69fb94de3c46442fffdee34f08f51ffceddbb5395b41dfd1565895653e9f60f98ca525835be9d5db1f16d6b22be12f4cd4
+  languageName: node
+  linkType: hard
+
+"react-hook-form@npm:^7.53.0":
+  version: 7.53.0
+  resolution: "react-hook-form@npm:7.53.0"
+  peerDependencies:
+    react: ^16.8.0 || ^17 || ^18 || ^19
+  checksum: 10c0/6d62b150618a833c17d59e669b707661499e2bb516a8d340ca37699f99eb448bbba7b5b78324938c8948014e21efaa32e3510c2ba246fd5e97a96fca0cfa7c98
   languageName: node
   linkType: hard
 
