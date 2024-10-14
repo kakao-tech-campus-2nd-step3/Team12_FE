@@ -17,31 +17,31 @@ function Header() {
   return (
     <Container
       justify="space-between"
-      padding="50px 150px"
-      height="150px"
+      padding="20px 40px"
+      height="60px"
       cssOverride={css`box-shadow: 0 4px 7px rgba(0, 0, 0, 0.2); position: relative;`}
     >
       <img
         src={logo}
         alt="logo"
         css={css`
-               width: 170px;
+               width: 75px;
            `}
       />
       <Container
         width="auto"
-        cssOverride={css`gap: 50px;`}
+        cssOverride={css`gap: 20px;`}
       >
         <Button css={css`
-          width: 290px;
-          height: 85px;
-          font-size:33px;
-          font-weight: bold;
+          width: 140px;
+          height: 35px;
+          font-size:14px;
+          border-color: #ECEDEE;
         `}
         >
           스터디 생성하기
         </Button>
-        <img src={alarm} alt="alarm" css={css`width: 40px;`} />
+        <img src={alarm} alt="alarm" css={css`width: 27px;`} />
         <Container
           width="auto"
           padding="0"
@@ -49,16 +49,16 @@ function Header() {
         >
           <Avatar
             css={css`
-                width: 60px;
-                height: 60px;
-                border-radius: 30px;
+                width: 40px;
+                height: 40px;
+                border-radius: 20px;
             `}
             onClick={toggleDropdown}
           />
           <img
             src={dropDown}
             alt="dropDown"
-            css={css`width: 15px;`}
+            css={css`width: 10px;`}
             onClick={toggleDropdown}
             role="presentation"
           />
