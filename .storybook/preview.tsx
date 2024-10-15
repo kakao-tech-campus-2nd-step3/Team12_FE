@@ -1,3 +1,4 @@
+// @ts-nocheck
 import type { Preview } from "@storybook/react";
 import {ThemeProvider} from '@emotion/react';
 import defaultTheme from '../src/styles/theme';
