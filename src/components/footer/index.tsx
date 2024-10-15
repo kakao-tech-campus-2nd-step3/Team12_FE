@@ -1,7 +1,7 @@
 import Container from '@components/container';
 import { css } from '@emotion/react';
 import logo from '@assets/logo.svg';
-import { FooterStyles } from '@components/footer/Footer.styles.ts';
+import { FooterStyles } from '@components/footer/Footer.styles';
 
 function Footer() {
   const dividerStyle = FooterStyles();
