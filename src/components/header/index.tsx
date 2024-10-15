@@ -30,7 +30,7 @@ function Header() {
       />
       <Container
         width="auto"
-        cssOverride={css`gap: 20px;`}
+        gap="20px"
       >
         <Button css={css`
           width: 140px;
@@ -45,7 +45,7 @@ function Header() {
         <Container
           width="auto"
           padding="0"
-          cssOverride={css`gap: 10px;`}
+          gap="10px"
         >
           <Avatar
             css={css`

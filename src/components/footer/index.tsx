@@ -17,7 +17,7 @@ function Footer() {
       />
       <Container
         width="auto"
-        cssOverride={css`gap: 30px;`}
+        gap="30px"
       >
         <div
           css={css`
