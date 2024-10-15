@@ -1,4 +1,4 @@
-import { css } from '@emotion/react';
+import { css, useTheme } from '@emotion/react';
 import Avatar from '@/components/avatar';
 import Button from '@/components/button';
 import Container from '@/components/container';
@@ -16,7 +16,8 @@ interface StudyCreationProps {
 }
 
 export default function InviteToStudyModal({ open, onClose }: StudyCreationProps) {
-  const { selectPhotoButtonStyle, creationButtonStyle } = useStudyCreationStyle();
+  const { selectPhotoButtonStyle } = useStudyCreationStyle();
+  const theme = useTheme();
   return (
     <Modal open={open} onClose={onClose} width="447px">
       <Container padding="30px" direction="column" align="flex-start">
@@ -38,8 +39,16 @@ export default function InviteToStudyModal({ open, onClose }: StudyCreationProps
             readOnly
             label="초대 링크"
           />
-          <Spacing height={20} />
-          <Button css={creationButtonStyle}>링크 공유하기</Button>
+          <Spacing height={18} />
+          <Button
+            variant="primary"
+            css={{
+              width: '100%',
+              borderRadius: theme.corners.medium,
+            }}
+          >
+            링크 공유하기
+          </Button>
         </Grid>
       </Container>
     </Modal>
