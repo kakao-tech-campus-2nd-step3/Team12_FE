@@ -41,17 +41,16 @@ function Header() {
         >
           스터디 생성하기
         </Button>
-        <img src={alarm} alt="alarm" css={css`width: 27px;`} />
+        <img src={alarm} alt="alarm" css={css`width: 25px;`} />
         <Container
           width="auto"
           padding="0"
           gap="10px"
         >
           <Avatar
+            size="small"
             css={css`
-                width: 40px;
-                height: 40px;
-                border-radius: 20px;
+                border-radius: 15px;
             `}
             onClick={toggleDropdown}
           />

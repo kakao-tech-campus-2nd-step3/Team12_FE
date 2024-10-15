@@ -11,7 +11,6 @@ function Banner() {
         gap="30px"
       >
         <Ranking />
-        s
         <IceBreaking />
       </Container>
     </DefaultPaddedContainer>
