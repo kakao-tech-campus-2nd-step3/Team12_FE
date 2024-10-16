@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import defaultTheme from '@styles/theme';
 import { mergeTheme } from '@/utils';
-import { ExtendedTheme } from '@/types';
+import { ExtendedTheme } from '@/styles';
 
 describe('mergeTheme', () => {
   it('should merge colors and corners from defaultTheme and ExtendedTheme', () => {
