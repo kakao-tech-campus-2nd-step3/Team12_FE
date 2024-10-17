@@ -33,6 +33,7 @@ export default function RightSection({
         variant="primary"
         type="submit"
         disabled={!isValid}
+        data-testid={studyCreationButtonTestId}
         css={{
           width: '100%',
           borderRadius: theme.corners.medium,
@@ -47,3 +48,5 @@ export default function RightSection({
 const validations = {
   description: { required: { value: true, message: '스터디 설명을 입력하세요.' } },
 };
+
+export const studyCreationButtonTestId = 'studyCreation-button';
