@@ -1,4 +1,5 @@
-import { defineConfig } from 'vite'
+/// <reference types="vitest" />
+import { defineConfig, UserConfig } from 'vite';
 import react from '@vitejs/plugin-react-swc'
 import tsconfigPaths from 'vite-tsconfig-paths';
 import svgr from 'vite-plugin-svgr';
@@ -10,6 +11,11 @@ export default defineConfig({
     react({
       jsxImportSource: "@emotion/react"
     }),
-    tsconfigPaths()
+    tsconfigPaths(),
   ],
-})
+  test: {
+    include: ['**/*.test.{ts,tsx}'],
+    globals: true,
+    environment: 'jsdom'
+  },
+} as UserConfig);
