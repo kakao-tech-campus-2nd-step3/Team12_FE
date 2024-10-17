@@ -24,9 +24,7 @@ function Header() {
       <img
         src={logo}
         alt="logo"
-        css={css`
-               width: 75px;
-           `}
+        css={{ width: '75px' }}
       />
       <Container
         width="auto"
@@ -41,7 +39,7 @@ function Header() {
         >
           스터디 생성하기
         </Button>
-        <img src={alarm} alt="alarm" css={css`width: 25px;`} />
+        <img src={alarm} alt="alarm" css={{ width: '25px' }} />
         <Container
           width="auto"
           padding="0"
@@ -49,52 +47,18 @@ function Header() {
         >
           <Avatar
             size="small"
-            css={css`
-                border-radius: 15px;
-            `}
+            css={{ borderRadius: '15px' }}
             onClick={toggleDropdown}
           />
           <img
             src={dropDown}
             alt="dropDown"
-            css={css`width: 10px;`}
+            css={{ width: '10px' }}
             onClick={toggleDropdown}
             role="presentation"
           />
           {isDropdownOpen && (
-          <div
-            css={css`
-                position: absolute;
-                right: 100px;
-                top: 150px;
-                width: 300px;
-                background: white;
-                font-size: 30px;
-                box-shadow: 0 4px 7px rgba(0, 0, 0, 0.2);
-                border-radius: 8px;
-                z-index: 1000;
-                padding: 10px 10px;
-              `}
-          >
-            <ul
-              css={css`
-                  list-style: none;
-                  padding: 0;
-                  margin: 0;
-                  li {
-                    padding: 20px 20px;
-                    cursor: pointer;
-                    &:hover {
-                      background-color: #f0f0f0;
-                    }
-                  }
-                `}
-            >
-              <li>내 스터디</li>
-              <li>설정</li>
-              <li>로그아웃</li>
-            </ul>
-          </div>
+            <Dropdown />
           )}
         </Container>
       </Container>
@@ -102,4 +66,41 @@ function Header() {
   );
 }
 
+function Dropdown() {
+  return (
+    <div css={dropdownStyle}>
+      <ul css={menuStyle}>
+        <li>내 스터디</li>
+        <li>설정</li>
+        <li>로그아웃</li>
+      </ul>
+    </div>
+  );
+}
+
 export default Header;
+
+const dropdownStyle = css`
+  position: absolute;
+  right: 50px;
+  top: 65px;
+  width: 180px;
+  background: white;
+  font-size: 13px;
+  box-shadow: 0 4px 7px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  z-index: 1000;
+  padding: 5px 5px;
+  `;
+const menuStyle = css`
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  li {
+    padding: 10px 10px;
+    cursor: pointer;
+    &:hover {
+      background-color: #f0f0f0;
+    }
+  }
+  `;
