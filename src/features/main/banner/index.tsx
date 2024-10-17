@@ -1,5 +1,5 @@
-import Ranking from '@components/ranking';
-import IceBreaking from '@components/iceBreaking';
+import Ranking from 'features/main/ranking';
+import IceBreaking from 'features/main/iceBreaking';
 import { DefaultPaddedContainer } from '@components/container/variants';
 import Container from '@components/container';
 
