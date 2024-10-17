@@ -1,11 +1,11 @@
 import { Meta, StoryObj } from '@storybook/react';
 import { MemoryRouter } from 'react-router-dom';
-import StudyCreationModal from '@/features/modal/studyCreation/StudyCreationModal';
+import InviteToStudyModal from '@features/modal/studyCreation/InviteToStudyModal';
 import { useState } from 'react';
 
-const meta: Meta<typeof StudyCreationModal> = {
-  title: 'Features/Modal/StudyCreation/StudyCreationModal',
-  component: StudyCreationModal,
+const meta: Meta<typeof InviteToStudyModal> = {
+  title: 'Features/Modal/StudyCreation/InviteToStudyModal',
+  component: InviteToStudyModal,
   decorators: [
     (Story) => (
       <MemoryRouter>
@@ -25,13 +25,13 @@ const meta: Meta<typeof StudyCreationModal> = {
 
 export default meta;
 
-type Story = StoryObj<typeof StudyCreationModal>;
+type Story = StoryObj<typeof InviteToStudyModal>;
 
 export const Default: Story = {
   render: (args) => {
     const [open, setOpen] = useState(args.open);
     return (
-      open ? <StudyCreationModal open={open} onClose={() => setOpen(false)} />
+      open ? <InviteToStudyModal open={open} onClose={() => setOpen(false)} />
       : <button onClick={() => setOpen(true)}>Open</button>
     );
   },
