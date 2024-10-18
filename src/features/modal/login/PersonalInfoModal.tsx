@@ -59,7 +59,7 @@ export default function PersonalInfoModal({ open, onClose }: PersonalInfoModalPr
       </Container>
 
       <Container padding="12px 30px">
-        <Button variant="primary" css={{ borderRadius: theme.corners.small, width: '100%' }}>가입하기</Button>
+        <Button variant="primary" css={{ borderRadius: theme.corners.medium, width: '100%' }}>가입하기</Button>
       </Container>
 
       <Spacing height={20} />
