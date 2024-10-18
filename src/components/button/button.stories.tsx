@@ -9,7 +9,10 @@ const meta: Meta<typeof Button> = {
 
     variant: {
       control: 'radio',
-      options: ['default', 'dark', 'light-outlined'],
+      options: ['default', 'dark', 'primary'],
+    },
+    disabled: {
+      control: 'boolean',
     },
     children: {
       control: 'text',
@@ -43,11 +46,19 @@ export const CustomStyled: Story = {
     variant: 'default',
     children: 'Custom Styled Button',
     css: {
-      backgroundColor: 'lightblue',
-      padding: '10px 20px',
-      borderRadius: '5px',
-      border: 'none',
-      cursor: 'pointer',
+      "backgroundColor": "lightblue",
+      "padding": "10px 20px",
+      "borderRadius": "5px",
+      "cursor": "pointer"
     },
   },
+};
+
+export const Disabled: Story = {
+  args: {
+    variant: "primary",
+    children: "Dark Button",
+    icon: "/src/assets/icons/eye.svg",
+    disabled: true
+  }
 };

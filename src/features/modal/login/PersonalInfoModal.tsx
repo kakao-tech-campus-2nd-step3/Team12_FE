@@ -1,3 +1,4 @@
+import { useTheme } from '@emotion/react';
 import Avatar from '@/components/avatar';
 import Button from '@/components/button';
 import Checkbox from '@/components/checkbox';
@@ -8,7 +9,7 @@ import Modal from '@/components/modal';
 import Spacing from '@/components/spacing';
 import { Heading, Paragraph } from '@/components/text';
 import TextArea from '@/components/textarea';
-import usePersonInfoModaStyles from './PersonalInfoModal.styles';
+import usePersonInfoModalStyles from './PersonalInfoModal.styles';
 
 interface PersonalInfoModalProps {
   open: boolean;
@@ -17,8 +18,9 @@ interface PersonalInfoModalProps {
 
 export default function PersonalInfoModal({ open, onClose }: PersonalInfoModalProps) {
   const {
-    selectPhotoButtonStyle, linkTextStyle, textStyle, signUpButtonStyle,
-  } = usePersonInfoModaStyles();
+    selectPhotoButtonStyle, linkTextStyle, textStyle,
+  } = usePersonInfoModalStyles();
+  const theme = useTheme();
   return (
     <Modal open={open} onClose={onClose} width="447px">
       <Container padding="30px" direction="column" align="flex-start">
@@ -57,7 +59,7 @@ export default function PersonalInfoModal({ open, onClose }: PersonalInfoModalPr
       </Container>
 
       <Container padding="12px 30px">
-        <Button css={signUpButtonStyle}>가입하기</Button>
+        <Button variant="primary" css={{ borderRadius: theme.corners.small, width: '100%' }}>가입하기</Button>
       </Container>
 
       <Spacing height={20} />
