@@ -1,8 +1,8 @@
+// @ts-nocheck
 import type { Preview } from "@storybook/react";
 import {ThemeProvider} from '@emotion/react';
 import defaultTheme from '../src/styles/theme';
 import 'reset-css/reset.css';
-
 const preview: Preview = {
   parameters: {
     controls: {

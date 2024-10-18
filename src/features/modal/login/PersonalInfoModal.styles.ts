@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
 import colorTheme from '@/styles/colors';
-import corners from '@/styles/corners';
 
 export default function usePersonInfoModaStyles() {
   const selectPhotoButtonStyle = css`
@@ -24,19 +23,7 @@ export default function usePersonInfoModaStyles() {
     color: ${colorTheme.text.subtle};
   `;
 
-  const signUpButtonStyle = css`
-    width: 100%;
-    background-color: ${colorTheme.primary.darken};
-    color: ${colorTheme.absolute.white};
-    border: none;
-    border-radius: ${corners.medium};
-    &:hover {
-      background-color: ${colorTheme.absolute.black};
-      color: ${colorTheme.primary.main};
-    }
-  `;
-
   return {
-    selectPhotoButtonStyle, linkTextStyle, textStyle, signUpButtonStyle,
+    selectPhotoButtonStyle, linkTextStyle, textStyle,
   };
 }

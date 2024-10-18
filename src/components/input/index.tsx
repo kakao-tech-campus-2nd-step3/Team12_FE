@@ -57,6 +57,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(({
           type={type === 'password' && isHidden
             ? 'password'
             : 'text'}
+          id={inputId.current}
           ref={ref}
           {...rest}
         />

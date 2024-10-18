@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
 import colorTheme from '@/styles/colors';
-import corners from '@/styles/corners';
 
 export default function useStudyCreationStyle() {
   const selectPhotoButtonStyle = css`
@@ -11,22 +10,11 @@ export default function useStudyCreationStyle() {
       background-color: transparent;
     }
   `;
-  const creationButtonStyle = css`
-  width: 100%;
-  background-color: ${colorTheme.primary.darken};
-  color: ${colorTheme.absolute.white};
-  border: none;
-  border-radius: ${corners.medium};
-  &:hover {
-    background-color: ${colorTheme.absolute.black};
-    color: ${colorTheme.primary.main};
-  }
-`;
 
   const textStyle = css`
-  color: ${colorTheme.text.subtle};
+    color: ${colorTheme.text.subtle};
   `;
   return {
-    selectPhotoButtonStyle, creationButtonStyle, textStyle,
+    selectPhotoButtonStyle, textStyle,
   };
 }

@@ -1,6 +1,6 @@
+import Logo from '@assets/logo.svg';
 import Container from '@/components/container/index';
 import Modal from '@/components/modal';
-import Logo from '@/assets/Logo.svg';
 import { Paragraph } from '@/components/text';
 import Button from '@/components/button';
 import Grid from '@/components/grid';
