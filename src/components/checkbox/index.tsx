@@ -1,4 +1,4 @@
-import { InputHTMLAttributes } from 'react';
+import { forwardRef, InputHTMLAttributes } from 'react';
 import { CSSObject } from '@emotion/react';
 import useCheckboxStyle from '@components/checkbox/useCheckboxStyle';
 
@@ -9,12 +9,12 @@ interface RadioProps extends InputHTMLAttributes<HTMLInputElement> {
   checked?: boolean;
 }
 
-function Radio({ type = 'checkbox', ...rest }: RadioProps) {
+const Radio = forwardRef<HTMLInputElement, RadioProps>(({ type = 'checkbox', ...rest }, ref) => {
   const { checkboxStyle } = useCheckboxStyle();
 
   return (
-    <input type={type} css={checkboxStyle} {...rest} />
+    <input type={type} css={checkboxStyle} ref={ref} {...rest} />
   );
-}
+});
 
 export default Radio;
