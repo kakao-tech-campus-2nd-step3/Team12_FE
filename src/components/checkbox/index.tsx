@@ -9,7 +9,7 @@ interface RadioProps extends InputHTMLAttributes<HTMLInputElement> {
   checked?: boolean;
 }
 
-const Radio = forwardRef<HTMLInputElement, RadioProps>(function Radio({ type = 'checkbox', ...rest }, ref) {
+const Radio = forwardRef<HTMLInputElement, RadioProps>(({ type = 'checkbox', ...rest }, ref) => {
   const { checkboxStyle } = useCheckboxStyle();
 
   return (

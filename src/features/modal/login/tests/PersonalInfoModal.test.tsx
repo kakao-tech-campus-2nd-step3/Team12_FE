@@ -2,9 +2,8 @@ import { describe, expect, it } from 'vitest';
 import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
 import { screen } from '@testing-library/react';
-import PersonalInfoModal from '@features/modal/login/PersonalInfoModal';
+import PersonalInfoModal, { personalInfoModalTestId } from '@features/modal/login/PersonalInfoModal';
 import { renderWithProviders } from '@/utils/testUtils';
-import { personalInfoModalTestId } from '@features/modal/login/PersonalInfoModal';
 
 describe('개인 정보 입력 모달 테스트', () => {
   it('가입하기 버튼은 모든 필수 항목이 입력된 후 활성화되어야 합니다', async () => {
@@ -38,4 +37,3 @@ describe('개인 정보 입력 모달 테스트', () => {
     expect(screen.getByText('010-0000-0000 형식으로 작성해주세요.')).toBeInTheDocument();
   });
 });
-

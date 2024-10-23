@@ -14,7 +14,6 @@ import usePersonInfoModalStyles from './PersonalInfoModal.styles';
 import { FormErrorMessage } from '@/components/text/variants';
 import { PersonalInfoInputs } from '@/types/personalInfo';
 
-
 interface PersonalInfoModalProps {
   open: boolean;
   onClose: () => void;
@@ -29,7 +28,7 @@ export default function PersonalInfoModal({ open, onClose }: PersonalInfoModalPr
   const {
     selectPhotoButtonStyle, linkTextStyle, textStyle,
   } = usePersonInfoModalStyles();
-  const { register, handleSubmit, formState: {errors, isValid}} = useForm<PersonalInfoInputs>({
+  const { register, handleSubmit, formState: { errors, isValid } } = useForm<PersonalInfoInputs>({
     defaultValues: {
       nickname: '',
       email: '',
@@ -71,7 +70,7 @@ export default function PersonalInfoModal({ open, onClose }: PersonalInfoModalPr
         </Container>
 
         <Container gap="5px">
-        <Checkbox {...register('agreeToTerms', { ...validations.agreeToTerms })} />
+          <Checkbox {...register('agreeToTerms', { ...validations.agreeToTerms })} data-testid="agree-checkbox" />
           <div css={textStyle}>
             <Paragraph.Small>
               <a href="https://github.com/kakao-tech-campus-2nd-step3/Team12_FE" css={linkTextStyle}>개인정보 처리방침</a>
@@ -86,12 +85,15 @@ export default function PersonalInfoModal({ open, onClose }: PersonalInfoModalPr
         </Container>
 
         <Container padding="12px 30px">
-          <Button 
+          <Button
             variant="primary"
             type="submit"
             disabled={!isValid}
             data-testid={personalInfoModalTestId}
-            css={{ borderRadius: theme.corners.small, width: '100%' }}>가입하기</Button>
+            css={{ borderRadius: theme.corners.small, width: '100%' }}
+          >
+            가입하기
+          </Button>
         </Container>
 
         <Spacing height={20} />
@@ -101,25 +103,25 @@ export default function PersonalInfoModal({ open, onClose }: PersonalInfoModalPr
 }
 
 const validations = {
-  nickname: { 
+  nickname: {
     required: { value: true, message: '닉네임을 입력하세요.' },
     pattern: { value: /^[a-zA-Z0-9가-힣]+$/, message: '닉네임은 한글, 영문, 숫자만 입력 가능합니다.' },
     minLength: { value: 3, message: '닉네임의 길이는 최소 3글자, 최대 10글자 입니다.' },
-    maxLength: { value: 10, message: '닉네임의 길이는 최소 3글자, 최대 10글자 입니다.' }
+    maxLength: { value: 10, message: '닉네임의 길이는 최소 3글자, 최대 10글자 입니다.' },
   },
-  email: { 
+  email: {
     required: { value: true, message: '이메일을 입력하세요.' },
-    pattern: { value: /^\S+@\S+$/i, message: 'example@gmail.com 형식으로 작성해주세요.' }
+    pattern: { value: /^\S+@\S+$/i, message: 'example@gmail.com 형식으로 작성해주세요.' },
   },
-  phone: { 
+  phone: {
     required: { value: true, message: '연락처를 입력하세요.' },
-    pattern: { value: /^\d{3}-\d{3,4}-\d{4}$/, message: '010-0000-0000 형식으로 작성해주세요.' }
+    pattern: { value: /^\d{3}-\d{3,4}-\d{4}$/, message: '010-0000-0000 형식으로 작성해주세요.' },
   },
-  introduction: { 
+  introduction: {
     required: { value: true, message: '자기소개를 입력하세요.' },
-    maxLangth: { value: 255, message: '자기소개는 최대 255자까지 입력 가능합니다.' }
+    maxLangth: { value: 255, message: '자기소개는 최대 255자까지 입력 가능합니다.' },
   },
-  agreeToTerms : { required: { value: true, message: '약관에 동의해주세요.' } },
+  agreeToTerms: { required: { value: true, message: '약관에 동의해주세요.' } },
 };
 
 export const personalInfoModalTestId = 'signUp-button';

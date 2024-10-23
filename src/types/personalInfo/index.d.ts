@@ -4,7 +4,7 @@ export interface PersonalInfo {
   phone: string;
   introduction: string;
   agreeToTerms: boolean;
-  }
+}
 
 export type PersonalInfoRequestBody = Pick<PersonalInfo, 'nickname' | 'email' | 'phone' | 'introduction' | 'agreeToTerms'>;
 export type PersonalInfoInputs = PersonalInfoRequestBody;
