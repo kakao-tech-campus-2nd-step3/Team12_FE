@@ -59,10 +59,10 @@ export default function PersonalInfoModal({ open, onClose }: PersonalInfoModalPr
             <Input label="닉네임" placeholder="디토에서 사용할 닉네임이에요." type="text" {...register('nickname', { ...validations.nickname })} />
             <FormErrorMessage errors={errors} name="nickname" />
             <Spacing height={10} />
-            <Input label="이메일" placeholder="이메일 주소를 입력해주세요." type="email" {...register('email', { ...validations.email })} />
+            <Input label="이메일" placeholder="example@gmail.com" type="email" {...register('email', { ...validations.email })} />
             <FormErrorMessage errors={errors} name="email" />
             <Spacing height={10} />
-            <Input label="연락처" placeholder="연락 가능한 번호를 입력해주세요." type="tel" {...register('phone', { ...validations.phone })} />
+            <Input label="연락처" placeholder="010-0000-0000" type="tel" {...register('phone', { ...validations.phone })} />
             <FormErrorMessage errors={errors} name="phone" />
             <Spacing height={10} />
             <TextArea rows={1} label="자기소개" resize="vertical" {...register('introduction', { ...validations.introduction })} />
@@ -109,11 +109,11 @@ const validations = {
   },
   email: { 
     required: { value: true, message: '이메일을 입력하세요.' },
-    pattern: { value: /^\S+@\S+$/i, message: '이메일 형식이 올바르지 않습니다.' }
+    pattern: { value: /^\S+@\S+$/i, message: 'example@gmail.com 형식으로 작성해주세요.' }
   },
   phone: { 
     required: { value: true, message: '연락처를 입력하세요.' },
-    pattern: { value: /^\d{3}-\d{3,4}-\d{4}$/, message: '연락처 형식이 올바르지 않습니다.' }
+    pattern: { value: /^\d{3}-\d{3,4}-\d{4}$/, message: '010-0000-0000 형식으로 작성해주세요.' }
   },
   introduction: { 
     required: { value: true, message: '자기소개를 입력하세요.' },
