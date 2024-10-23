@@ -110,10 +110,24 @@ export default function PersonalInfoModal({ open, onClose }: PersonalInfoModalPr
 }
 
 const validations = {
-  nickname: { required: { value: true, message: '닉네임을 입력하세요.' } },
-  email: { required: { value: true, message: '이메일을 입력하세요.' } },
-  phone: { required: { value: true, message: '연락처를 입력하세요.' } },
-  introduction: { required: { value: true, message: '자기소개를 입력하세요.' } },
+  nickname: { 
+    required: { value: true, message: '닉네임을 입력하세요.' },
+    pattern: { value: /^[a-zA-Z0-9가-힣]+$/, message: '닉네임은 한글, 영문, 숫자만 입력 가능합니다.' },
+    minLength: { value: 3, message: '닉네임의 길이는 최소 3글자, 최대 10글자 입니다.' },
+    maxLength: { value: 10, message: '닉네임의 길이는 최소 3글자, 최대 10글자 입니다.' }
+  },
+  email: { 
+    required: { value: true, message: '이메일을 입력하세요.' },
+    pattern: { value: /^\S+@\S+$/i, message: '이메일 형식이 올바르지 않습니다.' }
+  },
+  phone: { 
+    required: { value: true, message: '연락처를 입력하세요.' },
+    pattern: { value: /^\d{3}-\d{3,4}-\d{4}$/, message: '연락처 형식이 올바르지 않습니다.' }
+  },
+  introduction: { 
+    required: { value: true, message: '자기소개를 입력하세요.' },
+    maxLangth: { value: 255, message: '자기소개는 최대 255자까지 입력 가능합니다.' }
+  },
   agreeToTerms : { required: { value: true, message: '약관에 동의해주세요.' } },
 };
 
