@@ -16,6 +16,11 @@ export default function LeftSection({
   formState: { errors },
 }: StudyCreationSectionProps) {
   const { selectPhotoButtonStyle, textStyle } = useStudyCreationStyle();
+
+  const validations = {
+    name: { required: { value: true, message: '스터디 이름을 입력하세요.' } },
+    topic: { required: { value: true, message: '스터디 주제를 입력하세요.' } },
+  };
   return (
     <Container direction="column" gap="30px">
       <Container direction="column" align="flex-start">
@@ -56,8 +61,3 @@ export default function LeftSection({
     </Container>
   );
 }
-
-const validations = {
-  name: { required: { value: true, message: '스터디 이름을 입력하세요.' } },
-  topic: { required: { value: true, message: '스터디 주제를 입력하세요.' } },
-};

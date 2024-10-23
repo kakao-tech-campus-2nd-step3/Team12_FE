@@ -15,6 +15,11 @@ export default function RightSection({
   formState: { errors, isValid },
 }: StudyCreationSectionProps) {
   const theme = useTheme();
+
+  const validations = {
+    description: { required: { value: true, message: '스터디 설명을 입력하세요.' } },
+  };
+
   return (
     <Container direction="column" align="flex-start">
       <Textarea
@@ -44,9 +49,5 @@ export default function RightSection({
     </Container>
   );
 }
-
-const validations = {
-  description: { required: { value: true, message: '스터디 설명을 입력하세요.' } },
-};
 
 export const studyCreationButtonTestId = 'studyCreation-button';
