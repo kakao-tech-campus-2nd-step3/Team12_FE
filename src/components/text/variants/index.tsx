@@ -8,7 +8,6 @@ interface FormErrorMessageProps {
   name: string;
 }
 
-// eslint-disable-next-line
 export function FormErrorMessage({ errors, name }: FormErrorMessageProps) {
   return (
     <ErrorMessage
@@ -16,7 +15,7 @@ export function FormErrorMessage({ errors, name }: FormErrorMessageProps) {
       errors={errors}
       render={({ message }) => (
         <div css={messageContainerStyle}>
-          <ErrorText.Small>{message}</ErrorText.Small>
+          <ErrorText variant="small">{message}</ErrorText>
         </div>
       )}
     />

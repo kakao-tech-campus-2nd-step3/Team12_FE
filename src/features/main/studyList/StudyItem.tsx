@@ -29,13 +29,13 @@ function StudyItem(
       <Container direction="column" align="flex-start" padding="15px">
         <Heading.H4 weight="bold">{study.name}</Heading.H4>
         <Container padding="8px 0 25px 0" justify="flex-start">
-          <Paragraph.Small>{study.description}</Paragraph.Small>
+          <Paragraph variant="small">{study.description}</Paragraph>
         </Container>
         <hr css={dividerStyle} />
         <Container padding="12px 0 0 0">
           <Container justify="flex-start" gap="13px" cssOverride={css`flex-grow: 1`}>
             <Avatar size="small" />
-            <Paragraph.Small>스터디장</Paragraph.Small>
+            <Paragraph variant="small">스터디장</Paragraph>
           </Container>
           <Container justify="flex-start" gap="4px" cssOverride={css`flex-grow: 0`} width="auto">
             <UserIcon />
