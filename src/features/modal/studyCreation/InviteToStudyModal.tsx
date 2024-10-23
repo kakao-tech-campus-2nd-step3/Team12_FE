@@ -27,8 +27,8 @@ export default function InviteToStudyModal({ open, onClose }: StudyCreationProps
           <Avatar size="large" bordered />
           <Button css={selectPhotoButtonStyle}>Ditto Study</Button>
           <Container direction="column" cssOverride={css`color: ${colorTheme.text.moderate}`}>
-            <Paragraph.Small>OOO님이 Ditto Study에 초대했어요!</Paragraph.Small>
-            <Paragraph.Small>아래 링크를 통해 가입해주세요.</Paragraph.Small>
+            <Paragraph variant="small">OOO님이 Ditto Study에 초대했어요!</Paragraph>
+            <Paragraph variant="small">아래 링크를 통해 가입해주세요.</Paragraph>
           </Container>
         </Container>
 

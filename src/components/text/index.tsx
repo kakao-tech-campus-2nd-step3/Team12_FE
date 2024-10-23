@@ -16,47 +16,33 @@ interface TextProps {
   color?: string;
 }
 
+interface VariantTextProps extends TextProps {
+  variant?: 'large' | 'medium' | 'small';
+}
+
 const Text = styled.p<TextProps>`
-    font-weight: ${({ weight }) => weight || 'regular'};
-    margin: 0;
-    ${({ fontSize }) => fontSize && `font-size: ${fontSize};`};
-    ${({ color }) => color && `color: ${color};`};
+  font-weight: ${({ weight }) => weight || 'regular'};
+  margin: 0;
+  ${({ fontSize }) => fontSize && `font-size: ${fontSize};`};
+  ${({ color }) => color && `color: ${color};`};
 `;
 
 export default Text;
 
-export const ErrorText = {
-  Large: ({ children }: TextProps) => {
-    const theme = useTheme();
-    return <Text as="p" fontSize="16px" color={theme.colors.other.error}>{children}</Text>;
-  },
-  Medium: ({ children }: TextProps) => {
-    const theme = useTheme();
-    return <Text as="p" fontSize="14px" color={theme.colors.other.error}>{children}</Text>;
-  },
-  Small: ({ children }: TextProps) => {
-    const theme = useTheme();
-    return <Text as="p" fontSize="12px" color={theme.colors.other.error}>{children}</Text>;
-  },
-};
+export function ErrorText({ children, variant = 'medium' }: VariantTextProps) {
+  const theme = useTheme();
+  const textSizes = {
+    large: '16px', medium: '14px', small: '12px',
+  };
+  return <Text as="p" fontSize={textSizes[variant]} color={theme.colors.other.error}>{children}</Text>;
+}
 
-export const Paragraph = {
-  Large: ({ children, weight }: TextProps) => (
-    <Text as="p" fontSize="18px" weight={weight}>
-      {children}
-    </Text>
-  ),
-  Medium: ({ children, weight }: TextProps) => (
-    <Text as="p" fontSize="16px" weight={weight}>
-      {children}
-    </Text>
-  ),
-  Small: ({ children, weight }: TextProps) => (
-    <Text as="p" fontSize="14px" weight={weight}>
-      {children}
-    </Text>
-  ),
-};
+export function Paragraph({ children, variant = 'medium', weight }: VariantTextProps) {
+  const textSizes = {
+    large: '18px', medium: '16px', small: '14px',
+  };
+  return <Text as="p" fontSize={textSizes[variant]} weight={weight}>{children}</Text>;
+}
 
 export const Heading = {
   H1: ({ children, weight }: TextProps) => (

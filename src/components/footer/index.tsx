@@ -1,10 +1,12 @@
 import Container from '@components/container';
 import { css } from '@emotion/react';
 import logo from '@assets/logo.svg';
-import { FooterStyles } from '@components/footer/Footer.styles';
 
 function Footer() {
-  const dividerStyle = FooterStyles();
+  const dividerStyle = css`
+    color: black;
+    font-size: 15px;
+  `;
   return (
     <Container
       justify="space-between"

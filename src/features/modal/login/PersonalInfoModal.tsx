@@ -47,14 +47,14 @@ export default function PersonalInfoModal({ open, onClose }: PersonalInfoModalPr
       <Container gap="5px">
         <Checkbox />
         <div css={textStyle}>
-          <Paragraph.Small>
+          <Paragraph variant="small">
             <a href="https://github.com/kakao-tech-campus-2nd-step3/Team12_FE" css={linkTextStyle}>개인정보 처리방침</a>
             {' '}
             및
             {' '}
             <a href="https://github.com/kakao-tech-campus-2nd-step3/Team12_FE" css={linkTextStyle}>이용약관</a>
             에 동의해요.
-          </Paragraph.Small>
+          </Paragraph>
         </div>
       </Container>
 

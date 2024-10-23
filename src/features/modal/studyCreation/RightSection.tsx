@@ -15,19 +15,24 @@ export default function RightSection({
   formState: { errors, isValid },
 }: StudyCreationSectionProps) {
   const theme = useTheme();
+
+  const validations = {
+    description: { required: { value: true, message: '스터디 설명을 입력하세요.' } },
+  };
+
   return (
     <Container direction="column" align="flex-start">
       <Textarea
         label="스터디 설명"
         rows={14}
         resize="none"
-        {...register('description', { ...validations.description })}
+        {...register('description', validations.description)}
       />
       <FormErrorMessage errors={errors} name="description" />
       <Container cssOverride={css`color: ${colorTheme.text.subtle}`} gap="5px" justify="flex-start" padding="10px">
-        <Paragraph.Small>비공개</Paragraph.Small>
+        <Paragraph variant="small">비공개</Paragraph>
         <Switch type="checkbox" {...register('isOpen')} defaultChecked />
-        <Paragraph.Small>공개</Paragraph.Small>
+        <Paragraph variant="small">공개</Paragraph>
       </Container>
       <Button
         variant="primary"
@@ -44,9 +49,5 @@ export default function RightSection({
     </Container>
   );
 }
-
-const validations = {
-  description: { required: { value: true, message: '스터디 설명을 입력하세요.' } },
-};
 
 export const studyCreationButtonTestId = 'studyCreation-button';
