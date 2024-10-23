@@ -12,17 +12,8 @@ import { Heading, Paragraph } from '@/components/text';
 import TextArea from '@/components/textarea';
 import usePersonInfoModalStyles from './PersonalInfoModal.styles';
 import { FormErrorMessage } from '@/components/text/variants';
+import { PersonalInfoInputs } from '@/types/personalInfo';
 
-interface PersonalInfo {
-  nickname: string;
-  email: string;
-  phone: string;
-  introduction: string;
-  agreeToTerms: boolean;
-}
-
-type PersonalInfoRequestBody = Pick<PersonalInfo, 'nickname' | 'email' | 'phone' | 'introduction' | 'agreeToTerms'>;
-type PersonalInfoInputs = PersonalInfoRequestBody;
 
 interface PersonalInfoModalProps {
   open: boolean;
@@ -38,7 +29,7 @@ export default function PersonalInfoModal({ open, onClose }: PersonalInfoModalPr
   const {
     selectPhotoButtonStyle, linkTextStyle, textStyle,
   } = usePersonInfoModalStyles();
-  const { register, handleSubmit, formState: {errors, isValid}, watch} = useForm<PersonalInfoInputs>({
+  const { register, handleSubmit, formState: {errors, isValid}} = useForm<PersonalInfoInputs>({
     defaultValues: {
       nickname: '',
       email: '',
