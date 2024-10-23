@@ -21,13 +21,13 @@ export default function RightSection({
         label="스터디 설명"
         rows={14}
         resize="none"
-        {...register('description', { ...validations.description })}
+        {...register('description', validations.description)}
       />
       <FormErrorMessage errors={errors} name="description" />
       <Container cssOverride={css`color: ${colorTheme.text.subtle}`} gap="5px" justify="flex-start" padding="10px">
-        <Paragraph.Small>비공개</Paragraph.Small>
+        <Paragraph variant="small">비공개</Paragraph>
         <Switch type="checkbox" {...register('isOpen')} defaultChecked />
-        <Paragraph.Small>공개</Paragraph.Small>
+        <Paragraph variant="small">공개</Paragraph>
       </Container>
       <Button
         variant="primary"

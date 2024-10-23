@@ -34,7 +34,7 @@ export default function LeftSection({
             placeholder="최대 15자까지 입력 가능해요."
             type="text"
             maxLength={15}
-            {...register('name', { ...validations.name })}
+            {...register('name', validations.name)}
           />
           <FormErrorMessage errors={errors} name="name" />
           <Spacing height={10} />
@@ -42,13 +42,13 @@ export default function LeftSection({
             label="스터디 주제"
             placeholder="ex)코딩 스터디"
             type="text"
-            {...register('topic', { ...validations.topic })}
+            {...register('topic', validations.topic)}
           />
           <Spacing height={2} />
           <FormErrorMessage errors={errors} name="topic" />
           <Spacing height={10} />
           <div css={textStyle}>
-            <Paragraph.Small>부적절한 내용의 스터디 생성 시 이용이 제한될 수 있어요.</Paragraph.Small>
+            <Paragraph variant="small">부적절한 내용의 스터디 생성 시 이용이 제한될 수 있어요.</Paragraph>
           </div>
         </Grid>
       </Container>
