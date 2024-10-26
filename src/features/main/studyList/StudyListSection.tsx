@@ -4,17 +4,23 @@ import StudyFilterSection from '@features/main/studyList/StudyFilterSection';
 import Grid from '@components/grid';
 import StudyItem from '@features/main/studyList/StudyItem';
 import Container from '@components/container';
-import { Study } from '@/types/study';
-import { mockFilters, mockStudyList } from '@/mock/study';
+import type { Study, StudyFilter } from '@/types/study';
+import { mockStudyList } from '@/mock/study';
 
 function StudyListSection() {
-  const [studyFilters, setStudyFilters] = useState<string[]>(mockFilters);
+  const [studyFilter, setStudyFilter] = useState<StudyFilter>('all');
+  const [searchKeyword, setSearchKeyword] = useState('');
   // TODO: 추후에 백엔드와 논의하여 filter type 정의
   const [studies] = useState<Study[]>(mockStudyList);
 
   return (
     <DefaultPaddedContainer>
-      <StudyFilterSection filters={studyFilters} setFilters={setStudyFilters} />
+      <StudyFilterSection
+        studyFilter={studyFilter}
+        setStudyFilter={setStudyFilter}
+        searchKeyword={searchKeyword}
+        setSearchKeyword={setSearchKeyword}
+      />
       <Container padding="25px 0 0 0">
         <Grid
           columns={{
