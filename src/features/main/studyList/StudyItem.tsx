@@ -1,7 +1,6 @@
 import Container from '@components/container';
 import Tag from '@components/tag';
-import tagIcon from '@assets/icons/tag.svg';
-import { Heading, Paragraph } from '@components/text';
+import { Paragraph } from '@components/text';
 import { useStudyItemStyles } from '@features/main/studyList/StudyList.styles';
 import Avatar from '@components/avatar';
 import { CSSObject, useTheme } from '@emotion/react';
@@ -38,19 +37,21 @@ function StudyItem(
         <Container
           padding="8px 0"
           align="flex-start"
-          width="120px"
+          width="175px"
           direction="column"
           gap="3px"
           cssOverride={singleEllipsis}
         >
-          <Heading.H5 weight="bold" css={{ ...singleEllipsis, width: '100%' }}>{study.name}</Heading.H5>
+          <Paragraph variant="large" weight="bold" css={{ ...singleEllipsis, width: '100%' }}>{study.name}</Paragraph>
           <Paragraph variant="small" color={theme.colors.text.subtle}>
             #
             {study.topic}
           </Paragraph>
         </Container>
-        <Tag icon={tagIcon} variant={study.isOpen ? 'primary' : 'default'}>
-          {study.isOpen ? '모집중' : '모집마감'}
+        <Tag variant={study.isOpen ? 'primary' : 'default'}>
+          <Paragraph variant="small">
+            {study.isOpen ? '모집중' : '모집마감'}
+          </Paragraph>
         </Tag>
       </Container>
       <Container justify="flex-start" align="flex-start" height="42px" cssOverride={doubleEllipsis}>

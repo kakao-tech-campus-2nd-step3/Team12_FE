@@ -27,7 +27,7 @@ function StudyListSection() {
             initial: 1,
             xs: 2,
             md: 3,
-            lg: 5,
+            lg: 4,
           }}
           gap={19}
         >
