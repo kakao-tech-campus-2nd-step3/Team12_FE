@@ -72,7 +72,7 @@ export default function PersonalInfoModal({ open, onClose }: PersonalInfoModalPr
         <Container gap="5px">
           <Checkbox {...register('agreeToTerms', { ...validations.agreeToTerms })} data-testid="agree-checkbox" />
           <div css={textStyle}>
-            <Paragraph variant='small'>
+            <Paragraph variant="small">
               <a href="https://github.com/kakao-tech-campus-2nd-step3/Team12_FE" css={linkTextStyle}>개인정보 처리방침</a>
               {' '}
               및
