@@ -4,7 +4,7 @@ import Button from '@/components/button';
 import Container from '@/components/container';
 import Modal from '@/components/modal';
 import { Heading, Paragraph } from '@/components/text';
-import useStudyCreationStyle from './StudyCreation.styles';
+import useStudyCreationStyle from '../studyCreation/StudyCreation.styles';
 import colorTheme from '@/styles/colors';
 import Input from '@/components/input';
 import Grid from '@/components/grid';
