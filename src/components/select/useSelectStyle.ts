@@ -12,13 +12,10 @@ function useSelectStyle() {
   const selectStyle = (
     css`
       outline: none;
-      border: 1px solid ${theme.colors.border.subtle};
+      border: 1px solid ${theme.colors.border.prominent};
       border-radius: ${theme.corners.small};
       height: 30px;
       padding: 5px;
-      &::after {
-        color: ${theme.colors.text.subtle};
-      }
     `
   );
 
