@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react';
 import { MemoryRouter } from 'react-router-dom';
-import AcceptInvitationModal from './AcceptInvitationModal';
+import AcceptInvitationModal from '@/features/modal/invite/AcceptInvitationModal'
 import { useState } from 'react';
 
 const meta: Meta<typeof AcceptInvitationModal> = {

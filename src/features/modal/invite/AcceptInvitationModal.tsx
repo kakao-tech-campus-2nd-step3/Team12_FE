@@ -5,7 +5,7 @@ import Modal from '@/components/modal';
 import { Heading, Paragraph } from '@/components/text';
 import colorTheme from '@/styles/colors';
 import Spacing from '@/components/spacing';
-import StudyThumbnail from './StudyThumbnail';
+import StudyThumbnail from '@/features/modal/invite/StudyThumbnail';
 
 interface AcceptInvitationProps {
   open: boolean;
