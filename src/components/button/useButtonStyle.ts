@@ -39,6 +39,16 @@ function useButtonStyle({ variant = 'default' }: UseButtonStyleProps) {
       disabledBackgroundColor: globalTheme.colors.primary.passive,
       disabledColor: globalTheme.colors.text.subtle,
     },
+    selectPhoto: {
+      backgroundColor: 'transparent',
+      color: globalTheme.colors.primary.main,
+      border: 'none',
+      hoverBackgroundColor: 'transparent',
+      hoverColor: globalTheme.colors.primary.darken,
+      hoverBorderColor: 'none',
+      disabledBackgroundColor: 'transparent',
+      disabledColor: globalTheme.colors.text.subtle,
+    },
   };
 
   const styles = variantStyles[variant];

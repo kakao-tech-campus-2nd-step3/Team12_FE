@@ -15,7 +15,7 @@ export default function LeftSection({
   register,
   formState: { errors },
 }: StudyCreationSectionProps) {
-  const { selectPhotoButtonStyle, textStyle } = useStudyCreationStyle();
+  const { textStyle } = useStudyCreationStyle();
 
   const validations = {
     name: { required: { value: true, message: '스터디 이름을 입력하세요.' } },
@@ -29,7 +29,7 @@ export default function LeftSection({
 
       <Container direction="column" gap="6px">
         <Avatar size="large" bordered />
-        <Button css={selectPhotoButtonStyle}>스터디 사진 등록</Button>
+        <Button variant='selectPhoto'>스터디 사진 등록</Button>
       </Container>
 
       <Container direction="column" align="flex-start">
