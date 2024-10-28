@@ -1,7 +1,7 @@
-import { ReactNode } from 'react';
+import { HTMLAttributes, ReactNode } from 'react';
 import { css, CSSObject } from '@emotion/react';
 
-export interface ContainerProps {
+export interface ContainerProps extends HTMLAttributes<HTMLDivElement> {
   children?: ReactNode;
   direction?: 'row' | 'column';
   justify?: 'flex-start' | 'center' | 'flex-end' | 'space-between' | 'space-around' | 'space-evenly';
@@ -14,8 +14,8 @@ export interface ContainerProps {
   cssOverride?: CSSObject;
 }
 
-function StyledContainer({
-  children, direction, justify, align, width, height, gap, padding, boxSizing, cssOverride,
+function Container({
+  children, direction, justify, align, width, height, gap, padding, boxSizing, cssOverride, ...rest
 }: ContainerProps) {
   const style = css`
     display: flex;
@@ -30,21 +30,9 @@ function StyledContainer({
   `;
 
   return (
-    <div css={[style, cssOverride]}>
+    <div css={[style, cssOverride]} {...rest}>
       {children}
     </div>
-  );
-}
-
-function Container({
-  children, ...rest
-}: ContainerProps) {
-  return (
-    <StyledContainer
-      {...rest}
-    >
-      {children}
-    </StyledContainer>
   );
 }
 
