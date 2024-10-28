@@ -1,6 +1,6 @@
 import '@emotion/react';
 
-export type ButtonVariants = 'default' | 'dark' | 'primary' | 'selectPhoto';
+export type ButtonVariants = 'default' | 'dark' | 'primary' | 'transparent';
 
 export type TagVariants = 'default' | 'primary';
 

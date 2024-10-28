@@ -39,7 +39,7 @@ function useButtonStyle({ variant = 'default' }: UseButtonStyleProps) {
       disabledBackgroundColor: globalTheme.colors.primary.passive,
       disabledColor: globalTheme.colors.text.subtle,
     },
-    selectPhoto: {
+    transparent: {
       backgroundColor: 'transparent',
       color: globalTheme.colors.primary.main,
       border: 'none',

@@ -29,7 +29,7 @@ export default function LeftSection({
 
       <Container direction="column" gap="6px">
         <Avatar size="large" bordered />
-        <Button variant="selectPhoto">스터디 사진 등록</Button>
+        <Button variant="transparent">스터디 사진 등록</Button>
       </Container>
 
       <Container direction="column" align="flex-start">
