@@ -12,7 +12,7 @@ import { Heading, Paragraph } from '@/components/text';
 import TextArea from '@/components/textarea';
 import usePersonInfoModalStyles from './PersonalInfoModal.styles';
 import { FormErrorMessage } from '@/components/text/variants';
-import { PersonalInfoInputs } from '@/types/personalInfo';
+import { MemberInputs } from '@/types/member';
 
 interface PersonalInfoModalProps {
   open: boolean;
@@ -20,15 +20,15 @@ interface PersonalInfoModalProps {
 }
 
 export interface PersonalInfoSectionProps {
-  register: UseFormRegister<PersonalInfoInputs>;
-  formState: FormState<PersonalInfoInputs>;
+  register: UseFormRegister<MemberInputs>;
+  formState: FormState<MemberInputs>;
 }
 
 export default function PersonalInfoModal({ open, onClose }: PersonalInfoModalProps) {
   const {
     selectPhotoButtonStyle, linkTextStyle, textStyle,
   } = usePersonInfoModalStyles();
-  const { register, handleSubmit, formState: { errors, isValid } } = useForm<PersonalInfoInputs>({
+  const { register, handleSubmit, formState: { errors, isValid } } = useForm<MemberInputs>({
     defaultValues: {
       nickname: '',
       email: '',
@@ -40,7 +40,7 @@ export default function PersonalInfoModal({ open, onClose }: PersonalInfoModalPr
   });
   const theme = useTheme();
 
-  const onSubmit = (data: PersonalInfoInputs) => console.log(data);
+  const onSubmit = (data: MemberInputs) => console.log(data);
   return (
     <Modal open={open} onClose={onClose} width="447px">
       <form onSubmit={handleSubmit(onSubmit)}>
