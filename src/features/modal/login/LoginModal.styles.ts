@@ -5,11 +5,15 @@ export default function useLoginModalStyles() {
     width: 30px;
     height: 35px;
     border: none;
-    border-radius: 0px;
+    border-radius: 0;
     background-color: transparent;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
+    
+    &:hover {
+      border: none;
+    }
   `;
 
   const kakaoLoginButtonStyle = css`
@@ -24,6 +28,7 @@ export default function useLoginModalStyles() {
     &:hover {
       background-color: #FFEB00;
       color: #000000;
+      border: none;
     }
   `;
 
