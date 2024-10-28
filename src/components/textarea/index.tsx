@@ -15,10 +15,11 @@ export interface TextareaProps extends HTMLAttributes<HTMLTextAreaElement> {
   cols?: number;
   maxLength?: number;
   resize?: 'vertical' | 'horizontal' | 'none' | 'both';
+  placeholder?: string;
 }
 
 const TextArea = forwardRef<HTMLTextAreaElement, TextareaProps>(({
-  onChange, label, css, rows = 4, cols = 50, maxLength, resize = 'both', ...rest
+  onChange, label, css, rows = 4, cols = 50, maxLength, resize = 'both', placeholder='', ...rest
 }, ref) => {
   const textareaId = useRef(generateRandomId());
   const { textAreaStyle } = useTextAreaStyle({ resize });
@@ -42,6 +43,7 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextareaProps>(({
         maxLength={maxLength}
         ref={ref}
         onChange={onChange}
+        placeholder={placeholder}
         {...rest}
       />
     </>
