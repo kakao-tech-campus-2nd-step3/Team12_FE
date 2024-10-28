@@ -50,7 +50,7 @@ function StudyItem(
         </Container>
         <Tag variant={study.isOpen ? 'primary' : 'default'}>
           <Paragraph variant="small">
-            {study.isOpen ? '모집중' : '모집마감'}
+            {study.isOpen ? '모집중' : '마감'}
           </Paragraph>
         </Tag>
       </Container>
