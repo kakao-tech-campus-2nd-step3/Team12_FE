@@ -1,5 +1,6 @@
 import Container, { ContainerProps } from '@components/container';
 import { css } from '@emotion/react';
+import { rootWidth } from '@styles/length';
 
 interface DefaultPaddedContainerProps extends ContainerProps {
 }
@@ -13,6 +14,7 @@ export function DefaultPaddedContainer(
     flex-direction: column;
     align-items: center;
     padding: 0 20px;
+    max-width: ${rootWidth};
   `;
 
   return (
