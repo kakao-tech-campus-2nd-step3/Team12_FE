@@ -4,7 +4,7 @@ import InviteToStudyModal from '@features/modal/studyCreation/InviteToStudyModal
 import { useState } from 'react';
 
 const meta: Meta<typeof InviteToStudyModal> = {
-  title: 'Features/Modal/StudyCreation/Tests/InviteToStudyModal',
+  title: 'Features/Modal/StudyCreation/InviteToStudyModal',
   component: InviteToStudyModal,
   decorators: [
     (Story) => (
