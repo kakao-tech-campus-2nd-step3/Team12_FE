@@ -37,9 +37,9 @@ function StudyItem(
         <Container
           padding="8px 0"
           align="flex-start"
-          width="175px"
+          width="150px"
           direction="column"
-          gap="3px"
+          gap="8px"
           cssOverride={singleEllipsis}
         >
           <Paragraph variant="large" weight="bold" css={{ ...singleEllipsis, width: '100%' }}>{study.name}</Paragraph>
@@ -54,7 +54,7 @@ function StudyItem(
           </Paragraph>
         </Tag>
       </Container>
-      <Container justify="flex-start" align="flex-start" height="42px" cssOverride={doubleEllipsis}>
+      <Container justify="flex-start" align="flex-start" height="50px" padding="8px 0 0 0" cssOverride={doubleEllipsis}>
         <Paragraph variant="small" css={doubleEllipsis}>{study.description}</Paragraph>
       </Container>
       <Container padding="12px 0 0 0">
