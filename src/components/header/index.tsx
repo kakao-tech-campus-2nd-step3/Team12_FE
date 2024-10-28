@@ -6,6 +6,7 @@ import logo from '@assets/logo.svg';
 import alarm from '@assets/icons/alarm.svg';
 import dropDown from '@assets/icons/dropdown.svg';
 import { useState } from 'react';
+import { rootWidth } from '@styles/length';
 
 function Header() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -15,51 +16,53 @@ function Header() {
   };
 
   return (
-    <Container
-      justify="space-between"
-      padding="20px 40px"
-      height="60px"
-      cssOverride={css`box-shadow: 0 4px 7px rgba(0, 0, 0, 0.2); position: relative;`}
-    >
-      <img
-        src={logo}
-        alt="logo"
-        css={{ width: '75px' }}
-      />
+    <Container cssOverride={css`box-shadow: 0 4px 7px rgba(0, 0, 0, 0.2); position: relative;`}>
       <Container
-        width="auto"
-        gap="20px"
+        justify="space-between"
+        padding="20px"
+        height="60px"
+        width={rootWidth}
       >
-        <Button css={css`
+        <img
+          src={logo}
+          alt="logo"
+          css={{ width: '75px' }}
+        />
+        <Container
+          width="auto"
+          gap="20px"
+        >
+          <Button css={css`
           width: 140px;
           height: 35px;
           font-size:14px;
           border-color: #ECEDEE;
         `}
-        >
-          스터디 생성하기
-        </Button>
-        <img src={alarm} alt="alarm" css={{ width: '25px' }} />
-        <Container
-          width="auto"
-          padding="0"
-          gap="10px"
-        >
-          <Avatar
-            size="small"
-            css={{ borderRadius: '15px' }}
-            onClick={toggleDropdown}
-          />
-          <img
-            src={dropDown}
-            alt="dropDown"
-            css={{ width: '10px' }}
-            onClick={toggleDropdown}
-            role="presentation"
-          />
-          {isDropdownOpen && (
+          >
+            스터디 생성하기
+          </Button>
+          <img src={alarm} alt="alarm" css={{ width: '25px' }} />
+          <Container
+            width="auto"
+            padding="0"
+            gap="10px"
+          >
+            <Avatar
+              size="small"
+              css={{ borderRadius: '15px' }}
+              onClick={toggleDropdown}
+            />
+            <img
+              src={dropDown}
+              alt="dropDown"
+              css={{ width: '10px' }}
+              onClick={toggleDropdown}
+              role="presentation"
+            />
+            {isDropdownOpen && (
             <Dropdown />
-          )}
+            )}
+          </Container>
         </Container>
       </Container>
     </Container>
