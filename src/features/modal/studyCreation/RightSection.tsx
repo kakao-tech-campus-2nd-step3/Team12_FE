@@ -3,6 +3,7 @@ import {
   type StudyCreationSectionProps,
 } from '@features/modal/studyCreation/StudyCreationModal';
 import { FormErrorMessage } from '@components/text/variants';
+import { Controller } from 'react-hook-form';
 import Button from '@/components/button';
 import Container from '@/components/container';
 import Switch from '@/components/switch';
@@ -13,6 +14,7 @@ import colorTheme from '@/styles/colors';
 export default function RightSection({
   register,
   formState: { errors, isValid },
+  control,
 }: StudyCreationSectionProps) {
   const theme = useTheme();
 
@@ -31,7 +33,19 @@ export default function RightSection({
       <FormErrorMessage errors={errors} name="description" />
       <Container cssOverride={css`color: ${colorTheme.text.subtle}`} gap="5px" justify="flex-start" padding="10px">
         <Paragraph variant="small">비공개</Paragraph>
-        <Switch type="checkbox" {...register('isOpen')} defaultChecked />
+        <Controller
+          control={control}
+          render={({ field }) => (
+            <Switch
+              checked={field.value}
+              name={field.name}
+              onCheckedChange={({ checked }) => {
+                field.onChange(checked);
+              }}
+            />
+          )}
+          name="isOpen"
+        />
         <Paragraph variant="small">공개</Paragraph>
       </Container>
       <Button

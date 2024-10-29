@@ -1,5 +1,7 @@
 import { css } from '@emotion/react';
-import { FormState, useForm, UseFormRegister } from 'react-hook-form';
+import {
+  Control, FormState, useForm, UseFormRegister,
+} from 'react-hook-form';
 import Modal from '@/components/modal';
 import LeftSection from '@/features/modal/studyCreation/LeftSection';
 import RightSection from '@/features/modal/studyCreation/RightSection';
@@ -15,6 +17,7 @@ export default function StudyCreationModal({ open, onClose }: StudyCreationProps
     register,
     handleSubmit,
     formState,
+    control,
   } = useForm<StudyCreationInputs>({
     defaultValues: {
       isOpen: true,
@@ -31,8 +34,8 @@ export default function StudyCreationModal({ open, onClose }: StudyCreationProps
   return (
     <Modal open={open} onClose={onClose} width="850px">
       <form css={formStyle} onSubmit={handleSubmit(onSubmit)}>
-        <LeftSection formState={formState} register={register} />
-        <RightSection formState={formState} register={register} />
+        <LeftSection formState={formState} register={register} control={control} />
+        <RightSection formState={formState} register={register} control={control} />
       </form>
     </Modal>
   );
@@ -47,4 +50,5 @@ const formStyle = css`
 export interface StudyCreationSectionProps {
   register: UseFormRegister<StudyCreationInputs>;
   formState: FormState<StudyCreationInputs>;
+  control: Control<StudyCreationInputs>;
 }
