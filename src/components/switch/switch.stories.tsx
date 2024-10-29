@@ -17,7 +17,7 @@ type Story = StoryObj<typeof Switch>;
 
 export const Default: Story = {
   args: {
-
+    onCheckedChange: ({ checked }) => console.log('checked', checked),
   },
 };
 
@@ -30,6 +30,7 @@ export const CustomStyled: Story = {
         }
       `
     ),
-    defaultChecked: true,
+    checked: true,
+    onCheckedChange: ({ checked }) => console.log('checked', checked),
   },
 };
