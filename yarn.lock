@@ -4040,7 +4040,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios@npm:^1.6.1":
+"axios@npm:^1.6.1, axios@npm:^1.7.7":
   version: 1.7.7
   resolution: "axios@npm:1.7.7"
   dependencies:
@@ -4984,6 +4984,7 @@ __metadata:
     "@typescript-eslint/eslint-plugin": "npm:7.0.0"
     "@typescript-eslint/parser": "npm:^8.6.0"
     "@vitejs/plugin-react-swc": "npm:^3.5.0"
+    axios: "npm:^1.7.7"
     emotion-normalize: "npm:^11.0.1"
     eslint: "npm:8.57.0"
     eslint-config-airbnb: "npm:^19.0.4"
