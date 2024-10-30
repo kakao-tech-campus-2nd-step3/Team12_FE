@@ -1,10 +1,12 @@
 export interface Member {
+  id: number;
+  name: string;
   nickname: string;
   email: string;
-  phone: string;
-  introduction: string;
-  agreeToTerms: boolean;
+  contact: string;
+  description: string;
+  profileImage?: string;
 }
 
-export type MemberRequestBody = Pick<Member, 'nickname' | 'email' | 'phone' | 'introduction' | 'agreeToTerms'>;
+export type MemberRequestBody = Pick<Member, 'nickname' | 'email' | 'contact' | 'description'> & { agreeToTerms: boolean };
 export type MemberInputs = MemberRequestBody;
