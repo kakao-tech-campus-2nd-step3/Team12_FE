@@ -5,16 +5,13 @@ import { useState } from 'react';
 import { css } from '@emotion/react';
 import Switch from '@components/switch';
 import colorTheme from '@styles/colors';
+import { Controller, useForm } from 'react-hook-form';
+import { Paragraph } from '@components/text';
 
 export default function CalendarSection() {
   const [startDate, setStartDate] = useState<Date | null>(new Date());
-  const [isChecked, setIsChecked] = useState(true); // 초기 스위치 상태
-
-  const handleCheckChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newCheckedState = e.target.checked; // 새 체크 상태
-    setIsChecked(newCheckedState); // 체크 상태 업데이트
-    console.log('Checked state changed:', newCheckedState); // 체크 상태 출력
-  };
+  const [isChecked, setIsChecked] = useState(false);
+  const methods = useForm();
 
   return (
     <Container
@@ -28,18 +25,28 @@ export default function CalendarSection() {
         inline
       />
       <Container
-        width="60%"
+        width="70%"
         justify="flex-start"
         cssOverride={css`margin-top: 5px;`}
       >
-        <Switch
-          type="checkbox"
-          defaultChecked={isChecked} // 초기 체크 상태 설정
-          onChange={handleCheckChange}
+        <Controller
+          name="isOpen"
+          control={methods.control}
+          render={({ field }) => (
+            <Switch
+              checked={isChecked}
+              name={field.name}
+              onCheckedChange={({ checked }) => {
+                setIsChecked(checked);
+                field.onChange(checked);
+              }}
+            />
+          )}
         />
-        <span css={{ marginLeft: '8px' }}>
-          {isChecked ? '모집 중' : '모집 마감'}
-        </span>
+        <Paragraph variant="small" css={{ marginLeft: '10px' }}>
+          {isChecked ? '모집중' : '모집마감'}
+        </Paragraph>
+
       </Container>
 
     </Container>
