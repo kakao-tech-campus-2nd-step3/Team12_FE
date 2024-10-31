@@ -15,7 +15,7 @@ const colorTheme: Colors = {
   background: {
     main: '#FFFFFF',
     lighten: '#FFFFFF',
-    darken: '#F2F3F4',
+    darken: '#f6f6f6',
   },
   border: {
     subtle: '#ECEDEE',
