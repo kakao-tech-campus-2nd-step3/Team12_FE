@@ -1,4 +1,4 @@
-import { css, useTheme } from '@emotion/react';
+import { useTheme } from '@emotion/react';
 import Button from '@/components/button';
 import Container from '@/components/container';
 import Modal from '@/components/modal';
@@ -14,17 +14,19 @@ interface SubmitAssignmentProps {
   assignDesc?: string;
 }
 
-export default function SubmitAssignmentModal({ open, onClose, assignName= '', assignDesc = ''}: SubmitAssignmentProps) {
+export default function SubmitAssignmentModal({
+  open, onClose, assignName = '', assignDesc = '',
+}: SubmitAssignmentProps) {
   const theme = useTheme();
   return (
     <Modal open={open} onClose={onClose} width="447px">
-      <Container direction="column" gap="30px" padding="50px" align='flex-start'>
-        <Heading.H2 weight='bold'>{assignName}</Heading.H2>
+      <Container direction="column" gap="30px" padding="50px" align="flex-start">
+        <Heading.H2 weight="bold">{assignName}</Heading.H2>
         <Paragraph variant="small" color={colorTheme.absolute.black}>{assignDesc}</Paragraph>
         <Textarea
           rows={10}
-          resize='none'
-          placeholder='링크를 첨부해주세요.'
+          resize="none"
+          placeholder="링크를 첨부해주세요."
         />
 
         <Container direction="column">
