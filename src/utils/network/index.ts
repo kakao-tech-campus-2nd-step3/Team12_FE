@@ -1,9 +1,11 @@
-import axios from 'axios';
+import axios, { HttpStatusCode, isAxiosError } from 'axios';
 import { isAuthRequired } from '@constants/endpoints';
 import { tokenStorage } from '@/utils/storage';
+import { reIssueAccessToken } from '@/api/auth';
 
 const axiosInstance = axios.create({
   baseURL: import.meta.env.VITE_BASE_URL,
+  withCredentials: true,
 });
 
 axiosInstance.interceptors.request.use((config) => {
@@ -16,6 +18,17 @@ axiosInstance.interceptors.request.use((config) => {
   }
   nextConfig.headers.Authorization = `Bearer ${token}`;
   return nextConfig;
+});
+
+axiosInstance.interceptors.response.use((config) => config, async (error) => {
+  if (!isAxiosError(error)) return error;
+
+  const { config, response } = error;
+  if (!response || !config || response.status !== HttpStatusCode.Unauthorized
+  ) return error;
+  const accessToken = await reIssueAccessToken();
+  tokenStorage.set(accessToken);
+  return axiosInstance(config);
 });
 
 export default axiosInstance;
