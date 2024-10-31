@@ -1,5 +1,8 @@
+const prefix = '/api';
+
 const endpoints = {
-  myInfo: '/api/users',
+  myInfo: `${prefix}/users`,
+  reIssue: `${prefix}/reissue`,
 };
 
 const authRequiredEndpoints = {
