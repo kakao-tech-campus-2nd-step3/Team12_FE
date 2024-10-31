@@ -29,6 +29,7 @@ function StudyItem(
     ...singleEllipsis,
     whiteSpace: 'normal',
     wordBreak: 'break-all',
+    lineHeight: '16px',
   };
 
   return (
@@ -54,7 +55,7 @@ function StudyItem(
           </Paragraph>
         </Tag>
       </Container>
-      <Container justify="flex-start" align="flex-start" height="50px" padding="8px 0 0 0" cssOverride={doubleEllipsis}>
+      <Container justify="flex-start" align="flex-start" height="56px" padding="8px 0 0 0" cssOverride={doubleEllipsis}>
         <Paragraph variant="small" css={doubleEllipsis}>{study.description}</Paragraph>
       </Container>
       <Container padding="12px 0 0 0">
