@@ -1,7 +1,7 @@
 import Container from '@components/container';
 import Button from '@components/button';
 import Avatar from '@components/avatar';
-import { css } from '@emotion/react';
+import { css, useTheme } from '@emotion/react';
 import logo from '@assets/logo.svg';
 import alarm from '@assets/icons/alarm.svg';
 import dropDown from '@assets/icons/dropdown.svg';
@@ -10,13 +10,14 @@ import { rootWidth } from '@styles/length';
 
 function Header() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const theme = useTheme();
 
   const toggleDropdown = () => {
     setIsDropdownOpen((prev) => !prev);
   };
 
   return (
-    <Container cssOverride={css`box-shadow: 0 4px 7px rgba(0, 0, 0, 0.2); position: relative;`}>
+    <Container cssOverride={css`background-color: ${theme.colors.background.main}; box-shadow: 0 4px 7px rgba(0, 0, 0, 0.1); position: relative;`}>
       <Container
         justify="space-between"
         padding="20px"
