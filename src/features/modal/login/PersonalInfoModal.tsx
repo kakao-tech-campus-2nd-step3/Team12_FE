@@ -53,7 +53,7 @@ export default function PersonalInfoModal({ open, onClose }: PersonalInfoModalPr
       required: { value: true, message: '이메일을 입력하세요.' },
       pattern: { value: /^\S+@\S+$/i, message: 'example@gmail.com 형식으로 작성해주세요.' },
     },
-    phone: {
+    contact: {
       required: { value: true, message: '연락처를 입력하세요.' },
       pattern: { value: /^\d{3}-\d{3,4}-\d{4}$/, message: '010-0000-0000 형식으로 작성해주세요.' },
     },
@@ -84,8 +84,8 @@ export default function PersonalInfoModal({ open, onClose }: PersonalInfoModalPr
             <Input label="이메일" placeholder="example@gmail.com" type="email" {...register('email', validations.email)} />
             <FormErrorMessage errors={errors} name="email" />
             <Spacing height={10} />
-            <Input label="연락처" placeholder="010-0000-0000" type="tel" {...register('contact', validations.phone)} />
-            <FormErrorMessage errors={errors} name="phone" />
+            <Input label="연락처" placeholder="010-0000-0000" type="tel" {...register('contact', validations.contact)} />
+            <FormErrorMessage errors={errors} name="contact" />
             <Spacing height={10} />
             <TextArea rows={1} label="자기소개" resize="vertical" {...register('description', validations.description)} />
             <FormErrorMessage errors={errors} name="introduction" />
