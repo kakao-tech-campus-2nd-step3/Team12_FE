@@ -3,9 +3,9 @@ export interface Member {
   name: string;
   nickname: string;
   email: string;
-  phone: string;
-  introduction: string;
-  agreeToTerms: boolean;
+  contact: string;
+  description: string;
+  profileImage?: string;
 }
 
 export type PersonalInfoInputs = Pick<Member, 'nickname' | 'email' | 'contact' | 'description'> & { agreeToTerms: boolean };
