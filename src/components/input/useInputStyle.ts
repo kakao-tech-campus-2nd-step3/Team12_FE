@@ -13,7 +13,7 @@ function useInputStyle({ enableToggleShow, icon }: UseInputStyleProps) {
     css`
       padding: 10px ${enableToggleShow ? '34px' : '10px'} 10px ${icon ? '34px' : '10px'};
       border-radius: ${theme.corners.small};
-      border: 1px solid ${theme.colors.border.subtle};
+      border: 1px solid ${theme.colors.border.prominent};
       width: 100%;
       box-sizing: border-box;
       font-size: 15px;
