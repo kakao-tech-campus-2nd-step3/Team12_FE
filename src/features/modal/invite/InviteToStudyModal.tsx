@@ -4,19 +4,17 @@ import Button from '@/components/button';
 import Container from '@/components/container';
 import Modal from '@/components/modal';
 import { Heading, Paragraph } from '@/components/text';
-import useStudyCreationStyle from './StudyCreation.styles';
 import colorTheme from '@/styles/colors';
 import Input from '@/components/input';
 import Grid from '@/components/grid';
 import Spacing from '@/components/spacing';
 
-interface StudyCreationProps {
+interface InviteToStudyProps {
   open: boolean;
   onClose: () => void;
 }
 
-export default function InviteToStudyModal({ open, onClose }: StudyCreationProps) {
-  const { selectPhotoButtonStyle } = useStudyCreationStyle();
+export default function InviteToStudyModal({ open, onClose }: InviteToStudyProps) {
   const theme = useTheme();
   return (
     <Modal open={open} onClose={onClose} width="447px">
@@ -25,7 +23,7 @@ export default function InviteToStudyModal({ open, onClose }: StudyCreationProps
 
         <Container direction="column" gap="6px" cssOverride={css`font-weight: bold`} padding="30px">
           <Avatar size="large" bordered />
-          <Button css={selectPhotoButtonStyle}>Ditto Study</Button>
+          <Button variant="transparent">Ditto Study</Button>
           <Container direction="column" cssOverride={css`color: ${colorTheme.text.moderate}`}>
             <Paragraph variant="small">OOO님이 Ditto Study에 초대했어요!</Paragraph>
             <Paragraph variant="small">아래 링크를 통해 가입해주세요.</Paragraph>

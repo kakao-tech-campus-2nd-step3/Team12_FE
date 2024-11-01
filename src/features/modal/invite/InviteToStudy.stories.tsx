@@ -1,10 +1,10 @@
 import { Meta, StoryObj } from '@storybook/react';
 import { MemoryRouter } from 'react-router-dom';
-import InviteToStudyModal from '@features/modal/studyCreation/InviteToStudyModal';
+import InviteToStudyModal from '@/features/modal/invite/InviteToStudyModal';
 import { useState } from 'react';
 
 const meta: Meta<typeof InviteToStudyModal> = {
-  title: 'Features/Modal/StudyCreation/InviteToStudyModal',
+  title: 'Features/Modal/Invite/InviteToStudyModal',
   component: InviteToStudyModal,
   decorators: [
     (Story) => (
