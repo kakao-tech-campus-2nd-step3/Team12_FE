@@ -29,6 +29,7 @@ function StudyItem(
     ...singleEllipsis,
     whiteSpace: 'normal',
     wordBreak: 'break-all',
+    lineHeight: '16px',
   };
 
   return (
@@ -37,9 +38,9 @@ function StudyItem(
         <Container
           padding="8px 0"
           align="flex-start"
-          width="175px"
+          width="150px"
           direction="column"
-          gap="3px"
+          gap="8px"
           cssOverride={singleEllipsis}
         >
           <Paragraph variant="large" weight="bold" css={{ ...singleEllipsis, width: '100%' }}>{study.name}</Paragraph>
@@ -50,11 +51,11 @@ function StudyItem(
         </Container>
         <Tag variant={study.isOpen ? 'primary' : 'default'}>
           <Paragraph variant="small">
-            {study.isOpen ? '모집중' : '모집마감'}
+            {study.isOpen ? '모집중' : '마감'}
           </Paragraph>
         </Tag>
       </Container>
-      <Container justify="flex-start" align="flex-start" height="42px" cssOverride={doubleEllipsis}>
+      <Container justify="flex-start" align="flex-start" height="56px" padding="8px 0 0 0" cssOverride={doubleEllipsis}>
         <Paragraph variant="small" css={doubleEllipsis}>{study.description}</Paragraph>
       </Container>
       <Container padding="12px 0 0 0">

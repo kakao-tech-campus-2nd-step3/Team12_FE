@@ -21,7 +21,7 @@ function StudyListSection() {
         searchKeyword={searchKeyword}
         setSearchKeyword={setSearchKeyword}
       />
-      <Container padding="25px 0 0 0">
+      <Container padding="16px 0 0 0">
         <Grid
           columns={{
             initial: 1,

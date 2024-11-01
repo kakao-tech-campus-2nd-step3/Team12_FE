@@ -56,6 +56,7 @@ module.exports = {
     'react/jsx-props-no-spreading': 'off',
     '@typescript-eslint/no-use-before-define': 'off',
     'react/jsx-boolean-value': 'off',
+    'react/jsx-no-constructed-context-values': 'off',
     'import/prefer-default-export': 'off',
   },
 }
