@@ -4,15 +4,14 @@ const initStorage = <T extends keyof StorageKey>(key: T, storage: Storage) => {
 
     return JSON.parse(value as string);
   };
-  const set = (value?: StorageKey[T]) => {
-    if (typeof value === 'undefined' || value === null) {
-      storage.removeItem(key);
-      return;
-    }
+  const set = (value: StorageKey[T]) => {
     const stringifiedValue = JSON.stringify(value);
     storage.setItem(key, stringifiedValue);
   };
-  return { get, set };
+  const remove = () => {
+    storage.removeItem(key);
+  };
+  return { get, set, remove };
 };
 
 export const tokenStorage = initStorage('accessToken', localStorage);
