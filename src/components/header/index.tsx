@@ -47,6 +47,7 @@ function Header() {
             width="auto"
             padding="0"
             gap="10px"
+            cssOverride={{ position: 'relative' }}
           >
             <Avatar
               size="small"
@@ -61,7 +62,7 @@ function Header() {
               role="presentation"
             />
             {isDropdownOpen && (
-            <Dropdown />
+              <Dropdown />
             )}
           </Container>
         </Container>
@@ -71,6 +72,30 @@ function Header() {
 }
 
 function Dropdown() {
+  const dropdownStyle = css`
+  position: absolute;
+  right: 0;
+  top: 50px;
+  width: 180px;
+  background: white;
+  font-size: 13px;
+  box-shadow: 0 4px 7px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  z-index: 1000;
+  padding: 5px 5px;
+  `;
+  const menuStyle = css`
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  li {
+    padding: 10px 10px;
+    cursor: pointer;
+    &:hover {
+      background-color: #f0f0f0;
+    }
+  }
+`;
   return (
     <div css={dropdownStyle}>
       <ul css={menuStyle}>
@@ -83,28 +108,3 @@ function Dropdown() {
 }
 
 export default Header;
-
-const dropdownStyle = css`
-  position: absolute;
-  right: 50px;
-  top: 65px;
-  width: 180px;
-  background: white;
-  font-size: 13px;
-  box-shadow: 0 4px 7px rgba(0, 0, 0, 0.2);
-  border-radius: 5px;
-  z-index: 1000;
-  padding: 5px 5px;
-  `;
-const menuStyle = css`
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  li {
-    padding: 10px 10px;
-    cursor: pointer;
-    &:hover {
-      background-color: #f0f0f0;
-    }
-  }
-  `;
