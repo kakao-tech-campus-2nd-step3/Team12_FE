@@ -17,11 +17,6 @@ interface FetchErrorBoundaryState {
 }
 
 class ErrorBoundary extends Component<FetchErrorBoundaryProps, FetchErrorBoundaryState> {
-  render() {
-    const fallback = this.props.fallback || <Container>{this.state.errorMessage}</Container>;
-    return this.state.hasError ? fallback : this.props.children;
-  }
-
   componentDidCatch(error: Error) {
     console.error(error);
   }
@@ -41,6 +36,12 @@ class ErrorBoundary extends Component<FetchErrorBoundaryProps, FetchErrorBoundar
       hasError: true,
       errorMessage,
     };
+  }
+
+  render() {
+    const { props, state } = this;
+    const fallback = props.fallback || <Container>{state.errorMessage}</Container>;
+    return state.hasError ? fallback : props.children;
   }
 }
 
