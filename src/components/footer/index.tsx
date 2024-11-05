@@ -1,25 +1,33 @@
 import Container from '@components/container';
 import { css } from '@emotion/react';
-import logo from '@assets/logo.svg';
-import { FooterStyles } from '@components/footer/Footer.styles';
+import logo from '@assets/logo-inset.svg';
+import { rootWidth } from '@styles/length';
 
 function Footer() {
-  const dividerStyle = FooterStyles();
+  const dividerStyle = css`
+    color: #d3d3d3;
+    font-size: 15px;
+  `;
   return (
     <Container
-      justify="space-between"
-      padding="30px 70px"
       height="150px"
-      cssOverride={css`background-color: #f8f8f8;`}
+      cssOverride={css`background-color: #2c2c2c;`}
     >
-      <img src={logo} alt="logo" css={css`width: 50px;`} />
-      <Container width="auto" gap="30px">
-        <div css={dividerStyle}>
-          kakaotechcampus
-        </div>
-        <div css={dividerStyle}>
-          Team 12
-        </div>
+      <Container
+        width={rootWidth}
+        justify="flex-end"
+        padding="20px"
+        gap="15px"
+      >
+        <Container width="auto" direction="column" gap="8px" align="flex-end">
+          <div css={dividerStyle}>
+            &copy; 2024, Kakao Tech campus
+          </div>
+          <div css={dividerStyle}>
+            Team 12
+          </div>
+        </Container>
+        <img src={logo} alt="logo" css={css`width: 80px;`} />
       </Container>
     </Container>
   );

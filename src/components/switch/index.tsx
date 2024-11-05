@@ -1,5 +1,5 @@
 import {
-  forwardRef, InputHTMLAttributes, useRef,
+  forwardRef, InputHTMLAttributes, useRef, useState,
 } from 'react';
 import { CSSObject } from '@emotion/react';
 import useSwitchHandler from '@components/switch/useSwitchHandler';
@@ -7,20 +7,24 @@ import useSwitchStyle from '@components/switch/useSwitchStyle';
 import { generateRandomId } from '@/utils';
 
 interface SwitchProps extends InputHTMLAttributes<HTMLInputElement> {
-  type: 'checkbox';
+  type?: 'checkbox';
   wrapperCss?: CSSObject;
   circleCss?: CSSObject;
   checked?: boolean;
-  defaultChecked?: boolean;
+  onCheckedChange: ({ checked }: { checked: boolean }) => void;
 }
 
 const Switch = forwardRef<HTMLInputElement, SwitchProps>(({
-  type = 'checkbox', wrapperCss, circleCss, checked, defaultChecked, ...rest
+  type = 'checkbox', wrapperCss, circleCss, checked, onCheckedChange, ...rest
 }, ref) => {
   const inputIdRef = useRef(generateRandomId());
-  const { handleClick } = useSwitchHandler({ inputId: inputIdRef.current });
+  const [isChecked, setIsChecked] = useState(!!checked);
+  const { handleClick } = useSwitchHandler(
+    {
+      inputId: inputIdRef.current, onCheckedChange, isChecked, setIsChecked,
+    },
+  );
   const { switchWrapperStyle, switchCircleStyle, switchInputStyle } = useSwitchStyle();
-  const isChecked = checked || defaultChecked;
 
   // TODO: 하드코딩된 className 처리
   return (

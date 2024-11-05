@@ -1,40 +1,40 @@
-import { Dispatch, SetStateAction, useCallback } from 'react';
+import { Dispatch, SetStateAction } from 'react';
 import Container from '@components/container';
-import Tag from '@components/tag';
 import Input from '@components/input';
-import { css } from '@emotion/react';
+import Select from '@components/select';
+import type { StudyFilter } from '@/types/study';
 
 interface StudyFilterSectionProps {
-  filters: string[];
-  setFilters: Dispatch<SetStateAction<string[]>>;
+  studyFilter: StudyFilter;
+  setStudyFilter: Dispatch<SetStateAction<StudyFilter>>;
+  searchKeyword: string;
+  setSearchKeyword: Dispatch<SetStateAction<string>>;
 }
 
-function StudyFilterSection({ filters, setFilters }: StudyFilterSectionProps) {
-  const handleTagClose = useCallback((filterName: string) => {
-    const newFilter = [...filters];
-    newFilter.splice(filters.indexOf(filterName), 1);
-    setFilters(newFilter);
-  }, [filters, setFilters]);
-
+function StudyFilterSection({
+  studyFilter, setStudyFilter, searchKeyword, setSearchKeyword,
+}: StudyFilterSectionProps) {
   return (
-    <Container gap="40px">
-      <Container gap="3px" justify="flex-end" cssOverride={css`flex-grow: 1`}>
-        {
-          filters.map((filterName) => (
-            <Tag
-              variant="primary"
-              key={`study-filter-${filterName}`}
-              onClose={() => {
-                handleTagClose(filterName);
-              }}
-              enableClose
-            >
-              {filterName}
-            </Tag>
-          ))
-        }
-      </Container>
-      <Input type="text" placeholder="원하는 스터디를 검색해보세요!" css={css`font-size: 12px; width: 200px`} />
+    <Container gap="20px" justify="flex-end">
+      <Select
+        value={studyFilter}
+        onChange={(e) => setStudyFilter(e.target.value as StudyFilter)}
+        css={{ height: '35px', display: 'block' }}
+        placeholder="asdfasdf"
+      >
+        <option value="all">전체</option>
+        <option value="open">모집중</option>
+        <option value="closed">모집마감</option>
+      </Select>
+      <Input
+        type="text"
+        placeholder="원하는 스터디를 검색해보세요!"
+        css={{ fontSize: '12px', width: '200px' }}
+        value={searchKeyword}
+        onChange={(e) => {
+          setSearchKeyword(e.target.value);
+        }}
+      />
     </Container>
   );
 }

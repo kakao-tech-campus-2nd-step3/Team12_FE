@@ -6,6 +6,7 @@ export default function usePersonInfoModaStyles() {
     border: none;
     color: ${colorTheme.primary.main};
     &:hover {
+      border: none;
       color: ${colorTheme.primary.darken};
       background-color: transparent;
     }

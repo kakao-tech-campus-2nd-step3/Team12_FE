@@ -1,11 +1,11 @@
 import { Meta, StoryObj } from '@storybook/react';
 import { MemoryRouter } from 'react-router-dom';
-import InviteToStudyModal from '@/features/modal/studyCreation/InviteToStudyModal';
+import AcceptInvitationModal from '@/features/modal/invite/AcceptInvitationModal'
 import { useState } from 'react';
 
-const meta: Meta<typeof InviteToStudyModal> = {
-  title: 'Features/Modal/StudyCreation/InviteToStudyModal',
-  component: InviteToStudyModal,
+const meta: Meta<typeof AcceptInvitationModal> = {
+  title: 'Features/Modal/Invite/AcceptInvitationModal',
+  component: AcceptInvitationModal,
   decorators: [
     (Story) => (
       <MemoryRouter>
@@ -25,13 +25,13 @@ const meta: Meta<typeof InviteToStudyModal> = {
 
 export default meta;
 
-type Story = StoryObj<typeof InviteToStudyModal>;
+type Story = StoryObj<typeof AcceptInvitationModal>;
 
 export const Default: Story = {
   render: (args) => {
     const [open, setOpen] = useState(args.open);
     return (
-      open ? <InviteToStudyModal open={open} onClose={() => setOpen(false)} />
+      open ? <AcceptInvitationModal open={open} onClose={() => setOpen(false)} studyName='프론트엔드 스터디' />
       : <button onClick={() => setOpen(true)}>Open</button>
     );
   },
