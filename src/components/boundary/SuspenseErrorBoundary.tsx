@@ -1,5 +1,6 @@
 import { ReactNode, Suspense } from 'react';
 import ErrorBoundary from '@components/boundary/ErrorBoundary';
+import Spinner from '@components/fallback/Spinner';
 
 interface SuspenseErrorBoundaryProps {
   suspenseFallback?: ReactNode;
@@ -14,7 +15,7 @@ function SuspenseErrorBoundary({
 }: SuspenseErrorBoundaryProps) {
   return (
     <ErrorBoundary fallback={errorFallback}>
-      <Suspense fallback={suspenseFallback}>
+      <Suspense fallback={suspenseFallback || <Spinner />}>
         {children}
       </Suspense>
     </ErrorBoundary>
