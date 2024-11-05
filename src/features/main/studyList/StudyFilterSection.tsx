@@ -7,8 +7,8 @@ import type { StudyFilter } from '@/types/study';
 interface StudyFilterSectionProps {
   studyFilter: StudyFilter;
   setStudyFilter: Dispatch<SetStateAction<StudyFilter>>;
-  searchKeyword: string;
-  setSearchKeyword: Dispatch<SetStateAction<string>>;
+  searchKeyword: string | undefined;
+  setSearchKeyword: Dispatch<SetStateAction<string | undefined>>;
 }
 
 function StudyFilterSection({
