@@ -13,7 +13,8 @@ interface StudyItemWrapperProps {
 // @ts-ignore
 // eslint-disable-next-line
 function StudyGridWrapper({ studyFilter, searchKeyword }: StudyItemWrapperProps) {
-  const [studies] = useState<Study[]>(mockStudyList); // TODO: studyFilter, searchKeyword를 토대로 스터디 search, suspense wrap
+  const [studies] = useState<Study[]>(mockStudyList);
+  // TODO: studyFilter, searchKeyword를 토대로 스터디 search, suspense wrap
   return (
     <Container padding="16px 0 0 0">
       <Grid
