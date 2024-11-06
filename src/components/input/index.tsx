@@ -39,6 +39,8 @@ const Input = forwardRef<HTMLInputElement, InputProps>(({
     throw new Error('Cannot enable toggle while the type of input is not password');
   }
 
+  const inputType = type === 'password' && isHidden ? 'password' : type;
+
   return (
     <>
       {
@@ -54,9 +56,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(({
         <DynamicIcon icon={icon} css={inputIconStyle()} />
         <input
           css={[inputStyle, css]}
-          type={type === 'password' && isHidden
-            ? 'password'
-            : 'text'}
+          type={inputType}
           id={inputId.current}
           ref={ref}
           {...rest}
