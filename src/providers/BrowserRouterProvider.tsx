@@ -1,6 +1,6 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import MainPage from '@pages/MainPage';
-import AttendDate from '@pages/AttendDate';
+import AttendDatePage from '@/pages/AttendDatePage';
 
 const router = createBrowserRouter([
   {
@@ -12,7 +12,7 @@ const router = createBrowserRouter([
   {
     path: '/attend',
     element: (
-      <AttendDate />
+      <AttendDatePage />
     ),
   },
 ]);
