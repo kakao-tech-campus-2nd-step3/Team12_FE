@@ -10,7 +10,7 @@ function StudyListSection() {
   // TODO: 추후에 백엔드와 논의하여 filter type 정의
 
   return (
-    <DefaultPaddedContainer>
+    <DefaultPaddedContainer cssOverride={{ paddingTop: '40px' }}>
       <StudyFilterSection
         studyFilter={studyFilter}
         setStudyFilter={setStudyFilter}
