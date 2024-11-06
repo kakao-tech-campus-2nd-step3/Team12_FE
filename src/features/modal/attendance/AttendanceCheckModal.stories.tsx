@@ -2,6 +2,7 @@ import { Meta, StoryObj } from '@storybook/react';
 import { MemoryRouter } from 'react-router-dom';
 import { useState } from 'react';
 import AttendanceCheckModal from '@/features/modal/attendance/AttendanceCheckModal';
+import { Toaster, toast } from 'react-hot-toast';
 
 const meta: Meta<typeof AttendanceCheckModal> = {
   title: 'Features/Modal/Attendance/AttendanceCheckModal',
@@ -30,9 +31,21 @@ type Story = StoryObj<typeof AttendanceCheckModal>;
 export const Default: Story = {
   render: (args) => {
     const [open, setOpen] = useState(args.open);
+
+    const handleClose = () => {
+      toast.success("수정이 완료되었습니다!");
+      setOpen(false);
+    };
+
     return (
-      open ? <AttendanceCheckModal open={open} onClose={() => setOpen(false)} />
-      : <button onClick={() => setOpen(true)}>Open</button>
+      <>
+        <Toaster position="bottom-center" reverseOrder={false} />
+        {open ? (
+          <AttendanceCheckModal open={open} onClose={handleClose} />
+        ) : (
+          <button onClick={() => setOpen(true)}>Open</button>
+        )}
+      </>
     );
   },
   args: {

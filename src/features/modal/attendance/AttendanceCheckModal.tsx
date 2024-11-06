@@ -56,7 +56,7 @@ export default function AttendanceCheckModal({ open, onClose }: AcceptInvitation
             position: 'absolute',
             bottom: '40px',
           }}
-          onClick={onClose}
+          onClick={onClose} // 버튼 클릭 시 handleAccept 호출
         >
           수정완료
         </Button>
