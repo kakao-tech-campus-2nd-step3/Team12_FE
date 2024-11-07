@@ -12,6 +12,9 @@ import { DefaultPaddedContainer } from '@/components/container/variants';
 export default function AttendDateCreation() {
   const [currentDate, setCurrentDate] = useState('');
   const [currentTime, setCurrentTime] = useState('');
+  const [selectedDate, setSelectedDate] = useState('');
+  const [selectedTime, setSelectedTime] = useState('');
+  const [isPastDate, setIsPastDate] = useState(false);
 
   useEffect(() => {
     const today = new Date();
@@ -22,7 +25,19 @@ export default function AttendDateCreation() {
     });
     setCurrentDate(formattedDate);
     setCurrentTime(formattedTime);
+    setSelectedDate(formattedDate);
+    setSelectedTime(formattedTime);
   }, []);
+
+  useEffect(() => {
+    if (selectedDate && selectedTime) {
+      setIsPastDate(selectedTime < currentTime);
+    }
+  }, [selectedDate, selectedTime, currentTime]);
+
+  const handleCreateClick = () => {
+    toast.success('출석일자가 생성되었습니다!');
+  };
 
   return (
     <DefaultPaddedContainer>
@@ -30,11 +45,9 @@ export default function AttendDateCreation() {
         <Toaster position="bottom-center" reverseOrder={false} />
         <Heading.H1 css={{ marginTop: '20px', whiteSpace: 'nowrap', fontWeight: 'bold' }}>출석일자 생성</Heading.H1>
         <Grid
-          columns={
-        {
-          initial: 1, xs: 1, sm: 2, md: 4, lg: 4,
-        }
-      }
+          columns={{
+            initial: 1, xs: 1, sm: 2, md: 4, lg: 4,
+          }}
           css={{
             alignItems: 'center',
             justifyItems: 'center',
@@ -42,10 +55,23 @@ export default function AttendDateCreation() {
           gap={10}
         >
           <Container direction="column" align="flex-start" width="auto">
-            <Input type="date" label="시작일" defaultValue={currentDate} css={{ width: '140px', fontSize: '13px'}} />
+            <Input
+              type="date"
+              label="시작일"
+              value={selectedDate}
+              min={currentDate}
+              css={{ width: '140px', fontSize: '13px' }}
+              onChange={(e) => setSelectedDate(e.target.value)}
+            />
           </Container>
           <Container direction="column" align="flex-start" width="auto">
-            <Input type="time" label="시작시간" defaultValue={currentTime} css={{ width: '140px', fontSize: '13px'}} />
+            <Input
+              type="time"
+              label="시작시간"
+              value={selectedTime}
+              css={{ width: '140px', fontSize: '13px' }}
+              onChange={(e) => setSelectedTime(e.target.value)}
+            />
           </Container>
           <Select
             label="허용시간"
@@ -76,7 +102,8 @@ export default function AttendDateCreation() {
               marginTop: '15px',
               fontSize: '13px',
             }}
-            onClick={() => toast.success('출석일자가 생성되었습니다!')}
+            onClick={handleCreateClick}
+            disabled={isPastDate}
           >
             생성
           </Button>
