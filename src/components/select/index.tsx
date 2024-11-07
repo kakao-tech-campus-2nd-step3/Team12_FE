@@ -8,12 +8,11 @@ interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
   children?: ReactNode;
   icon?: string | ReactNode;
   label?: string;
-  placeholder?: string;
   css?: CSSObject;
 }
 
 function Select({
-  children, icon, label, placeholder, css, ...rest
+  children, icon, label, css, ...rest
 }: SelectProps) {
   const selectId = useRef(generateRandomId());
   const { selectStyle, selectContainerStyle } = useSelectStyle();
@@ -22,7 +21,6 @@ function Select({
     <div css={selectContainerStyle}>
       {label ? <Label>{label}</Label> : null}
       <select id={selectId.current} css={[selectStyle, css]} {...rest}>
-        <option value="" selected disabled hidden>{placeholder}</option>
         {children}
       </select>
     </div>
