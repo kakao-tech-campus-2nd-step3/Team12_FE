@@ -14,25 +14,36 @@ export default function AttendDateInput() {
 
   useEffect(() => {
     const today = new Date();
-    const year = today.getFullYear();
-    const month = String(today.getMonth() + 1).padStart(2, '0');
-    const day = String(today.getDate()).padStart(2, '0');
-    setCurrentDate(`${year}-${month}-${day}`);
-    const hours = String(today.getHours()).padStart(2, '0');
-    const minutes = String(today.getMinutes()).padStart(2, '0');
-    setCurrentTime(`${hours}:${minutes}`);
+    const formattedDate = today.toLocaleDateString('en-CA');
+    const formattedTime = today.toLocaleTimeString('en-GB', {
+      hour: '2-digit',
+      minute: '2-digit',
+    });
+    setCurrentDate(formattedDate);
+    setCurrentTime(formattedTime);
   }, []);
 
   return (
-    <Container direction="column" align="flex-start" css={{ maxWidth: '850px' }}>
+    <Container direction="row" align="flex-start" gap="10px">
       <Toaster position="bottom-center" reverseOrder={false} />
-      <Grid columns={5} gap={40}>
-        <Heading.H1 css={{ marginTop: '20px', whiteSpace: 'nowrap' }}>출석일자 생성</Heading.H1>
+      <Heading.H1 css={{ marginTop: '20px', whiteSpace: 'nowrap' }}>출석일자 생성</Heading.H1>
+      <Grid
+        columns={
+        {
+          initial: 1, xs: 1, sm: 2, md: 4, lg: 4,
+        }
+      }
+        css={{
+          alignItems: 'center',
+          justifyItems: 'center',
+        }}
+        gap={10}
+      >
         <Container direction="column" align="flex-start" width="auto">
-          <Input type="date" label="시작일" defaultValue={currentDate} />
+          <Input type="date" label="시작일" defaultValue={currentDate} css={{ width: '160px' }} />
         </Container>
         <Container direction="column" align="flex-start" width="auto">
-          <Input type="time" label="시작시간" defaultValue={currentTime} />
+          <Input type="time" label="시작시간" defaultValue={currentTime} css={{ width: '160px' }} />
         </Container>
         <Select
           label="허용시간"
@@ -43,7 +54,7 @@ export default function AttendDateInput() {
             height: '45px',
             boxSizing: 'border-box',
             fontSize: '15px',
-            width: '100px',
+            width: '160px',
           }}
         >
           <option value="5">5분</option>
@@ -58,7 +69,7 @@ export default function AttendDateInput() {
           css={{
             borderRadius: theme.corners.medium,
             minWidth: '73px',
-            width: '73px',
+            width: '160px',
             height: '45px',
             marginTop: '15px',
           }}

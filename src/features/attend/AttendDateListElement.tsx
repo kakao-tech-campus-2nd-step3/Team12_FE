@@ -19,6 +19,7 @@ export default function AttendDateListElement(
   { startDateTime, allowTime, memberAttendance }: AttendDateListElementProps,
 ) {
   const [startDate, startTime] = startDateTime.split(' ');
+
   return (
     <Grid columns={6} css={{ alignItems: 'center', justifyItems: 'center', gridTemplateColumns: '1fr 2fr 2fr 2fr 1fr 1fr' }}>
       <Text css={commonTextStyles}>{startDate}</Text>
