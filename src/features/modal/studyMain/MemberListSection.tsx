@@ -3,7 +3,7 @@ import { useState } from 'react';
 import Grid from '@components/grid';
 import Container from '@components/container';
 import MemberItem from '@features/modal/studyMain/MemberItem';
-import { InviteBtn } from '@features/modal/studyMain/InviteBtn.tsx';
+import { InviteBtn } from '@features/modal/studyMain/InviteBtn';
 import { mockMemberList } from '@/mock/member';
 import { Member } from '@/types/member';
 
