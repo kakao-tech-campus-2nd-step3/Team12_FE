@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { toast, Toaster } from 'react-hot-toast';
 import Button from '@/components/button';
 import Container from '@/components/container';
 import Input from '@/components/input';
@@ -6,7 +7,6 @@ import Select from '@/components/select';
 import { Heading } from '@/components/text';
 import theme from '@/styles/theme';
 import Grid from '@/components/grid';
-import { toast, Toaster } from 'react-hot-toast';
 
 export default function AttendDateInput() {
   const [currentDate, setCurrentDate] = useState('');
@@ -24,15 +24,15 @@ export default function AttendDateInput() {
   }, []);
 
   return (
-    <Container direction="column" align="flex-start" css={{ maxWidth: '850px'}}>
+    <Container direction="column" align="flex-start" css={{ maxWidth: '850px' }}>
       <Toaster position="bottom-center" reverseOrder={false} />
-      <Grid columns={5} gap={40} >
-      <Heading.H1 css={{marginTop: '20px', whiteSpace: 'nowrap'}}>출석일자 생성</Heading.H1>
-        <Container direction='column' align='flex-start' width='auto'>
-        <Input type="date" label="시작일" defaultValue={currentDate}/>
+      <Grid columns={5} gap={40}>
+        <Heading.H1 css={{ marginTop: '20px', whiteSpace: 'nowrap' }}>출석일자 생성</Heading.H1>
+        <Container direction="column" align="flex-start" width="auto">
+          <Input type="date" label="시작일" defaultValue={currentDate} />
         </Container>
-        <Container direction='column' align='flex-start' width='auto'>
-        <Input type="time" label="시작시간" defaultValue={currentTime}/>
+        <Container direction="column" align="flex-start" width="auto">
+          <Input type="time" label="시작시간" defaultValue={currentTime} />
         </Container>
         <Select
           label="허용시간"
