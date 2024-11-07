@@ -40,14 +40,14 @@ function MemberInfoItem(
     <Container justify="space-between" padding="4px" cssOverride={{ borderBottom: '1px solid #EDEDED' }}>
       <Avatar size="small" />
       <Paragraph css={{ ...paragraphStyle, flex: 0.5 }}>{member.nickname}</Paragraph>
-      <Paragraph css={{ ...paragraphStyle, flex: 1 }}>{member.phone}</Paragraph>
-      <Paragraph css={{ ...paragraphStyle, flex: 3 }}>{member.introduction}</Paragraph>
+      <Paragraph css={{ ...paragraphStyle, flex: 1 }}>{member.contact}</Paragraph>
+      <Paragraph css={{ ...paragraphStyle, flex: 3 }}>{member.description}</Paragraph>
       <Paragraph css={{ ...paragraphStyle, flex: 0.5 }}>출석</Paragraph>
       <Paragraph css={{ ...paragraphStyle, flex: 0.5 }}>과제</Paragraph>
       <Container gap="10px" css={{ flex: 1.5 }}>
         <Button variant="primary" css={btnStyle}>출석 정보</Button>
         <Button variant="primary" css={btnStyle}>과제 정보</Button>
-        <button css={removeButtonStyle}>퇴출</button>
+        <button type="button" css={removeButtonStyle}>퇴출</button>
       </Container>
     </Container>
   );
