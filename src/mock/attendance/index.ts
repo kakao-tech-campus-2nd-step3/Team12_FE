@@ -54,4 +54,49 @@ const mockAttendanceDate: string[] = [
   '2024-11-20 21:00',
 ];
 
-export { attendanceInfo, mockAttendanceDate };
+const mockMemberAttendance = [
+  {
+    id: '1',
+    name: '조장',
+    time: '',
+    status: false,
+    imageUrl: 'https://picsum.photos/200',
+  },
+  {
+    id: '2',
+    name: '네글자이',
+    time: '14:01:00',
+    status: true,
+    imageUrl: 'https://picsum.photos/200',
+  },
+  {
+    id: '3',
+    name: '다섯글자임',
+    time: '',
+    status: false,
+    imageUrl: 'https://picsum.photos/200',
+  },
+  {
+    id: '4',
+    name: '삼세형',
+    time: '14:01:00',
+    status: true,
+    imageUrl: 'https://picsum.photos/200',
+  },
+  {
+    id: '5',
+    name: '일민경',
+    time: '',
+    status: false,
+    imageUrl: 'https://picsum.photos/200',
+  },
+  {
+    id: '6',
+    name: '어렵다',
+    time: '14:01:00',
+    status: true,
+    imageUrl: 'https://picsum.photos/200',
+  },
+];
+
+export { attendanceInfo, mockAttendanceDate, mockMemberAttendance };

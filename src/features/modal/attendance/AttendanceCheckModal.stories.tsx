@@ -46,7 +46,7 @@ export const Default: Story = {
       <>
         <Toaster position="bottom-center" reverseOrder={false} />
         {open ? (
-          <AttendanceCheckModal open={open} onClose={onClose} editComplete={editComplete}/>
+          <AttendanceCheckModal open={open} onClose={onClose} editComplete={editComplete} memberAttendance={[]}/>
         ) : (
           <button onClick={() => setOpen(true)}>Open</button>
         )}

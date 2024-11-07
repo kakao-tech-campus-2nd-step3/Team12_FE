@@ -4,6 +4,7 @@ import Grid from '@/components/grid';
 import Text from '@/components/text';
 import Radio from '@/components/radio';
 import Container from '@/components/container';
+import theme from '@/styles/theme';
 
 interface AttendanceInfoProps {
   name: string;
@@ -29,12 +30,18 @@ export default function AttendanceInfo({
           textAlign: 'center',
         }}
       >
-        <Container direction="row" gap="10px">
+        <Container direction="row" gap="10px" justify="flex-start">
           <Avatar src={imageUrl} alt={name} size="small" />
-          <Text fontSize="15px">{name}</Text>
+          <Text fontSize="15px" css={{ textAlign: 'center' }}>{name}</Text>
         </Container>
-        <Text fontSize="12px">{time}</Text>
-        <Container direction="row" justify="flex-start" gap="3px">
+        {status ? (
+          <Text fontSize="12px">{time}</Text>
+        ) : (
+          <Text fontSize="12px" color={theme.colors.other.warn}>
+            결석
+          </Text>
+        )}
+        <Container direction="row" gap="3px">
           <Radio name={`attendance-${name}`} defaultChecked={status} />
           <Text fontSize="10px">출석</Text>
           <Radio name={`attendance-${name}`} defaultChecked={!status} />

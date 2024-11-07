@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { useState } from 'react';
 import Modal from '@/components/modal';
 import Text, { Heading } from '@/components/text';
 import Grid from '@/components/grid';
@@ -12,6 +13,13 @@ interface AcceptInvitationProps {
   open: boolean;
   onClose: () => void;
   editComplete: () => void;
+  memberAttendance: {
+    id: string;
+    name: string;
+    time: string;
+    status: boolean;
+    imageUrl: string;
+  }[];
 }
 
 const HorizontalLine = styled.hr`
@@ -20,10 +28,13 @@ const HorizontalLine = styled.hr`
 `;
 
 export default function AttendanceCheckModal(
-  { open, onClose, editComplete }: AcceptInvitationProps,
+  {
+    open, onClose, editComplete, memberAttendance,
+  }: AcceptInvitationProps,
 ) {
+  const [attendanceList] = useState(memberAttendance);
   return (
-    <Modal open={open} onClose={onClose} width="447px">
+    <Modal open={open} onClose={onClose} width="447px" height="628px">
       <Container padding="40px" direction="column" align="flex-start">
         <Spacing height={20} />
         <Heading.H1 weight="bold">출석조회</Heading.H1>
@@ -45,10 +56,15 @@ export default function AttendanceCheckModal(
           </Grid>
         </Container>
         <HorizontalLine />
-        <Container css={{ overflowY: 'scroll', height: '300px' }} direction="column" justify="flex-start">
-          <AttendanceInfo name="차조장" time="12:07:00" status={true} imageUrl="https://picsum.photos/200" />
-          <AttendanceInfo name="삼세형" time="12:08:09" status={false} imageUrl="https://picsum.photos/201" />
-          <AttendanceInfo name="일민경" time="12:09:00" status={true} imageUrl="https://picsum.photos/202" />
+        <Container css={{ overflowY: 'scroll', height: '350px' }} direction="column" justify="flex-start">
+          {attendanceList.map((attendance) => (
+            <AttendanceInfo
+              name={attendance.name}
+              time={attendance.time}
+              status={attendance.status}
+              imageUrl={attendance.imageUrl}
+            />
+          ))}
         </Container>
         <Button
           variant="primary"

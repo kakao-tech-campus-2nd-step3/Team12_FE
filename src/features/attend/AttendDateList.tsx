@@ -5,10 +5,11 @@ import AttendDateCreation from '@/features/attend/AttendDateCreation';
 import AttendDateListElement from './AttendDateListElement';
 import Grid from '@/components/grid';
 import Text from '@/components/text';
-import { mockAttendanceDate } from '@/mock/attendance';
+import { mockAttendanceDate, mockMemberAttendance } from '@/mock/attendance';
 
 export default function AttendDateList() {
   const [attendanceDates] = useState<string[]>(mockAttendanceDate);
+  const [memberAttendance] = useState(mockMemberAttendance);
   return (
     <DefaultPaddedContainer>
       <AttendDateCreation />
@@ -27,9 +28,7 @@ export default function AttendDateList() {
           <AttendDateListElement
             startDateTime={date}
             allowTime="5"
-            memberAttendance={
-            ['John', '', false, 'https://picsum.photos/200']
-          }
+            memberAttendance={memberAttendance}
           />
           <hr css={HorizontalSoftLine} />
         </>

@@ -1,24 +1,38 @@
 import { css } from '@emotion/react';
+import { useState } from 'react';
+import toast, { Toaster } from 'react-hot-toast';
 import Grid from '@/components/grid';
 import Text from '@/components/text';
 import Button from '@/components/button';
 import theme from '@/styles/theme';
+import AttendanceCheckModal from '@/features/modal/attendance/AttendanceCheckModal';
 
 interface AttendDateListElementProps {
   startDateTime: string;
   allowTime: string;
-  memberAttendance: [
+  memberAttendance: {
+    id: string;
     name: string,
     time: string,
     status: boolean,
     imageUrl: string,
-  ];
+  }[];
 }
 
 export default function AttendDateListElement(
   { startDateTime, allowTime, memberAttendance }: AttendDateListElementProps,
 ) {
   const [startDate, startTime] = startDateTime.split(' ');
+  const [open, setOpen] = useState(false);
+
+  const editComplete = () => {
+    toast.success('수정이 완료되었습니다!');
+    setOpen(false);
+  };
+
+  const onClose = () => {
+    setOpen(false);
+  };
 
   return (
     <Grid columns={6} css={{ alignItems: 'center', justifyItems: 'center', gridTemplateColumns: '1fr 2fr 2fr 2fr 1fr 1fr' }}>
@@ -36,9 +50,19 @@ export default function AttendDateListElement(
           textDecoration: 'underline',
           textAlign: 'center',
         }}
+        onClick={() => setOpen(true)}
       >
         출석인원 확인
       </Button>
+      {open && (
+      <AttendanceCheckModal
+        open={open}
+        onClose={onClose}
+        editComplete={editComplete}
+        memberAttendance={memberAttendance}
+      />
+      )}
+      <Toaster position="bottom-center" reverseOrder={false} />
       <Button variant="primary" css={commonButtonStyles}>
         수정
       </Button>
