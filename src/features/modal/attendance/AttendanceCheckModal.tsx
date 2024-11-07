@@ -59,6 +59,7 @@ export default function AttendanceCheckModal(
         <Container css={{ overflowY: 'scroll', height: '350px' }} direction="column" justify="flex-start">
           {attendanceList.map((attendance) => (
             <AttendanceInfo
+              key={attendance.id}
               name={attendance.name}
               time={attendance.time}
               status={attendance.status}

@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { DefaultPaddedContainer } from '@/components/container/variants';
 import AttendDateCreation from '@/features/attend/AttendDateCreation';
 import AttendDateListElement from './AttendDateListElement';
@@ -26,15 +26,16 @@ export default function AttendDateList() {
       </Grid>
       <hr css={HorizontalSoftLine} />
       {attendanceDates.map((date) => (
-        <>
+        <React.Fragment key={date}>
           <AttendDateListElement
             startDateTime={date}
             allowTime="5"
             memberAttendance={memberAttendance}
           />
           <hr css={HorizontalSoftLine} />
-        </>
+        </React.Fragment>
       ))}
+
     </DefaultPaddedContainer>
   );
 }
