@@ -1,5 +1,4 @@
 import axios, { HttpStatusCode, isAxiosError } from 'axios';
-import { isAuthRequired } from '@constants/endpoints';
 import { tokenStorage } from '@/utils/storage';
 import { reIssueAccessToken } from '@/api/auth';
 
@@ -9,8 +8,6 @@ const axiosInstance = axios.create({
 });
 
 axiosInstance.interceptors.request.use((config) => {
-  const { url } = config;
-  if (!isAuthRequired(url)) return config;
   const nextConfig = config;
   const token = tokenStorage.get();
   if (!token) {
@@ -25,9 +22,13 @@ axiosInstance.interceptors.response.use((config) => config, async (error) => {
 
   const { config, response } = error;
   if (!response || !config || response.status !== HttpStatusCode.Unauthorized
-  ) return error;
-  const accessToken = await reIssueAccessToken();
-  tokenStorage.set(accessToken);
+  ) return Promise.reject(error);
+  try {
+    const accessToken = await reIssueAccessToken();
+    tokenStorage.set(accessToken);
+  } catch (e) {
+    tokenStorage.remove();
+  }
   return axiosInstance(config);
 });
 

@@ -35,8 +35,7 @@ export function MemberInfoContextProvider({ children }: MemberInfoContextProps) 
         setIsLoggedIn(true);
         setMemberInfo(myInfo);
       } catch (e) {
-        // TODO: 에러 코드를 통해 token이 만료되어서 발생한 에러인지 확인 후 토큰 초기화
-        tokenStorage.set();
+        // TODO: 에러 처리. 토큰 에러는 interceptor에서 처리됨
       }
     })();
   }, []);
