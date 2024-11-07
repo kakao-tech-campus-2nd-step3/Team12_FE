@@ -1,14 +1,14 @@
 import { css } from '@emotion/react';
+import { useState } from 'react';
 import { DefaultPaddedContainer } from '@/components/container/variants';
 import AttendDateCreation from '@/features/attend/AttendDateCreation';
 import AttendDateListElement from './AttendDateListElement';
 import Grid from '@/components/grid';
 import Text from '@/components/text';
 import { mockAttendanceDate } from '@/mock/attendance';
-import { useState } from 'react';
 
 export default function AttendDateList() {
-  const [ attendanceDates ] = useState<string[]>(mockAttendanceDate);
+  const [attendanceDates] = useState<string[]>(mockAttendanceDate);
   return (
     <DefaultPaddedContainer>
       <AttendDateCreation />

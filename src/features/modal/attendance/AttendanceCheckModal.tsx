@@ -11,6 +11,7 @@ import theme from '@/styles/theme';
 interface AcceptInvitationProps {
   open: boolean;
   onClose: () => void;
+  editComplete: () => void;
 }
 
 const HorizontalLine = styled.hr`
@@ -18,9 +19,11 @@ const HorizontalLine = styled.hr`
   border: 1px solid #C8C8C8;
 `;
 
-export default function AttendanceCheckModal({ open, onClose }: AcceptInvitationProps) {
+export default function AttendanceCheckModal(
+  { open, onClose, editComplete }: AcceptInvitationProps,
+) {
   return (
-    <Modal open={open} onClose={onClose} width="447px" height="623px">
+    <Modal open={open} onClose={onClose} width="447px">
       <Container padding="40px" direction="column" align="flex-start">
         <Spacing height={20} />
         <Heading.H1 weight="bold">출석조회</Heading.H1>
@@ -28,13 +31,12 @@ export default function AttendanceCheckModal({ open, onClose }: AcceptInvitation
         <Text fontSize="15px">누가누가 잘하나 (a.k.a. 온사람)</Text>
         <Spacing height={23} />
         <Container gap="23px" justify="flex-start">
-          <div style={{ width: '30px', height: '30px' }} />
           <Grid
             columns={3}
             style={{
-              gridTemplateColumns: '0.4fr 1.8fr 1fr',
               alignItems: 'center',
               justifyItems: 'center',
+              textAlign: 'center',
             }}
           >
             <Text fontSize="15px">이름</Text>
@@ -56,7 +58,7 @@ export default function AttendanceCheckModal({ open, onClose }: AcceptInvitation
             position: 'absolute',
             bottom: '40px',
           }}
-          onClick={onClose}
+          onClick={editComplete}
         >
           수정완료
         </Button>

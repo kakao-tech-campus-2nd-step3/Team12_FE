@@ -22,19 +22,25 @@ export default function AttendanceInfo({
 }: AttendanceInfoProps) {
   return (
     <>
-      <Container gap="20px" width="100%">
-        <Avatar src={imageUrl} alt={name} size="small" />
-        <Grid columns={3} style={{ alignItems: 'center' }}>
+      <Grid
+        columns={3}
+        style={{
+          alignItems: 'center',
+          textAlign: 'center',
+        }}
+      >
+        <Container direction="row" gap="10px">
+          <Avatar src={imageUrl} alt={name} size="small" />
           <Text fontSize="15px">{name}</Text>
-          <Text fontSize="12px">{time}</Text>
-          <Container direction="row" justify="flex-start" gap="3px">
-            <Radio name={`attendance-${name}`} defaultChecked={status} />
-            <Text fontSize="10px">출석</Text>
-            <Radio name={`attendance-${name}`} defaultChecked={!status} />
-            <Text fontSize="10px">결석</Text>
-          </Container>
-        </Grid>
-      </Container>
+        </Container>
+        <Text fontSize="12px">{time}</Text>
+        <Container direction="row" justify="flex-start" gap="3px">
+          <Radio name={`attendance-${name}`} defaultChecked={status} />
+          <Text fontSize="10px">출석</Text>
+          <Radio name={`attendance-${name}`} defaultChecked={!status} />
+          <Text fontSize="10px">결석</Text>
+        </Container>
+      </Grid>
       <HorizontalLine />
     </>
   );

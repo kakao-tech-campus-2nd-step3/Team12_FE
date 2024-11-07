@@ -32,16 +32,21 @@ export const Default: Story = {
   render: (args) => {
     const [open, setOpen] = useState(args.open);
 
-    const handleClose = () => {
+
+    const onClose = () => {
+      setOpen(false);
+    }
+
+    const editComplete = () => {
       toast.success("수정이 완료되었습니다!");
       setOpen(false);
-    };
+    }
 
     return (
       <>
         <Toaster position="bottom-center" reverseOrder={false} />
         {open ? (
-          <AttendanceCheckModal open={open} onClose={handleClose} />
+          <AttendanceCheckModal open={open} onClose={onClose} editComplete={editComplete}/>
         ) : (
           <button onClick={() => setOpen(true)}>Open</button>
         )}
