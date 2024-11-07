@@ -23,7 +23,7 @@ function MemberItem(
         <Paragraph variant="large" css={{ marginLeft: '10px' }}>{member.nickname}</Paragraph>
       </Container>
       <Container justify="flex-start">
-        <Paragraph variant="medium" weight="regular" css={{ lineHeight: '20px' }}>{member.introduction}</Paragraph>
+        <Paragraph variant="medium" weight="regular" css={{ lineHeight: '20px' }}>{member.description}</Paragraph>
       </Container>
       <Container justify="flex-end" gap="10px">
         <Paragraph variant="small" color="#C8C8C8" css={css`text-decoration: underline;`}>출석 조회</Paragraph>
