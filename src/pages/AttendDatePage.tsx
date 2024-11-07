@@ -1,9 +1,10 @@
 import Page from '@/components/template/Page';
+import AttendDateList from '@/features/attend/AttendDateList';
 
 export default function AttendDatePage() {
   return (
     <Page>
-      <h1>AttendDate</h1>
+      <AttendDateList />
     </Page>
   );
 }

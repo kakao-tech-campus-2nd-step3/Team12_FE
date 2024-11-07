@@ -35,7 +35,7 @@ export default function AttendDateListElement(
   };
 
   return (
-    <Grid columns={6} css={{ alignItems: 'center', justifyItems: 'center', gridTemplateColumns: '1fr 2fr 2fr 2fr 1fr 1fr' }}>
+    <Grid columns={6} css={{ alignItems: 'center', justifyItems: 'center', gridTemplateColumns: '1fr 1fr 1fr 1fr 0.5fr 0.5fr' }}>
       <Text css={commonTextStyles}>{startDate}</Text>
       <Text css={commonTextStyles}>{startTime}</Text>
       <Text css={commonTextStyles}>
@@ -86,5 +86,6 @@ const commonButtonStyles = css`
   width: 60px;
   min-width: 60px;
   box-sizing: border-box;
-  align-self: center;
+  padding: 10px 10px;
+  margin: 5px;
 `;
