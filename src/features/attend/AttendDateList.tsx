@@ -4,8 +4,11 @@ import AttendDateCreation from '@/features/attend/AttendDateCreation';
 import AttendDateListElement from './AttendDateListElement';
 import Grid from '@/components/grid';
 import Text from '@/components/text';
+import { mockAttendanceDate } from '@/mock/attendance';
+import { useState } from 'react';
 
 export default function AttendDateList() {
+  const [ attendanceDates ] = useState<string[]>(mockAttendanceDate);
   return (
     <DefaultPaddedContainer>
       <AttendDateCreation />
@@ -19,14 +22,18 @@ export default function AttendDateList() {
         <Text css={commonTitleTextStyles}>삭제</Text>
       </Grid>
       <hr css={HorizontalSoftLine} />
-      <AttendDateListElement
-        startDateTime="2020-05-19 14:00"
-        allowTime="5"
-        memberAttendance={
-        ['John', '14:01', false, 'https://picsum.photos/200']
-      }
-      />
-      <hr css={HorizontalSoftLine} />
+      {attendanceDates.map((date) => (
+        <>
+          <AttendDateListElement
+            startDateTime={date}
+            allowTime="5"
+            memberAttendance={
+            ['John', '', false, 'https://picsum.photos/200']
+          }
+          />
+          <hr css={HorizontalSoftLine} />
+        </>
+      ))}
     </DefaultPaddedContainer>
   );
 }
