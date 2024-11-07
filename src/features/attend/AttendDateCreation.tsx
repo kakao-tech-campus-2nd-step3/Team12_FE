@@ -26,7 +26,7 @@ export default function AttendDateCreation() {
 
   return (
     <DefaultPaddedContainer>
-      <Container direction="row" align="flex-start" gap="10px">
+      <Container direction="row" align="flex-start" gap="50px">
         <Toaster position="bottom-center" reverseOrder={false} />
         <Heading.H1 css={{ marginTop: '20px', whiteSpace: 'nowrap', fontWeight: 'bold' }}>출석일자 생성</Heading.H1>
         <Grid
@@ -42,10 +42,10 @@ export default function AttendDateCreation() {
           gap={10}
         >
           <Container direction="column" align="flex-start" width="auto">
-            <Input type="date" label="시작일" defaultValue={currentDate} css={{ width: '160px' }} />
+            <Input type="date" label="시작일" defaultValue={currentDate} css={{ width: '140px', fontSize: '13px'}} />
           </Container>
           <Container direction="column" align="flex-start" width="auto">
-            <Input type="time" label="시작시간" defaultValue={currentTime} css={{ width: '160px' }} />
+            <Input type="time" label="시작시간" defaultValue={currentTime} css={{ width: '140px', fontSize: '13px'}} />
           </Container>
           <Select
             label="허용시간"
@@ -55,8 +55,8 @@ export default function AttendDateCreation() {
               border: '1px solid #DFE1E3',
               height: '45px',
               boxSizing: 'border-box',
-              fontSize: '15px',
-              width: '160px',
+              fontSize: '13px',
+              width: '140px',
             }}
           >
             <option value="5">5분</option>
@@ -71,9 +71,10 @@ export default function AttendDateCreation() {
             css={{
               borderRadius: theme.corners.medium,
               minWidth: '73px',
-              width: '160px',
+              width: '140px',
               height: '45px',
               marginTop: '15px',
+              fontSize: '13px',
             }}
             onClick={() => toast.success('출석일자가 생성되었습니다!')}
           >
