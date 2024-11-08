@@ -29,7 +29,20 @@ export default function AttendDateList() {
             <Text css={commonTitleTextStyles}>삭제</Text>
           </Grid>
           <hr css={HorizontalSoftLine} />
-          <Container css={{ overflowY: 'scroll', height: '400px' }} direction="column" justify="flex-start">
+          <Container
+            css={{
+              overflowY: 'scroll',
+              height: '350px',
+              overflowX: 'hidden',
+              '::-webkit-scrollbar': {
+                display: 'none',
+              },
+              msOverflowStyle: 'none',
+              scrollbarWidth: 'none',
+            }}
+            direction="column"
+            justify="flex-start"
+          >
             {attendanceDates.map((date) => (
               <React.Fragment key={date}>
                 <AttendDateListElement

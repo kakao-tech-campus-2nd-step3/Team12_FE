@@ -56,7 +56,20 @@ export default function AttendanceCheckModal(
           </Grid>
         </Container>
         <HorizontalLine />
-        <Container css={{ overflowY: 'scroll', height: '350px' }} direction="column" justify="flex-start">
+        <Container
+          css={{
+            overflowY: 'scroll',
+            height: '350px',
+            overflowX: 'hidden',
+            '::-webkit-scrollbar': {
+              display: 'none',
+            },
+            msOverflowStyle: 'none',
+            scrollbarWidth: 'none',
+          }}
+          direction="column"
+          justify="flex-start"
+        >
           {attendanceList.map((attendance) => (
             <AttendanceInfo
               key={attendance.id}
