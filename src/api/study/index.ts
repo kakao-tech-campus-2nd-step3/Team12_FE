@@ -8,3 +8,17 @@ export async function searchStudies(requestQuery: StudySearchRequestQuery) {
   });
   return response.data;
 }
+
+export async function createStudy(data: FormData) {
+  try {
+    const response = await axiosInstance.post(endpoints.createStudy, data, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Failed to create study:', error);
+    throw error;
+  }
+}

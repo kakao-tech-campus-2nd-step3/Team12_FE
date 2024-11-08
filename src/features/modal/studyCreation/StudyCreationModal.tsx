@@ -1,11 +1,13 @@
 import { css } from '@emotion/react';
 import {
   Control, FormState, useForm, UseFormRegister,
+  UseFormSetValue,
 } from 'react-hook-form';
 import Modal from '@/components/modal';
 import LeftSection from '@/features/modal/studyCreation/LeftSection';
 import RightSection from '@/features/modal/studyCreation/RightSection';
 import { type StudyCreationInputs } from '@/types/study';
+import { createStudy } from '@/api/study';
 
 interface StudyCreationProps {
   open: boolean;
@@ -18,24 +20,54 @@ export default function StudyCreationModal({ open, onClose }: StudyCreationProps
     handleSubmit,
     formState,
     control,
+    setValue,
   } = useForm<StudyCreationInputs>({
     defaultValues: {
       isOpen: true,
       name: '',
       topic: '',
       description: '',
+      profileImage: '',
     },
     mode: 'onChange',
   });
 
   // TODO: 실제 request 로직으로 변경 및 UI 로직과 분리
-  const onSubmit = (data: StudyCreationInputs) => console.log(data);
+  function onSubmit(data: StudyCreationInputs) {
+    const formData = new FormData();
+
+    const requestData = {
+      name: data.name,
+      description: data.description,
+      topic: data.topic,
+      isOpen: data.isOpen,
+    };
+    formData.append('request', JSON.stringify(requestData));
+    formData.append('profileImage', data.profileImage);
+
+    createStudy(formData)
+      .then((response) => {
+        console.log('Study created:', response);
+      })
+      .catch((error) => {
+        console.error('Failed to create study:', error);
+      });
+  }
 
   return (
     <Modal open={open} onClose={onClose} width="850px">
       <form css={formStyle} onSubmit={handleSubmit(onSubmit)}>
-        <LeftSection formState={formState} register={register} control={control} />
-        <RightSection formState={formState} register={register} control={control} />
+        <LeftSection
+          formState={formState}
+          register={register}
+          control={control}
+          setValue={setValue}
+        />
+        <RightSection
+          formState={formState}
+          register={register}
+          control={control}
+        />
       </form>
     </Modal>
   );
@@ -51,4 +83,5 @@ export interface StudyCreationSectionProps {
   register: UseFormRegister<StudyCreationInputs>;
   formState: FormState<StudyCreationInputs>;
   control: Control<StudyCreationInputs>;
+  setValue?: UseFormSetValue<StudyCreationInputs>;
 }
