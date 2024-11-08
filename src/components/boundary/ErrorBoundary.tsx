@@ -17,6 +17,14 @@ interface FetchErrorBoundaryState {
 }
 
 class ErrorBoundary extends Component<FetchErrorBoundaryProps, FetchErrorBoundaryState> {
+  constructor(props: FetchErrorBoundaryProps) {
+    super(props);
+    this.state = {
+      hasError: false,
+      errorMessage: undefined,
+    };
+  }
+
   componentDidCatch(error: Error) {
     console.error(error);
   }
