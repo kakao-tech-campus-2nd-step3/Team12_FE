@@ -4,7 +4,7 @@ export interface MemberInfoSectionProps {
   memberInfo: MemberInfo;
 }
 
-export default function MemberInfoSection({memberInfo}: MemberInfoSectionProps) {
+export default function MemberInfoSection({ memberInfo }: MemberInfoSectionProps) {
   return (
     <div>
       <div>{memberInfo.member.nickname}</div>

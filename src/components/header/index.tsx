@@ -7,10 +7,12 @@ import alarm from '@assets/icons/alarm.svg';
 import dropDown from '@assets/icons/dropdown.svg';
 import { useState } from 'react';
 import { rootWidth } from '@styles/length';
+import StudyCreationModal from '@/features/modal/studyCreation/StudyCreationModal';
 
 function Header() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const theme = useTheme();
+  const [isStudyCreationModalOpen, setIsStudyCreationModalOpen] = useState(false);
 
   const toggleDropdown = () => {
     setIsDropdownOpen((prev) => !prev);
@@ -18,6 +20,12 @@ function Header() {
 
   return (
     <Container cssOverride={css`background-color: ${theme.colors.background.main}; box-shadow: 0 4px 7px rgba(0, 0, 0, 0.1); position: relative;`}>
+      {isStudyCreationModalOpen && (
+        <StudyCreationModal
+          open={isStudyCreationModalOpen}
+          onClose={() => setIsStudyCreationModalOpen(false)}
+        />
+      )}
       <Container
         justify="space-between"
         padding="20px"
@@ -33,12 +41,14 @@ function Header() {
           width="auto"
           gap="20px"
         >
-          <Button css={css`
+          <Button
+            css={css`
           width: 140px;
           height: 35px;
           font-size:14px;
           border-color: #ECEDEE;
         `}
+            onClick={() => setIsStudyCreationModalOpen(true)}
           >
             스터디 생성하기
           </Button>
