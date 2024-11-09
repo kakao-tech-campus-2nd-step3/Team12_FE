@@ -7,7 +7,7 @@ interface DefaultPaddedContainerProps extends ContainerProps {
 
 // eslint-disable-next-line import/prefer-default-export
 export function DefaultPaddedContainer(
-  { children, ...rest }: DefaultPaddedContainerProps,
+  { children, cssOverride, ...rest }: DefaultPaddedContainerProps,
 ) {
   const paddedContainerStyle = css`
     box-sizing: border-box;
@@ -18,7 +18,7 @@ export function DefaultPaddedContainer(
   `;
 
   return (
-    <Container {...rest} cssOverride={paddedContainerStyle}>
+    <Container cssOverride={css([paddedContainerStyle, cssOverride])} {...rest}>
       {children}
     </Container>
   );

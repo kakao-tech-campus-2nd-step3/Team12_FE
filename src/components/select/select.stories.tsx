@@ -15,7 +15,7 @@ type Story = StoryObj<typeof Select>;
 
 export const Default: Story = {
   render: () => (
-    <Select placeholder="옵션을 선택하세요." label="label" icon={eye}>
+    <Select label="label" icon={eye}>
       <option value="asdf">asdf</option>
       <option value="asdf">asdf</option>
       <option value="asdf">asdf</option>
