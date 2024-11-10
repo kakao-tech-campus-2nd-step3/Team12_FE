@@ -10,11 +10,12 @@ interface ModalProps {
   width?: string;
   height?: string;
   open?: boolean;
+  hideClose?: boolean;
 }
 
 const Modal: React.FC<ModalProps> = ({
-  onClose, children, width, height, open,
-}) => {
+  onClose, children, width, height, open, hideClose,
+}) => { // TODO: hideClose가 true일경우, onClose와 open을 적절히 설정해야됨
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -49,7 +50,7 @@ const Modal: React.FC<ModalProps> = ({
   return ReactDOM.createPortal(
     <ModalOverlay onClick={handleOverlayClick}>
       <ModalContainer width={width} height={height} onClick={handleModalClick}>
-        <Button onClick={onClose}>&times;</Button>
+        { hideClose && <Button onClick={onClose}>&times;</Button> }
         <div>{children}</div>
       </ModalContainer>
     </ModalOverlay>,
