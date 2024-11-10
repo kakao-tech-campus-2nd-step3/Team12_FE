@@ -27,7 +27,7 @@ function StudyGridWrapper({ studyFilter, searchKeyword }: StudyItemWrapperProps)
   };
   const {
     data: studyResponse,
-    // fetchNextPage,
+    // fetchNextPage, TODO: infinite scroll
     refetch,
   } = useSuspenseInfiniteQuery({
     initialData: undefined,
@@ -39,7 +39,7 @@ function StudyGridWrapper({ studyFilter, searchKeyword }: StudyItemWrapperProps)
 
   useEffect(() => {
     refetch();
-  }, [studyFilter, searchKeyword]);
+  }, [refetch, studyFilter, searchKeyword]);
 
   return (
     <Container padding="16px 0 0 0">
