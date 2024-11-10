@@ -3,7 +3,7 @@ import Grid from '@components/grid';
 import StudyItem from '@features/main/studyList/StudyItem';
 import { useSuspenseInfiniteQuery } from '@tanstack/react-query';
 import { queryKeys } from '@constants/queryKeys';
-import useDebounce from '@hooks/useDebounce';
+import { useEffect } from 'react';
 import type { Study, StudyFilter, StudySearchRequestQuery } from '@/types/study';
 import { searchStudies } from '@/api/study';
 
@@ -12,8 +12,6 @@ interface StudyItemWrapperProps {
   searchKeyword: string;
 }
 
-// @ts-ignore
-// eslint-disable-next-line
 function StudyGridWrapper({ studyFilter, searchKeyword }: StudyItemWrapperProps) {
   const fetchPage = async ({ pageParam = 0 }) => {
     const params: StudySearchRequestQuery = {
@@ -39,7 +37,9 @@ function StudyGridWrapper({ studyFilter, searchKeyword }: StudyItemWrapperProps)
     getNextPageParam: (lastPage) => (lastPage.hasNextPage ? lastPage.currentPage + 1 : undefined),
   });
 
-  useDebounce({ func: refetch, delay: 500 });
+  useEffect(() => {
+    refetch();
+  }, [studyFilter, searchKeyword]);
 
   return (
     <Container padding="16px 0 0 0">
@@ -70,7 +70,7 @@ interface StudyItemContainerProps {
 }
 
 function StudyItemContainer({ studyList }: StudyItemContainerProps) {
-  return studyList.map((study) => <StudyItem study={study} key={`study-item-${study.name}-${study.id}`} />);
+  return studyList.map((study) => <StudyItem study={study} key={`study-item-${study.name}-${study.studyId}`} />);
 }
 
 export default StudyGridWrapper;

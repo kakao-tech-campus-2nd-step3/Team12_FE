@@ -1,9 +1,10 @@
 import {
-  Dispatch, SetStateAction, useEffect, useState,
+  Dispatch, SetStateAction, useState,
 } from 'react';
 import Container from '@components/container';
 import Input from '@components/input';
 import Select from '@components/select';
+import useDebounce from '@hooks/useDebounce';
 import type { StudyFilter } from '@/types/study';
 
 interface StudyFilterSectionProps {
@@ -16,14 +17,13 @@ function StudyFilterSection({
   studyFilter, setStudyFilter, setSearchKeyword,
 }: StudyFilterSectionProps) {
   const [inputValue, setInputValue] = useState('');
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setSearchKeyword(inputValue);
-    }, 500);
-    return () => {
-      clearTimeout(timer);
-    };
-  }, [inputValue, setSearchKeyword]);
+
+  useDebounce({
+    func: () => setSearchKeyword(inputValue),
+    delay: 500,
+    deps: [inputValue, setSearchKeyword],
+  });
+
   return (
     <Container gap="20px" justify="flex-end">
       <Select
