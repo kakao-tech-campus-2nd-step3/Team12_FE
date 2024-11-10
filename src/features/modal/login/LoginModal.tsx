@@ -18,6 +18,11 @@ interface LoginModalProps {
 
 function LoginModal({ open, onClose }: LoginModalProps) {
   const { kakaoLoginButtonStyle, iconButtonBaseStyle } = useLoginModalStyles();
+  const handleLoginClick = () => {
+    const REST_API_KEY = import.meta.env.VITE_KAKAO_API_KEY;
+    const REDIRECT_URI = `${import.meta.env.VITE_KAKAO_REDIRECT_URI}`;
+    window.location.href = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
+  };
   return (
     <Modal open={open} onClose={onClose} width="387px" height="478px">
       <Container padding="82px 30px" direction="column">
@@ -30,7 +35,13 @@ function LoginModal({ open, onClose }: LoginModalProps) {
       <Container padding="16px 30px" direction="column">
         <Paragraph variant="small" weight="lighter">sns로 5초만에 시작하기</Paragraph>
         <Spacing height={12} />
-        <Button icon={BubbleIcon} css={kakaoLoginButtonStyle}>카카오 계정으로 로그인</Button>
+        <Button
+          icon={BubbleIcon}
+          css={kakaoLoginButtonStyle}
+          onClick={handleLoginClick}
+        >
+          카카오 계정으로 로그인
+        </Button>
       </Container>
 
       <Container padding="0 80px" direction="column">
