@@ -1,19 +1,30 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import MainPage from '@pages/MainPage';
+import routePaths from '@constants/routePaths';
+import LoginSuccessPage from '@pages/LoginSuccessPage';
 import AttendDatePage from '@/pages/AttendDatePage';
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: routePaths.MAIN,
     element: (
       <MainPage />
     ),
   },
   {
-    path: '/attend',
+    path: routePaths.ATTEND,
     element: (
       <AttendDatePage />
     ),
+  },
+  {
+    path: routePaths.LOGIN_SUCCESS,
+    element: (
+      <LoginSuccessPage />
+    ),
+  },
+  {
+    path: routePaths.SUBMIT_PERSONAL_INFO,
   },
 ]);
 
