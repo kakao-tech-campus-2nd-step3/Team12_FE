@@ -1,20 +1,46 @@
 import Container from '@components/container';
 import Grid from '@components/grid';
 import StudyItem from '@features/main/studyList/StudyItem';
-import { useState } from 'react';
-import type { Study } from '@/types/study';
-import { mockStudyList } from '@/mock/study';
+import { useSuspenseInfiniteQuery } from '@tanstack/react-query';
+import { queryKeys } from '@constants/queryKeys';
+import useDebounce from '@hooks/useDebounce';
+import type { Study, StudyFilter, StudySearchRequestQuery } from '@/types/study';
+import { searchStudies } from '@/api/study';
 
 interface StudyItemWrapperProps {
-  studyFilter: string;
-  searchKeyword: string | undefined;
+  studyFilter: StudyFilter;
+  searchKeyword: string;
 }
 
 // @ts-ignore
 // eslint-disable-next-line
 function StudyGridWrapper({ studyFilter, searchKeyword }: StudyItemWrapperProps) {
-  const [studies] = useState<Study[]>(mockStudyList);
-  // TODO: studyFilter, searchKeyword를 토대로 스터디 search, suspense wrap
+  const fetchPage = async ({ pageParam = 0 }) => {
+    const params: StudySearchRequestQuery = {
+      size: 15,
+      page: pageParam,
+      sort: 'name,asc',
+    };
+    if (searchKeyword) {
+      params.name = searchKeyword;
+    }
+    if (studyFilter !== 'all') params.isOpen = studyFilter === 'open';
+    return searchStudies(params);
+  };
+  const {
+    data: studyResponse,
+    // fetchNextPage,
+    refetch,
+  } = useSuspenseInfiniteQuery({
+    initialData: undefined,
+    initialPageParam: 0,
+    queryKey: [queryKeys.MAIN_SEARCH_STUDIES, searchKeyword, studyFilter],
+    queryFn: fetchPage,
+    getNextPageParam: (lastPage) => (lastPage.hasNextPage ? lastPage.currentPage + 1 : undefined),
+  });
+
+  useDebounce({ func: refetch, delay: 500 });
+
   return (
     <Container padding="16px 0 0 0">
       <Grid
@@ -27,13 +53,24 @@ function StudyGridWrapper({ studyFilter, searchKeyword }: StudyItemWrapperProps)
         gap={19}
       >
         {
-          studies.map((study) => (
-            <StudyItem study={study} key={`study-item-${study.id}`} />
+          studyResponse.pages.map((page) => (
+            <StudyItemContainer
+              studyList={page.studies}
+              key={`study-search-${page.currentPage}`}
+            />
           ))
         }
       </Grid>
     </Container>
   );
+}
+
+interface StudyItemContainerProps {
+  studyList: Study[];
+}
+
+function StudyItemContainer({ studyList }: StudyItemContainerProps) {
+  return studyList.map((study) => <StudyItem study={study} key={`study-item-${study.name}-${study.id}`} />);
 }
 
 export default StudyGridWrapper;

@@ -1,4 +1,6 @@
-import { Dispatch, SetStateAction } from 'react';
+import {
+  Dispatch, SetStateAction, useEffect, useState,
+} from 'react';
 import Container from '@components/container';
 import Input from '@components/input';
 import Select from '@components/select';
@@ -7,13 +9,21 @@ import type { StudyFilter } from '@/types/study';
 interface StudyFilterSectionProps {
   studyFilter: StudyFilter;
   setStudyFilter: Dispatch<SetStateAction<StudyFilter>>;
-  searchKeyword: string;
   setSearchKeyword: Dispatch<SetStateAction<string>>;
 }
 
 function StudyFilterSection({
-  studyFilter, setStudyFilter, searchKeyword, setSearchKeyword,
+  studyFilter, setStudyFilter, setSearchKeyword,
 }: StudyFilterSectionProps) {
+  const [inputValue, setInputValue] = useState('');
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setSearchKeyword(inputValue);
+    }, 500);
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [inputValue, setSearchKeyword]);
   return (
     <Container gap="20px" justify="flex-end">
       <Select
@@ -29,10 +39,8 @@ function StudyFilterSection({
         type="text"
         placeholder="원하는 스터디를 검색해보세요!"
         css={{ fontSize: '12px', width: '200px' }}
-        value={searchKeyword}
-        onChange={(e) => {
-          setSearchKeyword(e.target.value);
-        }}
+        value={inputValue}
+        onChange={(e) => setInputValue(e.target.value)}
       />
     </Container>
   );

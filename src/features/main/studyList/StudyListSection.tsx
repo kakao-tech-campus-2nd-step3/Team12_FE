@@ -2,6 +2,7 @@ import { DefaultPaddedContainer } from '@components/container/variants';
 import { useState } from 'react';
 import StudyFilterSection from '@features/main/studyList/StudyFilterSection';
 import StudyGridWrapper from '@features/main/studyList/StudyGridWrapper';
+import SuspenseErrorBoundary from '@components/boundary/SuspenseErrorBoundary';
 import type { StudyFilter } from '@/types/study';
 
 function StudyListSection() {
@@ -14,10 +15,11 @@ function StudyListSection() {
       <StudyFilterSection
         studyFilter={studyFilter}
         setStudyFilter={setStudyFilter}
-        searchKeyword={searchKeyword}
         setSearchKeyword={setSearchKeyword}
       />
-      <StudyGridWrapper studyFilter={studyFilter} searchKeyword={searchKeyword} />
+      <SuspenseErrorBoundary>
+        <StudyGridWrapper studyFilter={studyFilter} searchKeyword={searchKeyword} />
+      </SuspenseErrorBoundary>
     </DefaultPaddedContainer>
   );
 }
