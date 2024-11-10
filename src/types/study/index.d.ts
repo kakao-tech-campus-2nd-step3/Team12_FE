@@ -5,7 +5,7 @@ export interface Study {
   createdAt: Date;
   isOpen: boolean;
   topic: string;
-  // profileImage?: string;
+  profileImage?: string;
 }
 
 export type StudyFilter = 'all' | 'open' | 'closed';
@@ -26,7 +26,7 @@ export interface StudySearchRequestQuery {
 }
 
 export interface StudySearchResponse {
-  studyList: Study[];
+  studies: Study[];
   hasNextPage: boolean;
   currentPage: number;
   maxPage: number;
