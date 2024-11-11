@@ -9,6 +9,9 @@ interface FormErrorMessageProps {
 }
 
 export function FormErrorMessage({ errors, name }: FormErrorMessageProps) {
+  const messageContainerStyle = css`
+    padding-top: 3px;
+  `;
   return (
     <ErrorMessage
       name={name}
@@ -21,7 +24,3 @@ export function FormErrorMessage({ errors, name }: FormErrorMessageProps) {
     />
   );
 }
-
-const messageContainerStyle = css`
-  padding-top: 3px;
-`;

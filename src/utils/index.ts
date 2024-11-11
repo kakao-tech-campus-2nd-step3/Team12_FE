@@ -19,7 +19,14 @@ function mergeTheme(theme: ExtendedTheme): Theme {
   return mergedTheme;
 }
 
+function dateToString(date: Date, includeTime?: boolean): string {
+  const ymd = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+  if (!includeTime) return ymd;
+  return `${ymd} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
+}
+
 export {
   mergeTheme,
   generateRandomId,
+  dateToString,
 };

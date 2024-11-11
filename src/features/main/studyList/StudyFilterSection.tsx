@@ -20,7 +20,6 @@ function StudyFilterSection({
         value={studyFilter}
         onChange={(e) => setStudyFilter(e.target.value as StudyFilter)}
         css={{ height: '35px', display: 'block' }}
-        placeholder="asdfasdf"
       >
         <option value="all">전체</option>
         <option value="open">모집중</option>
