@@ -46,7 +46,7 @@ export default function StudyCreationModal({ open, onClose }: StudyCreationProps
     formData.append('profileImage', data.profileImage);
     // console.log(formData.get('request'));
     // console.log(formData.get('profileImage'));
-    createStudy(formData)
+    createStudy(formData);
   }
 
   return (
