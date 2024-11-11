@@ -18,7 +18,26 @@ export async function createStudy(data: FormData) {
     });
     return response.data;
   } catch (error) {
-    console.error('Failed to create study:', error);
+    throw error;
+  }
+}
+
+export async function getStudy(studyId: number) {
+  try {
+    const response = await axiosInstance.get(endpoints.getStudy(studyId));
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export async function respondToInvitation(studyId: number, token: string) {
+  try {
+    const response = await axiosInstance.post(endpoints.inviteToStudy(studyId), {
+      token: token,
+    });
+    return response.data;
+  } catch (error) {
     throw error;
   }
 }
