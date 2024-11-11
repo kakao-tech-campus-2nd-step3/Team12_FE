@@ -11,3 +11,5 @@ export interface Member {
 export type PersonalInfoInputs = Pick<Member, 'nickname' | 'email' | 'contact' | 'description'> & { agreeToTerms: boolean };
 
 export type MyInfoResponse = Member;
+
+export type EditMemberRequestBody = Omit<Partial<Member>, 'id' | 'email'>;
