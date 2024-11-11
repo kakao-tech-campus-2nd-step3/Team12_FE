@@ -31,7 +31,7 @@ export const Default: Story = {
   render: (args) => {
     const [open, setOpen] = useState(args.open);
     return (
-      open ? <InviteToStudyModal open={open} onClose={() => setOpen(false)} />
+      open ? <InviteToStudyModal open={open} onClose={() => setOpen(false)} studyId={11} />
       : <button onClick={() => setOpen(true)}>Open</button>
     );
   },

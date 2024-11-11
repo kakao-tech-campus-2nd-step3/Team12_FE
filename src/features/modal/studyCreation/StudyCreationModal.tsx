@@ -44,14 +44,9 @@ export default function StudyCreationModal({ open, onClose }: StudyCreationProps
     };
     formData.append('request', JSON.stringify(requestData));
     formData.append('profileImage', data.profileImage);
-
+    // console.log(formData.get('request'));
+    // console.log(formData.get('profileImage'));
     createStudy(formData)
-      .then((response) => {
-        console.log('Study created:', response);
-      })
-      .catch((error) => {
-        console.error('Failed to create study:', error);
-      });
   }
 
   return (
