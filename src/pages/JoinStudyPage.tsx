@@ -1,14 +1,14 @@
-import { getStudy, respondToInvitation } from "@/api/study";
-import Container from "@/components/container";
-import { Heading } from "@/components/text";
-import AcceptInvitationModal from "@/features/modal/invite/AcceptInvitationModal";
-import { Study } from "@/types/study";
-import { useEffect, useState } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
-import { toast, Toaster } from "react-hot-toast";
-import { AxiosError } from "axios";
-import Button from "@/components/button";
-import failureIcon from "@/assets/icons/failure.png";
+import { useCallback, useEffect, useState } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import { toast, Toaster } from 'react-hot-toast';
+import { AxiosError } from 'axios';
+import { getStudy, respondToInvitation } from '@/api/study';
+import Container from '@/components/container';
+import { Heading } from '@/components/text';
+import AcceptInvitationModal from '@/features/modal/invite/AcceptInvitationModal';
+import { Study } from '@/types/study';
+import Button from '@/components/button';
+import failureIcon from '@/assets/icons/failure.png';
 
 export default function JoinStudyPage() {
   const [searchParams] = useSearchParams();
@@ -22,28 +22,27 @@ export default function JoinStudyPage() {
   const onClose = () => {
     setOpen(false);
     navigate('/');
-  }
+  };
 
-  async function acceptInvitation() {
+  const acceptInvitation = useCallback(async () => {
     if (!studyId || !token) return;
-  
+
     try {
       const response = await respondToInvitation(Number(studyId), token);
       setOpen(false);
       navigate('/', { state: { successMessage: response.data.message } });
     } catch (error) {
-      const axiosError = error as AxiosError; 
+      const axiosError = error as AxiosError;
       setOpen(false);
       setInviteFailed(true);
-      toast.error(axiosError.response?.data as string || "초대 수락에 실패했습니다.");
+      toast.error(axiosError.response?.data as string || '초대 수락에 실패했습니다.');
     }
-  }
+  }, [studyId, token, navigate]);
 
   useEffect(() => {
-
     const fetchStudy = async () => {
-        const data = await getStudy(Number(studyId));
-        setStudy(data);
+      const data = await getStudy(Number(studyId));
+      setStudy(data);
     };
 
     fetchStudy();
@@ -61,7 +60,7 @@ export default function JoinStudyPage() {
         />
       ) : (
         <Container justify="center" align="center" height="100%" direction="column" gap="30px">
-          <img src={failureIcon} alt="failure" width={200} height={200}/>
+          <img src={failureIcon} alt="failure" width={200} height={200} />
           <Heading.H1>초대를 수락할 수 없습니다.</Heading.H1>
           <Button variant="primary" onClick={onClose}>메인으로</Button>
         </Container>

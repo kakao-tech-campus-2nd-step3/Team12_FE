@@ -1,4 +1,4 @@
-import { css, useTheme } from '@emotion/react';
+import { css } from '@emotion/react';
 import Button from '@/components/button';
 import Container from '@/components/container';
 import Modal from '@/components/modal';
@@ -7,6 +7,7 @@ import colorTheme from '@/styles/colors';
 import Spacing from '@/components/spacing';
 import StudyThumbnail from '@/features/modal/invite/StudyThumbnail';
 import { Study } from '@/types/study';
+import theme from '@/styles/theme';
 
 interface AcceptInvitationProps {
   open: boolean;
@@ -15,13 +16,14 @@ interface AcceptInvitationProps {
   acceptInvitation: () => void;
 }
 
-export default function AcceptInvitationModal({ open, onClose, study, acceptInvitation}: AcceptInvitationProps) {
+export default function AcceptInvitationModal({
+  open, onClose, study, acceptInvitation,
+}: AcceptInvitationProps) {
   if (!open) return null;
-  const theme = useTheme();
   return (
     <Modal open={open} onClose={onClose} width="447px">
       <Container direction="column" gap="30px" padding="50px">
-        <StudyThumbnail src={study?.profileImage}/>
+        <StudyThumbnail src={study?.profileImage} />
         <Heading.H3 color={colorTheme.primary.main} weight="bolder">{study?.name}</Heading.H3>
         <Container direction="column" cssOverride={css`color: ${colorTheme.text.moderate}`} gap="5px">
           <Paragraph variant="small" color={colorTheme.absolute.black}>
