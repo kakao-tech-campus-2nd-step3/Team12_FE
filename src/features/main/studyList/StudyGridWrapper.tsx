@@ -70,7 +70,7 @@ interface StudyItemContainerProps {
 }
 
 function StudyItemContainer({ studyList }: StudyItemContainerProps) {
-  return studyList.map((study) => <StudyItem study={study} key={`study-item-${study.name}-${study.studyId}`} />);
+  return studyList.map((study) => <StudyItem study={study} key={`study-item-${study.name}-${study.id}`} />);
 }
 
 export default StudyGridWrapper;

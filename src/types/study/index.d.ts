@@ -1,5 +1,5 @@
 export interface Study {
-  studyId: number;
+  id: number;
   name: string;
   description: string;
   createdAt: Date;
