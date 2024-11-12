@@ -21,8 +21,8 @@ export default function NoticeItem({ notice }: NoticeItemProps) {
     <Container justify="space-between" padding="4px" cssOverride={{ borderBottom: '1px solid #EDEDED' }}>
       <Paragraph css={{ ...paragraphStyle, flex: 0.5 }}>{notice.id}</Paragraph>
       <Paragraph css={{ ...paragraphStyle, flex: 5 }}>{notice.title}</Paragraph>
-      <Paragraph css={{ ...paragraphStyle, flex: 1 }}>{notice.nickName}</Paragraph>
-      <Paragraph css={{ ...paragraphStyle, flex: 1 }}>{notice.createdAt}</Paragraph>
+      <Paragraph css={{ ...paragraphStyle, flex: 1 }}>{notice.nickname}</Paragraph>
+      <Paragraph css={{ ...paragraphStyle, flex: 1 }}>{notice.created_at}</Paragraph>
     </Container>
   );
 }
