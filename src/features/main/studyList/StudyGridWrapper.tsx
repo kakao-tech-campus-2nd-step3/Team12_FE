@@ -3,7 +3,6 @@ import Grid from '@components/grid';
 import StudyItem from '@features/main/studyList/StudyItem';
 import { useState } from 'react';
 import type { Study } from '@/types/study';
-import { mockStudyList } from '@/mock/study';
 
 interface StudyItemWrapperProps {
   studyFilter: string;
@@ -13,7 +12,7 @@ interface StudyItemWrapperProps {
 // @ts-ignore
 // eslint-disable-next-line
 function StudyGridWrapper({ studyFilter, searchKeyword }: StudyItemWrapperProps) {
-  const [studies] = useState<Study[]>(mockStudyList);
+  const [studies] = useState<Study[]>([]);
   // TODO: studyFilter, searchKeyword를 토대로 스터디 search, suspense wrap
   return (
     <Container padding="16px 0 0 0">

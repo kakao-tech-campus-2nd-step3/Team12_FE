@@ -2,8 +2,8 @@ export interface Study {
   id: number;
   name: string;
   description: string;
-  createdAt: Date;
-  isOpen: boolean;
+  created_at: Date;
+  is_open: boolean;
   topic: string;
   // profileImage?: string;
 }
@@ -13,7 +13,7 @@ export type StudyFilter = 'all' | 'open' | 'closed';
 // TODO: 추후에 profileImage input 구현 후 타입 변경
 // export type StudyCreationRequestBody =
 //  Pick<Study, 'name' | 'description' | 'isOpen' | 'topic' | 'profileImage'>;
-export type StudyCreationRequestBody = Pick<Study, 'name' | 'description' | 'isOpen' | 'topic'>;
+export type StudyCreationRequestBody = Pick<Study, 'name' | 'description' | 'is_open' | 'topic'>;
 export type StudyCreationInputs = StudyCreationRequestBody;
 
 export interface StudySearchRequestQuery {
@@ -22,13 +22,13 @@ export interface StudySearchRequestQuery {
   size?: number;
   topic?: string;
   name?: string;
-  isOpen?: boolean;
+  is_open?: boolean;
 }
 
 export interface StudySearchResponse {
-  studyList: Study[];
-  hasNextPage: boolean;
-  currentPage: number;
-  maxPage: number;
-  totalItemCount: number;
+  study_list: Study[];
+  has_next_page: boolean;
+  current_page: number;
+  max_page: number;
+  total_item_count: number;
 }
