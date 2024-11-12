@@ -47,7 +47,7 @@ export default function UserInfoEditSection() {
           <Heading.H2 css={{ margin: '20px 20px' }}>회원 정보 수정</Heading.H2>
         </Container>
         <Container direction="column" gap="8px">
-          <Avatar size="large" src={memberInfo?.profileImage} css={{ marginBottom: '10px' }} />
+          <Avatar size="large" src={memberInfo?.profile_image} css={{ marginBottom: '10px' }} />
 
           <Paragraph weight="bold">이름</Paragraph>
           <Input

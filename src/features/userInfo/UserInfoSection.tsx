@@ -28,7 +28,7 @@ export default function UserInfoSection() {
         {isLoggedIn ? (
           <Container direction="column">
             <Container direction="column" gap="8px">
-              <Avatar size="large" src={memberInfo?.profileImage} css={{ marginBottom: '10px' }} />
+              <Avatar size="large" src={memberInfo?.profile_image} css={{ marginBottom: '10px' }} />
               <Paragraph weight="bold">이름</Paragraph>
               <Paragraph css={{ marginBottom: '10px' }}>{memberInfo?.name}</Paragraph>
               <Paragraph weight="bold">닉네임</Paragraph>

@@ -34,7 +34,7 @@ export default function PersonalInfoModal({ open, onClose }: PersonalInfoModalPr
       email: '',
       contact: '',
       description: '',
-      agreeToTerms: false,
+      agree_to_terms: false,
     },
     mode: 'onChange',
   });

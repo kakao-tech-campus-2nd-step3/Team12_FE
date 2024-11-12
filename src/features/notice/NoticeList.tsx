@@ -20,10 +20,10 @@ export default function NoticeList() {
         const noticesInfo = await getNoticeList({ page: currentPage, size: pageSize });
         setNotices(noticesInfo.notices);
         setPaginationInfo({
-          hasNextPage: noticesInfo.hasNextPage,
-          currentPage: noticesInfo.currentPage,
-          maxPage: noticesInfo.maxPage,
-          totalItemCount: noticesInfo.totalItemCount,
+          has_next_page: noticesInfo.has_next_page,
+          current_page: noticesInfo.current_page,
+          max_page: noticesInfo.max_page,
+          total_item_count: noticesInfo.total_item_count,
         });
       } catch (e) {
         console.error('공지사항을 불러오는 데 실패했습니다:', e);
@@ -34,7 +34,7 @@ export default function NoticeList() {
   }, [currentPage]);
 
   const handleNextPage = () => {
-    if (paginationInfo?.hasNextPage) {
+    if (paginationInfo?.has_next_page) {
       setCurrentPage((prev) => prev + 1);
     }
   };
@@ -89,11 +89,11 @@ export default function NoticeList() {
           >
             이전
           </Button>
-          <Paragraph>{`${currentPage + 1} / ${paginationInfo?.maxPage}`}</Paragraph>
+          <Paragraph>{`${currentPage + 1} / ${paginationInfo?.max_page}`}</Paragraph>
           <Button
             variant="default"
             onClick={handleNextPage}
-            disabled={!paginationInfo?.hasNextPage}
+            disabled={!paginationInfo?.has_next_page}
           >
             다음
           </Button>

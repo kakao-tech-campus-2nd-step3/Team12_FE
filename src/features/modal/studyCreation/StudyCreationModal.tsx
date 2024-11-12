@@ -20,7 +20,7 @@ export default function StudyCreationModal({ open, onClose }: StudyCreationProps
     control,
   } = useForm<StudyCreationInputs>({
     defaultValues: {
-      isOpen: true,
+      is_open: true,
       name: '',
       topic: '',
       description: '',
