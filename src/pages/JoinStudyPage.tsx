@@ -28,9 +28,9 @@ export default function JoinStudyPage() {
     if (!studyId || !token) return;
 
     try {
-      const response = await respondToInvitation(Number(studyId), token);
+      await respondToInvitation(Number(studyId), token);
       setOpen(false);
-      navigate('/', { state: { successMessage: response.data.message } });
+      navigate('/', { state: { message: '스터디에 가입되었습니다!' } }); // 나중에 경로 수정
     } catch (error) {
       const axiosError = error as AxiosError;
       setOpen(false);

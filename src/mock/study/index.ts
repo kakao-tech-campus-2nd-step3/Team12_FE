@@ -6,6 +6,7 @@ export const mockStudyList = [
     createdAt: new Date(),
     topic: 'topic',
     description: '스터디 설명인데 엄청나게 긴 설명을 곁들인, 나야 스터디 스터디 설명인데 엄청나게 긴 설명을 곁들인, 나야 스터디 스터디 설명인데 엄청나게 긴 설명을 곁들인, 나야 스터디',
+    profileImage: 'https://picsum.photos/200',
   },
   {
     id: 2,
@@ -14,6 +15,7 @@ export const mockStudyList = [
     createdAt: new Date(),
     topic: 'topic',
     description: '스터디 설명인데 엄청나게 긴 설명을 곁들인, 나야 스터디 스터디 설명인데 엄청나게 긴 설명을 곁들인, 나야 스터디 스터디 설명인데 엄청나게 긴 설명을 곁들인, 나야 스터디',
+    profileImage: 'https://picsum.photos/200',
   },
   {
     id: 3,
@@ -22,6 +24,7 @@ export const mockStudyList = [
     createdAt: new Date(),
     topic: 'topic',
     description: '스터디 설명인데 엄청나게 긴 설명을 곁들인, 나야 스터디 스터디 설명인데 엄청나게 긴 설명을 곁들인, 나야 스터디 스터디 설명인데 엄청나게 긴 설명을 곁들인, 나야 스터디',
+    profileImage: 'https://picsum.photos/200',
   },
   {
     id: 4,
@@ -30,6 +33,7 @@ export const mockStudyList = [
     createdAt: new Date(),
     topic: 'topic',
     description: '스터디 설명인데 엄청나게 긴 설명을 곁들인, 나야 스터디 스터디 설명인데 엄청나게 긴 설명을 곁들인, 나야 스터디 스터디 설명인데 엄청나게 긴 설명을 곁들인, 나야 스터디',
+    profileImage: 'https://picsum.photos/200',
   },
   {
     id: 5,
@@ -38,6 +42,7 @@ export const mockStudyList = [
     createdAt: new Date(),
     topic: 'topic',
     description: '스터디 설명인데 엄청나게 긴 설명을 곁들인, 나야 스터디 스터디 설명인데 엄청나게 긴 설명을 곁들인, 나야 스터디 스터디 설명인데 엄청나게 긴 설명을 곁들인, 나야 스터디',
+    profileImage: 'https://picsum.photos/200',
   },
   {
     id: 6,
@@ -46,6 +51,7 @@ export const mockStudyList = [
     createdAt: new Date(),
     topic: 'topic',
     description: '스터디 설명인데 엄청나게 긴 설명을 곁들인, 나야 스터디 스터디 설명인데 엄청나게 긴 설명을 곁들인, 나야 스터디 스터디 설명인데 엄청나게 긴 설명을 곁들인, 나야 스터디',
+    profileImage: 'https://picsum.photos/200',
   },
 ];
 
