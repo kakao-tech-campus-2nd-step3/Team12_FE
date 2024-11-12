@@ -4,7 +4,8 @@ import StudyInfoSection from '@features/studyInfo/StudyInfoSection';
 import StudyInfoProvider from '@providers/StudyInfoProvider';
 import { useNavigate, useParams } from 'react-router-dom';
 import routePaths from '@constants/routePaths';
-import { Suspense } from 'react';
+import SuspenseErrorBoundary from '@components/boundary/SuspenseErrorBoundary';
+import Spacing from '@components/spacing';
 import { isIntegerString } from '@/utils';
 
 function StudyInfoPage() {
@@ -16,12 +17,16 @@ function StudyInfoPage() {
   }
   return (
     <Page>
-      <Suspense>
+      <Spacing height={20} />
+
+      <SuspenseErrorBoundary>
         <StudyInfoProvider studyId={parseInt(studyId, 10)}>
           <StudyInfoSection />
           <MemberListSection />
         </StudyInfoProvider>
-      </Suspense>
+      </SuspenseErrorBoundary>
+
+      <Spacing height={20} />
     </Page>
   );
 }
