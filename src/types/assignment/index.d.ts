@@ -2,16 +2,16 @@ export interface Assignment {
   id: number;
   title: string;
   content: string;
-  createdAt: string;
+  created_at: string;
   deadline: string;
 }
 
 export interface AssignList {
   assignments: Assignment[];
-  hasNextPage: boolean;
-  currentPage: number;
-  maxPage: number;
-  totalItemCount: number;
+  has_next_page: boolean;
+  current_page: number;
+  max_page: number;
+  total_item_count: number;
 }
 
 export type AssignDetail = Notice;

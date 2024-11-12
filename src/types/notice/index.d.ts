@@ -1,17 +1,17 @@
 export interface Notice {
   id: number;
   title: string;
-  nickName: string;
+  nickname: string;
   content: string;
-  createdAt: string;
+  created_at: string;
 }
 
 export interface NoticesList {
   notices: Notice[];
-  hasNextPage: boolean;
-  currentPage: number;
-  maxPage: number;
-  totalItemCount: number;
+  has_next_page: boolean;
+  current_page: number;
+  max_page: number;
+  total_item_count: number;
 }
 
 export type NoticeDetail = Notice;
