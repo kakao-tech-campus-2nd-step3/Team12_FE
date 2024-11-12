@@ -54,16 +54,6 @@ export default function NoticeDetailPage() {
       <Container direction="column" padding="20px">
         {notice ? (
           <>
-            <Container justify="flex-start" padding="20px 0" gap="5px">
-              <Button>수정</Button>
-              <Button
-                variant="default"
-                css={deleteBtnStyle}
-                onClick={handleDelete}
-              >
-                삭제
-              </Button>
-            </Container>
             <Container
               padding="12px 0"
               cssOverride={css`
@@ -77,12 +67,12 @@ export default function NoticeDetailPage() {
               <Paragraph variant="small">
                 작성자:
                 {' '}
-                {notice.nickName}
+                {notice.nickname}
               </Paragraph>
               <Paragraph variant="small">
                 작성일:
                 {' '}
-                {notice.createdAt}
+                {notice.created_at}
               </Paragraph>
             </Container>
             <Container justify="flex-start" align="flex-start" padding="8px 20px" cssOverride={{ borderBottom: '1px solid #b4b8bc', minHeight: '300px' }}>
@@ -92,7 +82,15 @@ export default function NoticeDetailPage() {
         ) : (
           <Paragraph>해당 공지사항을 찾을 수 없습니다.</Paragraph>
         )}
-        <Container justify="flex-end" padding="10px 8px">
+        <Container justify="flex-end" padding="10px 8px" gap="8px">
+          <Button>수정</Button>
+          <Button
+            variant="default"
+            css={deleteBtnStyle}
+            onClick={handleDelete}
+          >
+            삭제
+          </Button>
           <Button variant="primary">목록 보기</Button>
         </Container>
       </Container>
