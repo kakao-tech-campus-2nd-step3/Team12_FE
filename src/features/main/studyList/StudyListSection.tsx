@@ -6,8 +6,8 @@ import type { StudyFilter } from '@/types/study';
 
 function StudyListSection() {
   const [studyFilter, setStudyFilter] = useState<StudyFilter>('all');
-  const [searchKeyword, setSearchKeyword] = useState<string>();
-  // TODO: 추후에 백엔드와 논의하여 filter type 정의
+  const [searchKeyword, setSearchKeyword] = useState('');
+  // searchKeyword가 ''인 경우 undefined로 보내야 함.
 
   return (
     <DefaultPaddedContainer cssOverride={{ paddingTop: '40px' }}>

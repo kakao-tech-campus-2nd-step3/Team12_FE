@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import StudyInfoSection from "@features/modal/studyMain/StudyInfoSection.tsx";
 
 const meta: Meta<typeof StudyInfoSection> = {
-    title: 'features/studyMain/StudyInfoSection',
+    title: 'features/StudyMain/StudyInfoSection',
     component: StudyInfoSection,
     parameters: {
         layout: 'fullscreen',

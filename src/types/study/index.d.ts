@@ -2,8 +2,8 @@ export interface Study {
   id: number;
   name: string;
   description: string;
-  createdAt: Date;
-  isOpen: boolean;
+  created_at: Date;
+  is_open: boolean;
   topic: string;
   profileImage: file;
 }
@@ -22,13 +22,13 @@ export interface StudySearchRequestQuery {
   size?: number;
   topic?: string;
   name?: string;
-  isOpen?: boolean;
+  is_open?: boolean;
 }
 
 export interface StudySearchResponse {
-  studyList: Study[];
-  hasNextPage: boolean;
-  currentPage: number;
-  maxPage: number;
-  totalItemCount: number;
+  study_list: Study[];
+  has_next_page: boolean;
+  current_page: number;
+  max_page: number;
+  total_item_count: number;
 }

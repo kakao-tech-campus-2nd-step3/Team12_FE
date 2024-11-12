@@ -44,7 +44,7 @@ export default function RightSection({
               }}
             />
           )}
-          name="isOpen"
+          name="is_open"
         />
         <Paragraph variant="small">공개</Paragraph>
       </Container>
