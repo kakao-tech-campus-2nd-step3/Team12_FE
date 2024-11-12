@@ -1,47 +1,55 @@
-interface AttendanceInfo {
-  requiredAttendance: string[];
-  memberId: { [key: string]: MemberAttendanceInfo };
+export interface AttendanceInfo {
+  attendanceDateList: {
+    attendanceDateList: string[];
+  };
+  memberAttendances: {
+    [key: string]: MemberAttendanceInfo;
+  };
 }
 
-interface MemberAttendanceInfo {
-  memberAttendance: string[];
-  attendanceRate: number;
+export interface MemberAttendanceInfo {
+  memberAttendanceDateStringList: string[];
+  attendanceRate: string;
 }
 
-const attendanceInfo: AttendanceInfo = {
-  requiredAttendance: ['2024-11-01', '2024-11-05', '2024-11-10', '2024-11-15', '2024-11-20'],
-  memberId: {
-    member1: {
-      memberAttendance: ['2024-11-01', '2024-11-05', '2024-11-15'],
-      attendanceRate: 0.6,
+const attendanceInfo : AttendanceInfo = {
+  attendanceDateList: {
+    attendanceDateList: ['2024-09-01',
+      '2024-10-01',
+      '2024-10-11', '2024-11-01', '2024-11-05', '2024-11-10', '2024-11-15', '2024-11-20'],
+  },
+  memberAttendances: {
+    1: {
+      memberAttendanceDateStringList: ['2024-11-01', '2024-11-05', '2024-11-15'],
+      attendanceRate: '0.6',
     },
-    member2: {
-      memberAttendance: ['2024-11-01', '2024-11-10'],
-      attendanceRate: 0.4,
+    2: {
+      memberAttendanceDateStringList: ['2024-11-01', '2024-11-10'],
+      attendanceRate: '0.4',
     },
-    member3: {
-      memberAttendance: ['2024-11-05', '2024-11-10', '2024-11-15', '2024-11-20'],
-      attendanceRate: 0.8,
+    3: {
+      memberAttendanceDateStringList: ['2024-11-05', '2024-11-10', '2024-11-15', '2024-11-20'],
+      attendanceRate: '0.8',
     },
-    member4: {
-      memberAttendance: ['2024-11-01', '2024-11-05', '2024-11-10', '2024-11-15', '2024-11-20'],
-      attendanceRate: 1.0,
+    4: {
+      memberAttendanceDateStringList: ['2024-11-01', '2024-11-05', '2024-11-10', '2024-11-15', '2024-11-20'],
+      attendanceRate: '1.0',
     },
-    member5: {
-      memberAttendance: ['2024-11-01'],
-      attendanceRate: 0.2,
+    5: {
+      memberAttendanceDateStringList: ['2024-11-01'],
+      attendanceRate: '0.2',
     },
-    member6: {
-      memberAttendance: ['2024-11-05', '2024-11-20'],
-      attendanceRate: 0.4,
+    6: {
+      memberAttendanceDateStringList: ['2024-11-05', '2024-11-20'],
+      attendanceRate: '0.4',
     },
-    member7: {
-      memberAttendance: [],
-      attendanceRate: 0.0,
+    7: {
+      memberAttendanceDateStringList: [],
+      attendanceRate: '0.0',
     },
-    member8: {
-      memberAttendance: ['2024-11-01', '2024-11-10', '2024-11-15'],
-      attendanceRate: 0.6,
+    8: {
+      memberAttendanceDateStringList: ['2024-11-01', '2024-11-10', '2024-11-15'],
+      attendanceRate: '0.6',
     },
   },
 };

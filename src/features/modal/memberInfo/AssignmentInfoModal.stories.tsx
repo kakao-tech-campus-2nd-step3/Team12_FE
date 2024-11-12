@@ -32,7 +32,7 @@ export const Default: Story = {
   render: (args) => {
     const [open, setOpen] = useState(args.open);
     return (
-      open ? <AssignmentInfoModal open={open} onClose={() => setOpen(false)} memberInfos={members}/>
+      open ? <AssignmentInfoModal open={open} onClose={() => setOpen(false)} memberInfo={members[0]}/>
       : <button onClick={() => setOpen(true)}>Open</button>
     );
   },

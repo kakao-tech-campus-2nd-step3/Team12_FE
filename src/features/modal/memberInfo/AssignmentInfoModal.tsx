@@ -5,16 +5,16 @@ import { MemberInfo } from '@/mock/member';
 interface AssignmentInfoModalProps {
   open: boolean;
   onClose: () => void;
-  memberInfos: MemberInfo[];
+  memberInfo : MemberInfo;
 
 }
 
 export default function AssignmentInfoModal(
-  { open, onClose, memberInfos }: AssignmentInfoModalProps,
+  { open, onClose, memberInfo }: AssignmentInfoModalProps,
 ) {
   return (
     <Modal open={open} onClose={onClose} width="387px" height="478px">
-      <MemberInfoSection memberInfo={memberInfos[0]} />
+      <MemberInfoSection memberInfo={memberInfo} rate={20} />
       <div>AssignmentInfoModal</div>
     </Modal>
   );
