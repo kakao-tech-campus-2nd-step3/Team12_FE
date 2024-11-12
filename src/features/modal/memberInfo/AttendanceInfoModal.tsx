@@ -45,7 +45,7 @@ export default function AttendanceInfoModal(
           memberInfo={memberInfo}
           rate={Number(memberAttendanceInfo.attendanceRate) * 100}
         />
-        <Container direction="column" height="300px" css={{ overflowY: 'scroll' }} justify="flex-start">
+        <Container direction="column" height="300px" css={{ overflowY: 'scroll', overflowX: 'hidden' }} justify="flex-start">
           <Grid columns={2} css={{ justifyItems: 'center' }} gap={10}>
             <Text css={defaultFontStyle}>날짜</Text>
             <Text css={defaultFontStyle}>출석 현황</Text>
