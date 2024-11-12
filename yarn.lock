@@ -2963,6 +2963,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/date-fns@npm:^2.6.3":
+  version: 2.6.3
+  resolution: "@types/date-fns@npm:2.6.3"
+  dependencies:
+    date-fns: "npm:*"
+  checksum: 10c0/ad39324ad26b1ec4f9e1fd66536ef5a1090f9a00f4d5cbb0cb4c20caa731b98d3fd7f28e08ed0a0225cf2aea2d2a157722cf6c9954aa6133d510d4452345e803
+  languageName: node
+  linkType: hard
+
 "@types/doctrine@npm:^0.0.9":
   version: 0.0.9
   resolution: "@types/doctrine@npm:0.0.9"
@@ -4838,6 +4847,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"date-fns@npm:*, date-fns@npm:^4.1.0":
+  version: 4.1.0
+  resolution: "date-fns@npm:4.1.0"
+  checksum: 10c0/b79ff32830e6b7faa009590af6ae0fb8c3fd9ffad46d930548fbb5acf473773b4712ae887e156ba91a7b3dc30591ce0f517d69fd83bd9c38650fdc03b4e0bac8
+  languageName: node
+  linkType: hard
+
 "date-fns@npm:^3.6.0":
   version: 3.6.0
   resolution: "date-fns@npm:3.6.0"
@@ -5073,6 +5089,7 @@ __metadata:
     "@testing-library/user-event": "npm:^14.5.2"
     "@toast-ui/editor": "npm:^3.2.2"
     "@toast-ui/react-editor": "npm:^3.2.3"
+    "@types/date-fns": "npm:^2.6.3"
     "@types/eslint-plugin-jsx-a11y": "npm:^6"
     "@types/react": "npm:^18.3.3"
     "@types/react-dom": "npm:^18.3.0"
@@ -5080,6 +5097,7 @@ __metadata:
     "@typescript-eslint/parser": "npm:^8.6.0"
     "@vitejs/plugin-react-swc": "npm:^3.5.0"
     axios: "npm:^1.7.7"
+    date-fns: "npm:^4.1.0"
     emotion-normalize: "npm:^11.0.1"
     eslint: "npm:8.57.0"
     eslint-config-airbnb: "npm:^19.0.4"
