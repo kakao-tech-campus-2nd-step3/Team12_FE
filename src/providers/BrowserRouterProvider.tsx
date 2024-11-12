@@ -2,6 +2,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import MainPage from '@pages/MainPage';
 import routePaths from '@constants/routePaths';
 import LoginSuccessPage from '@pages/LoginSuccessPage';
+import StudyInfoPage from '@pages/StudyInfoPage';
 import AttendDatePage from '@/pages/AttendDatePage';
 
 const router = createBrowserRouter([
@@ -25,6 +26,12 @@ const router = createBrowserRouter([
   },
   {
     path: routePaths.SUBMIT_PERSONAL_INFO,
+  },
+  {
+    path: routePaths.STUDY_INFO,
+    element: (
+      <StudyInfoPage />
+    ),
   },
 ]);
 
