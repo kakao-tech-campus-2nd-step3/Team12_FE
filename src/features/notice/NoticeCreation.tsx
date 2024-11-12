@@ -20,18 +20,15 @@ export default function NoticeCreation() {
     if (!editorRef.current) return;
 
     const content = editorRef.current.getInstance().getMarkdown();
-
-    console.log(content);
     try {
       await createNotice({
         studyId: 5, // 실제 사용할 studyId로 변경 필요
         title,
         content,
       });
-      console.log('공지사항이 성공적으로 작성되었습니다.');
       alert('공지사항이 성공적으로 작성되었습니다!');
     } catch (error) {
-      console.error('공지사항 작성 중 오류 발생:', error);
+      alert('공지사항 작성 중 오류 발생');
     }
   };
 
