@@ -3,13 +3,13 @@ import {
   Control, FormState, useForm, UseFormRegister,
   UseFormSetValue,
 } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
+import defaultAvatar from '@assets/icons/default-avatar.svg';
 import Modal from '@/components/modal';
 import LeftSection from '@/features/modal/studyCreation/LeftSection';
 import RightSection from '@/features/modal/studyCreation/RightSection';
 import { type StudyCreationInputs } from '@/types/study';
 import { createStudy } from '@/api/study';
-import { useNavigate } from 'react-router-dom';
-import defaultAvatar from '@assets/icons/default-avatar.svg';
 
 interface StudyCreationProps {
   open: boolean;
@@ -48,13 +48,13 @@ export default function StudyCreationModal({ open, onClose }: StudyCreationProps
     if (data.profile_image) {
       formData.append('profileImage', data.profile_image);
     } else {
-      const defaultImageFile = new File([defaultAvatar], "default-avatar.svg", { type: "image/svg+xml" });
+      const defaultImageFile = new File([defaultAvatar], 'default-avatar.svg', { type: 'image/svg+xml' });
       formData.append('profileImage', defaultImageFile);
     }
     const response = createStudy(formData);
     if ((await response).status === 201) {
       onClose();
-      navigate('/' , { state: { message: '스터디를 생성하였습니다!' } });
+      navigate('/', { state: { message: '스터디를 생성하였습니다!' } });
       // 민경 TODO : 추후 스터디 페이지로 이동하도록 수정
     }
   }
