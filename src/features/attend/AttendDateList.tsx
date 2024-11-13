@@ -1,17 +1,33 @@
 import { css } from '@emotion/react';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { DefaultPaddedContainer } from '@/components/container/variants';
 import AttendDateCreation from '@/features/attend/AttendDateCreation';
 import AttendDateListElement from './AttendDateListElement';
 import Grid from '@/components/grid';
 import Text from '@/components/text';
-import { mockAttendanceDate, mockMemberAttendance } from '@/mock/attendance';
+import { mockMemberAttendance } from '@/mock/attendance';
 import Spacing from '@/components/spacing';
 import theme from '@/styles/theme';
 import Container from '@/components/container';
+import { getDateList } from '@/api/attendance';
+import { AttendanceResponse } from '@/types/attendance';
 
 export default function AttendDateList() {
-  const [attendanceDates] = useState<string[]>(mockAttendanceDate);
+  const [attendanceDates, setAttendanceDates] = useState<AttendanceResponse[]>([]);
+
+  const fetchAttendanceDates = async () => {
+    try {
+      const dates = await getDateList(11);
+      setAttendanceDates(dates.attendance_date_list);
+    } catch (error) {
+      console.error('Failed to fetch attendance dates:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchAttendanceDates();
+  });
+
   const [memberAttendance] = useState(mockMemberAttendance);
   return (
     <DefaultPaddedContainer>
@@ -43,16 +59,23 @@ export default function AttendDateList() {
             direction="column"
             justify="flex-start"
           >
-            {attendanceDates.map((date) => (
-              <React.Fragment key={date}>
-                <AttendDateListElement
-                  startDateTime={date}
-                  allowTime="5"
-                  memberAttendance={memberAttendance}
-                />
-                <hr css={HorizontalSoftLine} />
-              </React.Fragment>
-            ))}
+            {attendanceDates.map((data) => {
+              const startDate = new Date(data.start_time.replace(' ', 'T'));
+              const deadlineDate = new Date(data.deadline.replace(' ', 'T'));
+              const allowTime = (deadlineDate.getTime() - startDate.getTime()) / (1000 * 60);
+
+              return (
+                <React.Fragment key={data.id}>
+                  <AttendDateListElement
+                    startDateTime={data.start_time}
+                    allowTime={allowTime}
+                    memberAttendance={memberAttendance}
+                  />
+                  <hr css={HorizontalSoftLine} />
+                </React.Fragment>
+              );
+            })}
+
           </Container>
         </Container>
       </Container>

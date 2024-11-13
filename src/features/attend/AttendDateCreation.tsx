@@ -1,5 +1,5 @@
 import { useState, useEffect, SetStateAction } from 'react';
-import { Toaster } from 'react-hot-toast';
+import { toast, Toaster } from 'react-hot-toast';
 import { useForm } from 'react-hook-form';
 import Button from '@/components/button';
 import Container from '@/components/container';
@@ -12,11 +12,13 @@ import { DefaultPaddedContainer } from '@/components/container/variants';
 import { AttendDateCreationInputs } from '@/types/attendance';
 import { createDate } from '@/api/attendance';
 
-export default function AttendDateCreation({ studyId }: { studyId: number }) {
-  const [currentDate, setCurrentDate] = useState('');
-  const [currentTime, setCurrentTime] = useState('');
-  const [selectedDate, setSelectedDate] = useState('');
-  const [selectedTime, setSelectedTime] = useState('');
+interface AttendDateCreationProps {
+  studyId: number;
+}
+
+export default function AttendDateCreation({ studyId }: AttendDateCreationProps) {
+  const [currentDate] = useState(new Date());
+  const [selectedDate, setSelectedDate] = useState(currentDate);
   const [isPastDate, setIsPastDate] = useState(false);
   const [timeInterval, setTimeInterval] = useState('5');
 
@@ -29,33 +31,26 @@ export default function AttendDateCreation({ studyId }: { studyId: number }) {
   });
 
   useEffect(() => {
-    const today = new Date();
-    const formattedDate = today.toLocaleDateString('en-CA');
-    const formattedTime = today.toLocaleTimeString('en-GB', {
-      hour: '2-digit',
-      minute: '2-digit',
-    });
-    setCurrentDate(formattedDate);
-    setCurrentTime(formattedTime);
-    setSelectedDate(formattedDate);
-    setSelectedTime(formattedTime);
-  }, []);
-
-  useEffect(() => {
-    if (selectedDate && selectedTime) {
-      setIsPastDate(selectedTime < currentTime);
+    if (selectedDate) {
+      setIsPastDate(selectedDate < currentDate);
     }
-  }, [selectedDate, selectedTime, currentTime]);
+  }, [selectedDate, currentDate]);
 
-  const handleCreateClick = () => {
+  const handleCreateClick = async () => {
     const response = createDate({
       studyId,
       requestData: {
-        start_time: `${selectedDate} ${selectedTime}`,
+        start_time: `${selectedDate.toLocaleDateString('en-CA')} ${
+          selectedDate.toLocaleTimeString('en-GB', {
+            hour: '2-digit',
+            minute: '2-digit',
+          })}`,
         time_interval: Number(timeInterval),
       },
     });
-    console.log(response);
+    if ((await response).status === 201) {
+      toast.success('출석일자가 생성되었습니다.');
+    }
   };
 
   return (
@@ -78,20 +73,27 @@ export default function AttendDateCreation({ studyId }: { studyId: number }) {
               <Input
                 type="date"
                 label="시작일"
-                value={selectedDate}
-                min={currentDate}
+                value={selectedDate.toLocaleDateString('en-CA')}
+                min={currentDate.toLocaleDateString('en-CA')}
                 css={{ width: '140px', fontSize: '13px' }}
-                onChange={(e) => setSelectedDate(e.target.value)}
+                onChange={(e) => setSelectedDate(new Date(e.target.value))}
               />
             </Container>
             <Container direction="column" align="flex-start" width="auto">
               <Input
                 type="time"
                 label="시작시간"
-                value={selectedTime}
+                value={selectedDate.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })}
                 css={{ width: '140px', fontSize: '13px' }}
-                onChange={(e) => setSelectedTime(e.target.value)}
+                onChange={(e) => {
+                  const [hours, minutes] = e.target.value.split(':');
+                  const updatedDate = new Date(selectedDate);
+                  updatedDate.setHours(Number(hours));
+                  updatedDate.setMinutes(Number(minutes));
+                  setSelectedDate(updatedDate);
+                }}
               />
+
             </Container>
             <Select
               label="허용시간"

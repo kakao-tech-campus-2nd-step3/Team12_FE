@@ -9,7 +9,7 @@ import AttendanceCheckModal from '@/features/modal/attendance/AttendanceCheckMod
 
 interface AttendDateListElementProps {
   startDateTime: string;
-  allowTime: string;
+  allowTime: number;
   memberAttendance: {
     id: string;
     name: string,

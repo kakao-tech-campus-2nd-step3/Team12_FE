@@ -18,5 +18,14 @@ export async function createDate({ studyId, requestData }: CreateDateParams) {
       studyId,
     },
   });
+  return response;
+}
+
+export async function getDateList(studyId: number) {
+  const response = await axiosInstance.get(endpoints.attendanceDate, {
+    params: {
+      studyId,
+    },
+  });
   return response.data;
 }
