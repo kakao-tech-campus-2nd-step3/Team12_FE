@@ -28,7 +28,7 @@ const router = createBrowserRouter([
     path: routePaths.SUBMIT_PERSONAL_INFO,
   },
   {
-    path: routePaths.STUDY_INFO,
+    path: routePaths.STUDY_INFO(':studyId'),
     element: (
       <StudyInfoPage />
     ),
