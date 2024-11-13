@@ -39,7 +39,7 @@ export default function LeftSection({
       reader.readAsDataURL(file);
     }
     if (setValue) {
-      setValue('profileImage', file);
+      setValue('profile_image', file);
     }
   };
 

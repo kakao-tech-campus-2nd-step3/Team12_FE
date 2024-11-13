@@ -34,7 +34,7 @@ export const Default: Story = {
     const study: Study = {
       id: 1,
       name: '스터디 이름',
-      profileImage: 'https://via.placeholder.com/150',
+      profile_image: 'https://via.placeholder.com/150',
       description: '스터디 설명',
       created_at: new Date(),
       is_open: true,

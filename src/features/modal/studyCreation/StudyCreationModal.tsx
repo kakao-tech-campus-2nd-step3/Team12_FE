@@ -8,6 +8,7 @@ import LeftSection from '@/features/modal/studyCreation/LeftSection';
 import RightSection from '@/features/modal/studyCreation/RightSection';
 import { type StudyCreationInputs } from '@/types/study';
 import { createStudy } from '@/api/study';
+import { useNavigate } from 'react-router-dom';
 
 interface StudyCreationProps {
   open: boolean;
@@ -27,26 +28,29 @@ export default function StudyCreationModal({ open, onClose }: StudyCreationProps
       name: '',
       topic: '',
       description: '',
-      profileImage: '',
+      profile_image: '',
     },
     mode: 'onChange',
   });
 
-  // TODO: 실제 request 로직으로 변경 및 UI 로직과 분리
-  function onSubmit(data: StudyCreationInputs) {
+  async function onSubmit(data: StudyCreationInputs) {
     const formData = new FormData();
+    const navigate = useNavigate();
 
     const requestData = {
       name: data.name,
       description: data.description,
+      is_open: data.is_open,
       topic: data.topic,
-      isOpen: data.is_open,
     };
-    formData.append('request', JSON.stringify(requestData));
-    formData.append('profileImage', data.profileImage);
-    // console.log(formData.get('request'));
-    // console.log(formData.get('profileImage'));
-    createStudy(formData);
+    formData.append('request', new Blob([JSON.stringify(requestData)], { type: 'application/json' }));
+    formData.append('profileImage', data.profile_image);
+    const response = createStudy(formData);
+    if ((await response).status === 201) {
+      onClose();
+      navigate('/' , { state: { message: '스터디를 생성하였습니다!' } });
+      // 민경 TODO : 추후 스터디 페이지로 이동하도록 수정
+    }
   }
 
   return (

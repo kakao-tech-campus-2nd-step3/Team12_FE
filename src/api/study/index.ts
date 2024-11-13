@@ -15,7 +15,7 @@ export async function createStudy(data: FormData) {
       'Content-Type': 'multipart/form-data',
     },
   });
-  return response.data;
+  return response;
 }
 
 export async function getStudy(studyId: number) {
