@@ -17,7 +17,7 @@ export default function AttendDateList() {
     <DefaultPaddedContainer>
       <Container padding="40px" direction="column" align="flex-start" css={{ minHeight: 'calc(100vh - 210px)' }}>
         <Container padding="50px" direction="column" css={{ backgroundColor: `${theme.colors.absolute.white}`, boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)', minWidth: 'fit-content' }}>
-          <AttendDateCreation />
+          <AttendDateCreation studyId={11} />
           <Spacing height={20} />
           <hr css={HorizontalLine} />
           <Grid columns={6} css={{ alignItems: 'center', gridTemplateColumns: '1fr 1fr 1fr 1fr 0.5fr 0.5fr', padding: '10px 0px' }}>

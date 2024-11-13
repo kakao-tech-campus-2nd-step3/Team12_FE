@@ -9,6 +9,7 @@ const endpoints = {
   getStudy: (studyId: number) => `${prefix}/studies/${studyId}`,
   notices: `${prefix}/notices`,
   assignments: `${prefix}/assignments`,
+  attendanceDate: `${prefix}/attendance/date`,
 };
 
 export default endpoints;
