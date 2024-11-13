@@ -3,6 +3,7 @@ import MainPage from '@pages/MainPage';
 import routePaths from '@constants/routePaths';
 import LoginSuccessPage from '@pages/LoginSuccessPage';
 import StudyInfoPage from '@pages/StudyInfoPage';
+import SubmitPersonalInfoPage from '@pages/SubmitPersonalInfoPage';
 import AttendDatePage from '@/pages/AttendDatePage';
 
 const router = createBrowserRouter([
@@ -26,6 +27,9 @@ const router = createBrowserRouter([
   },
   {
     path: routePaths.SUBMIT_PERSONAL_INFO,
+    element: (
+      <SubmitPersonalInfoPage />
+    ),
   },
   {
     path: routePaths.STUDY_INFO(':studyId'),
