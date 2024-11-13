@@ -1,12 +1,11 @@
 import Modal from '@/components/modal';
 import MemberInfoSection from '@/features/modal/memberInfo/MemberInfoSection';
-import { MemberInfo } from '@/mock/member';
+import { StudyMember } from '@/types/study';
 
 interface AssignmentInfoModalProps {
   open: boolean;
   onClose: () => void;
-  memberInfo : MemberInfo;
-
+  memberInfo : StudyMember;
 }
 
 export default function AssignmentInfoModal(

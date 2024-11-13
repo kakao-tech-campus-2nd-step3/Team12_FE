@@ -41,5 +41,5 @@ export interface StudyMember {
     profile_image: string;
   };
   role: string;
-  join_at: string;
+  joined_at: string;
 }

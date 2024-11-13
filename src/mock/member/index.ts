@@ -8,7 +8,7 @@ export interface Member {
 export interface MemberInfo {
   member: Member;
   role: string;
-  joined_at: string;
+  join_at: string;
 }
 
 const members: MemberInfo[] = [
@@ -20,7 +20,7 @@ const members: MemberInfo[] = [
       profileImage: 'https://i.pinimg.com/564x/f7/97/af/f797af58d1c77a6b434a728fa03966e7.jpg',
     },
     role: '스터디장',
-    joined_at: '2024-11-08T00:00:00',
+    join_at: '2024-11-08T00:00:00',
   },
   {
     member: {
@@ -30,7 +30,7 @@ const members: MemberInfo[] = [
       profileImage: 'https://i.pinimg.com/564x/f7/97/af/f797af58d1c77a6b434a728fa03966e7.jpg',
     },
     role: '스터디원',
-    joined_at: '2024-11-04T00:00:00',
+    join_at: '2024-11-04T00:00:00',
   },
 ];
 
