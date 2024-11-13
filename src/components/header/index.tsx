@@ -71,7 +71,7 @@ function Header() {
                     <Avatar
                       size="small"
                       css={{ borderRadius: '15px' }}
-                      src={memberInfo?.profileImage}
+                      src={memberInfo?.profile_image}
                     />
                     <img
                       src={dropDown}

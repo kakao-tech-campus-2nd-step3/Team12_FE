@@ -18,7 +18,7 @@ function LoginSuccessPage() {
       return;
     }
     login(accessToken);
-  }, []);
+  }, [accessToken, navigate, login]);
   return (
     <Container height="500px">
       <Spinner />

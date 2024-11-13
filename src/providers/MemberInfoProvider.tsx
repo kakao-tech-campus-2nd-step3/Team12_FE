@@ -52,8 +52,8 @@ export function MemberInfoContextProvider({ children }: MemberInfoContextProps) 
         const myInfo = await getMyInfo();
         setIsLoggedIn(true);
         setMemberInfo(myInfo);
-        if (!myInfo.nickname && location.pathname !== routePaths.SUBMIT_PERSONAL_INFO) {
-          location.href = routePaths.SUBMIT_PERSONAL_INFO;
+        if (!myInfo.nickname && window.location.pathname !== routePaths.SUBMIT_PERSONAL_INFO) {
+          window.location.href = routePaths.SUBMIT_PERSONAL_INFO;
         }
       } catch (e) {
         // TODO: 에러 처리. 토큰 에러는 interceptor에서 처리됨

@@ -18,11 +18,11 @@ export const StudyInfoContext = createContext<StudyInfoContextValue>({
     // attendanceDate: [],
     topic: '',
     name: '',
-    isOpen: true,
+    is_open: true,
     description: '',
-    createdAt: new Date(),
+    created_at: new Date(),
     id: 0,
-    profileImage: '',
+    profile_image: '',
   },
 });
 

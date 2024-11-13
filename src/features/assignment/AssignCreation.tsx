@@ -27,7 +27,6 @@ export default function AssignCreation() {
 
     const content = editorRef.current.getInstance().getMarkdown();
 
-    console.log(content);
     try {
       await createAssign({
         studyId: 11, // 실제 사용할 studyId로 변경 필요
@@ -35,7 +34,6 @@ export default function AssignCreation() {
         content,
         deadline,
       });
-      console.log('과제가 성공적으로 작성되었습니다.');
       alert('과제가 성공적으로 작성되었습니다!');
     } catch (error) {
       console.error('과제 작성 중 오류 발생:', error);

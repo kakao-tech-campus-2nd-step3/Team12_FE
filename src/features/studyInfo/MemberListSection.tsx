@@ -9,7 +9,6 @@ import { StudyInfoContext } from '@providers/StudyInfoProvider';
 
 function MemberListSection() {
   const { study } = useContext(StudyInfoContext);
-  console.log(study);
 
   return (
     <DefaultPaddedContainer>

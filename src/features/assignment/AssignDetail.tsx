@@ -22,7 +22,7 @@ export default function AssignDetailPage() {
           const data = await getAssignDetail(assignId);
           setAssign(data);
         } catch (error) {
-          console.log('error: ', error);
+          console.error(error);
           alert('과제를 불러오는 데 실패했습니다.');
         } finally {
           setLoading(false);
