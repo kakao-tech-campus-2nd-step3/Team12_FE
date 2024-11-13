@@ -12,20 +12,13 @@ interface AttendDateListElementProps {
   studyId: number;
   startDateTime: string;
   allowTime: number;
-  memberAttendance: {
-    id: string;
-    name: string,
-    time: string,
-    status: boolean,
-    imageUrl: string,
-  }[];
   onDeleteComplete: () => void;
   isPastDate: boolean;
 }
 
 export default function AttendDateListElement(
   {
-    studyId, startDateTime, allowTime, memberAttendance, onDeleteComplete, isPastDate,
+    studyId, startDateTime, allowTime, onDeleteComplete, isPastDate,
   }: AttendDateListElementProps,
 ) {
   const [startDate, startTime] = startDateTime.split(' ');
@@ -78,7 +71,8 @@ export default function AttendDateListElement(
         open={open}
         onClose={onClose}
         editComplete={editComplete}
-        memberAttendance={memberAttendance}
+        studyId={studyId}
+        date={startDateTime}
       />
       )}
       <Toaster position="bottom-center" reverseOrder={false} />

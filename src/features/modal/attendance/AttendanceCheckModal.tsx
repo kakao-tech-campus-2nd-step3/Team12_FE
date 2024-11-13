@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Modal from '@/components/modal';
 import Text, { Heading } from '@/components/text';
 import Grid from '@/components/grid';
@@ -8,18 +8,17 @@ import Container from '@/components/container';
 import Spacing from '@/components/spacing';
 import Button from '@/components/button';
 import theme from '@/styles/theme';
+import { getStudyMember } from '@/api/study';
+import { MemberAttendance, MemberAttendanceResponse } from '@/types/attendance';
+import { getAttendanceList } from '@/api/attendance';
+import { StudyMember } from '@/types/study';
 
 interface AcceptInvitationProps {
   open: boolean;
   onClose: () => void;
   editComplete: () => void;
-  memberAttendance: {
-    id: string;
-    name: string;
-    time: string;
-    status: boolean;
-    imageUrl: string;
-  }[];
+  studyId: number;
+  date: string;
 }
 
 const HorizontalLine = styled.hr`
@@ -29,10 +28,28 @@ const HorizontalLine = styled.hr`
 
 export default function AttendanceCheckModal(
   {
-    open, onClose, editComplete, memberAttendance,
+    open, onClose, editComplete, studyId, date,
   }: AcceptInvitationProps,
 ) {
-  const [attendanceList] = useState(memberAttendance);
+  const [memberAttendanceList, setMemberAttendance] = useState<{
+    [key: string]: MemberAttendance }>({});
+  const [memberList, setMemberList] = useState<StudyMember[]>([]);
+
+  useEffect(() => {
+    async function fetchStudyMember(): Promise<void> {
+      const response = await getStudyMember(studyId);
+      setMemberList(response);
+    }
+    const fetchMemberAttendance = async (): Promise<void> => {
+      const response: MemberAttendanceResponse = await getAttendanceList(studyId);
+      const attendanceEntries = response.member_attendance;
+      setMemberAttendance(attendanceEntries);
+    };
+
+    fetchStudyMember();
+    fetchMemberAttendance();
+  }, [studyId]);
+
   return (
     <Modal open={open} onClose={onClose} width="447px" height="628px">
       <Container padding="40px" direction="column" align="flex-start">
@@ -70,15 +87,25 @@ export default function AttendanceCheckModal(
           direction="column"
           justify="flex-start"
         >
-          {attendanceList.map((attendance) => (
-            <AttendanceInfo
-              key={attendance.id}
-              name={attendance.name}
-              time={attendance.time}
-              status={attendance.status}
-              imageUrl={attendance.imageUrl}
-            />
-          ))}
+          {memberList.map((member) => {
+            const memberId = member.member?.id?.toString();
+            const attendanceDates = memberId
+              ? memberAttendanceList[memberId]?.memberAttendanceDateStringList || []
+              : [];
+            // 민경 TODO : 나중에 로직 바꿀수도 있음
+            const isPresent = attendanceDates.includes(date);
+
+            return (
+              <AttendanceInfo
+                key={member.member.id}
+                name={member.member.nickname}
+                time=""
+                status={isPresent}
+                imageUrl={member.member.profile_image}
+              />
+            );
+          })}
+
         </Container>
         <Button
           variant="primary"

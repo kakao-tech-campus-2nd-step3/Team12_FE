@@ -32,3 +32,14 @@ export interface StudySearchResponse {
   max_page: number;
   total_item_count: number;
 }
+
+export interface StudyMember {
+  member: {
+    id: number;
+    nickname: string;
+    email: string;
+    profile_image: string;
+  };
+  role: string;
+  join_at: string;
+}

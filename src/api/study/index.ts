@@ -29,3 +29,8 @@ export async function respondToInvitation(studyId: number, token: string) {
   });
   return response.data;
 }
+
+export async function getStudyMember(studyId: number) {
+  const response = await axiosInstance.get(endpoints.getStudyMember(studyId));
+  return response.data;
+}

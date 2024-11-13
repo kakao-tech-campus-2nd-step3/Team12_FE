@@ -5,7 +5,6 @@ import AttendDateCreation from '@/features/attend/AttendDateCreation';
 import AttendDateListElement from './AttendDateListElement';
 import Grid from '@/components/grid';
 import Text from '@/components/text';
-import { mockMemberAttendance } from '@/mock/attendance';
 import Spacing from '@/components/spacing';
 import theme from '@/styles/theme';
 import Container from '@/components/container';
@@ -24,7 +23,6 @@ export default function AttendDateList() {
     fetchAttendanceDates();
   }, []);
 
-  const [memberAttendance] = useState(mockMemberAttendance);
   return (
     <DefaultPaddedContainer>
       <Container padding="40px" direction="column" align="flex-start" css={{ minHeight: 'calc(100vh - 210px)' }}>
@@ -67,7 +65,6 @@ export default function AttendDateList() {
                     studyId={11}
                     startDateTime={data.start_time}
                     allowTime={allowTime}
-                    memberAttendance={memberAttendance}
                     onDeleteComplete={fetchAttendanceDates}
                     isPastDate={isPastDate}
                   />

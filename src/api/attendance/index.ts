@@ -46,3 +46,12 @@ export async function deleteDate({ studyId, requestData }: DeleteDateParams) {
   });
   return response;
 }
+
+export async function getAttendanceList(studyId: number) {
+  const response = await axiosInstance.get(endpoints.attendance, {
+    params: {
+      studyId,
+    },
+  });
+  return response.data;
+}

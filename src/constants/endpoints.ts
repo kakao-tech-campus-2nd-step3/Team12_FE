@@ -10,6 +10,8 @@ const endpoints = {
   notices: `${prefix}/notices`,
   assignments: `${prefix}/assignments`,
   attendanceDate: `${prefix}/attendance/date`,
+  attendance: `${prefix}/attendance`,
+  getStudyMember: (studyId: number) => `${prefix}/studies/${studyId}/members`,
 };
 
 export default endpoints;
