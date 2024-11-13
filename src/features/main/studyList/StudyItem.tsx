@@ -52,9 +52,9 @@ function StudyItem(
               {study.topic}
             </Paragraph>
           </Container>
-          <Tag variant={study.isOpen ? 'primary' : 'default'}>
+          <Tag variant={study.is_open ? 'primary' : 'default'}>
             <Paragraph variant="small">
-              {study.isOpen ? '모집중' : '마감'}
+              {study.is_open ? '모집중' : '마감'}
             </Paragraph>
           </Tag>
         </Container>

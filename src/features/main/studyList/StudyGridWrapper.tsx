@@ -21,7 +21,7 @@ function StudyGridWrapper({ studyFilter, searchKeyword }: StudyItemWrapperProps)
     if (searchKeyword) {
       params.name = searchKeyword;
     }
-    if (studyFilter !== 'all') params.isOpen = studyFilter === 'open';
+    if (studyFilter !== 'all') params.is_open = studyFilter === 'open';
     return searchStudies(params);
   };
   const {
@@ -33,7 +33,9 @@ function StudyGridWrapper({ studyFilter, searchKeyword }: StudyItemWrapperProps)
     initialPageParam: 0,
     queryKey: [queryKeys.MAIN_SEARCH_STUDIES, searchKeyword, studyFilter],
     queryFn: fetchPage,
-    getNextPageParam: (lastPage) => (lastPage.hasNextPage ? lastPage.currentPage + 1 : undefined),
+    getNextPageParam: (lastPage) => (
+      lastPage.has_next_page ? lastPage.current_page + 1 : undefined
+    ),
   });
 
   useEffect(() => {
@@ -45,8 +47,8 @@ function StudyGridWrapper({ studyFilter, searchKeyword }: StudyItemWrapperProps)
       {
         studyResponse.pages.map((page) => (
           <StudyItemContainer
-            studyList={page.studies}
-            key={`study-search-${page.currentPage}`}
+            studyList={page.study_list}
+            key={`study-search-${page.current_page}`}
           />
         ))
       }
