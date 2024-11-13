@@ -7,6 +7,8 @@ const endpoints = {
   createStudy: `${prefix}/studies`,
   inviteToStudy: (studyId: number) => `${prefix}/studies/${studyId}/members/invites`,
   getStudy: (studyId: number) => `${prefix}/studies/${studyId}`,
+  notices: `${prefix}/notices`,
+  assignments: `${prefix}/assignments`,
 };
 
 export default endpoints;
