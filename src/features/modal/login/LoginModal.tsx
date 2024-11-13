@@ -19,9 +19,7 @@ interface LoginModalProps {
 function LoginModal({ open, onClose }: LoginModalProps) {
   const { kakaoLoginButtonStyle, iconButtonBaseStyle } = useLoginModalStyles();
   const handleLoginClick = () => {
-    const REST_API_KEY = import.meta.env.VITE_KAKAO_API_KEY;
-    const REDIRECT_URI = `${import.meta.env.VITE_KAKAO_REDIRECT_URI}`;
-    window.location.href = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
+    window.location.href = `${import.meta.env.VITE_BASE_URL}/api/oauth2/authorization/kakao`;
   };
   return (
     <Modal open={open} onClose={onClose} width="387px" height="478px">
