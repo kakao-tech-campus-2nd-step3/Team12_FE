@@ -9,6 +9,7 @@ import RightSection from '@/features/modal/studyCreation/RightSection';
 import { type StudyCreationInputs } from '@/types/study';
 import { createStudy } from '@/api/study';
 import { useNavigate } from 'react-router-dom';
+import defaultAvatar from '@assets/icons/default-avatar.svg';
 
 interface StudyCreationProps {
   open: boolean;
@@ -32,10 +33,10 @@ export default function StudyCreationModal({ open, onClose }: StudyCreationProps
     },
     mode: 'onChange',
   });
+  const navigate = useNavigate();
 
   async function onSubmit(data: StudyCreationInputs) {
     const formData = new FormData();
-    const navigate = useNavigate();
 
     const requestData = {
       name: data.name,
@@ -44,7 +45,12 @@ export default function StudyCreationModal({ open, onClose }: StudyCreationProps
       topic: data.topic,
     };
     formData.append('request', new Blob([JSON.stringify(requestData)], { type: 'application/json' }));
-    formData.append('profileImage', data.profile_image);
+    if (data.profile_image) {
+      formData.append('profileImage', data.profile_image);
+    } else {
+      const defaultImageFile = new File([defaultAvatar], "default-avatar.svg", { type: "image/svg+xml" });
+      formData.append('profileImage', defaultImageFile);
+    }
     const response = createStudy(formData);
     if ((await response).status === 201) {
       onClose();
