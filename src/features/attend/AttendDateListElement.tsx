@@ -6,8 +6,10 @@ import Text from '@/components/text';
 import Button from '@/components/button';
 import theme from '@/styles/theme';
 import AttendanceCheckModal from '@/features/modal/attendance/AttendanceCheckModal';
+import { deleteDate } from '@/api/attendance';
 
 interface AttendDateListElementProps {
+  studyId: number;
   startDateTime: string;
   allowTime: number;
   memberAttendance: {
@@ -17,10 +19,14 @@ interface AttendDateListElementProps {
     status: boolean,
     imageUrl: string,
   }[];
+  onDeleteComplete: () => void;
+  isPastDate: boolean;
 }
 
 export default function AttendDateListElement(
-  { startDateTime, allowTime, memberAttendance }: AttendDateListElementProps,
+  {
+    studyId, startDateTime, allowTime, memberAttendance, onDeleteComplete, isPastDate,
+  }: AttendDateListElementProps,
 ) {
   const [startDate, startTime] = startDateTime.split(' ');
   const [open, setOpen] = useState(false);
@@ -32,6 +38,19 @@ export default function AttendDateListElement(
 
   const onClose = () => {
     setOpen(false);
+  };
+
+  const deleteAttendDate = async () => {
+    const response = deleteDate({
+      studyId,
+      requestData: {
+        start_time: startDateTime,
+      },
+    });
+    if ((await response).status === 204) {
+      toast.success('출석일자가 삭제되었습니다.');
+      onDeleteComplete();
+    }
   };
 
   return (
@@ -63,10 +82,21 @@ export default function AttendDateListElement(
       />
       )}
       <Toaster position="bottom-center" reverseOrder={false} />
-      <Button variant="primary" css={commonButtonStyles}>
+      <Button
+        variant="primary"
+        css={commonButtonStyles}
+        disabled={isPastDate}
+      >
         수정
       </Button>
-      <Button variant="primary" css={commonButtonStyles}>
+      <Button
+        variant="primary"
+        css={commonButtonStyles}
+        onClick={() => {
+          deleteAttendDate();
+        }}
+        disabled={isPastDate}
+      >
         삭제
       </Button>
     </Grid>

@@ -59,13 +59,17 @@ export default function AttendDateList() {
               const startDate = new Date(data.start_time.replace(' ', 'T'));
               const deadlineDate = new Date(data.deadline.replace(' ', 'T'));
               const allowTime = (deadlineDate.getTime() - startDate.getTime()) / (1000 * 60);
+              const isPastDate = deadlineDate < new Date();
 
               return (
                 <React.Fragment key={data.id}>
                   <AttendDateListElement
+                    studyId={11}
                     startDateTime={data.start_time}
                     allowTime={allowTime}
                     memberAttendance={memberAttendance}
+                    onDeleteComplete={fetchAttendanceDates}
+                    isPastDate={isPastDate}
                   />
                   <hr css={HorizontalSoftLine} />
                 </React.Fragment>
