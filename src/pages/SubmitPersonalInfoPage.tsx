@@ -17,7 +17,7 @@ function SubmitPersonalInfoPage() {
       return;
     }
     login(accessToken);
-  }, []);
+  }, [accessToken, login, navigate]);
   return (
     <PersonalInfoModal open onClose={() => {}} />
   );
