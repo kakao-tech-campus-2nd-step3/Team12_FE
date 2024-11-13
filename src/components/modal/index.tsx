@@ -50,7 +50,7 @@ const Modal: React.FC<ModalProps> = ({
   return ReactDOM.createPortal(
     <ModalOverlay onClick={handleOverlayClick}>
       <ModalContainer width={width} height={height} onClick={handleModalClick}>
-        { hideClose && <Button onClick={onClose}>&times;</Button> }
+        { !hideClose && <Button onClick={onClose}>&times;</Button> }
         <div>{children}</div>
       </ModalContainer>
     </ModalOverlay>,
