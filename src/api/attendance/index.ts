@@ -25,6 +25,15 @@ interface UpdateDateParams {
   }
 }
 
+interface UpdateAttendanceParams {
+  studyId: number;
+  memberId: number;
+  requestData: {
+    datetime: string;
+    is_attended: boolean;
+  }
+}
+
 export async function createDate({ studyId, requestData }: CreateDateParams) {
   const response = await axiosInstance.post(endpoints.attendanceDate, requestData, {
     headers: {
@@ -75,4 +84,17 @@ export async function getAttendanceList(studyId: number) {
     },
   });
   return response.data;
+}
+
+export async function updateAttendance({ studyId, memberId, requestData }: UpdateAttendanceParams) {
+  const response = await axiosInstance.put(endpoints.attendance, requestData, {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    params: {
+      studyId,
+      memberId,
+    },
+  });
+  return response;
 }

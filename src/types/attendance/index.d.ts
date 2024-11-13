@@ -16,8 +16,8 @@ export interface AttendanceInfo {
 }
 
 export interface MemberAttendanceInfo {
-  memberAttendanceDateStringList: string[];
-  attendanceRate: string;
+  member_attendance_list: string[];
+  attendance_rate: string;
 }
 
 export type AttendanceCreationRequestBody = Pick<Attendance, 'study_id' | 'start_time' | 'time_interval'>;

@@ -10,7 +10,7 @@ import Button from '@/components/button';
 import theme from '@/styles/theme';
 import { getStudyMember } from '@/api/study';
 import { MemberAttendance, MemberAttendanceResponse } from '@/types/attendance';
-import { getAttendanceList } from '@/api/attendance';
+import { getAttendanceList, updateAttendance } from '@/api/attendance';
 import { StudyMember } from '@/types/study';
 
 interface AcceptInvitationProps {
@@ -26,29 +26,61 @@ const HorizontalLine = styled.hr`
   border: 1px solid #C8C8C8;
 `;
 
-export default function AttendanceCheckModal(
-  {
-    open, onClose, editComplete, studyId, date,
-  }: AcceptInvitationProps,
-) {
+export default function AttendanceCheckModal({
+  open, onClose, editComplete, studyId, date,
+}: AcceptInvitationProps) {
   const [memberAttendanceList, setMemberAttendance] = useState<{
-    [key: string]: MemberAttendance }>({});
+    [key: string]: MemberAttendance
+  }>({});
   const [memberList, setMemberList] = useState<StudyMember[]>([]);
+  const [attendanceStatus, setAttendanceStatus] = useState<{ [memberId: string]: boolean }>({});
+  const [isPastDate, setIsPastDate] = useState(false);
+
+  useEffect(() => {
+    const currentDate = new Date();
+    const selectedDate = new Date(date);
+    setIsPastDate(selectedDate < currentDate);
+  }, [date]);
 
   useEffect(() => {
     async function fetchStudyMember(): Promise<void> {
       const response = await getStudyMember(studyId);
       setMemberList(response);
     }
-    const fetchMemberAttendance = async (): Promise<void> => {
+
+    async function fetchMemberAttendance(): Promise<void> {
       const response: MemberAttendanceResponse = await getAttendanceList(studyId);
-      const attendanceEntries = response.member_attendance;
-      setMemberAttendance(attendanceEntries);
-    };
+      setMemberAttendance(response.member_attendance);
+    }
 
     fetchStudyMember();
     fetchMemberAttendance();
   }, [studyId]);
+
+  const handleStatusChange = (memberId: string, updatedStatus: boolean) => {
+    setAttendanceStatus((prevStatus) => ({
+      ...prevStatus,
+      [memberId]: updatedStatus,
+    }));
+  };
+
+  const handleEditComplete = () => {
+    try {
+      Object.entries(attendanceStatus).forEach(([memberId, isAttended]) => {
+        updateAttendance({
+          studyId,
+          memberId: Number(memberId),
+          requestData: {
+            datetime: date,
+            is_attended: isAttended,
+          },
+        });
+      });
+      editComplete();
+    } catch (error) {
+      console.error('Failed to update attendance:', error);
+    }
+  };
 
   return (
     <Modal open={open} onClose={onClose} width="447px" height="628px">
@@ -59,14 +91,7 @@ export default function AttendanceCheckModal(
         <Text fontSize="15px">누가누가 잘하나 (a.k.a. 온사람)</Text>
         <Spacing height={23} />
         <Container gap="23px" justify="flex-start">
-          <Grid
-            columns={3}
-            style={{
-              alignItems: 'center',
-              justifyItems: 'center',
-              textAlign: 'center',
-            }}
-          >
+          <Grid columns={3} style={{ alignItems: 'center', justifyItems: 'center', textAlign: 'center' }}>
             <Text fontSize="15px">이름</Text>
             <Text fontSize="15px">출석 시간</Text>
             <Text fontSize="15px">출석 현황</Text>
@@ -78,9 +103,7 @@ export default function AttendanceCheckModal(
             overflowY: 'scroll',
             height: '350px',
             overflowX: 'hidden',
-            '::-webkit-scrollbar': {
-              display: 'none',
-            },
+            '::-webkit-scrollbar': { display: 'none' },
             msOverflowStyle: 'none',
             scrollbarWidth: 'none',
           }}
@@ -88,24 +111,32 @@ export default function AttendanceCheckModal(
           justify="flex-start"
         >
           {memberList.map((member) => {
-            const memberId = member.member?.id?.toString();
-            const attendanceDates = memberId
-              ? memberAttendanceList[memberId]?.memberAttendanceDateStringList || []
-              : [];
-            // 민경 TODO : 나중에 로직 바꿀수도 있음
-            const isPresent = attendanceDates.includes(date);
+            const memberId = member.member.id.toString();
+            const attendanceDates = memberAttendanceList[memberId]?.member_attendance_list ?? [];
+            let time = '';
+
+            const isAttended = attendanceDates.some((attendanceDate: string) => {
+              if (attendanceDate.slice(0, 10) === date.slice(0, 10)) {
+                time = attendanceDate.slice(11, 16);
+                return true;
+              }
+              return false;
+            });
 
             return (
               <AttendanceInfo
-                key={member.member.id}
+                key={memberId}
+                memberId={memberId}
                 name={member.member.nickname}
-                time=""
-                status={isPresent}
+                time={time}
+                status={isAttended}
                 imageUrl={member.member.profile_image}
+                onStatusChange={(
+                  updatedStatus: boolean,
+                ) => handleStatusChange(memberId, updatedStatus)}
               />
             );
           })}
-
         </Container>
         <Button
           variant="primary"
@@ -115,7 +146,8 @@ export default function AttendanceCheckModal(
             position: 'absolute',
             bottom: '40px',
           }}
-          onClick={editComplete}
+          onClick={handleEditComplete}
+          disabled={!isPastDate}
         >
           수정완료
         </Button>
