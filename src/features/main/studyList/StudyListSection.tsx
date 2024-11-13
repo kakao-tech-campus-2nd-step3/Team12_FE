@@ -3,6 +3,8 @@ import { useState } from 'react';
 import StudyFilterSection from '@features/main/studyList/StudyFilterSection';
 import StudyGridWrapper from '@features/main/studyList/StudyGridWrapper';
 import SuspenseErrorBoundary from '@components/boundary/SuspenseErrorBoundary';
+import Container from '@components/container';
+import StudySkeletonGrid from '@features/main/studyList/StudySkeletonGrid';
 import type { StudyFilter } from '@/types/study';
 
 function StudyListSection() {
@@ -17,9 +19,12 @@ function StudyListSection() {
         setStudyFilter={setStudyFilter}
         setSearchKeyword={setSearchKeyword}
       />
-      <SuspenseErrorBoundary>
-        <StudyGridWrapper studyFilter={studyFilter} searchKeyword={searchKeyword} />
-      </SuspenseErrorBoundary>
+
+      <Container padding="16px 0 0 0">
+        <SuspenseErrorBoundary suspenseFallback={<StudySkeletonGrid />}>
+          <StudyGridWrapper studyFilter={studyFilter} searchKeyword={searchKeyword} />
+        </SuspenseErrorBoundary>
+      </Container>
     </DefaultPaddedContainer>
   );
 }

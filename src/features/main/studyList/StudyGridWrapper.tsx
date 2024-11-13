@@ -1,9 +1,8 @@
-import Container from '@components/container';
-import Grid from '@components/grid';
 import StudyItem from '@features/main/studyList/StudyItem';
 import { useSuspenseInfiniteQuery } from '@tanstack/react-query';
 import { queryKeys } from '@constants/queryKeys';
 import { useEffect } from 'react';
+import StudyGrid from '@features/main/studyList/StudyGrid';
 import type { Study, StudyFilter, StudySearchRequestQuery } from '@/types/study';
 import { searchStudies } from '@/api/study';
 
@@ -42,26 +41,16 @@ function StudyGridWrapper({ studyFilter, searchKeyword }: StudyItemWrapperProps)
   }, [refetch, studyFilter, searchKeyword]);
 
   return (
-    <Container padding="16px 0 0 0">
-      <Grid
-        columns={{
-          initial: 1,
-          xs: 2,
-          md: 3,
-          lg: 4,
-        }}
-        gap={19}
-      >
-        {
-          studyResponse.pages.map((page) => (
-            <StudyItemContainer
-              studyList={page.studies}
-              key={`study-search-${page.currentPage}`}
-            />
-          ))
-        }
-      </Grid>
-    </Container>
+    <StudyGrid>
+      {
+        studyResponse.pages.map((page) => (
+          <StudyItemContainer
+            studyList={page.studies}
+            key={`study-search-${page.currentPage}`}
+          />
+        ))
+      }
+    </StudyGrid>
   );
 }
 
