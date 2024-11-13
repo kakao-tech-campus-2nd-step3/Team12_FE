@@ -5,7 +5,13 @@ import { css, useTheme } from '@emotion/react';
 import logo from '@assets/logo.svg';
 import alarm from '@assets/icons/alarm.svg';
 import dropDown from '@assets/icons/dropdown.svg';
-import { useContext, useState } from 'react';
+import {
+  RefObject,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import { rootWidth } from '@styles/length';
 import { MemberInfoContext } from '@providers/MemberInfoProvider';
 import LoginModal from '@features/modal/login/LoginModal';
@@ -14,6 +20,7 @@ function Header() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const { memberInfo, isLoggedIn } = useContext(MemberInfoContext);
+  const toggleContainerRef = useRef<HTMLDivElement>(null);
   const theme = useTheme();
 
   const toggleDropdown = () => {
@@ -42,13 +49,7 @@ function Header() {
             width="auto"
             gap="20px"
           >
-            <Button css={css`
-            width: 140px;
-            height: 35px;
-            font-size:14px;
-            border-color: #ECEDEE;
-          `}
-            >
+            <Button variant="default">
               스터디 생성하기
             </Button>
             <img src={alarm} alt="alarm" css={{ width: '25px' }} />
@@ -61,9 +62,11 @@ function Header() {
               {
               isLoggedIn ? (
                 <>
-                  <Container
-                    gap="12px"
+                  <div
+                    css={{ display: 'flex', gap: '12px' }}
+                    role="presentation"
                     onClick={toggleDropdown}
+                    ref={toggleContainerRef}
                   >
                     <Avatar
                       size="small"
@@ -76,9 +79,12 @@ function Header() {
                       css={{ width: '10px' }}
                       role="presentation"
                     />
-                  </Container>
+                  </div>
                   {isDropdownOpen && (
-                    <Dropdown />
+                    <HeaderDropdown
+                      toggleContainerRef={toggleContainerRef}
+                      close={() => { setIsDropdownOpen(false); }}
+                    />
                   )}
                 </>
               ) : (
@@ -99,8 +105,28 @@ function Header() {
   );
 }
 
-function Dropdown() {
+interface HeaderDropdownProps {
+  close: () => void;
+  toggleContainerRef: RefObject<HTMLDivElement>;
+}
+function HeaderDropdown({ close, toggleContainerRef }: HeaderDropdownProps) {
   const { logout } = useContext(MemberInfoContext);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current
+        && !dropdownRef.current.contains(event.target as Node)
+        && toggleContainerRef.current
+        && !toggleContainerRef.current.contains(event.target as Node)) {
+        close();
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [close, toggleContainerRef]);
   const dropdownStyle = css`
     position: absolute;
     right: 0;
@@ -126,7 +152,7 @@ function Dropdown() {
     }
 `;
   return (
-    <div css={dropdownStyle}>
+    <div css={dropdownStyle} ref={dropdownRef}>
       <ul css={menuStyle}>
         <li>내 스터디</li>
         <li>설정</li>
