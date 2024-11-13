@@ -6,27 +6,56 @@ import Text from '@/components/text';
 import Button from '@/components/button';
 import theme from '@/styles/theme';
 import AttendanceCheckModal from '@/features/modal/attendance/AttendanceCheckModal';
-import { deleteDate } from '@/api/attendance';
+import { deleteDate, updateDate } from '@/api/attendance';
+import Input from '@/components/input';
+import Select from '@/components/select';
 
 interface AttendDateListElementProps {
   studyId: number;
   startDateTime: string;
   allowTime: number;
-  onDeleteComplete: () => void;
+  onComplete: () => void;
   isPastDate: boolean;
+  dateId: number;
 }
 
 export default function AttendDateListElement(
   {
-    studyId, startDateTime, allowTime, onDeleteComplete, isPastDate,
+    studyId, startDateTime, allowTime, onComplete, isPastDate, dateId,
   }: AttendDateListElementProps,
 ) {
-  const [startDate, startTime] = startDateTime.split(' ');
+  const [startDate, setStartDate] = useState(startDateTime.split(' ')[0]);
+  const [startTime, setStartTime] = useState(startDateTime.split(' ')[1]);
+  const [allowTimeVal, setAllowTimeVal] = useState(allowTime);
   const [open, setOpen] = useState(false);
+  const [editOpen, setEditOpen] = useState(false);
 
-  const editComplete = () => {
-    toast.success('수정이 완료되었습니다!');
-    setOpen(false);
+  const editComplete = async () => {
+    try {
+      const response = await updateDate({
+        studyId,
+        requestData: {
+          start_time: `${startDate} ${startTime}`,
+          time_interval: allowTimeVal,
+          date_id: dateId,
+        },
+      });
+
+      if (response.status === 204) {
+        toast.success('수정이 완료되었습니다!');
+      }
+    } catch (error: any) {
+      if (error.response && error.response.status === 400) {
+        toast.error('잘못된 입력입니다.');
+      } else {
+        toast.error('오류가 발생했습니다.');
+      }
+      setStartDate(startDateTime.split(' ')[0]);
+      setStartTime(startDateTime.split(' ')[1]);
+      setAllowTimeVal(allowTime);
+    } finally {
+      setEditOpen(false);
+    }
   };
 
   const onClose = () => {
@@ -42,18 +71,59 @@ export default function AttendDateListElement(
     });
     if ((await response).status === 204) {
       toast.success('출석일자가 삭제되었습니다.');
-      onDeleteComplete();
+      onComplete();
+    } else {
+      toast.error('삭제에 실패했습니다.');
     }
   };
 
   return (
     <Grid columns={6} css={{ alignItems: 'center', justifyItems: 'center', gridTemplateColumns: '1fr 1fr 1fr 1fr 0.5fr 0.5fr' }}>
-      <Text css={commonTextStyles}>{startDate}</Text>
-      <Text css={commonTextStyles}>{startTime}</Text>
-      <Text css={commonTextStyles}>
-        {allowTime}
-        분
-      </Text>
+      { editOpen ? (
+        <Input
+          type="date"
+          value={startDate}
+          css={{ width: '140px', fontSize: '13px', textAlign: 'center' }}
+          onChange={(e) => { setStartDate(e.target.value); }}
+        />
+      ) : <Text css={commonTextStyles}>{startDate}</Text> }
+      { editOpen ? (
+        <Input
+          type="time"
+          value={startTime}
+          css={{ width: '140px', fontSize: '13px', textAlign: 'center' }}
+          onChange={(e) => { setStartTime(e.target.value); }}
+        />
+      )
+        : <Text css={commonTextStyles}>{startTime}</Text>}
+      { editOpen ? (
+        <Select
+          value={allowTimeVal}
+          onChange={(e) => { setAllowTimeVal(Number(e.target.value)); }}
+          css={{
+            padding: '10px',
+            borderRadius: '4px',
+            border: '1px solid #DFE1E3',
+            height: '45px',
+            boxSizing: 'border-box',
+            fontSize: '13px',
+            width: '140px',
+            textAlign: 'center',
+          }}
+        >
+          <option value="5">5분</option>
+          <option value="10">10분</option>
+          <option value="15">15분</option>
+          <option value="20">20분</option>
+          <option value="30">30분</option>
+          <option value="60">1시간</option>
+        </Select>
+      ) : (
+        <Text css={commonTextStyles}>
+          {allowTimeVal}
+          분
+        </Text>
+      )}
       <Button
         variant="transparent"
         css={{
@@ -76,13 +146,25 @@ export default function AttendDateListElement(
       />
       )}
       <Toaster position="bottom-center" reverseOrder={false} />
-      <Button
-        variant="primary"
-        css={commonButtonStyles}
-        disabled={isPastDate}
-      >
-        수정
-      </Button>
+      { editOpen ? (
+        <Button
+          css={commonButtonStyles}
+          onClick={editComplete}
+        >
+          완료
+        </Button>
+      ) : (
+        <Button
+          variant="primary"
+          css={commonButtonStyles}
+          disabled={isPastDate}
+          onClick={() => {
+            setEditOpen(true);
+          }}
+        >
+          수정
+        </Button>
+      )}
       <Button
         variant="primary"
         css={commonButtonStyles}

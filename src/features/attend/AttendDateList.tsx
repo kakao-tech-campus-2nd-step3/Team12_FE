@@ -65,8 +65,9 @@ export default function AttendDateList() {
                     studyId={11}
                     startDateTime={data.start_time}
                     allowTime={allowTime}
-                    onDeleteComplete={fetchAttendanceDates}
+                    onComplete={fetchAttendanceDates}
                     isPastDate={isPastDate}
+                    dateId={data.id}
                   />
                   <hr css={HorizontalSoftLine} />
                 </React.Fragment>

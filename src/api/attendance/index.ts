@@ -16,6 +16,15 @@ interface DeleteDateParams {
   }
 }
 
+interface UpdateDateParams {
+  studyId: number;
+  requestData: {
+    start_time: string;
+    time_interval: number;
+    date_id: number;
+  }
+}
+
 export async function createDate({ studyId, requestData }: CreateDateParams) {
   const response = await axiosInstance.post(endpoints.attendanceDate, requestData, {
     headers: {
@@ -43,6 +52,18 @@ export async function deleteDate({ studyId, requestData }: DeleteDateParams) {
       studyId,
     },
     data: requestData,
+  });
+  return response;
+}
+
+export async function updateDate({ studyId, requestData }: UpdateDateParams) {
+  const response = await axiosInstance.put(endpoints.attendanceDate, requestData, {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    params: {
+      studyId,
+    },
   });
   return response;
 }
