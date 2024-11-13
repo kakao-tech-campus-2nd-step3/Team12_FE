@@ -14,9 +14,15 @@ import { createDate } from '@/api/attendance';
 
 interface AttendDateCreationProps {
   studyId: number;
+  onCreationComplete: () => void;
 }
 
-export default function AttendDateCreation({ studyId }: AttendDateCreationProps) {
+export default function AttendDateCreation(
+  {
+    studyId,
+    onCreationComplete,
+  }: AttendDateCreationProps,
+) {
   const [currentDate] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState(currentDate);
   const [isPastDate, setIsPastDate] = useState(false);
@@ -50,6 +56,7 @@ export default function AttendDateCreation({ studyId }: AttendDateCreationProps)
     });
     if ((await response).status === 201) {
       toast.success('출석일자가 생성되었습니다.');
+      onCreationComplete();
     }
   };
 

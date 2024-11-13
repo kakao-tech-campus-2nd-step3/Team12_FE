@@ -16,24 +16,20 @@ export default function AttendDateList() {
   const [attendanceDates, setAttendanceDates] = useState<AttendanceResponse[]>([]);
 
   const fetchAttendanceDates = async () => {
-    try {
-      const dates = await getDateList(11);
-      setAttendanceDates(dates.attendance_date_list);
-    } catch (error) {
-      console.error('Failed to fetch attendance dates:', error);
-    }
+    const dates = await getDateList(11);
+    setAttendanceDates(dates.attendance_date_list);
   };
 
   useEffect(() => {
     fetchAttendanceDates();
-  });
+  }, []);
 
   const [memberAttendance] = useState(mockMemberAttendance);
   return (
     <DefaultPaddedContainer>
       <Container padding="40px" direction="column" align="flex-start" css={{ minHeight: 'calc(100vh - 210px)' }}>
         <Container padding="50px" direction="column" css={{ backgroundColor: `${theme.colors.absolute.white}`, boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)', minWidth: 'fit-content' }}>
-          <AttendDateCreation studyId={11} />
+          <AttendDateCreation studyId={11} onCreationComplete={fetchAttendanceDates} />
           <Spacing height={20} />
           <hr css={HorizontalLine} />
           <Grid columns={6} css={{ alignItems: 'center', gridTemplateColumns: '1fr 1fr 1fr 1fr 0.5fr 0.5fr', padding: '10px 0px' }}>

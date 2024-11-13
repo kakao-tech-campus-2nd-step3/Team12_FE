@@ -9,6 +9,13 @@ interface CreateDateParams {
   }
 }
 
+interface DeleteDateParams {
+  studyId: number;
+  requestData: {
+    start_time: string;
+  }
+}
+
 export async function createDate({ studyId, requestData }: CreateDateParams) {
   const response = await axiosInstance.post(endpoints.attendanceDate, requestData, {
     headers: {
@@ -28,4 +35,14 @@ export async function getDateList(studyId: number) {
     },
   });
   return response.data;
+}
+
+export async function deleteDate({ studyId, requestData }: DeleteDateParams) {
+  const response = await axiosInstance.delete(endpoints.attendanceDate, {
+    params: {
+      studyId,
+    },
+    data: requestData,
+  });
+  return response;
 }
