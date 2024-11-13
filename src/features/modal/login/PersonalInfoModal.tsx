@@ -66,7 +66,7 @@ export default function PersonalInfoModal({ open, onClose }: PersonalInfoModalPr
   };
 
   return (
-    <Modal open={open} onClose={onClose} hideClose={true} width="447px">
+    <Modal open={open} onClose={onClose} hideClose width="447px">
       <form onSubmit={handleSubmit(onSubmit)}>
         <Container padding="30px" direction="column" align="flex-start">
           <Heading.H3 weight="bold">개인 정보를 입력해주세요.</Heading.H3>
