@@ -36,8 +36,8 @@ export const Default: Story = {
       name: '스터디 이름',
       profileImage: 'https://via.placeholder.com/150',
       description: '스터디 설명',
-      createdAt: new Date(),
-      isOpen: true,
+      created_at: new Date(),
+      is_open: true,
       topic: '스터디 주제',
     };
 

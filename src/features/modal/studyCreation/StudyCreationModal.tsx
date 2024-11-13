@@ -40,7 +40,7 @@ export default function StudyCreationModal({ open, onClose }: StudyCreationProps
       name: data.name,
       description: data.description,
       topic: data.topic,
-      isOpen: data.isOpen,
+      isOpen: data.is_open,
     };
     formData.append('request', JSON.stringify(requestData));
     formData.append('profileImage', data.profileImage);
