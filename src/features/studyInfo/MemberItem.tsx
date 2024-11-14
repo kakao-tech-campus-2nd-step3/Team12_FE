@@ -23,6 +23,7 @@ function MemberItem(
   `;
   const textStyle = css`
     text-decoration: underline;
+    cursor: pointer;
   `;
   const memberInfo = studyMember.member;
   const [open, setOpen] = useState(false);
