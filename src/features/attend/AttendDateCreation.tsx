@@ -42,7 +42,7 @@ export default function AttendDateCreation(
 
   const handleCreateClick = async () => {
     try {
-      const response = createDate({
+      createDate({
         study_id: studyId,
         requestData: {
           start_time: `${selectedDate.toLocaleDateString('en-CA')} ${
@@ -53,9 +53,7 @@ export default function AttendDateCreation(
           time_interval: Number(timeInterval),
         },
       });
-      if ((await response).status === 201) {
-        toast.success('출석일자가 생성되었습니다🍀');
-      }
+      toast.success('출석일자가 생성되었습니다🍀');
     } catch (error: any) {
       toast.error('잘못된 입력입니다🥲');
     }
