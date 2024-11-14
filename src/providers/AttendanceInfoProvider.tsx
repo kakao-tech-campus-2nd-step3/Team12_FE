@@ -41,8 +41,12 @@ export function AttendanceInfoContextProvider(
 
   const checkAttend = async () => {
     try {
+      const requestData = {
+        date_id: dateId,
+        code: attendanceCode,
+      };
       checkAttendance(
-        { study_id: studyId, requestData: { date_id: dateId, code: attendanceCode } },
+        { requestData, study_id: studyId.toString() },
       );
     } catch (e) {
       console.error(e);
