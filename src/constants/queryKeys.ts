@@ -3,4 +3,5 @@ export const queryKeys = {
   STUDY_INFO: 'study_info',
   STUDY_MEMBERS: 'study_members',
   STUDY_ATTENDANCE_DATES: 'study_attendance_dates',
+  STUDY_ATTENDANCE_INFO: 'study_attendance_info',
 };

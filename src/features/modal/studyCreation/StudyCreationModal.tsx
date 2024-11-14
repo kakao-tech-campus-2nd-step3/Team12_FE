@@ -3,6 +3,7 @@ import {
   Control, FormState, useForm, UseFormRegister,
   UseFormSetValue,
 } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 import defaultBackground from '@assets/banner-background.webp';
 import Modal from '@/components/modal';
 import LeftSection from '@/features/modal/studyCreation/LeftSection';
@@ -28,9 +29,11 @@ export default function StudyCreationModal({ open, onClose }: StudyCreationProps
       name: '',
       topic: '',
       description: '',
+      profile_image: '',
     },
     mode: 'onChange',
   });
+  const navigate = useNavigate();
 
   // TODO: 실제 request 로직으로 변경 및 UI 로직과 분리
   async function onSubmit(data: StudyCreationInputs) {
@@ -39,8 +42,8 @@ export default function StudyCreationModal({ open, onClose }: StudyCreationProps
     const requestData = {
       name: data.name,
       description: data.description,
-      topic: data.topic,
       is_open: data.is_open,
+      topic: data.topic,
     };
     formData.append('request', new Blob([JSON.stringify(requestData)], { type: 'application/json' }));
     if (data.profile_image) {
@@ -50,6 +53,12 @@ export default function StudyCreationModal({ open, onClose }: StudyCreationProps
       const blob = await defaultImageResponse.blob();
       const defaultBackgroundFile = new File([blob], 'defaultImage.webp');
       formData.append('profileImage', defaultBackgroundFile);
+      const response = createStudy(formData);
+      if ((await response).status === 201) {
+        onClose();
+        navigate('/', { state: { message: '스터디를 생성하였습니다!' } });
+      // 민경 TODO : 추후 스터디 페이지로 이동하도록 수정
+      }
     }
     // console.log(formData.get('request'));
     // console.log(formData.get('profileImage'));

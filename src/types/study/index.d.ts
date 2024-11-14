@@ -1,3 +1,5 @@
+import { RequireAttendanceDate } from '../attendance';
+
 export interface Study {
   id: number;
   name: string;
@@ -5,7 +7,7 @@ export interface Study {
   created_at: Date;
   is_open: boolean;
   topic: string;
-  profile_image: string;
+  profile_image: file;
 }
 
 export type StudyFilter = 'all' | 'open' | 'closed';
@@ -14,7 +16,7 @@ export type StudyRole = '스터디장' | '스터디원';
 // TODO: 추후에 profileImage input 구현 후 타입 변경
 // export type StudyCreationRequestBody =
 //  Pick<Study, 'name' | 'description' | 'isOpen' | 'topic' | 'profileImage'>;
-export type StudyCreationRequestBody = Pick<Study, 'name' | 'description' | 'is_open' | 'topic'> & { profile_image?: File };
+export type StudyCreationRequestBody = Pick<Study, 'name' | 'description' | 'is_open' | 'topic' | 'profile_image'>;
 export type StudyCreationInputs = StudyCreationRequestBody;
 
 export interface StudySearchRequestQuery {
@@ -44,4 +46,7 @@ export type StudyMember = {
 
 export type StudyMembersResponse = StudyMember[];
 
-export type StudyInfoWithMembers = Study & { members: StudyMember[] };
+export type StudyInfoWithMembers = Study &
+{ members: StudyMember[] } &
+{ studyAttendanceInfo: AttendanceInfo } &
+{ attendanceDateInfo: RequireAttendanceDate[] };

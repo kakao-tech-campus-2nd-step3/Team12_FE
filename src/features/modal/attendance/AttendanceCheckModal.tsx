@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import Modal from '@/components/modal';
 import Text, { Heading } from '@/components/text';
 import Grid from '@/components/grid';
@@ -8,18 +8,14 @@ import Container from '@/components/container';
 import Spacing from '@/components/spacing';
 import Button from '@/components/button';
 import theme from '@/styles/theme';
+import { updateAttendance } from '@/api/attendance';
+import { StudyInfoContext } from '@/providers/StudyInfoProvider';
 
 interface AcceptInvitationProps {
   open: boolean;
   onClose: () => void;
   editComplete: () => void;
-  memberAttendance: {
-    id: string;
-    name: string;
-    time: string;
-    status: boolean;
-    imageUrl: string;
-  }[];
+  date: string;
 }
 
 const HorizontalLine = styled.hr`
@@ -27,12 +23,45 @@ const HorizontalLine = styled.hr`
   border: 1px solid #C8C8C8;
 `;
 
-export default function AttendanceCheckModal(
-  {
-    open, onClose, editComplete, memberAttendance,
-  }: AcceptInvitationProps,
-) {
-  const [attendanceList] = useState(memberAttendance);
+export default function AttendanceCheckModal({
+  open, onClose, editComplete, date,
+}: AcceptInvitationProps) {
+  const [attendanceStatus, setAttendanceStatus] = useState<{ [memberId: string]: boolean }>({});
+  const [isPastDate, setIsPastDate] = useState(false);
+  const { study } = useContext(StudyInfoContext);
+  console.log(study);
+
+  useEffect(() => {
+    const currentDate = new Date();
+    const selectedDate = new Date(date);
+    setIsPastDate(selectedDate < currentDate);
+  }, [date]);
+
+  const handleStatusChange = (memberId: string, updatedStatus: boolean) => {
+    setAttendanceStatus((prevStatus) => ({
+      ...prevStatus,
+      [memberId]: updatedStatus,
+    }));
+  };
+
+  const handleEditComplete = () => {
+    try {
+      Object.entries(attendanceStatus).forEach(([memberId, isAttended]) => {
+        updateAttendance({
+          study_id: study.id,
+          member_id: Number(memberId),
+          requestData: {
+            datetime: date,
+            is_attended: isAttended,
+          },
+        });
+      });
+      editComplete();
+    } catch (error) {
+      console.error('Failed to update attendance:', error);
+    }
+  };
+
   return (
     <Modal open={open} onClose={onClose} width="447px" height="628px">
       <Container padding="40px" direction="column" align="flex-start">
@@ -42,14 +71,7 @@ export default function AttendanceCheckModal(
         <Text fontSize="15px">누가누가 잘하나 (a.k.a. 온사람)</Text>
         <Spacing height={23} />
         <Container gap="23px" justify="flex-start">
-          <Grid
-            columns={3}
-            style={{
-              alignItems: 'center',
-              justifyItems: 'center',
-              textAlign: 'center',
-            }}
-          >
+          <Grid columns={3} style={{ alignItems: 'center', justifyItems: 'center', textAlign: 'center' }}>
             <Text fontSize="15px">이름</Text>
             <Text fontSize="15px">출석 시간</Text>
             <Text fontSize="15px">출석 현황</Text>
@@ -61,24 +83,42 @@ export default function AttendanceCheckModal(
             overflowY: 'scroll',
             height: '350px',
             overflowX: 'hidden',
-            '::-webkit-scrollbar': {
-              display: 'none',
-            },
+            '::-webkit-scrollbar': { display: 'none' },
             msOverflowStyle: 'none',
             scrollbarWidth: 'none',
           }}
           direction="column"
           justify="flex-start"
         >
-          {attendanceList.map((attendance) => (
-            <AttendanceInfo
-              key={attendance.id}
-              name={attendance.name}
-              time={attendance.time}
-              status={attendance.status}
-              imageUrl={attendance.imageUrl}
-            />
-          ))}
+          {study.members.map((member) => {
+            const memberId = member.member.id.toString();
+            const attendanceDates = study
+              .studyAttendanceInfo.member_attendance[memberId]
+              ?.member_attendance_list ?? [];
+            let time = '';
+
+            const isAttended = attendanceDates.some((attendanceDate: string) => {
+              if (attendanceDate.slice(0, 10) === date.slice(0, 10)) {
+                time = attendanceDate.slice(11, 16);
+                return true;
+              }
+              return false;
+            });
+
+            return (
+              <AttendanceInfo
+                key={memberId}
+                memberId={memberId}
+                name={member.member.nickname}
+                time={time}
+                status={isAttended}
+                imageUrl={member.member.profile_image}
+                onStatusChange={(
+                  updatedStatus: boolean,
+                ) => handleStatusChange(memberId, updatedStatus)}
+              />
+            );
+          })}
         </Container>
         <Button
           variant="primary"
@@ -88,7 +128,8 @@ export default function AttendanceCheckModal(
             position: 'absolute',
             bottom: '40px',
           }}
-          onClick={editComplete}
+          onClick={handleEditComplete}
+          disabled={!isPastDate}
         >
           수정완료
         </Button>

@@ -1,12 +1,13 @@
 import { Meta, StoryObj } from '@storybook/react';
 import { MemoryRouter } from 'react-router-dom';
 import { useState } from 'react';
-import AttendanceCheckModal from '@/features/modal/attendance/AttendanceCheckModal';
-import { Toaster, toast } from 'react-hot-toast';
+import EnterCodeModal from '@/features/modal/attendance/EnterCodeModal';
+import { Toaster } from 'react-hot-toast';
+import { AttendanceInfoContextProvider } from '@/providers/AttendanceInfoProvider';
 
-const meta: Meta<typeof AttendanceCheckModal> = {
-  title: 'Features/Modal/Attendance/AttendanceCheckModal',
-  component: AttendanceCheckModal,
+const meta: Meta<typeof EnterCodeModal> = {
+  title: 'Features/Modal/Attendance/EnterCodeModal',
+  component: EnterCodeModal,
   decorators: [
     (Story) => (
       <MemoryRouter>
@@ -26,7 +27,7 @@ const meta: Meta<typeof AttendanceCheckModal> = {
 
 export default meta;
 
-type Story = StoryObj<typeof AttendanceCheckModal>;
+type Story = StoryObj<typeof EnterCodeModal>;
 
 export const Default: Story = {
   render: (args) => {
@@ -37,19 +38,17 @@ export const Default: Story = {
       setOpen(false);
     }
 
-    const editComplete = () => {
-      toast.success("수정이 완료되었습니다!");
-      setOpen(false);
-    }
-
     return (
       <>
+      <AttendanceInfoContextProvider studyId={206} dateId={38}>
+
         <Toaster position="bottom-center" reverseOrder={false} />
-        {open ? (
-          <AttendanceCheckModal open={open} onClose={onClose} editComplete={editComplete} date='2024-11-14'/>
+        {open ? ( 
+          <EnterCodeModal open={open} onClose={onClose} />
         ) : (
           <button onClick={() => setOpen(true)}>Open</button>
         )}
+        </AttendanceInfoContextProvider>
       </>
     );
   },
