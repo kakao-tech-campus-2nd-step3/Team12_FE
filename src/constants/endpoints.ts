@@ -15,6 +15,7 @@ const endpoints = {
   attendanceDate: `${prefix}/attendance/date`,
   attendance: `${prefix}/attendance`,
   getCode: `${prefix}/attendance/code`,
+  checkAttendance: `${prefix}/attendance`,
 };
 
 export default endpoints;

@@ -47,7 +47,7 @@ export type StudyInfoResponse = Study;
 export type StudyMember = {
   member: Pick<Member, 'id' | 'nickname' | 'description' | 'profile_image'>;
   role: StudyRole;
-  joined_at: Date;
+  joined_at: string;
 };
 
 export type StudyMembersResponse = StudyMember[];

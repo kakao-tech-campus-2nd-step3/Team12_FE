@@ -3,7 +3,9 @@ import { Paragraph } from '@components/text';
 import Avatar from '@components/avatar';
 import { css, useTheme } from '@emotion/react';
 import { useStudyItemStyles } from '@features/main/studyList/StudyList.styles';
+import { useState } from 'react';
 import { StudyMember } from '@/types/study';
+import AttendanceInfoModal from '../modal/memberAttendInfo/AttendanceInfoModal';
 
 interface MemberItemProps {
   studyMember: StudyMember;
@@ -23,6 +25,11 @@ function MemberItem(
     text-decoration: underline;
   `;
   const memberInfo = studyMember.member;
+  const [open, setOpen] = useState(false);
+
+  const onClose = () => {
+    setOpen(false);
+  };
 
   return (
     <Container direction="column" height="100%" align="flex-start" gap="20px" padding="20px 20px 20px 26px" css={css(containerStyle, containerStyleOverride)}>
@@ -35,7 +42,8 @@ function MemberItem(
       </Container>
       <Container justify="flex-end" gap="10px">
         <Paragraph variant="small" color={theme.colors.text.moderate} css={textStyle}>과제 정보</Paragraph>
-        <Paragraph variant="small" color={theme.colors.text.moderate} css={textStyle}>출석 정보</Paragraph>
+        <Paragraph variant="small" color={theme.colors.text.moderate} css={textStyle} onClick={() => { setOpen(true); }}>출석 정보</Paragraph>
+        {open && <AttendanceInfoModal open={open} onClose={onClose} memberInfo={studyMember} />}
       </Container>
     </Container>
   );
