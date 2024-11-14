@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { css } from '@emotion/react';
 import Grid from '@/components/grid';
 import Modal from '@/components/modal';
-import MemberInfoSection from '@/features/modal/memberInfo/MemberInfoSection';
+import MemberInfoSection from '@/features/modal/memberAttendInfo/MemberInfoSection';
 import Text, { Heading } from '@/components/text';
 import colorTheme from '@/styles/colors';
 import Container from '@/components/container';

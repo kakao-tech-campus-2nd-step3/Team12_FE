@@ -5,7 +5,7 @@ import { css, useTheme } from '@emotion/react';
 import { useStudyItemStyles } from '@features/main/studyList/StudyList.styles';
 import { useState } from 'react';
 import { StudyMember } from '@/types/study';
-import AttendanceInfoModal from '../modal/memberInfo/AttendanceInfoModal';
+import AttendanceInfoModal from '../modal/memberAttendInfo/AttendanceInfoModal';
 
 interface MemberItemProps {
   studyMember: StudyMember;
