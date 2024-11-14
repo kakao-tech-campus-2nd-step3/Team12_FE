@@ -4,7 +4,6 @@ import { useContext, useEffect } from 'react';
 import { MemberInfoContext } from '@providers/MemberInfoProvider';
 import Container from '@components/container';
 import Spinner from '@components/fallback/Spinner';
-import { Heading } from '@components/text';
 
 function LoginSuccessPage() {
   const location = useLocation();
@@ -18,11 +17,11 @@ function LoginSuccessPage() {
       return;
     }
     login(accessToken);
+    window.location.href = routePaths.MAIN;
   }, [accessToken, navigate, login]);
   return (
-    <Container height="500px">
+    <Container height="500px" direction="column">
       <Spinner />
-      <Heading.H1>로그인 처리 중</Heading.H1>
     </Container>
   );
 }
