@@ -60,8 +60,6 @@ export default function StudyCreationModal({ open, onClose }: StudyCreationProps
       // 민경 TODO : 추후 스터디 페이지로 이동하도록 수정
       }
     }
-    // console.log(formData.get('request'));
-    // console.log(formData.get('profileImage'));
     createStudy(formData);
   }
 

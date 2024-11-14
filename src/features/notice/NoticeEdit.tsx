@@ -7,6 +7,7 @@ import Button from '@components/button';
 import { useEffect, useRef, useState } from 'react';
 import Input from '@components/input';
 import Spinner from '@components/fallback/Spinner';
+import toast from 'react-hot-toast';
 import { editNotice, getNoticeDetail } from '@/api/notice';
 
 export default function NoticeEdit() {
@@ -24,8 +25,7 @@ export default function NoticeEdit() {
           editorRef.current.getInstance().setMarkdown(data.content);
         }
       } catch (error) {
-        console.error('공지사항 불러오기 실패:', error);
-        alert('공지사항을 불러오는 데 실패했습니다.');
+        toast.error('공지사항을 불러오는 데 실패했습니다.');
       } finally {
         setLoading(false);
       }
@@ -48,10 +48,9 @@ export default function NoticeEdit() {
         title,
         content,
       });
-      alert('공지사항이 성공적으로 수정되었습니다.');
+      toast.success('공지사항이 성공적으로 수정되었습니다.');
     } catch (error) {
-      console.error('공지사항 수정 중 오류 발생:', error);
-      alert('공지사항 수정 중 오류가 발생했습니다.');
+      toast.error('공지사항 수정 중 오류가 발생했습니다.');
     }
   };
 

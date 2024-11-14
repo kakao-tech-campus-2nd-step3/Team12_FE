@@ -6,6 +6,7 @@ import '@toast-ui/editor/dist/toastui-editor.css';
 import Button from '@components/button';
 import { useRef, useState } from 'react';
 import Input from '@components/input';
+import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import routePaths from '@constants/routePaths';
 import { createNotice } from '@/api/notice';
@@ -33,10 +34,10 @@ export default function NoticeCreation({ studyId }: NoticeCreationProps) {
         title,
         content,
       });
-      alert('공지사항이 성공적으로 작성되었습니다!');
+      toast.success('공지사항이 성공적으로 작성되었습니다!');
       navigate(routePaths.STUDY_NOTICE(studyId));
     } catch (error) {
-      alert('공지사항 작성 중 오류 발생');
+      toast.error('공지사항 저장에 실패했습니다.');
     }
   };
 

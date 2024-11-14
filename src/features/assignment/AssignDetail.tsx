@@ -7,6 +7,7 @@ import { css } from '@emotion/react';
 import Button from '@components/button';
 import { Viewer } from '@toast-ui/react-editor';
 import '@toast-ui/editor/dist/toastui-editor-viewer.css';
+import toast from 'react-hot-toast';
 import { AssignDetail } from '@/types/assignment';
 import { deleteAssign, getAssignDetail } from '@/api/assignment';
 
@@ -22,8 +23,7 @@ export default function AssignDetailPage() {
           const data = await getAssignDetail(assignId);
           setAssign(data);
         } catch (error) {
-          console.error(error);
-          alert('과제를 불러오는 데 실패했습니다.');
+          toast.error('과제를 불러오는 데 실패했습니다.');
         } finally {
           setLoading(false);
         }
@@ -37,10 +37,9 @@ export default function AssignDetailPage() {
     if (window.confirm('정말로 이 과제를 삭제하시겠습니까?')) {
       try {
         await deleteAssign(assignId);
-        alert('과제가 성공적으로 삭제되었습니다.');
+        toast.success('과제가 성공적으로 삭제되었습니다.');
       } catch (deleteError) {
-        console.error('삭제 중 오류 발생:', deleteError);
-        alert('과제 삭제 중 오류가 발생했습니다.');
+        toast.error('과제 삭제 중 오류가 발생했습니다.');
       }
     }
   };

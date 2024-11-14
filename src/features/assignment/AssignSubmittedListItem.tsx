@@ -2,6 +2,7 @@ import { Paragraph } from '@components/text';
 import { CSSObject } from '@emotion/react';
 import Container from '@components/container';
 import Button from '@components/button';
+import toast from 'react-hot-toast';
 import { SubmittedAssign } from '@/types/assignment';
 import { downloadAssign } from '@/api/assignment';
 
@@ -22,9 +23,9 @@ export default function AssignSubmittedListItem({ submittedAssign }: AssignItemP
   const handleDownload = async (fileId: number) => {
     try {
       await downloadAssign(fileId);
-      console.log(`File with ID ${fileId} downloaded successfully.`);
+      toast.success('파일을 성공적으로 다운록드하였습니다!');
     } catch (error) {
-      console.error('파일을 다운로드하는 데 실패했습니다:', error);
+      toast.error('파일을 다운로드하는 데 실패했습니다.');
     }
   };
 

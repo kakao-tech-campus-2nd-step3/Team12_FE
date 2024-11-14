@@ -8,6 +8,7 @@ import { useEffect, useRef, useState } from 'react';
 import Input from '@components/input';
 import AssignDeadline from '@features/assignment/AssignDeadline';
 import Spinner from '@components/fallback/Spinner';
+import toast from 'react-hot-toast';
 import { editAssign, getAssignDetail } from '@/api/assignment';
 
 export default function AssignEdit() {
@@ -26,8 +27,10 @@ export default function AssignEdit() {
           editorRef.current.getInstance().setMarkdown(data.content);
         }
       } catch (error) {
-        console.error('과제 불러오기 실패:', error);
-        alert('과제를 불러오는 데 실패했습니다.');
+        toast.error('과제를 불러오는데에 실패했습니다.', {
+          position: 'top-center',
+          duration: 3000,
+        });
       } finally {
         setLoading(false);
       }
@@ -55,10 +58,9 @@ export default function AssignEdit() {
         content,
         deadline,
       });
-      alert('과제가 성공적으로 수정되었습니다.');
+      toast.success('과제가 성공적으로 수정되었습니다.');
     } catch (error) {
-      console.error('과제 수정 중 오류 발생:', error);
-      alert('과제 수정 중 오류가 발생했습니다.');
+      toast.error('과제 수정 중 오류가 발생했습니다.');
     }
   };
 
