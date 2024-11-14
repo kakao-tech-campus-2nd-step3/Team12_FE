@@ -9,12 +9,10 @@ const endpoints = {
   submitPersonalInfo: `${prefix}/auth`,
   createStudy: `${prefix}/studies`,
   inviteToStudy: (studyId: number) => `${prefix}/studies/${studyId}/members/invites`,
-  getStudy: (studyId: number) => `${prefix}/studies/${studyId}`,
   notices: `${prefix}/notices`,
   assignments: `${prefix}/assignments`,
   attendanceDate: `${prefix}/attendance/date`,
   attendance: `${prefix}/attendance`,
-  getStudyMember: (studyId: number) => `${prefix}/studies/${studyId}/members`,
   getCode: `${prefix}/attendance/code`,
 };
 
