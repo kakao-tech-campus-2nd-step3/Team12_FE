@@ -7,10 +7,10 @@ import { CSSObject, useTheme } from '@emotion/react';
 import UserIcon from '@assets/icons/user.svg?react';
 import { Link } from 'react-router-dom';
 import routePaths from '@constants/routePaths';
-import { StudySearchInfo } from '@/types/study';
+import { DetailedStudyInfo } from '@/types/study';
 
 interface StudyItemProps {
-  study: StudySearchInfo;
+  study: DetailedStudyInfo;
 }
 
 function StudyItem(
