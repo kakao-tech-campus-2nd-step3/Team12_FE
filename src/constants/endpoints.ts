@@ -5,6 +5,7 @@ const endpoints = {
   reIssue: `${prefix}/reissue`,
   searchStudy: `${prefix}/studies`,
   studyInfo: (studyId: number | string) => `${prefix}/studies/${studyId}`,
+  editStudyProfile: (studyId: number | string) => `${prefix}/studies/${studyId}/profileImage`,
   studyMembers: (studyId: number | string) => `${prefix}/studies/${studyId}/members`,
   submitPersonalInfo: `${prefix}/auth`,
   createStudy: `${prefix}/studies`,
