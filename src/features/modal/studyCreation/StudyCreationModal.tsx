@@ -5,13 +5,13 @@ import {
 } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import defaultBackground from '@assets/banner-background.webp';
+import toast from 'react-hot-toast';
 import Modal from '@/components/modal';
 import LeftSection from '@/features/modal/studyCreation/LeftSection';
 import RightSection from '@/features/modal/studyCreation/RightSection';
 import { type StudyCreationInputs } from '@/types/study';
 import { createStudy } from '@/api/study';
 import routePaths from '@/constants/routePaths';
-import toast from 'react-hot-toast';
 
 interface StudyCreationProps {
   open: boolean;

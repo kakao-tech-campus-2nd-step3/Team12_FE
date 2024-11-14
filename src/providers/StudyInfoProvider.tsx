@@ -1,7 +1,7 @@
 import { createContext, ReactNode } from 'react';
 import { useSuspenseQueries } from '@tanstack/react-query';
 import { queryKeys } from '@constants/queryKeys';
-import type { StudyInfoWithMembers } from '@/types/study';
+import type { DetailedStudyInfo, StudyInfoWithMembers } from '@/types/study';
 import { getStudyInfo, getStudyMembers } from '@/api/study';
 import { getAttendanceList, getDateList } from '@/api/attendance';
 
@@ -26,11 +26,16 @@ export const StudyInfoContext = createContext<StudyInfoContextValue>({
     created_at: new Date(),
     id: 0,
     profile_image: '',
+    study_leader_info: {
+      nickname: '',
+      profile_image: '',
+      number_of_people: 0,
+    },
   },
   refetch: () => {},
 });
 
-function StudyInfoContextProvider({ studyId, children }: StudyInfoContextProps) {
+export function StudyInfoContextProvider({ studyId, children }: StudyInfoContextProps) {
   const {
     data: study,
     refetch,
@@ -56,7 +61,7 @@ function StudyInfoContextProvider({ studyId, children }: StudyInfoContextProps) 
     combine: (result) => {
       const [studyInfo, studyMemberInfo, attendanceInfo, dateInfo] = result;
       const data: StudyInfoWithMembers = {
-        ...(studyInfo.data),
+        ...(studyInfo.data as DetailedStudyInfo),
         members: studyMemberInfo.data,
         studyAttendanceInfo: attendanceInfo.data,
         attendanceDateInfo: dateInfo.data.attendance_date_list,

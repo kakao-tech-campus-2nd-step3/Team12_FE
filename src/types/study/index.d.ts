@@ -54,7 +54,7 @@ export type StudyMember = {
 
 export type StudyMembersResponse = StudyMember[];
 
-export type StudyInfoWithMembers = Study &
+export type StudyInfoWithMembers = DetailedStudyInfo &
 { members: StudyMember[] } &
 { studyAttendanceInfo: AttendanceInfo } &
 { attendanceDateInfo: RequireAttendanceDate[] };
