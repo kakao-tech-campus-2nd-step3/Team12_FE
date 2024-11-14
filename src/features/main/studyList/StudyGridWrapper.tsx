@@ -3,8 +3,8 @@ import { useSuspenseInfiniteQuery } from '@tanstack/react-query';
 import { queryKeys } from '@constants/queryKeys';
 import { useEffect } from 'react';
 import StudyGrid from '@features/main/studyList/StudyGrid';
-import StudySkeletonGrid from '@features/main/studyList/StudySkeletonGrid';
 import { useInView } from 'react-intersection-observer';
+import StudyItemSkeleton from '@features/main/studyList/StudyItemSkeleton';
 import type { Study, StudyFilter, StudySearchRequestQuery } from '@/types/study';
 import { searchStudies } from '@/api/study';
 
@@ -48,7 +48,7 @@ function StudyGridWrapper({ studyFilter, searchKeyword }: StudyItemWrapperProps)
 
   useEffect(() => {
     if (inView) fetchNextPage();
-  }, [inView]);
+  }, [inView, fetchNextPage]);
 
   return (
     <>
@@ -61,10 +61,15 @@ function StudyGridWrapper({ studyFilter, searchKeyword }: StudyItemWrapperProps)
             />
           ))
         }
+        {
+          isFetchingNextPage && [...Array(8).keys()].map((i) => {
+            const key = `study-skeleton-nextpage-${i}`;
+            return (
+              <StudyItemSkeleton key={key} />
+            );
+          })
+        }
       </StudyGrid>
-      {
-        isFetchingNextPage && <StudySkeletonGrid />
-      }
       <div css={{ height: '30px' }} ref={ref} />
     </>
   );
