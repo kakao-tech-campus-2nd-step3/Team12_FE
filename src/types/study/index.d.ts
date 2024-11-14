@@ -28,8 +28,16 @@ export interface StudySearchRequestQuery {
   is_open?: boolean;
 }
 
+export type StudySearchInfo = Study & {
+  study_leader_info: {
+    nickname: string;
+    profile_image: string;
+    number_of_people: number;
+  };
+};
+
 export interface StudySearchResponse {
-  study_list: Study[];
+  study_list: StudySearchInfo[];
   has_next_page: boolean;
   current_page: number;
   max_page: number;

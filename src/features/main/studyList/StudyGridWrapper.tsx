@@ -5,7 +5,11 @@ import { useEffect } from 'react';
 import StudyGrid from '@features/main/studyList/StudyGrid';
 import { useInView } from 'react-intersection-observer';
 import StudyItemSkeleton from '@features/main/studyList/StudyItemSkeleton';
-import type { Study, StudyFilter, StudySearchRequestQuery } from '@/types/study';
+import type {
+  StudyFilter,
+  StudySearchInfo,
+  StudySearchRequestQuery,
+} from '@/types/study';
 import { searchStudies } from '@/api/study';
 
 interface StudyItemWrapperProps {
@@ -18,7 +22,7 @@ function StudyGridWrapper({ studyFilter, searchKeyword }: StudyItemWrapperProps)
     const params: StudySearchRequestQuery = {
       size: 15,
       page: pageParam,
-      sort: 'name,asc',
+      sort: 'createdAt,desc',
     };
     if (searchKeyword) {
       params.name = searchKeyword;
@@ -76,7 +80,7 @@ function StudyGridWrapper({ studyFilter, searchKeyword }: StudyItemWrapperProps)
 }
 
 interface StudyItemContainerProps {
-  studyList: Study[];
+  studyList: StudySearchInfo[];
 }
 
 function StudyItemContainer({ studyList }: StudyItemContainerProps) {
