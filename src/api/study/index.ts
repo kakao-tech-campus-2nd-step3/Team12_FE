@@ -1,11 +1,11 @@
 import endpoints from '@constants/endpoints';
 import type {
+  Study,
   StudyInfoResponse,
   StudyMembersResponse,
   StudySearchRequestQuery,
   StudySearchResponse,
 } from '@/types/study';
-import { Study, StudySearchRequestQuery, StudySearchResponse } from '@/types/study';
 import axiosInstance from '@/utils/network';
 
 export async function searchStudies(requestQuery: StudySearchRequestQuery) {
@@ -34,6 +34,28 @@ export async function respondToInvitation(studyId: number, token: string) {
 export async function getStudyInfo(studyId: number) {
   const response = await axiosInstance.get<StudyInfoResponse>(endpoints.studyInfo(studyId));
   return response.data;
+}
+
+export async function editStudyInfo(studyId: number, data: {
+  name: string;
+  description: string;
+  is_open: boolean;
+  topic: string;
+}) {
+  const response = await axiosInstance.put<StudyInfoResponse>(endpoints.studyInfo(studyId), data);
+  return response.data;
+}
+
+export async function editStudyProfile(studyId: number, profile_image: FormData) {
+  await axiosInstance.put<void>(
+    endpoints.editStudyProfile(studyId),
+    profile_image,
+    {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    },
+  );
 }
 
 export async function getStudyMembers(studyId: number) {
