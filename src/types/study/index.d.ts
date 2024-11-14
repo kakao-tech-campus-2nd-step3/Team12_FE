@@ -5,7 +5,7 @@ export interface Study {
   created_at: Date;
   is_open: boolean;
   topic: string;
-  profileImage: file;
+  profile_image: string;
 }
 
 export type StudyFilter = 'all' | 'open' | 'closed';
@@ -14,7 +14,7 @@ export type StudyRole = '스터디장' | '스터디원';
 // TODO: 추후에 profileImage input 구현 후 타입 변경
 // export type StudyCreationRequestBody =
 //  Pick<Study, 'name' | 'description' | 'isOpen' | 'topic' | 'profileImage'>;
-export type StudyCreationRequestBody = Pick<Study, 'name' | 'description' | 'is_open' | 'topic' | 'profileImage'>;
+export type StudyCreationRequestBody = Pick<Study, 'name' | 'description' | 'is_open' | 'topic'> & { profile_image?: File };
 export type StudyCreationInputs = StudyCreationRequestBody;
 
 export interface StudySearchRequestQuery {
