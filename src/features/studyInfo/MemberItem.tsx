@@ -27,8 +27,8 @@ function MemberItem(
         <Paragraph variant="medium" weight="regular" css={{ lineHeight: '20px' }}>{memberInfo.description}</Paragraph>
       </Container>
       <Container justify="flex-end" gap="10px">
-        <Paragraph variant="small" color="#C8C8C8" css={css`text-decoration: underline;`}>출석 조회</Paragraph>
-        <Paragraph variant="small" color="#C8C8C8" css={css`text-decoration: underline;`}>내보내기</Paragraph>
+        <Paragraph variant="small" color="#C8C8C8" css={css`text-decoration: underline;`}>과제 정보</Paragraph>
+        <Paragraph variant="small" color="#C8C8C8" css={css`text-decoration: underline;`}>출석 정보</Paragraph>
       </Container>
     </Container>
   );
