@@ -3,15 +3,10 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { useState } from 'react';
 import { css } from '@emotion/react';
-import Switch from '@components/switch';
 import colorTheme from '@styles/colors';
-import { Controller, useForm } from 'react-hook-form';
-import { Paragraph } from '@components/text';
 
 export default function CalendarSection() {
   const [startDate, setStartDate] = useState<Date | null>(new Date());
-  const [isChecked, setIsChecked] = useState(false);
-  const methods = useForm();
 
   return (
     <Container
@@ -28,27 +23,7 @@ export default function CalendarSection() {
         width="70%"
         justify="flex-start"
         cssOverride={css`margin-top: 5px;`}
-      >
-        <Controller
-          name="isOpen"
-          control={methods.control}
-          render={({ field }) => (
-            <Switch
-              checked={isChecked}
-              name={field.name}
-              onCheckedChange={({ checked }) => {
-                setIsChecked(checked);
-                field.onChange(checked);
-              }}
-            />
-          )}
-        />
-        <Paragraph variant="small" css={{ marginLeft: '10px' }}>
-          {isChecked ? '모집중' : '모집마감'}
-        </Paragraph>
-
-      </Container>
-
+      />
     </Container>
   );
 }
