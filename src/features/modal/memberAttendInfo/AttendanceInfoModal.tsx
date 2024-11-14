@@ -46,7 +46,7 @@ export default function AttendanceInfoModal(
         <MemberInfoSection
           memberInfo={memberInfo}
           rate={memberAttendance.attendance_rate
-            ? (memberAttendance.attendance_rate * 100).toFixed(0)
+            ? (parseFloat(memberAttendance.attendance_rate) * 100).toFixed(0)
             : 0}
         />
         <Container direction="column" height="300px" css={{ overflowY: 'scroll', overflowX: 'hidden' }} justify="flex-start">
