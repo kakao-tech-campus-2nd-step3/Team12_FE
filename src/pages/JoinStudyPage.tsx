@@ -2,14 +2,14 @@ import { useCallback, useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { toast, Toaster } from 'react-hot-toast';
 import { AxiosError } from 'axios';
-import { getStudy, respondToInvitation } from '@/api/study';
+import routePaths from '@constants/routePaths';
+import { getStudyInfo, respondToInvitation } from '@/api/study';
 import Container from '@/components/container';
 import { Heading } from '@/components/text';
 import AcceptInvitationModal from '@/features/modal/invite/AcceptInvitationModal';
 import { Study } from '@/types/study';
 import Button from '@/components/button';
 import failureIcon from '@/assets/icons/failure.png';
-import routePaths from '@/constants/routePaths';
 
 export default function JoinStudyPage() {
   const [searchParams] = useSearchParams();
@@ -22,7 +22,7 @@ export default function JoinStudyPage() {
 
   const onClose = () => {
     setOpen(false);
-    navigate('/');
+    navigate(routePaths.MAIN);
   };
 
   const acceptInvitation = useCallback(async () => {
@@ -42,7 +42,7 @@ export default function JoinStudyPage() {
 
   useEffect(() => {
     const fetchStudy = async () => {
-      const data = await getStudy(Number(studyId));
+      const data = await getStudyInfo(Number(studyId));
       setStudy(data);
     };
 

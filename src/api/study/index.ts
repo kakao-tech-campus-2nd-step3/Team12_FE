@@ -23,11 +23,6 @@ export async function createStudy(data: FormData) {
   return response;
 }
 
-export async function getStudy(studyId: number) {
-  const response = await axiosInstance.get(endpoints.getStudy(studyId));
-  return response.data;
-}
-
 export async function respondToInvitation(studyId: number, token: string) {
   const response = await axiosInstance.post(endpoints.inviteToStudy(studyId), {
     token,
