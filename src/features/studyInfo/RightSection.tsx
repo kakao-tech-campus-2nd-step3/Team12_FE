@@ -3,13 +3,28 @@ import { css } from '@emotion/react';
 import Button from '@components/button';
 import colorTheme from '@styles/colors';
 import { useNavigate } from 'react-router-dom';
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import routePaths from '@/constants/routePaths';
 import { StudyInfoContext } from '@/providers/StudyInfoProvider';
 
 export default function RightSection() {
   const navigate = useNavigate();
   const study = useContext(StudyInfoContext);
+  const [currentDate] = useState(new Date());
+  const [isAttendDate, setIsAttendDate] = useState(false);
+  const [isAttendTime, setIsAttendTime] = useState(false);
+
+  useEffect(() => {
+    study.study.attendanceDateInfo.forEach((date) => {
+      if (date.start_time.split(' ')[0] === currentDate.toLocaleDateString('en-CA')) {
+        setIsAttendDate(true);
+      }
+      if (currentDate <= new Date(date.deadline) && currentDate >= new Date(date.start_time)) {
+        setIsAttendTime(true);
+      }
+    });
+  }, [currentDate, study.study.attendanceDateInfo]);
+
   return (
     <Container
       height="100%"
@@ -31,7 +46,13 @@ export default function RightSection() {
       font-size: 14px;
       `}
       >
-        오늘은 10월 27일입니다.
+        오늘은
+        {' '}
+        {currentDate.getMonth()}
+        월
+        {' '}
+        {currentDate.getDate()}
+        일입니다.
       </div>
       <div css={css`
         font-size: 10px;
@@ -45,10 +66,14 @@ export default function RightSection() {
         전체 공지사항
       </div>
       <hr css={hrStyle} />
-      <div css={mainDescription}>2024.10.27</div>
-      <div css={subDescription}>오늘은 스터디 출석일이에요!</div>
+      <div css={mainDescription}>{currentDate.toLocaleDateString('en-CA')}</div>
+      { isAttendDate ? <div css={subDescription}>오늘은 스터디 출석일이에요!</div>
+        : <div css={subDescription}>오늘은 스터디 출석일이 아니에요!</div>}
       <div css={buttonDivStyle}>
-        <Button variant="primary">
+        <Button
+          variant="primary"
+          disabled={!isAttendTime}
+        >
           출석하기
         </Button>
         <Button

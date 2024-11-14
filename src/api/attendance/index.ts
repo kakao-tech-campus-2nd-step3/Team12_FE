@@ -34,6 +34,11 @@ interface UpdateAttendanceParams {
   }
 }
 
+interface GetCodeParams {
+  study_id: number;
+  date_id: number;
+}
+
 export async function createDate({ study_id, requestData }: CreateDateParams) {
   const response = await axiosInstance.post(endpoints.attendanceDate, requestData, {
     headers: {
@@ -99,4 +104,14 @@ export async function updateAttendance(
     },
   });
   return response;
+}
+
+export async function getCode({ study_id, date_id }: GetCodeParams) {
+  const response = await axiosInstance.get(endpoints.getCode, {
+    params: {
+      study_id,
+      date_id,
+    },
+  });
+  return response.data;
 }
