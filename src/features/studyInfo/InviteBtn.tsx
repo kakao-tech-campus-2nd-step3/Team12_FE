@@ -49,6 +49,7 @@ export function InviteBtn() {
             open={isInviteModalOpen}
             onClose={() => setIsInviteModalOpen(false)}
             studyId={studyId}
+            studyName={study.name}
             copyComplete={() => toast.success('링크가 복사되었습니다!')}
           />
           )
