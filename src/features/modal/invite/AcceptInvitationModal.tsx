@@ -1,4 +1,4 @@
-import { css, useTheme } from '@emotion/react';
+import { css } from '@emotion/react';
 import Button from '@/components/button';
 import Container from '@/components/container';
 import Modal from '@/components/modal';
@@ -6,23 +6,28 @@ import { Heading, Paragraph } from '@/components/text';
 import colorTheme from '@/styles/colors';
 import Spacing from '@/components/spacing';
 import StudyThumbnail from '@/features/modal/invite/StudyThumbnail';
+import { Study } from '@/types/study';
+import theme from '@/styles/theme';
 
 interface AcceptInvitationProps {
   open: boolean;
   onClose: () => void;
-  studyName: string;
+  study: Study;
+  acceptInvitation: () => void;
 }
 
-export default function AcceptInvitationModal({ open, onClose, studyName = '' }: AcceptInvitationProps) {
-  const theme = useTheme();
+export default function AcceptInvitationModal({
+  open, onClose, study, acceptInvitation,
+}: AcceptInvitationProps) {
+  if (!open) return null;
   return (
     <Modal open={open} onClose={onClose} width="447px">
       <Container direction="column" gap="30px" padding="50px">
-        <StudyThumbnail src="https://picsum.photos/200" />
-        <Heading.H3 color={colorTheme.primary.main} weight="bolder">{studyName}</Heading.H3>
+        <StudyThumbnail src={study?.profileImage} />
+        <Heading.H3 color={colorTheme.primary.main} weight="bolder">{study?.name}</Heading.H3>
         <Container direction="column" cssOverride={css`color: ${colorTheme.text.moderate}`} gap="5px">
           <Paragraph variant="small" color={colorTheme.absolute.black}>
-            {studyName}
+            {study?.name}
             에 초대합니다.
           </Paragraph>
           <Paragraph variant="small" color={colorTheme.absolute.black}>수락을 눌러 스터디에 가입해보세요!</Paragraph>
@@ -35,6 +40,7 @@ export default function AcceptInvitationModal({ open, onClose, studyName = '' }:
               width: '265px',
               borderRadius: theme.corners.medium,
             }}
+            onClick={acceptInvitation}
           >
             수락하기
           </Button>
