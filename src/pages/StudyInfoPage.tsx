@@ -6,6 +6,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import routePaths from '@constants/routePaths';
 import SuspenseErrorBoundary from '@components/boundary/SuspenseErrorBoundary';
 import Spacing from '@components/spacing';
+import Container from '@components/container';
 import { isIntegerString } from '@/utils';
 
 function StudyInfoPage() {
@@ -22,11 +23,11 @@ function StudyInfoPage() {
       <SuspenseErrorBoundary>
         <StudyInfoProvider studyId={parseInt(studyId, 10)}>
           <StudyInfoSection />
-          <MemberListSection />
+          <Container css={{ backgroundColor: 'white' }} padding="20px 0">
+            <MemberListSection />
+          </Container>
         </StudyInfoProvider>
       </SuspenseErrorBoundary>
-
-      <Spacing height={20} />
     </Page>
   );
 }
