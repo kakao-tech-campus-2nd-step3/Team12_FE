@@ -26,6 +26,7 @@ export default function StudyInfoSection() {
         <RightSection />
         <CalendarSection />
       </Container>
+      <Spacing height={35} />
     </DefaultPaddedContainer>
   );
 }

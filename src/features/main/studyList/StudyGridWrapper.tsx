@@ -3,6 +3,8 @@ import { useSuspenseInfiniteQuery } from '@tanstack/react-query';
 import { queryKeys } from '@constants/queryKeys';
 import { useEffect } from 'react';
 import StudyGrid from '@features/main/studyList/StudyGrid';
+import { useInView } from 'react-intersection-observer';
+import StudyItemSkeleton from '@features/main/studyList/StudyItemSkeleton';
 import type { Study, StudyFilter, StudySearchRequestQuery } from '@/types/study';
 import { searchStudies } from '@/api/study';
 
@@ -24,9 +26,11 @@ function StudyGridWrapper({ studyFilter, searchKeyword }: StudyItemWrapperProps)
     if (studyFilter !== 'all') params.is_open = studyFilter === 'open';
     return searchStudies(params);
   };
+  const { ref, inView } = useInView({ threshold: 1 });
   const {
     data: studyResponse,
-    // fetchNextPage, TODO: infinite scroll
+    isFetchingNextPage,
+    fetchNextPage,
     refetch,
   } = useSuspenseInfiniteQuery({
     initialData: undefined,
@@ -42,17 +46,32 @@ function StudyGridWrapper({ studyFilter, searchKeyword }: StudyItemWrapperProps)
     refetch();
   }, [refetch, studyFilter, searchKeyword]);
 
+  useEffect(() => {
+    if (inView) fetchNextPage();
+  }, [inView, fetchNextPage]);
+
   return (
-    <StudyGrid>
-      {
-        studyResponse.pages.map((page) => (
-          <StudyItemContainer
-            studyList={page.study_list}
-            key={`study-search-${page.current_page}`}
-          />
-        ))
-      }
-    </StudyGrid>
+    <>
+      <StudyGrid>
+        {
+          studyResponse.pages.map((page) => (
+            <StudyItemContainer
+              studyList={page.study_list}
+              key={`study-search-${page.current_page}`}
+            />
+          ))
+        }
+        {
+          isFetchingNextPage && [...Array(8).keys()].map((i) => {
+            const key = `study-skeleton-nextpage-${i}`;
+            return (
+              <StudyItemSkeleton key={key} />
+            );
+          })
+        }
+      </StudyGrid>
+      <div css={{ height: '30px' }} ref={ref} />
+    </>
   );
 }
 
