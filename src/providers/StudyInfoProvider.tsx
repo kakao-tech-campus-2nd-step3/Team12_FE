@@ -19,11 +19,11 @@ interface StudyInfoContextValue {
 export const StudyInfoContext = createContext<StudyInfoContextValue>({
   study: {
     members: [],
-    studyAttendanceInfo: {
+    study_attendance_info: {
       required_attendance: [],
       member_attendance: {},
     },
-    attendanceDateInfo: [],
+    attendance_date_info: [],
     topic: '',
     name: '',
     is_open: true,
@@ -81,8 +81,8 @@ function StudyInfoContextProvider({ studyId, children }: StudyInfoContextProps) 
       const data: ExtendedStudyInfo = {
         ...(studyInfo.data),
         members: studyMemberInfo.data,
-        studyAttendanceInfo: attendanceInfo.data,
-        attendanceDateInfo: dateInfo.data.attendance_date_list,
+        study_attendance_info: attendanceInfo.data,
+        attendance_date_info: dateInfo.data.attendance_date_list,
         notice: noticeInfo.data.notices.length === 1 ? noticeInfo.data.notices[0] : undefined,
         assignment: assignmentInfo.data.assignments.length === 1
           ? assignmentInfo.data.assignments[0]
