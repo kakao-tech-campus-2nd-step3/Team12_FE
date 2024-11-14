@@ -1,5 +1,10 @@
 import endpoints from '@constants/endpoints';
-import { StudySearchRequestQuery, StudySearchResponse } from '@/types/study';
+import type {
+  StudyInfoResponse,
+  StudyMembersResponse,
+  StudySearchRequestQuery,
+  StudySearchResponse,
+} from '@/types/study';
 import axiosInstance from '@/utils/network';
 
 export async function searchStudies(requestQuery: StudySearchRequestQuery) {
@@ -30,7 +35,12 @@ export async function respondToInvitation(studyId: number, token: string) {
   return response.data;
 }
 
-export async function getStudyMember(studyId: number) {
-  const response = await axiosInstance.get(endpoints.getStudyMember(studyId));
+export async function getStudyInfo(studyId: number) {
+  const response = await axiosInstance.get<StudyInfoResponse>(endpoints.studyInfo(studyId));
+  return response.data;
+}
+
+export async function getStudyMembers(studyId: number) {
+  const response = await axiosInstance.get<StudyMembersResponse>(endpoints.studyMembers(studyId));
   return response.data;
 }

@@ -4,7 +4,7 @@ import {
   UseFormSetValue,
 } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import defaultAvatar from '@assets/icons/default-avatar.svg';
+import defaultBackground from '@assets/banner-background.webp';
 import Modal from '@/components/modal';
 import LeftSection from '@/features/modal/studyCreation/LeftSection';
 import RightSection from '@/features/modal/studyCreation/RightSection';
@@ -35,6 +35,7 @@ export default function StudyCreationModal({ open, onClose }: StudyCreationProps
   });
   const navigate = useNavigate();
 
+  // TODO: 실제 request 로직으로 변경 및 UI 로직과 분리
   async function onSubmit(data: StudyCreationInputs) {
     const formData = new FormData();
 
@@ -48,15 +49,20 @@ export default function StudyCreationModal({ open, onClose }: StudyCreationProps
     if (data.profile_image) {
       formData.append('profileImage', data.profile_image);
     } else {
-      const defaultImageFile = new File([defaultAvatar], 'default-avatar.svg', { type: 'image/svg+xml' });
-      formData.append('profileImage', defaultImageFile);
-    }
-    const response = createStudy(formData);
-    if ((await response).status === 201) {
-      onClose();
-      navigate('/', { state: { message: '스터디를 생성하였습니다!' } });
+      const defaultImageResponse = await fetch(defaultBackground);
+      const blob = await defaultImageResponse.blob();
+      const defaultBackgroundFile = new File([blob], 'defaultImage.webp');
+      formData.append('profileImage', defaultBackgroundFile);
+      const response = createStudy(formData);
+      if ((await response).status === 201) {
+        onClose();
+        navigate('/', { state: { message: '스터디를 생성하였습니다!' } });
       // 민경 TODO : 추후 스터디 페이지로 이동하도록 수정
+      }
     }
+    // console.log(formData.get('request'));
+    // console.log(formData.get('profileImage'));
+    createStudy(formData);
   }
 
   return (

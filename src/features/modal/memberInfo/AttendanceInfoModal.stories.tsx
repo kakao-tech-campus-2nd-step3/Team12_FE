@@ -2,7 +2,7 @@ import { Meta, StoryObj } from '@storybook/react';
 import { MemoryRouter } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import AttendanceInfoModal from '@/features/modal/memberInfo/AttendanceInfoModal';
-import { getStudyMember } from '@/api/study';
+import { getStudyMembers } from '@/api/study';
 import { StudyMember } from '@/types/study';
 import { getAttendanceList } from '@/api/attendance';
 import { AttendanceInfo, MemberAttendanceResponse } from '@/types/attendance';
@@ -41,7 +41,7 @@ export const Default: Story = {
     useEffect(() => {
       const fetchStudyMember = async () => {
         try {
-          const response = await getStudyMember(11);
+          const response = await getStudyMembers(11);
           setMembers(response);
         } catch (error) {
           console.error("Error fetching members:", error);

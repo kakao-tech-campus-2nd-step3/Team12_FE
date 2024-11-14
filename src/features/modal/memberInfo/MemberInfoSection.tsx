@@ -19,7 +19,7 @@ export default function MemberInfoSection({ memberInfo, rate }: MemberInfoSectio
           <Text fontSize="24px" weight="bold">{memberInfo.member.nickname}</Text>
           <Text fontSize="13px" color={colorTheme.text.moderate}>
             가입일 :
-            {memberInfo.joined_at.split(' ')[0]}
+            {memberInfo.joined_at.toISOString()}
           </Text>
         </Container>
         <ProgressBar progress={rate} width="250px" description="출석률" />

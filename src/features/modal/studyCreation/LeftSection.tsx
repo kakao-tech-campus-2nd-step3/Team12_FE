@@ -29,18 +29,16 @@ export default function LeftSection({
   const handleImageChange = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
 
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        if (e.target && typeof e.target.result === 'string') {
-          setAvatarPreview(e.target.result);
-        }
-      };
-      reader.readAsDataURL(file);
-    }
-    if (setValue) {
-      setValue('profile_image', file);
-    }
+    if (!setValue || !file) return;
+
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      if (e.target && typeof e.target.result === 'string') {
+        setAvatarPreview(e.target.result);
+      }
+    };
+    reader.readAsDataURL(file);
+    setValue('profile_image', file);
   };
 
   const handleButtonClick = () => {

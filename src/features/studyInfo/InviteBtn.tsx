@@ -10,7 +10,7 @@ export function InviteBtn() {
       padding="20px 20px 20px 26px"
       cssOverride={css`
         border-radius: ${theme.corners.big};
-        box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+        box-shadow: 0 2px 2px rgba(0, 0, 0, 0.25);
         max-height: 290px;
         background-color: #E1E1E1;
       `}

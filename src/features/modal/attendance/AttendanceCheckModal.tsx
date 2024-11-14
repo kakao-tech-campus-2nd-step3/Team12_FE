@@ -8,7 +8,7 @@ import Container from '@/components/container';
 import Spacing from '@/components/spacing';
 import Button from '@/components/button';
 import theme from '@/styles/theme';
-import { getStudyMember } from '@/api/study';
+import { getStudyMembers } from '@/api/study';
 import { MemberAttendance, MemberAttendanceResponse } from '@/types/attendance';
 import { getAttendanceList, updateAttendance } from '@/api/attendance';
 import { StudyMember } from '@/types/study';
@@ -44,7 +44,7 @@ export default function AttendanceCheckModal({
 
   useEffect(() => {
     async function fetchStudyMember(): Promise<void> {
-      const response = await getStudyMember(studyId);
+      const response = await getStudyMembers(studyId);
       setMemberList(response);
     }
 
