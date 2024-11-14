@@ -17,8 +17,9 @@ function Avatar({
   src, alt, css, size, bordered = false, ...rest
 }: AvatarProps) {
   const { avatarStyle } = useAvatarStyle({ size, bordered });
+  const avatarSrc = (!src || src === 'null') ? defaultAvatar : src;
   return (
-    <img src={src || defaultAvatar} css={[avatarStyle, css]} alt={alt || 'avatar'} {...rest} />
+    <img src={avatarSrc} css={[avatarStyle, css]} alt={alt || 'avatar'} {...rest} />
   );
 }
 
