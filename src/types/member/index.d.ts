@@ -8,7 +8,7 @@ export interface Member {
   profile_image?: string;
 }
 
-export type PersonalInfoInputs = Pick<Member, 'nickname' | 'email' | 'contact' | 'description'> & { agree_to_terms: boolean };
+export type PersonalInfoInputs = Pick<Member, 'nickname' | 'email' | 'contact' | 'description' | 'name'> & { agree_to_terms?: boolean };
 
 export type MyInfoResponse = Member;
 
