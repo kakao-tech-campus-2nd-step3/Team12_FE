@@ -28,7 +28,7 @@ export interface StudySearchRequestQuery {
   is_open?: boolean;
 }
 
-export type StudySearchInfo = Study & {
+export type DetailedStudyInfo = Study & {
   study_leader_info: {
     nickname: string;
     profile_image: string;
@@ -37,7 +37,7 @@ export type StudySearchInfo = Study & {
 };
 
 export interface StudySearchResponse {
-  study_list: StudySearchInfo[];
+  study_list: DetailedStudyInfo[];
   has_next_page: boolean;
   current_page: number;
   max_page: number;
