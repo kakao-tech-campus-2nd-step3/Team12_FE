@@ -48,7 +48,7 @@ class ErrorBoundary extends Component<FetchErrorBoundaryProps, FetchErrorBoundar
 
   render() {
     const { props, state } = this;
-    const fallback = props.fallback || <Container>{state.errorMessage}</Container>;
+    const fallback = props.fallback || <Container padding="20px 0">{state.errorMessage}</Container>;
     return state.hasError ? fallback : props.children;
   }
 }
