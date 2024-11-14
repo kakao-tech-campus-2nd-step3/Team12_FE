@@ -7,6 +7,7 @@ import Button from '@components/button';
 import { useRef, useState } from 'react';
 import Input from '@components/input';
 import AssignDeadline from '@features/assignment/AssignDeadline';
+import toast from 'react-hot-toast';
 import { createAssign } from '@/api/assignment';
 
 export default function AssignCreation() {
@@ -34,9 +35,9 @@ export default function AssignCreation() {
         content,
         deadline,
       });
-      alert('과제가 성공적으로 작성되었습니다!');
+      toast.success('과제가 성공적으로 작성되었습니다!');
     } catch (error) {
-      console.error('과제 작성 중 오류 발생:', error);
+      toast.error('과제 작성 중 오류가 발생하였습니다.');
     }
   };
 

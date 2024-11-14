@@ -7,6 +7,7 @@ import Button from '@components/button';
 import Input from '@components/input';
 import { css } from '@emotion/react';
 import theme from '@styles/theme';
+import toast from 'react-hot-toast';
 import { editStudyInfo, editStudyProfile, getStudyInfo } from '@/api/study';
 
 export default function StudyEditSection() {
@@ -45,9 +46,9 @@ export default function StudyEditSection() {
       }
       await editStudyProfile(studyId, formData);
       await editStudyInfo(studyId, updatedData);
-      alert('스터디 정보가 수정되었습니다.');
+      toast.success('스터디 정보가 수정되었습니다.');
     } catch (error) {
-      alert('스터디 정보 저장에 실패했습니다.');
+      toast.error('스터디 정보 저장에 실패했습니다.');
     }
   };
 

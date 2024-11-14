@@ -29,7 +29,6 @@ export default function AttendanceCheckModal({
   const [attendanceStatus, setAttendanceStatus] = useState<{ [memberId: string]: boolean }>({});
   const [isPastDate, setIsPastDate] = useState(false);
   const { study } = useContext(StudyInfoContext);
-  console.log(study);
 
   useEffect(() => {
     const currentDate = new Date();

@@ -6,6 +6,7 @@ import Spinner from '@components/fallback/Spinner';
 import { css } from '@emotion/react';
 import Button from '@components/button';
 import { Viewer } from '@toast-ui/react-editor';
+import toast from 'react-hot-toast';
 import { NoticeDetail } from '@/types/notice';
 import { deleteNotice, getNoticeDetail } from '@/api/notice';
 import '@toast-ui/editor/dist/toastui-editor-viewer.css';
@@ -22,8 +23,7 @@ export default function NoticeDetailPage() {
           const data = await getNoticeDetail(noticeId);
           setNotice(data);
         } catch (error) {
-          console.error(error);
-          alert('공지사항을 불러오는 데 실패했습니다.');
+          toast.error('공지사항을 불러오는 데 실패했습니다.');
         } finally {
           setLoading(false);
         }
@@ -37,10 +37,9 @@ export default function NoticeDetailPage() {
     if (window.confirm('정말로 이 공지사항을 삭제하시겠습니까?')) {
       try {
         await deleteNotice(noticeId);
-        alert('공지사항이 성공적으로 삭제되었습니다.');
+        toast.success('공지사항이 성공적으로 삭제되었습니다.');
       } catch (deleteError) {
-        console.error('삭제 중 오류 발생:', deleteError);
-        alert('공지사항 삭제 중 오류가 발생했습니다.');
+        toast.error('공지사항 삭제 중 오류가 발생했습니다.');
       }
     }
   };
