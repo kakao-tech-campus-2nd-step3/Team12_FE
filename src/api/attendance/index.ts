@@ -126,10 +126,10 @@ export async function getCode({ study_id, date_id }: GetCodeParams) {
 }
 
 export async function checkAttendance({ study_id, requestData }: CheckAttendanceParams) {
-  const response = await axiosInstance.post(endpoints.checkAttendance, requestData,{
+  const response = await axiosInstance.post(endpoints.checkAttendance, requestData, {
     params: {
       study_id,
-    }
+    },
   });
   return response.data;
 }

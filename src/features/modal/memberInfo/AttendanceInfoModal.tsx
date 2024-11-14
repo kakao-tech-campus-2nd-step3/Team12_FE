@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { css } from '@emotion/react';
 import Grid from '@/components/grid';
 import Modal from '@/components/modal';
@@ -7,14 +7,12 @@ import Text, { Heading } from '@/components/text';
 import colorTheme from '@/styles/colors';
 import Container from '@/components/container';
 import { StudyMember } from '@/types/study';
-import { MemberAttendance } from '@/types/attendance';
+import { StudyInfoContext } from '@/providers/StudyInfoProvider';
 
 interface AttendanceInfoModalProps {
   open: boolean;
   onClose: () => void;
   memberInfo: StudyMember;
-  memberAttendanceInfo: MemberAttendance | null
-  attendanceDateList: string[] | null;
 }
 
 const HorizontalLine = css`
@@ -33,18 +31,22 @@ const defaultFontStyle = {
 
 export default function AttendanceInfoModal(
   {
-    open, onClose, memberInfo, memberAttendanceInfo, attendanceDateList,
+    open, onClose, memberInfo,
   }
   : AttendanceInfoModalProps,
 ) {
+  const { study } = useContext(StudyInfoContext);
+  const memberAttendance = study
+    .studyAttendanceInfo
+    ?.member_attendance[memberInfo.member.id.toString()];
   return (
     <Modal open={open} onClose={onClose} width="387px">
       <Container gap="30px" direction="column" padding="60px 30px" align="flex-start">
         <Heading.H1 weight="bold">출석 정보</Heading.H1>
         <MemberInfoSection
           memberInfo={memberInfo}
-          rate={memberAttendanceInfo
-            ? parseFloat(Number(memberAttendanceInfo?.attendance_rate).toFixed(2)) * 100
+          rate={memberAttendance.attendance_rate
+            ? (memberAttendance.attendance_rate * 100).toFixed(0)
             : 0}
         />
         <Container direction="column" height="300px" css={{ overflowY: 'scroll', overflowX: 'hidden' }} justify="flex-start">
@@ -53,8 +55,8 @@ export default function AttendanceInfoModal(
             <Text css={defaultFontStyle}>출석 현황</Text>
           </Grid>
           <hr css={HorizontalLine} />
-          {attendanceDateList?.map((attendanceDate) => {
-            const isAttended = memberAttendanceInfo?.member_attendance_list.some(
+          {study.studyAttendanceInfo.required_attendance?.map((attendanceDate : string) => {
+            const isAttended = memberAttendance.member_attendance_list.some(
               (memberAttend: string) => attendanceDate.slice(0, 10) === memberAttend.slice(0, 10),
             );
             return (
