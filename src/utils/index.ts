@@ -19,6 +19,15 @@ function mergeTheme(theme: ExtendedTheme): Theme {
   return mergedTheme;
 }
 
+function isNumericString(value?: string) {
+  if (!value) return false;
+  return !Number.isNaN(parseFloat(value));
+}
+
+function isIntegerString(value?: string) {
+  return isNumericString(value) && Number.isInteger(parseFloat(value as string));
+}
+
 function dateToString(date: Date, includeTime?: boolean): string {
   const ymd = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
   if (!includeTime) return ymd;
@@ -29,4 +38,6 @@ export {
   mergeTheme,
   generateRandomId,
   dateToString,
+  isNumericString,
+  isIntegerString,
 };

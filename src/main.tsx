@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ThemeProvider } from '@emotion/react';
 import defaultTheme from '@styles/theme';
 import 'reset-css/reset.css';
+import { MemberInfoContextProvider } from '@providers/MemberInfoProvider';
 
 const queryClient = new QueryClient();
 
@@ -12,7 +13,9 @@ createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
       <ThemeProvider theme={defaultTheme}>
-        <BrowserRouterProvider />
+        <MemberInfoContextProvider>
+          <BrowserRouterProvider />
+        </MemberInfoContextProvider>
       </ThemeProvider>
     </QueryClientProvider>
   </StrictMode>,

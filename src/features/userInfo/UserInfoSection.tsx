@@ -3,21 +3,13 @@ import Container from '@components/container';
 import { Heading, Paragraph } from '@components/text';
 import { MemberInfoContext } from '@providers/MemberInfoProvider.tsx';
 import Avatar from '@components/avatar';
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import Button from '@components/button';
 
 export default function UserInfoSection() {
   const {
     isLoggedIn, memberInfo,
   } = useContext(MemberInfoContext);
-
-  useEffect(() => {
-    if (!isLoggedIn) {
-      console.log('User is not logged in');
-    } else {
-      console.log('User Info:', memberInfo);
-    }
-  }, [isLoggedIn, memberInfo]);
 
   return (
     <DefaultPaddedContainer css={{ boxShadow: '0 2px 2px rgba(0, 0, 0, 0.1)' }}>

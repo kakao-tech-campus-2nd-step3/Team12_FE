@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from 'react';
+import { useState, useContext } from 'react';
 import { DefaultPaddedContainer } from '@components/container/variants';
 import Container from '@components/container';
 import { Heading, Paragraph } from '@components/text';
@@ -26,19 +26,11 @@ export default function UserInfoEditSection() {
     if (description !== memberInfo?.description) updatedData.description = description;
 
     try {
-      const result = await editMyInfo(updatedData);
-      console.log('저장된 정보:', result);
+      await editMyInfo(updatedData);
     } catch (error) {
-      console.error('정보 저장에 실패했습니다:', error);
       alert('정보 저장에 실패했습니다.');
     }
   };
-
-  useEffect(() => {
-    if (!memberInfo) {
-      console.warn('사용자 정보가 없습니다.');
-    }
-  }, [memberInfo]);
 
   return (
     <DefaultPaddedContainer css={{ boxShadow: '0 2px 2px rgba(0, 0, 0, 0.1)' }}>

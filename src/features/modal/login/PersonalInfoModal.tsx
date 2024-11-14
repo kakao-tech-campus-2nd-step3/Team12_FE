@@ -13,6 +13,7 @@ import TextArea from '@/components/textarea';
 import usePersonInfoModalStyles from './PersonalInfoModal.styles';
 import { FormErrorMessage } from '@/components/text/variants';
 import { PersonalInfoInputs } from '@/types/member';
+import { submitPersonalInfo } from '@/api/member';
 
 interface PersonalInfoModalProps {
   open: boolean;
@@ -40,7 +41,7 @@ export default function PersonalInfoModal({ open, onClose }: PersonalInfoModalPr
   });
   const theme = useTheme();
 
-  const onSubmit = (data: PersonalInfoInputs) => console.log(data);
+  const onSubmit = (data: PersonalInfoInputs) => submitPersonalInfo(data);
 
   const validations = {
     nickname: {
@@ -65,7 +66,7 @@ export default function PersonalInfoModal({ open, onClose }: PersonalInfoModalPr
   };
 
   return (
-    <Modal open={open} onClose={onClose} width="447px">
+    <Modal open={open} onClose={onClose} hideClose width="447px">
       <form onSubmit={handleSubmit(onSubmit)}>
         <Container padding="30px" direction="column" align="flex-start">
           <Heading.H3 weight="bold">개인 정보를 입력해주세요.</Heading.H3>
