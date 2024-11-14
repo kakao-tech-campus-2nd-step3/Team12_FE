@@ -44,7 +44,6 @@ export default function AttendanceCheckModal({
   };
 
   const handleEditComplete = () => {
-    console.log(study.attendanceDateInfo);
     try {
       Object.entries(attendanceStatus).forEach(([memberId, isAttended]) => {
         updateAttendance({
@@ -93,7 +92,7 @@ export default function AttendanceCheckModal({
           {study.members.map((member) => {
             const memberId = member.member.id.toString();
             const attendanceDates = study
-              .studyAttendanceInfo.member_attendance[memberId]
+              .study_attendance_info.member_attendance[memberId]
               ?.member_attendance_list ?? [];
             let time = '';
 
