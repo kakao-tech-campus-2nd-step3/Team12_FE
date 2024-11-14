@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import { useContext, useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
 import Modal from '@/components/modal';
 import Text, { Heading } from '@/components/text';
 import Grid from '@/components/grid';
@@ -57,7 +58,7 @@ export default function AttendanceCheckModal({
       });
       editComplete();
     } catch (error) {
-      console.error('Failed to update attendance:', error);
+      toast.error('Failed to update attendance');
     }
   };
 
