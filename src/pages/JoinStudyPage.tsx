@@ -2,7 +2,8 @@ import { useCallback, useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { toast, Toaster } from 'react-hot-toast';
 import { AxiosError } from 'axios';
-import { getStudy, respondToInvitation } from '@/api/study';
+import routePaths from '@constants/routePaths';
+import { getStudyInfo, respondToInvitation } from '@/api/study';
 import Container from '@/components/container';
 import { Heading } from '@/components/text';
 import AcceptInvitationModal from '@/features/modal/invite/AcceptInvitationModal';
@@ -21,7 +22,7 @@ export default function JoinStudyPage() {
 
   const onClose = () => {
     setOpen(false);
-    navigate('/');
+    navigate(routePaths.MAIN);
   };
 
   const acceptInvitation = useCallback(async () => {
@@ -30,7 +31,7 @@ export default function JoinStudyPage() {
     try {
       await respondToInvitation(Number(studyId), token);
       setOpen(false);
-      navigate('/', { state: { message: '스터디에 가입되었습니다!' } }); // 나중에 경로 수정
+      navigate(routePaths.MAIN, { state: { message: '스터디에 가입되었습니다!' } }); // 나중에 경로 수정
     } catch (error) {
       const axiosError = error as AxiosError;
       setOpen(false);
@@ -41,7 +42,7 @@ export default function JoinStudyPage() {
 
   useEffect(() => {
     const fetchStudy = async () => {
-      const data = await getStudy(Number(studyId));
+      const data = await getStudyInfo(Number(studyId));
       setStudy(data);
     };
 
