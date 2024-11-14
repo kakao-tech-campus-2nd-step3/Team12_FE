@@ -31,7 +31,7 @@ export default function JoinStudyPage() {
     try {
       await respondToInvitation(Number(studyId), token);
       setOpen(false);
-      navigate(routePaths.STUDY_INFO(studyId), { state: { message: '스터디에 가입되었습니다!' } });
+      navigate(routePaths.STUDY_INFO(studyId), { state: { message: '스터디에 가입되었습니다!' } }); // 나중에 경로 수정
     } catch (error) {
       const axiosError = error as AxiosError;
       setOpen(false);

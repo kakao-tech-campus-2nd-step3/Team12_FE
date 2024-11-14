@@ -20,7 +20,7 @@ export async function createStudy(data: FormData) {
       'Content-Type': 'multipart/form-data',
     },
   });
-  return response;
+  return response.data;
 }
 
 export async function respondToInvitation(studyId: number, token: string) {

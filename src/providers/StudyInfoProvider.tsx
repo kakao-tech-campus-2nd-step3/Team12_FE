@@ -65,6 +65,10 @@ function StudyInfoContextProvider({ studyId, children }: StudyInfoContextProps) 
         studyInfo.refetch();
         studyMemberInfo.refetch();
       };
+      const refetchInfos = () => {
+        studyInfo.refetch();
+        studyMemberInfo.refetch();
+      };
       return {
         data,
         refetch: refetchInfos,
