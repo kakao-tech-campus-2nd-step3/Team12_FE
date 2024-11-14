@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import StudyInfoSection from "@features/modal/studyMain/StudyInfoSection.tsx";
+import StudyInfoSection from "@features/studyInfo/StudyInfoSection.tsx";
 
 const meta: Meta<typeof StudyInfoSection> = {
     title: 'features/StudyMain/StudyInfoSection',

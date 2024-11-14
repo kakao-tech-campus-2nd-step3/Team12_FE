@@ -1,8 +1,14 @@
 const initStorage = <T extends keyof StorageKey>(key: T, storage: Storage) => {
   const get = (): StorageKey[T] => {
-    const value = storage.getItem(key);
+    let value;
 
-    return JSON.parse(value as string);
+    try {
+      value = JSON.parse(storage.getItem(key) as string);
+    } catch (e) {
+      return undefined;
+    }
+
+    return value;
   };
   const set = (value: StorageKey[T]) => {
     const stringifiedValue = JSON.stringify(value);

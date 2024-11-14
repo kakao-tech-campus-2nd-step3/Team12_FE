@@ -1,13 +1,21 @@
 import {
-  createContext, Dispatch, ReactNode, SetStateAction, useEffect, useState,
+  createContext,
+  Dispatch,
+  ReactNode,
+  SetStateAction,
+  useCallback,
+  useEffect,
+  useState,
 } from 'react';
+import routePaths from '@constants/routePaths';
 import { Member } from '@/types/member';
 import { tokenStorage } from '@/utils/storage';
 import { getMyInfo } from '@/api/member';
 
 interface MemberInfoContextValue {
   isLoggedIn: boolean;
-  setIsLoggedIn: Dispatch<SetStateAction<boolean>>;
+  logout: () => void;
+  login: (token: string) => void;
   memberInfo?: Member;
   setMemberInfo: Dispatch<SetStateAction<Member | undefined>>;
 }
@@ -18,13 +26,24 @@ interface MemberInfoContextProps {
 
 export const MemberInfoContext = createContext<MemberInfoContextValue>({
   isLoggedIn: false,
-  setIsLoggedIn: () => {},
+  login: () => {},
+  logout: () => {},
   setMemberInfo: () => {},
 });
 
 export function MemberInfoContextProvider({ children }: MemberInfoContextProps) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [memberInfo, setMemberInfo] = useState<Member>();
+  const logout = useCallback(() => {
+    setMemberInfo(undefined);
+    setIsLoggedIn(false);
+    tokenStorage.remove();
+    window.location.reload();
+  }, [setIsLoggedIn, setMemberInfo]);
+
+  const login = useCallback((token: string) => {
+    tokenStorage.set(token);
+  }, []);
 
   useEffect(() => {
     (async () => {
@@ -34,6 +53,9 @@ export function MemberInfoContextProvider({ children }: MemberInfoContextProps) 
         const myInfo = await getMyInfo();
         setIsLoggedIn(true);
         setMemberInfo(myInfo);
+        if (!myInfo.nickname && window.location.pathname !== routePaths.SUBMIT_PERSONAL_INFO) {
+          window.location.href = routePaths.SUBMIT_PERSONAL_INFO;
+        }
       } catch (e) {
         // TODO: 에러 처리. 토큰 에러는 interceptor에서 처리됨
       }
@@ -42,7 +64,7 @@ export function MemberInfoContextProvider({ children }: MemberInfoContextProps) 
 
   return (
     <MemberInfoContext.Provider value={{
-      isLoggedIn, setIsLoggedIn, memberInfo, setMemberInfo,
+      isLoggedIn, login, logout, memberInfo, setMemberInfo,
     }}
     >
       {children}

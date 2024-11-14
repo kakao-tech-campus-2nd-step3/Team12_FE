@@ -5,10 +5,12 @@ import { useStudyItemStyles } from '@features/main/studyList/StudyList.styles';
 import Avatar from '@components/avatar';
 import { CSSObject, useTheme } from '@emotion/react';
 import UserIcon from '@assets/icons/user.svg?react';
-import { Study } from '@/types/study';
+import { Link } from 'react-router-dom';
+import routePaths from '@constants/routePaths';
+import { StudySearchInfo } from '@/types/study';
 
 interface StudyItemProps {
-  study: Study;
+  study: StudySearchInfo;
 }
 
 function StudyItem(
@@ -33,48 +35,50 @@ function StudyItem(
   };
 
   return (
-    <Container direction="column" height="100%" align="flex-start" padding="20px 20px 20px 26px" cssOverride={containerStyle}>
-      <Container justify="space-between" align="flex-start">
-        <Container
-          padding="8px 0"
-          align="flex-start"
-          width="150px"
-          direction="column"
-          gap="8px"
-          cssOverride={singleEllipsis}
-        >
-          <Paragraph variant="large" weight="bold" css={{ ...singleEllipsis, width: '100%' }}>{study.name}</Paragraph>
-          <Paragraph variant="small" color={theme.colors.text.subtle}>
-            #
-            {study.topic}
-          </Paragraph>
+    <Link to={routePaths.STUDY_INFO(study.id)} css={{ textDecoration: 'none', color: 'black' }}>
+      <Container direction="column" height="100%" align="flex-start" padding="20px 20px 20px 26px" cssOverride={containerStyle}>
+        <Container justify="space-between" align="flex-start">
+          <Container
+            padding="8px 0"
+            align="flex-start"
+            width="150px"
+            direction="column"
+            gap="8px"
+            cssOverride={singleEllipsis}
+          >
+            <Paragraph variant="large" weight="bold" css={{ ...singleEllipsis, width: '100%' }}>{study.name}</Paragraph>
+            <Paragraph variant="small" color={theme.colors.text.subtle}>
+              #
+              {study.topic}
+            </Paragraph>
+          </Container>
+          <Tag variant={study.is_open ? 'primary' : 'default'}>
+            <Paragraph variant="small">
+              {study.is_open ? '모집중' : '마감'}
+            </Paragraph>
+          </Tag>
         </Container>
-        <Tag variant={study.isOpen ? 'primary' : 'default'}>
-          <Paragraph variant="small">
-            {study.isOpen ? '모집중' : '마감'}
-          </Paragraph>
-        </Tag>
-      </Container>
-      <Container justify="flex-start" align="flex-start" height="56px" padding="8px 0 0 0" cssOverride={doubleEllipsis}>
-        <Paragraph variant="small" css={doubleEllipsis}>{study.description}</Paragraph>
-      </Container>
-      <Container padding="12px 0 0 0">
-        <Container justify="flex-start" gap="13px" cssOverride={{ flexGrow: 1 }}>
-          <Avatar size="small" />
-          <Paragraph variant="small">스터디장</Paragraph>
+        <Container justify="flex-start" align="flex-start" height="56px" padding="8px 0 0 0" cssOverride={doubleEllipsis}>
+          <Paragraph variant="small" css={doubleEllipsis}>{study.description}</Paragraph>
         </Container>
-        <Container
-          justify="flex-start"
-          padding="0 6px 0 0"
-          gap="4px"
-          cssOverride={{ flexGrow: 0, color: theme.colors.primary.darken }}
-          width="auto"
-        >
-          <UserIcon stroke={theme.colors.primary.darken} />
-          4
+        <Container padding="12px 0 0 0">
+          <Container justify="flex-start" gap="13px" cssOverride={{ flexGrow: 1 }}>
+            <Avatar size="small" src={study.study_leader_info.profile_image} />
+            <Paragraph variant="small">{study.study_leader_info.nickname}</Paragraph>
+          </Container>
+          <Container
+            justify="flex-start"
+            padding="0 6px 0 0"
+            gap="4px"
+            cssOverride={{ flexGrow: 0, color: theme.colors.primary.darken }}
+            width="auto"
+          >
+            <UserIcon stroke={theme.colors.primary.darken} />
+            {study.study_leader_info.number_of_people}
+          </Container>
         </Container>
       </Container>
-    </Container>
+    </Link>
   );
 }
 

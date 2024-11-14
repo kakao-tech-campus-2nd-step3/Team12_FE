@@ -1,39 +1,90 @@
-import Container from '@components/container';
-import Grid from '@components/grid';
 import StudyItem from '@features/main/studyList/StudyItem';
-import { useState } from 'react';
-import type { Study } from '@/types/study';
-import { mockStudyList } from '@/mock/study';
+import { useSuspenseInfiniteQuery } from '@tanstack/react-query';
+import { queryKeys } from '@constants/queryKeys';
+import { useEffect } from 'react';
+import StudyGrid from '@features/main/studyList/StudyGrid';
+import { useInView } from 'react-intersection-observer';
+import StudyItemSkeleton from '@features/main/studyList/StudyItemSkeleton';
+import type {
+  StudyFilter,
+  StudySearchInfo,
+  StudySearchRequestQuery,
+} from '@/types/study';
+import { searchStudies } from '@/api/study';
 
 interface StudyItemWrapperProps {
-  studyFilter: string;
-  searchKeyword: string | undefined;
+  studyFilter: StudyFilter;
+  searchKeyword: string;
 }
 
-// @ts-ignore
-// eslint-disable-next-line
 function StudyGridWrapper({ studyFilter, searchKeyword }: StudyItemWrapperProps) {
-  const [studies] = useState<Study[]>(mockStudyList);
-  // TODO: studyFilter, searchKeyword를 토대로 스터디 search, suspense wrap
+  const fetchPage = async ({ pageParam = 0 }) => {
+    const params: StudySearchRequestQuery = {
+      size: 15,
+      page: pageParam,
+      sort: 'createdAt,desc',
+    };
+    if (searchKeyword) {
+      params.name = searchKeyword;
+    }
+    if (studyFilter !== 'all') params.is_open = studyFilter === 'open';
+    return searchStudies(params);
+  };
+  const { ref, inView } = useInView({ threshold: 1 });
+  const {
+    data: studyResponse,
+    isFetchingNextPage,
+    fetchNextPage,
+    refetch,
+  } = useSuspenseInfiniteQuery({
+    initialData: undefined,
+    initialPageParam: 0,
+    queryKey: [queryKeys.MAIN_SEARCH_STUDIES, searchKeyword, studyFilter],
+    queryFn: fetchPage,
+    getNextPageParam: (lastPage) => (
+      lastPage.has_next_page ? lastPage.current_page + 1 : undefined
+    ),
+  });
+
+  useEffect(() => {
+    refetch();
+  }, [refetch, studyFilter, searchKeyword]);
+
+  useEffect(() => {
+    if (inView) fetchNextPage();
+  }, [inView, fetchNextPage]);
+
   return (
-    <Container padding="16px 0 0 0">
-      <Grid
-        columns={{
-          initial: 1,
-          xs: 2,
-          md: 3,
-          lg: 4,
-        }}
-        gap={19}
-      >
+    <>
+      <StudyGrid>
         {
-          studies.map((study) => (
-            <StudyItem study={study} key={`study-item-${study.id}`} />
+          studyResponse.pages.map((page) => (
+            <StudyItemContainer
+              studyList={page.study_list}
+              key={`study-search-${page.current_page}`}
+            />
           ))
         }
-      </Grid>
-    </Container>
+        {
+          isFetchingNextPage && [...Array(8).keys()].map((i) => {
+            const key = `study-skeleton-nextpage-${i}`;
+            return (
+              <StudyItemSkeleton key={key} />
+            );
+          })
+        }
+      </StudyGrid>
+      <div css={{ height: '30px' }} ref={ref} />
+    </>
   );
+}
+
+interface StudyItemContainerProps {
+  studyList: StudySearchInfo[];
+}
+
+function StudyItemContainer({ studyList }: StudyItemContainerProps) {
+  return studyList.map((study) => <StudyItem study={study} key={`study-item-${study.name}-${study.id}`} />);
 }
 
 export default StudyGridWrapper;
