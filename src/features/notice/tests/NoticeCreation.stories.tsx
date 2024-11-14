@@ -20,7 +20,7 @@ type Story = StoryObj<typeof NoticeCreation>;
 export const Default: Story = {
     render: () => (
         <>
-            <NoticeCreation />
+            <NoticeCreation studyId={11}/>
             <Toaster /> {/* Toaster 추가 */}
         </>
     ),
