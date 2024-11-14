@@ -37,7 +37,7 @@ export default function AttendanceInfoModal(
 ) {
   const { study } = useContext(StudyInfoContext);
   const memberAttendance = study
-    .studyAttendanceInfo
+    .study_attendance_info
     ?.member_attendance[memberInfo.member.id.toString()];
   return (
     <Modal open={open} onClose={onClose} width="387px">
@@ -46,7 +46,7 @@ export default function AttendanceInfoModal(
         <MemberInfoSection
           memberInfo={memberInfo}
           rate={memberAttendance.attendance_rate
-            ? (memberAttendance.attendance_rate * 100).toFixed(0)
+            ? (parseFloat(memberAttendance.attendance_rate) * 100).toFixed(0)
             : 0}
         />
         <Container direction="column" height="300px" css={{ overflowY: 'scroll', overflowX: 'hidden' }} justify="flex-start">
@@ -55,7 +55,7 @@ export default function AttendanceInfoModal(
             <Text css={defaultFontStyle}>출석 현황</Text>
           </Grid>
           <hr css={HorizontalLine} />
-          {study.studyAttendanceInfo.required_attendance?.map((attendanceDate : string) => {
+          {study.study_attendance_info.required_attendance?.map((attendanceDate : string) => {
             const isAttended = memberAttendance.member_attendance_list.some(
               (memberAttend: string) => attendanceDate.slice(0, 10) === memberAttend.slice(0, 10),
             );
