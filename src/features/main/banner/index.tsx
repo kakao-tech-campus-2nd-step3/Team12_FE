@@ -53,13 +53,13 @@ function LeftSection() {
   const { isLoggedIn } = useContext(MemberInfoContext);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isCreationModalOpen, setIsCreationModalOpen] = useState(false);
-  function handleBannerButtonClick() {
+  const handleBannerButtonClick = () => {
     if (isLoggedIn) {
       setIsCreationModalOpen(true);
       return;
     }
     setIsLoginModalOpen(true);
-  }
+  };
   return (
     <>
       <Container padding="0 0 0 200px" align="flex-start" direction="column">
@@ -78,8 +78,18 @@ function LeftSection() {
         </Paragraph>
         <Button css={{ marginTop: '16px' }} variant="primary" onClick={handleBannerButtonClick}>5초만에 시작하기</Button>
       </Container>
-      {isLoginModalOpen && <LoginModal onClose={() => setIsLoginModalOpen(false)} open={isLoginModalOpen} />}
-      {isCreationModalOpen && <StudyCreationModal onClose={() => setIsCreationModalOpen(false)} open={isCreationModalOpen} />}
+      {isLoginModalOpen && (
+      <LoginModal
+        onClose={() => setIsLoginModalOpen(false)}
+        open={isLoginModalOpen}
+      />
+      )}
+      {isCreationModalOpen && (
+      <StudyCreationModal
+        onClose={() => setIsCreationModalOpen(false)}
+        open={isCreationModalOpen}
+      />
+      )}
     </>
   );
 }
