@@ -46,7 +46,7 @@ export default function AttendDateList() {
             direction="column"
             justify="flex-start"
           >
-            {study.attendanceDateInfo.map((date: RequireAttendanceDate) => {
+            {study.attendance_date_info.map((date: RequireAttendanceDate) => {
               const startDate = new Date(date.start_time.replace(' ', 'T'));
               const deadlineDate = new Date(date.deadline.replace(' ', 'T'));
               const allowTime = (deadlineDate.getTime() - startDate.getTime()) / (1000 * 60);

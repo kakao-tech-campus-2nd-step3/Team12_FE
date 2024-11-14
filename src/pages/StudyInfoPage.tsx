@@ -5,7 +5,6 @@ import StudyInfoProvider from '@providers/StudyInfoProvider';
 import { useNavigate, useParams } from 'react-router-dom';
 import routePaths from '@constants/routePaths';
 import SuspenseErrorBoundary from '@components/boundary/SuspenseErrorBoundary';
-import Spacing from '@components/spacing';
 import Container from '@components/container';
 import { isIntegerString } from '@/utils';
 
@@ -18,8 +17,6 @@ function StudyInfoPage() {
   }
   return (
     <Page>
-      <Spacing height={20} />
-
       <SuspenseErrorBoundary>
         <StudyInfoProvider studyId={parseInt(studyId, 10)}>
           <StudyInfoSection />
