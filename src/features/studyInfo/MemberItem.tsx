@@ -20,7 +20,7 @@ function MemberItem(
   return (
     <Container direction="column" height="100%" align="flex-start" gap="20px" padding="20px 20px 20px 26px" cssOverride={containerStyle}>
       <Container justify="flex-start">
-        <Avatar bordered={true} css={css`width: 40px; height: 40px;`} />
+        <Avatar bordered={true} src={memberInfo.profile_image} css={css`width: 40px; height: 40px;`} />
         <Paragraph variant="large" css={{ marginLeft: '10px' }}>{memberInfo.nickname}</Paragraph>
       </Container>
       <Container justify="flex-start">
