@@ -5,6 +5,7 @@ import type {
   StudySearchRequestQuery,
   StudySearchResponse,
 } from '@/types/study';
+import { Study, StudySearchRequestQuery, StudySearchResponse } from '@/types/study';
 import axiosInstance from '@/utils/network';
 
 export async function searchStudies(requestQuery: StudySearchRequestQuery) {
@@ -37,5 +38,10 @@ export async function getStudyInfo(studyId: number) {
 
 export async function getStudyMembers(studyId: number) {
   const response = await axiosInstance.get<StudyMembersResponse>(endpoints.studyMembers(studyId));
+  return response.data;
+}
+
+export async function getMyStudies() {
+  const response = await axiosInstance.get<Study[]>(`${endpoints.myInfo}/studies`);
   return response.data;
 }

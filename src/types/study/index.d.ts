@@ -1,5 +1,3 @@
-import { RequireAttendanceDate } from '../attendance';
-
 export interface Study {
   id: number;
   name: string;
