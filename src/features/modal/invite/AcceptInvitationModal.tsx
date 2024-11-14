@@ -23,7 +23,7 @@ export default function AcceptInvitationModal({
   return (
     <Modal open={open} onClose={onClose} width="447px">
       <Container direction="column" gap="30px" padding="50px">
-        <StudyThumbnail src={study?.profileImage} />
+        <StudyThumbnail src={study?.profile_image} />
         <Heading.H3 color={colorTheme.primary.main} weight="bolder">{study?.name}</Heading.H3>
         <Container direction="column" cssOverride={css`color: ${colorTheme.text.moderate}`} gap="5px">
           <Paragraph variant="small" color={colorTheme.absolute.black}>
