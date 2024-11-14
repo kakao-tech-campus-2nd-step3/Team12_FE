@@ -138,8 +138,8 @@ export default function AttendDateListElement(
       <AttendanceCheckModal
         open={open}
         onClose={onClose}
-        editComplete={editComplete}
         date={startDateTime}
+        dateId={dateId}
       />
       )}
       <Toaster position="bottom-center" reverseOrder={false} />

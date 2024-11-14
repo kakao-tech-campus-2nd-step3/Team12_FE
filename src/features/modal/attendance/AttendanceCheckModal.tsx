@@ -14,8 +14,8 @@ import { StudyInfoContext } from '@/providers/StudyInfoProvider';
 interface AcceptInvitationProps {
   open: boolean;
   onClose: () => void;
-  editComplete: () => void;
   date: string;
+  dateId: number;
 }
 
 const HorizontalLine = styled.hr`
@@ -24,12 +24,11 @@ const HorizontalLine = styled.hr`
 `;
 
 export default function AttendanceCheckModal({
-  open, onClose, editComplete, date,
+  open, onClose, date, dateId,
 }: AcceptInvitationProps) {
   const [attendanceStatus, setAttendanceStatus] = useState<{ [memberId: string]: boolean }>({});
   const [isPastDate, setIsPastDate] = useState(false);
   const { study } = useContext(StudyInfoContext);
-  console.log(study);
 
   useEffect(() => {
     const currentDate = new Date();
@@ -45,18 +44,19 @@ export default function AttendanceCheckModal({
   };
 
   const handleEditComplete = () => {
+    console.log(study.attendanceDateInfo);
     try {
       Object.entries(attendanceStatus).forEach(([memberId, isAttended]) => {
         updateAttendance({
           study_id: study.id,
           member_id: Number(memberId),
           requestData: {
-            datetime: date,
+            date_id: dateId,
             is_attended: isAttended,
           },
         });
       });
-      editComplete();
+      onClose();
     } catch (error) {
       console.error('Failed to update attendance:', error);
     }

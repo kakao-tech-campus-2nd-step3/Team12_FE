@@ -25,7 +25,6 @@ function StudyInfoPage() {
           <MemberListSection />
         </StudyInfoProvider>
       </SuspenseErrorBoundary>
-
       <Spacing height={20} />
     </Page>
   );

@@ -4,20 +4,22 @@ import {
   useEffect,
   useState,
 } from 'react';
-import { getCode } from '@/api/attendance';
+import { checkAttendance, getCode } from '@/api/attendance';
 
 interface AttendanceInfoContextValue {
   code: string;
+  checkAttend: () => void;
 }
 
 interface AttendanceInfoContextProps {
   studyId: number;
-  dateId: number;
+  dateId?: number;
   children?: ReactNode;
 }
 
 export const AttendanceInfoContext = createContext<AttendanceInfoContextValue>({
   code: '',
+  checkAttend: () => {},
 });
 
 export function AttendanceInfoContextProvider(
@@ -28,6 +30,7 @@ export function AttendanceInfoContextProvider(
   useEffect(() => {
     (async () => {
       try {
+        if (!dateId) return;
         const code = await getCode({ study_id: studyId, date_id: dateId });
         setAttendanceCode(code.code);
       } catch (e) {
@@ -36,9 +39,20 @@ export function AttendanceInfoContextProvider(
     })();
   }, [studyId, dateId]);
 
+  const checkAttend = async () => {
+    try {
+      checkAttendance(
+        { study_id: studyId, requestData: { date_id: dateId, code: attendanceCode } },
+      );
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
   return (
     <AttendanceInfoContext.Provider value={{
       code: attendanceCode,
+      checkAttend,
     }}
     >
       {children}

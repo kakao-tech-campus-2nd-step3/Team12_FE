@@ -29,14 +29,22 @@ interface UpdateAttendanceParams {
   study_id: number;
   member_id: number;
   requestData: {
-    datetime: string;
+    date_id: number;
     is_attended: boolean;
   }
 }
 
 interface GetCodeParams {
   study_id: number;
-  date_id: number;
+  date_id?: number;
+}
+
+interface CheckAttendanceParams {
+  study_id: number;
+  requestData: {
+    date_id?: number;
+    code?: string;
+  }
 }
 
 export async function createDate({ study_id, requestData }: CreateDateParams) {
@@ -102,6 +110,7 @@ export async function updateAttendance(
       study_id,
       member_id,
     },
+    data: requestData,
   });
   return response;
 }
@@ -113,5 +122,18 @@ export async function getCode({ study_id, date_id }: GetCodeParams) {
       date_id,
     },
   });
+  return response.data;
+}
+
+export async function checkAttendance({ study_id, requestData }: CheckAttendanceParams) {
+  const response = await axiosInstance.post(endpoints.checkAttendance, {
+    params: {
+      study_id,
+    },
+    data: {
+      requestData,
+    },
+  });
+  console.log(response);
   return response.data;
 }
