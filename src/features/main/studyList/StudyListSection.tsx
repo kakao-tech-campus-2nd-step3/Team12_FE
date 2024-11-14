@@ -20,7 +20,7 @@ function StudyListSection() {
         setSearchKeyword={setSearchKeyword}
       />
 
-      <Container padding="16px 0 0 0">
+      <Container padding="16px 0 0 0" direction="column" gap="19px">
         <SuspenseErrorBoundary suspenseFallback={<StudySkeletonGrid />}>
           <StudyGridWrapper studyFilter={studyFilter} searchKeyword={searchKeyword} />
         </SuspenseErrorBoundary>

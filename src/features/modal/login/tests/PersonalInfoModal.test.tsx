@@ -14,7 +14,6 @@ describe('개인 정보 입력 모달 테스트', () => {
     expect(screen.getByTestId(personalInfoModalTestId)).toBeDisabled();
 
     await userEvent.type(screen.getByLabelText('닉네임'), '럭키비키쿠키');
-    await userEvent.type(screen.getByLabelText('이메일'), 'test@example.com');
     await userEvent.type(screen.getByLabelText('연락처'), '010-1234-5678');
     await userEvent.type(screen.getByLabelText('자기소개'), '안녕하세요!');
     const agreeCheckbox = screen.getByTestId('agree-checkbox');
@@ -27,13 +26,11 @@ describe('개인 정보 입력 모달 테스트', () => {
     renderWithProviders(<PersonalInfoModal onClose={() => {}} open />);
 
     await userEvent.type(screen.getByLabelText('닉네임'), '닉네임');
-    await userEvent.type(screen.getByLabelText('이메일'), 'test');
     await userEvent.type(screen.getByLabelText('연락처'), '1234');
     await userEvent.type(screen.getByLabelText('자기소개'), '안녕하세요!');
     const agreeCheckbox = screen.getByTestId('agree-checkbox');
     await userEvent.click(agreeCheckbox);
 
-    expect(screen.getByText('example@gmail.com 형식으로 작성해주세요.')).toBeInTheDocument();
     expect(screen.getByText('010-0000-0000 형식으로 작성해주세요.')).toBeInTheDocument();
   });
 });

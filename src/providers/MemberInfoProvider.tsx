@@ -38,6 +38,7 @@ export function MemberInfoContextProvider({ children }: MemberInfoContextProps) 
     setMemberInfo(undefined);
     setIsLoggedIn(false);
     tokenStorage.remove();
+    window.location.reload();
   }, [setIsLoggedIn, setMemberInfo]);
 
   const login = useCallback((token: string) => {

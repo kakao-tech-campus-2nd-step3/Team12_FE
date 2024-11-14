@@ -7,10 +7,10 @@ import { CSSObject, useTheme } from '@emotion/react';
 import UserIcon from '@assets/icons/user.svg?react';
 import { Link } from 'react-router-dom';
 import routePaths from '@constants/routePaths';
-import { Study } from '@/types/study';
+import { DetailedStudyInfo } from '@/types/study';
 
 interface StudyItemProps {
-  study: Study;
+  study: DetailedStudyInfo;
 }
 
 function StudyItem(
@@ -63,8 +63,8 @@ function StudyItem(
         </Container>
         <Container padding="12px 0 0 0">
           <Container justify="flex-start" gap="13px" cssOverride={{ flexGrow: 1 }}>
-            <Avatar size="small" />
-            <Paragraph variant="small">스터디장</Paragraph>
+            <Avatar size="small" src={study.study_leader_info.profile_image} />
+            <Paragraph variant="small">{study.study_leader_info.nickname}</Paragraph>
           </Container>
           <Container
             justify="flex-start"
@@ -74,7 +74,7 @@ function StudyItem(
             width="auto"
           >
             <UserIcon stroke={theme.colors.primary.darken} />
-            4
+            {study.study_leader_info.number_of_people}
           </Container>
         </Container>
       </Container>

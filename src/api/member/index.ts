@@ -11,8 +11,12 @@ export async function getMyInfo(): Promise<MyInfoResponse> {
   return response.data;
 }
 
-export async function submitPersonalInfo(input: PersonalInfoInputs) {
-  await axiosInstance.post(endpoints.submitPersonalInfo, input);
+export async function submitPersonalInfo(input: PersonalInfoInputs, name: string, email: string) {
+  const infoInput = input;
+  delete infoInput.agree_to_terms;
+  infoInput.name = name;
+  infoInput.email = email;
+  await axiosInstance.post(endpoints.submitPersonalInfo, infoInput);
 }
 
 export async function editMyInfo(data: EditMemberRequestBody): Promise<MyInfoResponse> {

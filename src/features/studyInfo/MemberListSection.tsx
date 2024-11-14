@@ -6,13 +6,15 @@ import MemberItem from '@features/studyInfo/MemberItem';
 import { InviteBtn } from '@features/studyInfo/InviteBtn';
 import Spacing from '@components/spacing';
 import { StudyInfoContext } from '@providers/StudyInfoProvider';
+import { Heading } from '@components/text';
 
 function MemberListSection() {
   const { study } = useContext(StudyInfoContext);
 
   return (
     <DefaultPaddedContainer>
-      <Container padding="25px 0 0 0">
+      <Container padding="25px 0 0 0" direction="column" align="flex-start" gap="19px">
+        <Heading.H2 weight="bold">멤버 목록</Heading.H2>
         <Grid
           columns={{
             initial: 1,
