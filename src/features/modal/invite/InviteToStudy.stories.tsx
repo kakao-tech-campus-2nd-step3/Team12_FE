@@ -39,7 +39,13 @@ export const Default: Story = {
       <>
         <Toaster position="bottom-center" reverseOrder={false} />
         {open ? (
-          <InviteToStudyModal open={open} onClose={() => setOpen(false)} studyId={11} copyComplete={copyComplete} />
+          <InviteToStudyModal
+            open={open} 
+            onClose={() => setOpen(false)} 
+            studyId={11} 
+            copyComplete={copyComplete} 
+            studyName={'스터디'}
+          />
         ) : (
           <button onClick={() => setOpen(true)}>Open</button>
         )}

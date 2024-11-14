@@ -24,7 +24,7 @@ function Spinner() {
     animation: ${spin} 1s cubic-bezier(0.42, 0, 0.58, 1) infinite;
 `;
   return (
-    <Container direction="column">
+    <Container direction="column" padding="40px 0">
       <div css={spinnerStyle} />
       <Paragraph variant="small" color={theme.colors.text.moderate}>로드 중</Paragraph>
     </Container>
