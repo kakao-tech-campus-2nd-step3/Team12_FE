@@ -15,6 +15,8 @@ import {
 import { rootWidth } from '@styles/length';
 import { MemberInfoContext } from '@providers/MemberInfoProvider';
 import LoginModal from '@features/modal/login/LoginModal';
+import { Link } from 'react-router-dom';
+import routePaths from '@constants/routePaths';
 import StudyCreationModal from '@/features/modal/studyCreation/StudyCreationModal';
 
 function Header() {
@@ -44,11 +46,13 @@ function Header() {
           height="60px"
           width={rootWidth}
         >
-          <img
-            src={logo}
-            alt="logo"
-            css={{ width: '75px' }}
-          />
+          <Link to={routePaths.MAIN}>
+            <img
+              src={logo}
+              alt="logo"
+              css={{ width: '75px' }}
+            />
+          </Link>
           <Container
             width="auto"
             gap="20px"
