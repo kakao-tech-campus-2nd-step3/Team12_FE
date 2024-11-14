@@ -16,11 +16,11 @@ interface AttendanceInfoContextProps {
   children?: ReactNode;
 }
 
-export const MemberInfoContext = createContext<AttendanceInfoContextValue>({
+export const AttendanceInfoContext = createContext<AttendanceInfoContextValue>({
   code: '',
 });
 
-export function MemberInfoContextProvider(
+export function AttendanceInfoContextProvider(
   { studyId, dateId, children }
   : AttendanceInfoContextProps,
 ) {
@@ -29,7 +29,7 @@ export function MemberInfoContextProvider(
     (async () => {
       try {
         const code = await getCode({ study_id: studyId, date_id: dateId });
-        setAttendanceCode(code.data.code);
+        setAttendanceCode(code.code);
       } catch (e) {
         console.error(e);
       }
@@ -37,11 +37,11 @@ export function MemberInfoContextProvider(
   }, [studyId, dateId]);
 
   return (
-    <MemberInfoContext.Provider value={{
+    <AttendanceInfoContext.Provider value={{
       code: attendanceCode,
     }}
     >
       {children}
-    </MemberInfoContext.Provider>
+    </AttendanceInfoContext.Provider>
   );
 }
