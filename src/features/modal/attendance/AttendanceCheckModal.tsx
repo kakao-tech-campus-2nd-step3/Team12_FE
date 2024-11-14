@@ -15,8 +15,8 @@ import { StudyInfoContext } from '@/providers/StudyInfoProvider';
 interface AcceptInvitationProps {
   open: boolean;
   onClose: () => void;
-  editComplete: () => void;
   date: string;
+  dateId: number;
 }
 
 const HorizontalLine = styled.hr`
@@ -25,7 +25,7 @@ const HorizontalLine = styled.hr`
 `;
 
 export default function AttendanceCheckModal({
-  open, onClose, editComplete, date,
+  open, onClose, date, dateId,
 }: AcceptInvitationProps) {
   const [attendanceStatus, setAttendanceStatus] = useState<{ [memberId: string]: boolean }>({});
   const [isPastDate, setIsPastDate] = useState(false);
@@ -51,12 +51,12 @@ export default function AttendanceCheckModal({
           study_id: study.id,
           member_id: Number(memberId),
           requestData: {
-            datetime: date,
+            date_id: dateId,
             is_attended: isAttended,
           },
         });
       });
-      editComplete();
+      onClose();
     } catch (error) {
       toast.error('Failed to update attendance');
     }
@@ -93,7 +93,7 @@ export default function AttendanceCheckModal({
           {study.members.map((member) => {
             const memberId = member.member.id.toString();
             const attendanceDates = study
-              .studyAttendanceInfo.member_attendance[memberId]
+              .study_attendance_info.member_attendance[memberId]
               ?.member_attendance_list ?? [];
             let time = '';
 

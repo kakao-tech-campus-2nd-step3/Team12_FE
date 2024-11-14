@@ -1,7 +1,7 @@
 export interface Notice {
   id: number;
   title: string;
-  nickname: string;
+  nickname: string; // 작성자
   content: string;
   created_at: string;
 }

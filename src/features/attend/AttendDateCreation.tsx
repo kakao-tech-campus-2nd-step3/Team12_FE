@@ -1,5 +1,5 @@
 import { useState, useEffect, SetStateAction } from 'react';
-import { toast, Toaster } from 'react-hot-toast';
+import { toast } from 'react-hot-toast';
 import { useForm } from 'react-hook-form';
 import Button from '@/components/button';
 import Container from '@/components/container';
@@ -64,7 +64,6 @@ export default function AttendDateCreation(
   return (
     <DefaultPaddedContainer>
       <Container direction="row" align="flex-start" gap="50px">
-        <Toaster position="bottom-center" reverseOrder={false} />
         <Heading.H1 css={{ marginTop: '20px', whiteSpace: 'nowrap', fontWeight: 'bold' }}>출석일자 생성</Heading.H1>
         <form onSubmit={handleSubmit(handleCreateClick)}>
           <Grid
