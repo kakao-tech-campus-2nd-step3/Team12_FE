@@ -14,14 +14,13 @@ interface AttendDateListElementProps {
   studyId: number;
   startDateTime: string;
   allowTime: number;
-  onComplete: () => void;
   isPastDate: boolean;
   dateId: number;
 }
 
 export default function AttendDateListElement(
   {
-    studyId, startDateTime, allowTime, onComplete, isPastDate, dateId,
+    studyId, startDateTime, allowTime, isPastDate, dateId,
   }: AttendDateListElementProps,
 ) {
   const [startDate, setStartDate] = useState(startDateTime.split(' ')[0]);
@@ -33,7 +32,7 @@ export default function AttendDateListElement(
   const editComplete = async () => {
     try {
       const response = await updateDate({
-        studyId,
+        study_id: studyId,
         requestData: {
           start_time: `${startDate} ${startTime}`,
           time_interval: allowTimeVal,
@@ -42,13 +41,13 @@ export default function AttendDateListElement(
       });
 
       if (response.status === 204) {
-        toast.success('수정이 완료되었습니다!');
+        toast.success('수정이 완료되었습니다🍀');
       }
     } catch (error: any) {
       if (error.response && error.response.status === 400) {
-        toast.error('잘못된 입력입니다.');
+        toast.error('잘못된 입력입니다🥲');
       } else {
-        toast.error('오류가 발생했습니다.');
+        toast.error('오류가 발생했습니다🚨');
       }
       setStartDate(startDateTime.split(' ')[0]);
       setStartTime(startDateTime.split(' ')[1]);
@@ -64,16 +63,15 @@ export default function AttendDateListElement(
 
   const deleteAttendDate = async () => {
     const response = deleteDate({
-      studyId,
+      study_id: studyId,
       requestData: {
         start_time: startDateTime,
       },
     });
     if ((await response).status === 204) {
-      toast.success('출석일자가 삭제되었습니다.');
-      onComplete();
+      toast.success('출석일자가 삭제되었습니다🍀');
     } else {
-      toast.error('삭제에 실패했습니다.');
+      toast.error('삭제에 실패했습니다🥲');
     }
   };
 
@@ -141,7 +139,6 @@ export default function AttendDateListElement(
         open={open}
         onClose={onClose}
         editComplete={editComplete}
-        studyId={studyId}
         date={startDateTime}
       />
       )}

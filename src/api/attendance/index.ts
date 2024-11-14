@@ -2,7 +2,7 @@ import endpoints from '@constants/endpoints';
 import axiosInstance from '@/utils/network';
 
 interface CreateDateParams {
-  studyId: number;
+  study_id: number;
   requestData: {
     start_time: string;
     time_interval: number;
@@ -10,14 +10,14 @@ interface CreateDateParams {
 }
 
 interface DeleteDateParams {
-  studyId: number;
+  study_id: number;
   requestData: {
     start_time: string;
   }
 }
 
 interface UpdateDateParams {
-  studyId: number;
+  study_id: number;
   requestData: {
     start_time: string;
     time_interval: number;
@@ -26,74 +26,76 @@ interface UpdateDateParams {
 }
 
 interface UpdateAttendanceParams {
-  studyId: number;
-  memberId: number;
+  study_id: number;
+  member_id: number;
   requestData: {
     datetime: string;
     is_attended: boolean;
   }
 }
 
-export async function createDate({ studyId, requestData }: CreateDateParams) {
+export async function createDate({ study_id, requestData }: CreateDateParams) {
   const response = await axiosInstance.post(endpoints.attendanceDate, requestData, {
     headers: {
       'Content-Type': 'application/json',
     },
     params: {
-      studyId,
+      study_id,
     },
   });
   return response;
 }
 
-export async function getDateList(studyId: number) {
+export async function getDateList(study_id: number) {
   const response = await axiosInstance.get(endpoints.attendanceDate, {
     params: {
-      studyId,
+      study_id,
     },
   });
   return response.data;
 }
 
-export async function deleteDate({ studyId, requestData }: DeleteDateParams) {
+export async function deleteDate({ study_id, requestData }: DeleteDateParams) {
   const response = await axiosInstance.delete(endpoints.attendanceDate, {
     params: {
-      studyId,
+      study_id,
     },
     data: requestData,
   });
   return response;
 }
 
-export async function updateDate({ studyId, requestData }: UpdateDateParams) {
+export async function updateDate({ study_id, requestData }: UpdateDateParams) {
   const response = await axiosInstance.put(endpoints.attendanceDate, requestData, {
     headers: {
       'Content-Type': 'application/json',
     },
     params: {
-      studyId,
+      study_id,
     },
   });
   return response;
 }
 
-export async function getAttendanceList(studyId: number) {
+export async function getAttendanceList(study_id: number) {
   const response = await axiosInstance.get(endpoints.attendance, {
     params: {
-      studyId,
+      study_id,
     },
   });
   return response.data;
 }
 
-export async function updateAttendance({ studyId, memberId, requestData }: UpdateAttendanceParams) {
+export async function updateAttendance(
+  { study_id, member_id, requestData }: UpdateAttendanceParams,
+) {
   const response = await axiosInstance.put(endpoints.attendance, requestData, {
     headers: {
       'Content-Type': 'application/json',
     },
     params: {
-      studyId,
-      memberId,
+      study_id,
+      member_id,
     },
   });
   return response;

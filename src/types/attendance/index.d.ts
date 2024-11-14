@@ -21,5 +21,6 @@ export interface MemberAttendanceInfo {
 export type AttendanceCreationRequestBody = Pick<Attendance, 'study_id' | 'start_time' | 'time_interval'>;
 export type AttendDateCreationInputs = AttendDateCreationRequestBody;
 export type AttendanceResponse = Pick<Attendance, 'id' | 'start_time' | 'deadline'>;
+export type RequireAttendanceDate = AttendanceResponse;
 export type MemberAttendance = MemberAttendanceInfo;
 export type MemberAttendanceResponse = AttendanceInfo;

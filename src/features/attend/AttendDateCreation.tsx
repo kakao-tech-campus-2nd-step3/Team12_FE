@@ -14,13 +14,11 @@ import { createDate } from '@/api/attendance';
 
 interface AttendDateCreationProps {
   studyId: number;
-  onCreationComplete: () => void;
 }
 
 export default function AttendDateCreation(
   {
     studyId,
-    onCreationComplete,
   }: AttendDateCreationProps,
 ) {
   const [currentDate] = useState(new Date());
@@ -43,20 +41,23 @@ export default function AttendDateCreation(
   }, [selectedDate, currentDate]);
 
   const handleCreateClick = async () => {
-    const response = createDate({
-      studyId,
-      requestData: {
-        start_time: `${selectedDate.toLocaleDateString('en-CA')} ${
-          selectedDate.toLocaleTimeString('en-GB', {
-            hour: '2-digit',
-            minute: '2-digit',
-          })}`,
-        time_interval: Number(timeInterval),
-      },
-    });
-    if ((await response).status === 201) {
-      toast.success('출석일자가 생성되었습니다.');
-      onCreationComplete();
+    try {
+      const response = createDate({
+        study_id: studyId,
+        requestData: {
+          start_time: `${selectedDate.toLocaleDateString('en-CA')} ${
+            selectedDate.toLocaleTimeString('en-GB', {
+              hour: '2-digit',
+              minute: '2-digit',
+            })}`,
+          time_interval: Number(timeInterval),
+        },
+      });
+      if ((await response).status === 201) {
+        toast.success('출석일자가 생성되었습니다🍀');
+      }
+    } catch (error: any) {
+      toast.error('잘못된 입력입니다🥲');
     }
   };
 

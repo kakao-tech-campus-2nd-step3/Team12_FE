@@ -44,6 +44,12 @@ const router = createBrowserRouter([
       <JoinStudyPage />
     ),
   },
+  {
+    path: routePaths.STUDY_ATTENDANCE(':studyId'),
+    element: (
+      <AttendDatePage />
+    ),
+  },
 ]);
 
 function BrowserRouterProvider() {

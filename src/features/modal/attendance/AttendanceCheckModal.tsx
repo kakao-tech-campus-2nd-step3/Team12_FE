@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import Modal from '@/components/modal';
 import Text, { Heading } from '@/components/text';
 import Grid from '@/components/grid';
@@ -8,16 +8,13 @@ import Container from '@/components/container';
 import Spacing from '@/components/spacing';
 import Button from '@/components/button';
 import theme from '@/styles/theme';
-import { getStudyMembers } from '@/api/study';
-import { MemberAttendance, MemberAttendanceResponse } from '@/types/attendance';
-import { getAttendanceList, updateAttendance } from '@/api/attendance';
-import { StudyMember } from '@/types/study';
+import { updateAttendance } from '@/api/attendance';
+import { StudyInfoContext } from '@/providers/StudyInfoProvider';
 
 interface AcceptInvitationProps {
   open: boolean;
   onClose: () => void;
   editComplete: () => void;
-  studyId: number;
   date: string;
 }
 
@@ -27,35 +24,18 @@ const HorizontalLine = styled.hr`
 `;
 
 export default function AttendanceCheckModal({
-  open, onClose, editComplete, studyId, date,
+  open, onClose, editComplete, date,
 }: AcceptInvitationProps) {
-  const [memberAttendanceList, setMemberAttendance] = useState<{
-    [key: string]: MemberAttendance
-  }>({});
-  const [memberList, setMemberList] = useState<StudyMember[]>([]);
   const [attendanceStatus, setAttendanceStatus] = useState<{ [memberId: string]: boolean }>({});
   const [isPastDate, setIsPastDate] = useState(false);
+  const { study } = useContext(StudyInfoContext);
+  console.log(study);
 
   useEffect(() => {
     const currentDate = new Date();
     const selectedDate = new Date(date);
     setIsPastDate(selectedDate < currentDate);
   }, [date]);
-
-  useEffect(() => {
-    async function fetchStudyMember(): Promise<void> {
-      const response = await getStudyMembers(studyId);
-      setMemberList(response);
-    }
-
-    async function fetchMemberAttendance(): Promise<void> {
-      const response: MemberAttendanceResponse = await getAttendanceList(studyId);
-      setMemberAttendance(response.member_attendance);
-    }
-
-    fetchStudyMember();
-    fetchMemberAttendance();
-  }, [studyId]);
 
   const handleStatusChange = (memberId: string, updatedStatus: boolean) => {
     setAttendanceStatus((prevStatus) => ({
@@ -68,8 +48,8 @@ export default function AttendanceCheckModal({
     try {
       Object.entries(attendanceStatus).forEach(([memberId, isAttended]) => {
         updateAttendance({
-          studyId,
-          memberId: Number(memberId),
+          study_id: study.id,
+          member_id: Number(memberId),
           requestData: {
             datetime: date,
             is_attended: isAttended,
@@ -110,9 +90,11 @@ export default function AttendanceCheckModal({
           direction="column"
           justify="flex-start"
         >
-          {memberList.map((member) => {
+          {study.members.map((member) => {
             const memberId = member.member.id.toString();
-            const attendanceDates = memberAttendanceList[memberId]?.member_attendance_list ?? [];
+            const attendanceDates = study
+              .studyAttendanceInfo.member_attendance[memberId]
+              ?.member_attendance_list ?? [];
             let time = '';
 
             const isAttended = attendanceDates.some((attendanceDate: string) => {

@@ -1,3 +1,5 @@
+import { RequireAttendanceDate } from '../attendance';
+
 export interface Study {
   id: number;
   name: string;
@@ -44,4 +46,7 @@ export type StudyMember = {
 
 export type StudyMembersResponse = StudyMember[];
 
-export type StudyInfoWithMembers = Study & { members: StudyMember[] };
+export type StudyInfoWithMembers = Study &
+{ members: StudyMember[] } &
+{ studyAttendanceInfo: AttendanceInfo } &
+{ attendanceDateInfo: RequireAttendanceDate[] };

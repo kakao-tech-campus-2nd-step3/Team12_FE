@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
-import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import React, { useContext } from 'react';
 import { DefaultPaddedContainer } from '@/components/container/variants';
 import AttendDateCreation from '@/features/attend/AttendDateCreation';
 import AttendDateListElement from './AttendDateListElement';
@@ -8,26 +9,18 @@ import Text from '@/components/text';
 import Spacing from '@/components/spacing';
 import theme from '@/styles/theme';
 import Container from '@/components/container';
-import { getDateList } from '@/api/attendance';
-import { AttendanceResponse } from '@/types/attendance';
+import { RequireAttendanceDate } from '@/types/attendance';
+import { StudyInfoContext } from '@/providers/StudyInfoProvider';
 
 export default function AttendDateList() {
-  const [attendanceDates, setAttendanceDates] = useState<AttendanceResponse[]>([]);
-
-  const fetchAttendanceDates = async () => {
-    const dates = await getDateList(11);
-    setAttendanceDates(dates.attendance_date_list);
-  };
-
-  useEffect(() => {
-    fetchAttendanceDates();
-  }, []);
+  const { studyId } = useParams<{ studyId: string }>();
+  const { study } = useContext(StudyInfoContext);
 
   return (
     <DefaultPaddedContainer>
       <Container padding="40px" direction="column" align="flex-start" css={{ minHeight: 'calc(100vh - 210px)' }}>
         <Container padding="50px" direction="column" css={{ backgroundColor: `${theme.colors.absolute.white}`, boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)', minWidth: 'fit-content' }}>
-          <AttendDateCreation studyId={11} onCreationComplete={fetchAttendanceDates} />
+          <AttendDateCreation studyId={Number(studyId)} />
           <Spacing height={20} />
           <hr css={HorizontalLine} />
           <Grid columns={6} css={{ alignItems: 'center', gridTemplateColumns: '1fr 1fr 1fr 1fr 0.5fr 0.5fr', padding: '10px 0px' }}>
@@ -53,21 +46,20 @@ export default function AttendDateList() {
             direction="column"
             justify="flex-start"
           >
-            {attendanceDates.map((data) => {
-              const startDate = new Date(data.start_time.replace(' ', 'T'));
-              const deadlineDate = new Date(data.deadline.replace(' ', 'T'));
+            {study.attendanceDateInfo.map((date: RequireAttendanceDate) => {
+              const startDate = new Date(date.start_time.replace(' ', 'T'));
+              const deadlineDate = new Date(date.deadline.replace(' ', 'T'));
               const allowTime = (deadlineDate.getTime() - startDate.getTime()) / (1000 * 60);
               const isPastDate = deadlineDate < new Date();
 
               return (
-                <React.Fragment key={data.id}>
+                <React.Fragment key={date.id}>
                   <AttendDateListElement
-                    studyId={11}
-                    startDateTime={data.start_time}
+                    studyId={Number(studyId)}
+                    startDateTime={date.start_time}
                     allowTime={allowTime}
-                    onComplete={fetchAttendanceDates}
                     isPastDate={isPastDate}
-                    dateId={data.id}
+                    dateId={date.id}
                   />
                   <hr css={HorizontalSoftLine} />
                 </React.Fragment>

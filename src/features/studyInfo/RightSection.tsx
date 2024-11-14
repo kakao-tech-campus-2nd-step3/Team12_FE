@@ -2,8 +2,14 @@ import Container from '@components/container';
 import { css } from '@emotion/react';
 import Button from '@components/button';
 import colorTheme from '@styles/colors';
+import { useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
+import routePaths from '@/constants/routePaths';
+import { StudyInfoContext } from '@/providers/StudyInfoProvider';
 
 export default function RightSection() {
+  const navigate = useNavigate();
+  const study = useContext(StudyInfoContext);
   return (
     <Container
       height="100%"
@@ -45,7 +51,11 @@ export default function RightSection() {
         <Button variant="primary">
           출석하기
         </Button>
-        <Button>출석 현황 확인하기</Button>
+        <Button
+          onClick={() => { navigate(routePaths.STUDY_ATTENDANCE(study.study.id)); }}
+        >
+          출석 현황 확인하기
+        </Button>
       </div>
       <hr css={hrStyle} />
       <div css={mainDescription}>해야하는 과제</div>
