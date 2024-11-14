@@ -10,6 +10,7 @@ interface StudyInfoContextProps {
 }
 interface StudyInfoContextValue {
   study: StudyInfoWithMembers;
+  refetch: () => void;
 }
 
 export const StudyInfoContext = createContext<StudyInfoContextValue>({
@@ -24,11 +25,13 @@ export const StudyInfoContext = createContext<StudyInfoContextValue>({
     id: 0,
     profile_image: '',
   },
+  refetch: () => {},
 });
 
 function StudyInfoContextProvider({ studyId, children }: StudyInfoContextProps) {
   const {
     data: study,
+    refetch,
   } = useSuspenseQueries({
     queries: [
       {
@@ -46,13 +49,18 @@ function StudyInfoContextProvider({ studyId, children }: StudyInfoContextProps) 
         ...(studyInfo.data),
         members: studyMemberInfo.data,
       };
+      const refetchInfos = () => {
+        studyInfo.refetch();
+        studyMemberInfo.refetch();
+      };
       return {
         data,
+        refetch: refetchInfos,
       };
     },
   });
   return (
-    <StudyInfoContext.Provider value={{ study }}>
+    <StudyInfoContext.Provider value={{ study, refetch }}>
       {children}
     </StudyInfoContext.Provider>
   );
