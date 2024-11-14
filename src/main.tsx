@@ -6,6 +6,7 @@ import { ThemeProvider } from '@emotion/react';
 import defaultTheme from '@styles/theme';
 import 'reset-css/reset.css';
 import { MemberInfoContextProvider } from '@providers/MemberInfoProvider';
+import { Toaster } from 'react-hot-toast';
 
 const queryClient = new QueryClient();
 
@@ -18,5 +19,6 @@ createRoot(document.getElementById('root')!).render(
         </MemberInfoContextProvider>
       </ThemeProvider>
     </QueryClientProvider>
+    <Toaster />
   </StrictMode>,
 );
