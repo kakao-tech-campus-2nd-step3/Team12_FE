@@ -7,7 +7,7 @@ export interface Attendance {
 }
 
 export interface AttendanceInfo {
-  attendance_date_list: string[];
+  required_attendance: string[];
   member_attendance: {
     [key: string]: MemberAttendanceInfo;
   };
