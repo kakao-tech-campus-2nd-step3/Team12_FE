@@ -2,25 +2,51 @@ import {
   type StudyCreationSectionProps,
 } from '@features/modal/studyCreation/StudyCreationModal';
 import { FormErrorMessage } from '@components/text/variants';
+import { ChangeEvent, useRef, useState } from 'react';
 import Avatar from '@/components/avatar';
-import Button from '@/components/button';
 import Container from '@/components/container';
 import Input from '@/components/input';
 import { Heading, Paragraph } from '@/components/text';
 import useStudyCreationStyle from './StudyCreation.styles';
 import Spacing from '@/components/spacing';
 import Grid from '@/components/grid';
+import Button from '@/components/button';
 
 export default function LeftSection({
   register,
   formState: { errors },
+  setValue,
 }: StudyCreationSectionProps) {
   const { textStyle } = useStudyCreationStyle();
+  const [avatarPreview, setAvatarPreview] = useState<string | null>(null);
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   const validations = {
     name: { required: { value: true, message: '스터디 이름을 입력하세요.' } },
     topic: { required: { value: true, message: '스터디 주제를 입력하세요.' } },
   };
+
+  const handleImageChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        if (e.target && typeof e.target.result === 'string') {
+          setAvatarPreview(e.target.result);
+        }
+      };
+      reader.readAsDataURL(file);
+    }
+    if (setValue) {
+      setValue('profileImage', file);
+    }
+  };
+
+  const handleButtonClick = () => {
+    fileInputRef.current?.click();
+  };
+
   return (
     <Container direction="column" gap="30px">
       <Container direction="column" align="flex-start">
@@ -28,8 +54,19 @@ export default function LeftSection({
       </Container>
 
       <Container direction="column" gap="6px">
-        <Avatar size="large" bordered />
-        <Button variant="transparent">스터디 사진 등록</Button>
+        <Avatar
+          size="large"
+          bordered
+          src={avatarPreview || ''}
+        />
+        <Button variant="transparent" onClick={handleButtonClick}>스터디 사진 등록</Button>
+        <Input
+          type="file"
+          ref={fileInputRef}
+          css={{ display: 'none' }}
+          accept="image/*"
+          onChange={handleImageChange}
+        />
       </Container>
 
       <Container direction="column" align="flex-start">

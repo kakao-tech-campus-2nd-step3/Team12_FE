@@ -5,6 +5,7 @@ import LoginSuccessPage from '@pages/LoginSuccessPage';
 import StudyInfoPage from '@pages/StudyInfoPage';
 import SubmitPersonalInfoPage from '@pages/SubmitPersonalInfoPage';
 import AttendDatePage from '@/pages/AttendDatePage';
+import JoinStudyPage from '@/pages/JoinStudyPage';
 
 const router = createBrowserRouter([
   {
@@ -35,6 +36,12 @@ const router = createBrowserRouter([
     path: routePaths.STUDY_INFO(':studyId'),
     element: (
       <StudyInfoPage />
+    ),
+  },
+  {
+    path: '/join',
+    element: (
+      <JoinStudyPage />
     ),
   },
 ]);

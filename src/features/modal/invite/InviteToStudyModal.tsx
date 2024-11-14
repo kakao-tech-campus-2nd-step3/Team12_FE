@@ -1,4 +1,6 @@
 import { css, useTheme } from '@emotion/react';
+import { useEffect, useState } from 'react';
+import CopyToClipboard from 'react-copy-to-clipboard';
 import Avatar from '@/components/avatar';
 import Button from '@/components/button';
 import Container from '@/components/container';
@@ -8,14 +10,37 @@ import colorTheme from '@/styles/colors';
 import Input from '@/components/input';
 import Grid from '@/components/grid';
 import Spacing from '@/components/spacing';
+import { inviteToStudy } from '@/api/invite';
 
 interface InviteToStudyProps {
   open: boolean;
   onClose: () => void;
+  copyComplete?: () => void;
+  studyId: number;
 }
 
-export default function InviteToStudyModal({ open, onClose }: InviteToStudyProps) {
+export default function InviteToStudyModal({
+  open, onClose, studyId, copyComplete,
+}: InviteToStudyProps) {
   const theme = useTheme();
+  const [inviteLink, setInviteLink] = useState('');
+
+  useEffect(() => {
+    const fetchInviteLink = async () => {
+      try {
+        const response = await inviteToStudy(studyId);
+        const link = `${import.meta.env.VITE_BASE_URL}/join?study_id=${response.study_id}&token=${response.token}`;
+        setInviteLink(link);
+      } catch (error) {
+        console.error('초대 링크 생성 실패:', error);
+      }
+    };
+
+    if (open) {
+      fetchInviteLink();
+    }
+  }, [open, studyId]);
+
   return (
     <Modal open={open} onClose={onClose} width="447px">
       <Container padding="30px 0" direction="column" align="flex-start">
@@ -33,20 +58,22 @@ export default function InviteToStudyModal({ open, onClose }: InviteToStudyProps
         <Grid columns={1}>
           <Input
             type="text"
-            value="https://discord.gg/RHphspSM"
+            value={inviteLink}
             readOnly
             label="초대 링크"
           />
           <Spacing height={20} />
-          <Button
-            variant="primary"
-            css={{
-              width: '100%',
-              borderRadius: theme.corners.medium,
-            }}
-          >
-            링크 공유하기
-          </Button>
+          <CopyToClipboard text={inviteLink} onCopy={copyComplete}>
+            <Button
+              variant="primary"
+              css={{
+                width: '100%',
+                borderRadius: theme.corners.medium,
+              }}
+            >
+              링크 공유하기
+            </Button>
+          </CopyToClipboard>
         </Grid>
       </Container>
     </Modal>

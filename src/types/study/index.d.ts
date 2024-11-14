@@ -1,5 +1,3 @@
-import type { Member } from '@/types/member';
-
 export interface Study {
   id: number;
   name: string;
@@ -7,7 +5,7 @@ export interface Study {
   created_at: Date;
   is_open: boolean;
   topic: string;
-  profile_image?: string;
+  profileImage: file;
 }
 
 export type StudyFilter = 'all' | 'open' | 'closed';
@@ -16,7 +14,7 @@ export type StudyRole = '스터디장' | '스터디원';
 // TODO: 추후에 profileImage input 구현 후 타입 변경
 // export type StudyCreationRequestBody =
 //  Pick<Study, 'name' | 'description' | 'isOpen' | 'topic' | 'profileImage'>;
-export type StudyCreationRequestBody = Pick<Study, 'name' | 'description' | 'is_open' | 'topic'>;
+export type StudyCreationRequestBody = Pick<Study, 'name' | 'description' | 'is_open' | 'topic' | 'profileImage'>;
 export type StudyCreationInputs = StudyCreationRequestBody;
 
 export interface StudySearchRequestQuery {

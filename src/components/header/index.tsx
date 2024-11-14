@@ -15,6 +15,7 @@ import {
 import { rootWidth } from '@styles/length';
 import { MemberInfoContext } from '@providers/MemberInfoProvider';
 import LoginModal from '@features/modal/login/LoginModal';
+import StudyCreationModal from '@/features/modal/studyCreation/StudyCreationModal';
 
 function Header() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -22,6 +23,7 @@ function Header() {
   const { memberInfo, isLoggedIn } = useContext(MemberInfoContext);
   const toggleContainerRef = useRef<HTMLDivElement>(null);
   const theme = useTheme();
+  const [isStudyCreationModalOpen, setIsStudyCreationModalOpen] = useState(false);
 
   const toggleDropdown = () => {
     setIsDropdownOpen((prev) => !prev);
@@ -29,11 +31,13 @@ function Header() {
 
   return (
     <>
-      <Container
-        cssOverride={
-        css`background-color: ${theme.colors.background.main}; box-shadow: 0 4px 7px rgba(0, 0, 0, 0.1); position: relative;`
-      }
-      >
+      <Container cssOverride={css`background-color: ${theme.colors.background.main}; box-shadow: 0 4px 7px rgba(0, 0, 0, 0.1); position: relative;`}>
+        {isStudyCreationModalOpen && (
+        <StudyCreationModal
+          open={isStudyCreationModalOpen}
+          onClose={() => setIsStudyCreationModalOpen(false)}
+        />
+        )}
         <Container
           justify="space-between"
           padding="20px"
@@ -49,7 +53,10 @@ function Header() {
             width="auto"
             gap="20px"
           >
-            <Button variant="default">
+            <Button
+              variant="default"
+              onClick={() => setIsStudyCreationModalOpen(true)}
+            >
               스터디 생성하기
             </Button>
             <img src={alarm} alt="alarm" css={{ width: '25px' }} />

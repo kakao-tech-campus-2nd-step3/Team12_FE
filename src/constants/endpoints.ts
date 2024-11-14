@@ -7,6 +7,9 @@ const endpoints = {
   studyInfo: (studyId: number | string) => `${prefix}/studies/${studyId}`,
   studyMembers: (studyId: number | string) => `${prefix}/studies/${studyId}/members`,
   submitPersonalInfo: `${prefix}/auth`,
+  createStudy: `${prefix}/studies`,
+  inviteToStudy: (studyId: number) => `${prefix}/studies/${studyId}/members/invites`,
+  getStudy: (studyId: number) => `${prefix}/studies/${studyId}`,
   notices: `${prefix}/notices`,
   assignments: `${prefix}/assignments`,
 };
