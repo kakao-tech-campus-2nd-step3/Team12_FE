@@ -1,5 +1,9 @@
 import { useTheme } from '@emotion/react';
 import { FormState, useForm, UseFormRegister } from 'react-hook-form';
+import { useContext } from 'react';
+import { MemberInfoContext } from '@providers/MemberInfoProvider';
+import { useNavigate } from 'react-router-dom';
+import routePaths from '@constants/routePaths';
 import Avatar from '@/components/avatar';
 import Button from '@/components/button';
 import Checkbox from '@/components/checkbox';
@@ -29,10 +33,10 @@ export default function PersonalInfoModal({ open, onClose }: PersonalInfoModalPr
   const {
     selectPhotoButtonStyle, linkTextStyle, textStyle,
   } = usePersonInfoModalStyles();
+  const { memberInfo } = useContext(MemberInfoContext);
   const { register, handleSubmit, formState: { errors, isValid } } = useForm<PersonalInfoInputs>({
     defaultValues: {
       nickname: '',
-      email: '',
       contact: '',
       description: '',
       agree_to_terms: false,
@@ -40,8 +44,17 @@ export default function PersonalInfoModal({ open, onClose }: PersonalInfoModalPr
     mode: 'onChange',
   });
   const theme = useTheme();
+  const navigate = useNavigate();
 
-  const onSubmit = (data: PersonalInfoInputs) => submitPersonalInfo(data);
+  const onSubmit = (data: PersonalInfoInputs) => {
+    if (!memberInfo) return;
+    submitPersonalInfo(
+      data,
+      memberInfo.name as string,
+      memberInfo.email as string,
+    );
+    navigate(routePaths.MAIN);
+  };
 
   const validations = {
     nickname: {
@@ -60,7 +73,7 @@ export default function PersonalInfoModal({ open, onClose }: PersonalInfoModalPr
     },
     description: {
       required: { value: true, message: '자기소개를 입력하세요.' },
-      maxLangth: { value: 255, message: '자기소개는 최대 255자까지 입력 가능합니다.' },
+      maxLength: { value: 255, message: '자기소개는 최대 255자까지 입력 가능합니다.' },
     },
     agreeToTerms: { required: { value: true, message: '약관에 동의해주세요.' } },
   };
@@ -81,9 +94,6 @@ export default function PersonalInfoModal({ open, onClose }: PersonalInfoModalPr
           <Grid columns={1}>
             <Input label="닉네임" placeholder="디토에서 사용할 닉네임이에요." type="text" {...register('nickname', validations.nickname)} />
             <FormErrorMessage errors={errors} name="nickname" />
-            <Spacing height={10} />
-            <Input label="이메일" placeholder="example@gmail.com" type="email" {...register('email', validations.email)} />
-            <FormErrorMessage errors={errors} name="email" />
             <Spacing height={10} />
             <Input label="연락처" placeholder="010-0000-0000" type="tel" {...register('contact', validations.contact)} />
             <FormErrorMessage errors={errors} name="contact" />
