@@ -13,11 +13,12 @@ export default function AssignList() {
   const [paginationInfo, setPaginationInfo] = useState<Omit<AssignsResponse, 'assignments'>>();
   const [currentPage, setCurrentPage] = useState(0);
   const pageSize = 5;
+  const studyId = 11;
 
   useEffect(() => {
     const fetchAssigns = async () => {
       try {
-        const assignsInfo = await getAssignList({ page: currentPage, size: pageSize });
+        const assignsInfo = await getAssignList({ page: currentPage, size: pageSize, studyId });
         setAssigns(assignsInfo.assignments);
         setPaginationInfo({
           has_next_page: assignsInfo.has_next_page,
