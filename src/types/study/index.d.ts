@@ -59,7 +59,7 @@ export type StudyMembersResponse = StudyMember[];
 
 export type ExtendedStudyInfo = Study &
 { members: StudyMember[] } &
-{ studyAttendanceInfo: AttendanceInfo } &
-{ attendanceDateInfo: RequireAttendanceDate[] } &
+{ study_attendance_info: AttendanceInfo } &
+{ attendance_date_info: RequireAttendanceDate[] } &
 { notice?: Notice } &
 { assignment?: Assignment };
