@@ -17,6 +17,7 @@ import { MemberInfoContext } from '@providers/MemberInfoProvider';
 import LoginModal from '@features/modal/login/LoginModal';
 import { Link } from 'react-router-dom';
 import routePaths from '@constants/routePaths';
+import toast from 'react-hot-toast';
 import StudyCreationModal from '@/features/modal/studyCreation/StudyCreationModal';
 
 function Header() {
@@ -59,7 +60,14 @@ function Header() {
           >
             <Button
               variant="default"
-              onClick={() => setIsStudyCreationModalOpen(true)}
+              onClick={() => {
+                if (isLoggedIn) {
+                  setIsStudyCreationModalOpen(true);
+                  return;
+                }
+
+                toast.error('로그인이 필요한 작업입니다. 먼저 로그인해주세요.');
+              }}
             >
               스터디 생성하기
             </Button>
@@ -165,7 +173,9 @@ function HeaderDropdown({ close, toggleContainerRef }: HeaderDropdownProps) {
   return (
     <div css={dropdownStyle} ref={dropdownRef}>
       <ul css={menuStyle}>
-        <li>내 스터디</li>
+        <Link to={routePaths.MY_STUDY} css={{ textDecoration: 'none', color: 'black' }}>
+          <li>내 스터디</li>
+        </Link>
         <li>설정</li>
         <li role="presentation" onClick={() => logout()}>로그아웃</li>
       </ul>

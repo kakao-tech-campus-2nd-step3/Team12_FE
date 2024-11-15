@@ -8,12 +8,20 @@ import { useRef, useState } from 'react';
 import Input from '@components/input';
 import AssignDeadline from '@features/assignment/AssignDeadline';
 import toast from 'react-hot-toast';
+import { css } from '@emotion/react';
+import { useNavigate } from 'react-router-dom';
+import routePaths from '@constants/routePaths.ts';
 import { createAssign } from '@/api/assignment';
 
-export default function AssignCreation() {
+interface AssignCreationProps {
+  studyId: number;
+}
+
+export default function AssignCreation({ studyId }: AssignCreationProps) {
   const editorRef = useRef<Editor>(null);
   const [title, setTitle] = useState('');
-  const [deadline, setDeadline] = useState<string>(''); // deadline 상태 추가
+  const [deadline, setDeadline] = useState<string>('');
+  const navigate = useNavigate();
 
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
@@ -30,12 +38,13 @@ export default function AssignCreation() {
 
     try {
       await createAssign({
-        studyId: 11, // 실제 사용할 studyId로 변경 필요
+        studyId,
         title,
         content,
         deadline,
       });
       toast.success('과제가 성공적으로 작성되었습니다!');
+      navigate(routePaths.STUDY_ASSIGNMENT(studyId));
     } catch (error) {
       toast.error('과제 작성 중 오류가 발생하였습니다.');
     }
@@ -43,29 +52,38 @@ export default function AssignCreation() {
 
   return (
     <DefaultPaddedContainer css={{ boxShadow: '0 2px 2px rgba(0, 0, 0, 0.1)' }}>
-      <Container direction="column" padding="0 10px 50px 10px">
-        <Container justify="flex-start" padding="15px">
-          <Heading.H2 css={{ margin: '20px 20px' }}>과제 등록하기</Heading.H2>
+      <Container direction="column" padding="60px" align="flex-start">
+        <Container justify="flex-start" padding="20px 0">
+          <Heading.H2 weight="bold">과제 등록하기</Heading.H2>
         </Container>
-        <Container justify="flex-start">
-          <Heading.H4 css={{ padding: '20px 15px 20px 40px' }}>제목: </Heading.H4>
-          <Input
-            type="text"
-            value={title}
-            onChange={handleTitleChange}
-            css={{ width: '300px', height: '30px' }}
+        <Container justify="space-between">
+          <Container justify="flex-start" padding="0 0 20px 0">
+            <Heading.H4>제목: </Heading.H4>
+            <Input
+              type="text"
+              value={title}
+              onChange={handleTitleChange}
+              css={{ width: '300px', height: '30px', marginLeft: '15px' }}
+            />
+          </Container>
+          <AssignDeadline onDeadlineChange={handleDeadlineChange} />
+        </Container>
+        <Container css={css`
+            & > div {
+              width: 100%;
+            }
+          `}
+        >
+          <Editor
+            ref={editorRef}
+            previewStyle="vertical"
+            height="400px"
+            initialEditType="markdown"
+            useCommandShortcut={false}
+            hideModeSwitch={true}
           />
         </Container>
-        <AssignDeadline onDeadlineChange={handleDeadlineChange} />
-        <Editor
-          ref={editorRef}
-          previewStyle="vertical"
-          height="400px"
-          initialEditType="markdown"
-          useCommandShortcut={false}
-          hideModeSwitch={true}
-        />
-        <Container justify="flex-end" padding="20px 60px">
+        <Container justify="flex-end" padding="20px 0">
           <Button variant="primary" onClick={NoticeCreationBtn}>등록하기</Button>
         </Container>
 

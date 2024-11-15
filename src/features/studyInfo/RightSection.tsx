@@ -27,6 +27,10 @@ export default function RightSection() {
     navigate(routePaths.STUDY_ATTENDANCE(study.id));
   };
 
+  const moveAssignPage = () => {
+    navigate(routePaths.STUDY_ASSIGNMENT(study.id));
+  };
+
   useEffect(() => {
     study.attendance_date_info.forEach((date) => {
       if (date.start_time.split(' ')[0] === currentDate.toLocaleDateString('en-CA')) {
@@ -113,7 +117,11 @@ export default function RightSection() {
         <div css={subDescription}>{study.assignment?.title ?? '과제가 없습니다.'}</div>
         <div css={buttonDivStyle}>
           <Button variant="primary" disabled={!study.assignment?.title}>과제 완료하기</Button>
-          <Button>전체 과제 확인하기</Button>
+          <Button
+            onClick={moveAssignPage}
+          >
+            전체 과제 확인하기
+          </Button>
         </div>
       </Container>
     </AttendanceInfoContextProvider>

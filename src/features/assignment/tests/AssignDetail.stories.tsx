@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import AssignDetailPage from "@features/assignment/AssignDetail.tsx";
-
+import AssignDetailPage from "@pages/assignment/AssignDetailPage.tsx";
 
 const meta: Meta<typeof AssignDetailPage> = {
     title: 'features/Assignment/AssignDetailPage',

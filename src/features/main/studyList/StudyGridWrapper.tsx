@@ -27,7 +27,7 @@ function StudyGridWrapper({ studyFilter, searchKeyword }: StudyItemWrapperProps)
     if (searchKeyword) {
       params.name = searchKeyword;
     }
-    if (studyFilter !== 'all') params.is_open = studyFilter === 'open';
+    if (studyFilter !== 'all') params.isOpen = studyFilter === 'open';
     return searchStudies(params);
   };
   const { ref, inView } = useInView({ threshold: 1 });

@@ -7,6 +7,8 @@ const endpoints = {
   studyInfo: (studyId: number | string) => `${prefix}/studies/${studyId}`,
   editStudyProfile: (studyId: number | string) => `${prefix}/studies/${studyId}/profileImage`,
   studyMembers: (studyId: number | string) => `${prefix}/studies/${studyId}/members`,
+  studyRole: (studyId: number | string) => `${prefix}/studies/${studyId}/members/role`,
+  applyStudyJoin: (studyId: number | string) => `${prefix}/studies/${studyId}/members/apply`,
   submitPersonalInfo: `${prefix}/auth`,
   createStudy: `${prefix}/studies`,
   inviteToStudy: (studyId: number) => `${prefix}/studies/${studyId}/members/invites`,

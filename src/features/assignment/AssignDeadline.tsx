@@ -45,7 +45,7 @@ export default function AssignDeadline({ onDeadlineChange }: AssignCreationDateP
 `;
 
   return (
-    <Container direction="column" justify="flex-end" align="flex-end" gap="5px" padding="10px 70px">
+    <Container direction="column" justify="flex-end" width="auto" align="flex-end" gap="5px" padding="10px 10px">
       <Paragraph>마감 기한</Paragraph>
       <Container gap="5px" justify="flex-end" align="flex-end" cssOverride={calendarSection}>
         <ReactDatePicker
