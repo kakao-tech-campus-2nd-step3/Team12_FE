@@ -4,6 +4,7 @@ import { Heading } from '@components/text';
 import Container from '@components/container';
 import Grid from '@components/grid';
 import MyStudyListItem from '@features/myStudy/MyStudyListItem';
+import toast from 'react-hot-toast';
 import { Study } from '@/types/study';
 import { getMyStudies } from '@/api/study';
 
@@ -16,7 +17,7 @@ export default function MyStudyList() {
         const myStudiesInfo: Study[] = await getMyStudies();
         setStudies(myStudiesInfo);
       } catch (e) {
-        console.error('과제를 불러오는 데 실패했습니다:', e);
+        toast.error('과제를 불러오는 데 실패했습니다.');
       }
     };
 
