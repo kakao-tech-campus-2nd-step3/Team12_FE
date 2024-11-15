@@ -8,8 +8,12 @@ import NoticePage from '@pages/notice/NoticePage';
 import NoticeWritePage from '@pages/notice/NoticeWritePage';
 import NoticeDetailPage from '@pages/notice/NoticeDetailPage';
 import NoticeEditPage from '@pages/notice/NoticeEditPage';
-import AttendDatePage from '@/pages/AttendDatePage';
+import AssignPage from '@pages/assignment/AssignPage.tsx';
+import AssignWritePage from '@pages/assignment/AssignWritePage.tsx';
+import AssignDetailPage from '@pages/assignment/AssignDetailPage.tsx';
+import AssignEditPage from '@pages/assignment/AssignEditPage.tsx';
 import JoinStudyPage from '@/pages/JoinStudyPage';
+import AttendDatePage from '@/pages/AttendDatePage';
 
 const router = createBrowserRouter([
   {
@@ -76,6 +80,30 @@ const router = createBrowserRouter([
     path: routePaths.STUDY_NOTICE_EDIT(':noticeId'),
     element: (
       <NoticeEditPage />
+    ),
+  },
+  {
+    path: routePaths.STUDY_ASSIGNMENT(':studyId'),
+    element: (
+      <AssignPage />
+    ),
+  },
+  {
+    path: routePaths.STUDY_ASSIGNMENT_WRITE(':studyId'),
+    element: (
+      <AssignWritePage />
+    ),
+  },
+  {
+    path: routePaths.STUDY_ASSIGNMENT_DETAIL(':assignId'),
+    element: (
+      <AssignDetailPage />
+    ),
+  },
+  {
+    path: routePaths.STUDY_ASSIGNMENT_EDIT(':assignId'),
+    element: (
+      <AssignEditPage />
     ),
   },
 ]);
