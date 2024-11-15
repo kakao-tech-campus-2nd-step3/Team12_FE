@@ -22,30 +22,31 @@ export default function MyStudyList() {
     };
 
     fetchStudies();
-  });
+  }, []);
 
   return (
-    <DefaultPaddedContainer css={{ boxShadow: '0 2px 2px rgba(0, 0, 0, 0.1)' }}>
+    <DefaultPaddedContainer css={{ boxShadow: '0 2px 2px rgba(0, 0, 0, 0.1)', backgroundColor: 'white' }}>
       <Container direction="column" padding="0 10px 50px 10px">
         <Container justify="flex-start" padding="15px">
           <Heading.H2 css={{ margin: '20px 0', fontWeight: 'bold' }}>내 스터디</Heading.H2>
         </Container>
-        <Grid
-          columns={{
-            initial: 1,
-            xs: 3,
-            md: 4,
-            lg: 5,
-          }}
-          gap={19}
-        >
-          {studies.map((study) => (
-            <MyStudyListItem
-              key={`submitted-item-${study.id}`}
-              study={study}
-            />
-          ))}
-        </Grid>
+        {studies.length === 0
+          ? '가입한 스터디가 없어요. 스터디를 검색한 후 가입해보세요!'
+          : (
+            <Grid
+              columns={{
+                initial: 1,
+                xs: 3,
+                md: 4,
+                lg: 4,
+              }}
+              gap={15}
+            >
+              {studies.map((study) => (
+                <MyStudyListItem key={`submitted-item-${study.id}`} study={study} />
+              ))}
+            </Grid>
+          )}
       </Container>
     </DefaultPaddedContainer>
   );

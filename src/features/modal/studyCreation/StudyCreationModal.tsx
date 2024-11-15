@@ -47,7 +47,7 @@ export default function StudyCreationModal({ open, onClose }: StudyCreationProps
     };
     formData.append('request', new Blob([JSON.stringify(requestData)], { type: 'application/json' }));
     if (data.profile_image) {
-      formData.append('profileImage', data.profile_image);
+      formData.append('profile_image', data.profile_image);
     } else {
       const defaultImageResponse = await fetch(defaultBackground);
       const blob = await defaultImageResponse.blob();
