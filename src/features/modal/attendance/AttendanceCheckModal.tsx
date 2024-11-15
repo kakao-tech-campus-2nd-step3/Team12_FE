@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import { useContext, useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
 import Modal from '@/components/modal';
 import Text, { Heading } from '@/components/text';
 import Grid from '@/components/grid';
@@ -44,7 +45,6 @@ export default function AttendanceCheckModal({
   };
 
   const handleEditComplete = () => {
-    console.log(study.attendanceDateInfo);
     try {
       Object.entries(attendanceStatus).forEach(([memberId, isAttended]) => {
         updateAttendance({
@@ -58,7 +58,7 @@ export default function AttendanceCheckModal({
       });
       onClose();
     } catch (error) {
-      console.error('Failed to update attendance:', error);
+      toast.error('Failed to update attendance');
     }
   };
 
@@ -93,7 +93,7 @@ export default function AttendanceCheckModal({
           {study.members.map((member) => {
             const memberId = member.member.id.toString();
             const attendanceDates = study
-              .studyAttendanceInfo.member_attendance[memberId]
+              .study_attendance_info.member_attendance[memberId]
               ?.member_attendance_list ?? [];
             let time = '';
 

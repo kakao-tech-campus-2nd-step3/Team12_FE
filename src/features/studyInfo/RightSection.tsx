@@ -2,7 +2,7 @@ import Container from '@components/container';
 import { css } from '@emotion/react';
 import Button from '@components/button';
 import colorTheme from '@styles/colors';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useContext, useEffect, useState } from 'react';
 import routePaths from '@/constants/routePaths';
 import { StudyInfoContext } from '@/providers/StudyInfoProvider';
@@ -11,7 +11,7 @@ import { AttendanceInfoContextProvider } from '@/providers/AttendanceInfoProvide
 
 export default function RightSection() {
   const navigate = useNavigate();
-  const study = useContext(StudyInfoContext);
+  const { study } = useContext(StudyInfoContext);
   const [currentDate] = useState(new Date());
   const [isAttendDate, setIsAttendDate] = useState(false);
   const [isAttendTime, setIsAttendTime] = useState(false);
@@ -23,11 +23,11 @@ export default function RightSection() {
   };
 
   const moveStudyPage = () => {
-    navigate(routePaths.STUDY_ATTENDANCE(study.study.id));
+    navigate(routePaths.STUDY_ATTENDANCE(study.id));
   };
 
   useEffect(() => {
-    study.study.attendanceDateInfo.forEach((date) => {
+    study.attendance_date_info.forEach((date) => {
       if (date.start_time.split(' ')[0] === currentDate.toLocaleDateString('en-CA')) {
         setIsAttendDate(true);
       }
@@ -36,10 +36,10 @@ export default function RightSection() {
         setIsAttendTime(true);
       }
     });
-  }, [currentDate, study.study.attendanceDateInfo]);
+  }, [currentDate, study.attendance_date_info]);
 
   return (
-    <AttendanceInfoContextProvider studyId={study.study.id} dateId={dateId}>
+    <AttendanceInfoContextProvider studyId={study.id} dateId={dateId}>
       <Container
         height="100%"
         width="40%"
@@ -49,10 +49,10 @@ export default function RightSection() {
         gap="6px"
       >
         <div css={css`
-      font-size: 20px;
-      color: ${colorTheme.primary.darken};
-          font-weight: bold;
-      `}
+          font-size: 20px;
+          color: ${colorTheme.primary.darken};
+              font-weight: bold;
+          `}
         >
           공지사항
         </div>
@@ -60,25 +60,22 @@ export default function RightSection() {
       font-size: 14px;
       `}
         >
-          오늘은
-          {' '}
-          {currentDate.getMonth()}
-          월
-          {' '}
-          {currentDate.getDate()}
-          일입니다.
+          {study.notice?.title ?? '공지사항이 없습니다.'}
         </div>
-        <div css={css`
-        font-size: 10px;
-        color: #B5B5B5;
-        text-decoration: underline;
-        text-align: right;
-        width: 100%;
-        margin-top: -10px;
-      `}
-        >
-          전체 공지사항
-        </div>
+        <Container padding="7px 0" justify="flex-end">
+          <Link
+            to={routePaths.STUDY_NOTICE(study.id)}
+            css={css` 
+              font-size: 13px;
+              color: #B5B5B5;
+              text-decoration: underline;
+              margin-right: 0;
+              margin-top: -10px;
+            `}
+          >
+            전체 공지사항
+          </Link>
+        </Container>
         <hr css={hrStyle} />
         <div css={mainDescription}>{currentDate.toLocaleDateString('en-CA')}</div>
         { isAttendDate ? <div css={subDescription}>오늘은 스터디 출석일이에요!</div>
@@ -103,9 +100,9 @@ export default function RightSection() {
         </div>
         <hr css={hrStyle} />
         <div css={mainDescription}>해야하는 과제</div>
-        <div css={subDescription}>애자일한 개발 완성</div>
+        <div css={subDescription}>{study.assignment?.title ?? '과제가 없습니다.'}</div>
         <div css={buttonDivStyle}>
-          <Button variant="primary">과제 완료하기</Button>
+          <Button variant="primary" disabled={!study.assignment?.title}>과제 완료하기</Button>
           <Button>전체 과제 확인하기</Button>
         </div>
       </Container>

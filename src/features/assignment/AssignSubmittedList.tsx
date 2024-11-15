@@ -3,36 +3,42 @@ import { useState, useEffect } from 'react';
 import { Heading, Paragraph } from '@components/text';
 import Container from '@components/container';
 import Grid from '@components/grid';
+import AssignSubmittedListItem from '@features/assignment/AssignSubmittedListItem';
 import Button from '@components/button';
-import AssignListItem from '@features/assignment/AssignListItem';
-import { Assignment, AssignsResponse } from '@/types/assignment';
-import { getAssignList } from '@/api/assignment';
+import { SubmittedAssign, SubmittedAssignList } from '@/types/assignment';
+import { getSubmittedAssignList } from '@/api/assignment';
+import { NoticesResponse } from '@/types/notice';
 
-export default function AssignList() {
-  const [assigns, setAssigns] = useState<Assignment[]>([]);
-  const [paginationInfo, setPaginationInfo] = useState<Omit<AssignsResponse, 'assignments'>>();
+export default function AssignSubmittedList() {
+  const [submittedAssigns, setSubmittedAssigns] = useState<SubmittedAssign[]>([]);
+  const [paginationInfo, setPaginationInfo] = useState<Omit<NoticesResponse, 'notices'>>();
   const [currentPage, setCurrentPage] = useState(0);
   const pageSize = 5;
-  const studyId = 11;
+  const assignId = 1;
 
   useEffect(() => {
-    const fetchAssigns = async () => {
+    const fetchSubmittedAssigns = async () => {
       try {
-        const assignsInfo = await getAssignList({ page: currentPage, size: pageSize, studyId });
-        setAssigns(assignsInfo.assignments);
+        // eslint-disable-next-line max-len
+        const submittedAssignsInfo: SubmittedAssignList = await getSubmittedAssignList({
+          page: currentPage,
+          size: pageSize,
+          assignId,
+        });
+        setSubmittedAssigns(submittedAssignsInfo.assignment_files);
         setPaginationInfo({
-          has_next_page: assignsInfo.has_next_page,
-          current_page: assignsInfo.current_page,
-          max_page: assignsInfo.max_page,
-          total_item_count: assignsInfo.total_item_count,
+          has_next_page: submittedAssignsInfo.has_next_page,
+          current_page: submittedAssignsInfo.current_page,
+          max_page: submittedAssignsInfo.max_page,
+          total_item_count: submittedAssignsInfo.total_item_count,
         });
       } catch (e) {
         console.error('과제를 불러오는 데 실패했습니다:', e);
       }
     };
 
-    fetchAssigns();
-  }, [currentPage]);
+    fetchSubmittedAssigns();
+  }, [currentPage, assignId]);
 
   const handleNextPage = () => {
     if (paginationInfo?.has_next_page) {
@@ -50,18 +56,17 @@ export default function AssignList() {
     <DefaultPaddedContainer css={{ boxShadow: '0 2px 2px rgba(0, 0, 0, 0.1)' }}>
       <Container direction="column" padding="0 10px 50px 10px">
         <Container justify="flex-start" padding="15px">
-          <Heading.H2 css={{ margin: '20px 20px' }}>과제</Heading.H2>
+          <Heading.H2 css={{ margin: '20px 20px' }}>제출한 과제</Heading.H2>
         </Container>
         <Container justify="space-between" padding="0 40px 20px 40px">
-          <Paragraph>과제입니다. 잘 읽고 제출해주세요.</Paragraph>
-          <Button variant="primary">과제 생성하기</Button>
+          <Paragraph>제출한 과제입니다. 서로 과제를 보고 피드백해주세요.</Paragraph>
         </Container>
         <Container direction="column" padding="10px 20px">
           <Container justify="space-between" padding="4px" cssOverride={{ borderBottom: '2px solid #EDEDED' }}>
-            <Paragraph css={{ flex: 0.5, textAlign: 'center' }}>No.</Paragraph>
-            <Paragraph css={{ flex: 4, textAlign: 'center' }}>제목</Paragraph>
-            <Paragraph css={{ flex: 1, textAlign: 'center' }}>등록일</Paragraph>
-            <Paragraph css={{ flex: 1, textAlign: 'center' }}>마감기한</Paragraph>
+            <Paragraph css={{ flex: 1, textAlign: 'center' }}>No.</Paragraph>
+            <Paragraph css={{ flex: 5, textAlign: 'center' }}>제목</Paragraph>
+            <Paragraph css={{ flex: 1, textAlign: 'center' }}>제출자</Paragraph>
+            <Paragraph css={{ flex: 1, textAlign: 'center' }}>다운로드</Paragraph>
           </Container>
           <Grid
             columns={{
@@ -71,17 +76,14 @@ export default function AssignList() {
               lg: 1,
             }}
           >
-            {
-                            assigns.map((assign) => (
-                              <AssignListItem
-                                key={`notice-item-${assign.id}`}
-                                assign={assign}
-                              />
-                            ))
-                        }
+            {submittedAssigns.map((submittedAssign) => (
+              <AssignSubmittedListItem
+                key={`submitted-item-${submittedAssign.file.id}`}
+                submittedAssign={submittedAssign}
+              />
+            ))}
           </Grid>
         </Container>
-
         <Container padding="20px" gap="12px">
           <Button
             variant="default"

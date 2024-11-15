@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import NoticeDetailPage from "@features/notice/NoticeDetail.tsx";
+import NoticeDetailPage from "@pages/notice/NoticeDetailPage.tsx";
 
 
 const meta: Meta<typeof NoticeDetailPage> = {

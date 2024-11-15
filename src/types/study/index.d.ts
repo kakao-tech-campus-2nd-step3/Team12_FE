@@ -1,4 +1,7 @@
-import { RequireAttendanceDate } from '../attendance';
+import type { AttendanceInfo, RequireAttendanceDate } from '@/types/attendance';
+import type { Member } from '@/types/member';
+import type { Notice } from '@/types/notice';
+import { Assignment } from '@/types/assignment';
 
 export interface Study {
   id: number;
@@ -54,7 +57,9 @@ export type StudyMember = {
 
 export type StudyMembersResponse = StudyMember[];
 
-export type StudyInfoWithMembers = DetailedStudyInfo &
+export type ExtendedStudyInfo = Study &
 { members: StudyMember[] } &
-{ studyAttendanceInfo: AttendanceInfo } &
-{ attendanceDateInfo: RequireAttendanceDate[] };
+{ study_attendance_info: AttendanceInfo } &
+{ attendance_date_info: RequireAttendanceDate[] } &
+{ notice?: Notice } &
+{ assignment?: Assignment };
