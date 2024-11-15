@@ -15,7 +15,6 @@ import AssignEditPage from '@pages/assignment/AssignEditPage';
 import MyStudyPage from '@pages/MyStudyPage';
 import AttendDatePage from '@/pages/AttendDatePage';
 import JoinStudyPage from '@/pages/JoinStudyPage';
-import AttendDatePage from '@/pages/AttendDatePage';
 
 const router = createBrowserRouter([
   {
@@ -106,6 +105,9 @@ const router = createBrowserRouter([
     path: routePaths.STUDY_ASSIGNMENT_EDIT(':assignId'),
     element: (
       <AssignEditPage />
+    ),
+  },
+  {
     path: routePaths.MY_STUDY,
     element: (
       <MyStudyPage />
