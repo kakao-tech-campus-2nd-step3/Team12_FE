@@ -165,7 +165,9 @@ function HeaderDropdown({ close, toggleContainerRef }: HeaderDropdownProps) {
   return (
     <div css={dropdownStyle} ref={dropdownRef}>
       <ul css={menuStyle}>
-        <li>내 스터디</li>
+        <Link to={routePaths.MY_STUDY} css={{ textDecoration: 'none', color: 'black' }}>
+          <li>내 스터디</li>
+        </Link>
         <li>설정</li>
         <li role="presentation" onClick={() => logout()}>로그아웃</li>
       </ul>
