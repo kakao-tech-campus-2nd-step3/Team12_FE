@@ -10,6 +10,8 @@ import { Toaster } from 'react-hot-toast';
 
 const queryClient = new QueryClient();
 
+console.log(import.meta.env.VITE_BASE_URL);
+
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>

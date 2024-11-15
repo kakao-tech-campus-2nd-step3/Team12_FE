@@ -91,7 +91,11 @@ export default function RightSection() {
 
             출석하기
           </Button>
-          { open && <EnterCodeModal open={open} onClose={onClose} /> }
+          {
+          // 민경 TODO : 실제 역할에 따라 role을 넘겨줘야 함
+          // eslint-disable-next-line jsx-a11y/aria-role
+          open && <EnterCodeModal open={open} onClose={onClose} role="user" />
+          }
           <Button
             onClick={moveStudyPage}
           >

@@ -29,28 +29,20 @@ export function AttendanceInfoContextProvider(
   const [attendanceCode, setAttendanceCode] = useState('');
   useEffect(() => {
     (async () => {
-      try {
-        if (!dateId) return;
-        const code = await getCode({ study_id: studyId, date_id: dateId });
-        setAttendanceCode(code.code);
-      } catch (e) {
-        console.error(e);
-      }
+      if (!dateId) return;
+      const code = await getCode({ study_id: studyId, date_id: dateId });
+      setAttendanceCode(code.code);
     })();
   }, [studyId, dateId]);
 
-  const checkAttend = async () => {
-    try {
-      const requestData = {
-        date_id: dateId,
-        code: attendanceCode,
-      };
-      checkAttendance(
-        { requestData, study_id: studyId.toString() },
-      );
-    } catch (e) {
-      console.error(e);
-    }
+  const checkAttend = async (): Promise<void> => {
+    const requestData = {
+      date_id: dateId,
+      code: attendanceCode,
+    };
+    await checkAttendance(
+      { requestData, study_id: studyId.toString() },
+    );
   };
 
   return (
