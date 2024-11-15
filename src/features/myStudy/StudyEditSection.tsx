@@ -8,16 +8,21 @@ import Input from '@components/input';
 import { css } from '@emotion/react';
 import theme from '@styles/theme';
 import toast from 'react-hot-toast';
+import Checkbox from '@components/checkbox';
 import { editStudyInfo, editStudyProfile, getStudyInfo } from '@/api/study';
 
-export default function StudyEditSection() {
+interface StudyEditSectionProps {
+  studyId: number;
+  onClose: () => void;
+}
+
+export default function StudyEditSection({ studyId, onClose }: StudyEditSectionProps) {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [isOpen, setIsOpen] = useState<boolean>(true);
   const [topic, setTopic] = useState('');
   const [profileImage, setProfileImage] = useState('');
   const [file, setFile] = useState<File | null>(null);
-  const studyId = 57;
 
   useEffect(() => {
     const fetchStudy = async () => {
@@ -43,10 +48,15 @@ export default function StudyEditSection() {
       const formData = new FormData();
       if (file) {
         formData.append('profile_image', file);
+      } else {
+        const defaultImage = await fetch(profileImage);
+        const blob = await defaultImage.blob();
+        formData.append('profile_image', new Blob([blob], { type: 'multipart/form-data' }));
       }
       await editStudyProfile(studyId, formData);
       await editStudyInfo(studyId, updatedData);
       toast.success('스터디 정보가 수정되었습니다.');
+      onClose();
     } catch (error) {
       toast.error('스터디 정보 저장에 실패했습니다.');
     }
@@ -65,57 +75,57 @@ export default function StudyEditSection() {
   };
 
   return (
-    <DefaultPaddedContainer css={{ boxShadow: '0 2px 2px rgba(0, 0, 0, 0.1)' }}>
-      <Container direction="column" padding="0 10px 50px 10px">
-        <Container justify="flex-start" padding="15px">
-          <Heading.H2 css={{ margin: '20px 20px' }}>스터디 정보 수정</Heading.H2>
+    <DefaultPaddedContainer>
+      <Container direction="column" padding="30px 10px 30px 10px">
+        <Container justify="flex-start" align="flex-start" padding="0 0 15px 0">
+          <Heading.H3 weight="bold">스터디 정보 수정</Heading.H3>
         </Container>
         <Container direction="column" gap="8px">
           <Avatar size="large" src={profileImage} css={{ marginBottom: '10px' }} />
-          <Container direction="column" gap="8px" cssOverride={{ marginBottom: '10px' }}>
+          <Container direction="column" gap="8px" css={{ marginBottom: '10px' }}>
             <Paragraph weight="bold">프로필 이미지</Paragraph>
             <input
               type="file"
               accept="image/*"
               onChange={handleFileChange}
-              css={{ marginLeft: '10%' }}
+              css={{ marginLeft: '30%' }}
             />
           </Container>
         </Container>
 
-        <Paragraph weight="bold">스터디명</Paragraph>
         <Input
           type="text"
           placeholder={name}
           value={name}
+          label="스터디명"
           onChange={(e) => setName(e.target.value)}
-          css={{ marginBottom: '10px' }}
+          css={{ marginBottom: '10px', width: '100%' }}
         />
 
-        <Paragraph weight="bold">스터디 설명</Paragraph>
         <Input
           type="text"
           value={description}
+          label="스터디 설명"
           onChange={(e) => setDescription(e.target.value)}
           placeholder={description}
           css={{ marginBottom: '10px' }}
         />
         <Container gap="8px" cssOverride={{ marginBottom: '10px' }}>
-          <Paragraph weight="bold">스터디 모집 여부</Paragraph>
-          <input
-            type="checkbox"
+          <Paragraph>스터디 모집 여부</Paragraph>
+          <Checkbox
             checked={isOpen}
             onChange={handleStudyOpenChange}
             css={checkboxStyle}
           />
         </Container>
 
-        <Paragraph weight="bold">스터디 주제</Paragraph>
         <Input
           type="text"
           value={topic}
+          label="스터디 주제"
           onChange={(e) => setTopic(e.target.value)}
           placeholder={topic}
+          width="100%"
         />
 
         <Container justify="flex-end" padding="20px">
