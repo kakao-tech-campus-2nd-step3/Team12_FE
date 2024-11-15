@@ -6,6 +6,8 @@ import StudyInfoPage from '@pages/StudyInfoPage';
 import SubmitPersonalInfoPage from '@pages/SubmitPersonalInfoPage';
 import NoticePage from '@pages/NoticePage';
 import NoticeWritePage from '@pages/NoticeWritePage';
+import NoticeDetailPage from '@pages/NoticeDetailPage';
+import NoticeEditPage from '@pages/NoticeEditPage';
 import AttendDatePage from '@/pages/AttendDatePage';
 import JoinStudyPage from '@/pages/JoinStudyPage';
 
@@ -62,6 +64,18 @@ const router = createBrowserRouter([
     path: routePaths.STUDY_NOTICE_WRITE(':studyId'),
     element: (
       <NoticeWritePage />
+    ),
+  },
+  {
+    path: routePaths.STUDY_NOTICE_DETAIL(':noticeId'),
+    element: (
+      <NoticeDetailPage />
+    ),
+  },
+  {
+    path: routePaths.STUDY_NOTICE_EDIT(':noticeId'),
+    element: (
+      <NoticeEditPage />
     ),
   },
 ]);
