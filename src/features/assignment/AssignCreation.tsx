@@ -9,12 +9,19 @@ import Input from '@components/input';
 import AssignDeadline from '@features/assignment/AssignDeadline';
 import toast from 'react-hot-toast';
 import { css } from '@emotion/react';
+import { useNavigate } from 'react-router-dom';
+import routePaths from '@constants/routePaths.ts';
 import { createAssign } from '@/api/assignment';
 
-export default function AssignCreation() {
+interface AssignCreationProps {
+  studyId: number;
+}
+
+export default function AssignCreation({ studyId }: AssignCreationProps) {
   const editorRef = useRef<Editor>(null);
   const [title, setTitle] = useState('');
-  const [deadline, setDeadline] = useState<string>(''); // deadline 상태 추가
+  const [deadline, setDeadline] = useState<string>('');
+  const navigate = useNavigate();
 
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
@@ -31,12 +38,13 @@ export default function AssignCreation() {
 
     try {
       await createAssign({
-        studyId: 11, // 실제 사용할 studyId로 변경 필요
+        studyId,
         title,
         content,
         deadline,
       });
       toast.success('과제가 성공적으로 작성되었습니다!');
+      navigate(routePaths.STUDY_ASSIGNMENT(studyId));
     } catch (error) {
       toast.error('과제 작성 중 오류가 발생하였습니다.');
     }
