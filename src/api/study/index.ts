@@ -8,6 +8,13 @@ import type {
   StudySearchResponse,
 } from '@/types/study';
 import axiosInstance from '@/utils/network';
+import { StudyRankingResponse } from '@/types/ranking';
+
+interface GetRankingListParams {
+  sort?: string;
+  page?: number;
+  size?: number;
+}
 
 export async function searchStudies(requestQuery: StudySearchRequestQuery) {
   const response = await axiosInstance.get<StudySearchResponse>(endpoints.searchStudy, {
@@ -78,4 +85,19 @@ export async function getMyStudies() {
 export async function getMyRole(studyId: number) {
   const response = await axiosInstance.get<StudyRoleResponse>(endpoints.studyRole(studyId));
   return response.data.role;
+}
+
+export async function getRankingList({
+  sort = 'createdAt',
+  page = 0,
+  size = 8,
+}: GetRankingListParams = {}): Promise<StudyRankingResponse> {
+  const response = await axiosInstance.get<StudyRankingResponse>(endpoints.rankings, {
+    params: {
+      sort,
+      page,
+      size,
+    },
+  });
+  return response.data;
 }
