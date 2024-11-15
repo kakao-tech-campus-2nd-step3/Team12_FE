@@ -32,13 +32,18 @@ export default function CalendarSection() {
         justify="flex-start"
         cssOverride={css`margin-top: 5px;`}
       />
-      <Paragraph
-        variant="small"
-        css={{ textDecoration: 'underline', cursor: 'pointer' }}
-        onClick={handleEditClick}
-      >
-        스터디 정보 수정하기
-      </Paragraph>
+      {
+        study.my_role === '스터디장'
+        && (
+        <Paragraph
+          variant="small"
+          css={{ textDecoration: 'underline', cursor: 'pointer' }}
+          onClick={handleEditClick}
+        >
+          스터디 정보 수정하기
+        </Paragraph>
+        )
+      }
       {
         isEditModalOpen
         && (

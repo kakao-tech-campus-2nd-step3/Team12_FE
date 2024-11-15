@@ -13,9 +13,10 @@ import { editStudyInfo, editStudyProfile, getStudyInfo } from '@/api/study';
 
 interface StudyEditSectionProps {
   studyId: number;
+  onClose: () => void;
 }
 
-export default function StudyEditSection({ studyId }: StudyEditSectionProps) {
+export default function StudyEditSection({ studyId, onClose }: StudyEditSectionProps) {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [isOpen, setIsOpen] = useState<boolean>(true);
@@ -55,6 +56,7 @@ export default function StudyEditSection({ studyId }: StudyEditSectionProps) {
       await editStudyProfile(studyId, formData);
       await editStudyInfo(studyId, updatedData);
       toast.success('스터디 정보가 수정되었습니다.');
+      onClose();
     } catch (error) {
       toast.error('스터디 정보 저장에 실패했습니다.');
     }
