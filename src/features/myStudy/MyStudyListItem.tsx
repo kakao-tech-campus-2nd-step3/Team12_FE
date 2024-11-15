@@ -2,7 +2,8 @@ import { Paragraph } from '@components/text';
 import { css, CSSObject, useTheme } from '@emotion/react';
 import Container from '@components/container';
 import Tag from '@components/tag';
-import { useStudyItemStyles } from '@features/main/studyList/StudyList.styles';
+import { Link } from 'react-router-dom';
+import routePaths from '@constants/routePaths';
 import { Study } from '@/types/study';
 
 interface MyStudyListItemProps {
@@ -10,8 +11,18 @@ interface MyStudyListItemProps {
 }
 
 export default function MyStudyListItem({ study }: MyStudyListItemProps) {
-  const { containerStyle } = useStudyItemStyles();
   const theme = useTheme();
+  const containerStyle = css`
+    border-radius: ${theme.corners.big};
+    border: ${theme.colors.border.prominent} 1px solid;
+    max-height: 290px;
+    background-color: ${theme.colors.background.main};
+    transition-duration: 0.2s;
+    cursor: pointer;
+    &:hover {
+      transform: translateY(-5px);
+    }
+  `;
 
   const singleEllipsis: CSSObject = {
     textOverflow: 'ellipsis',
@@ -27,86 +38,69 @@ export default function MyStudyListItem({ study }: MyStudyListItemProps) {
   };
 
   return (
-    <Container
-      direction="column"
-      height="100%"
-      align="flex-start"
-      padding="40% 20px 0 20px"
-      cssOverride={css`
-        ${containerStyle} 
+    <Link to={routePaths.STUDY_INFO(study.id)} css={{ textDecoration: 'none', color: 'black' }}>
+      <Container
+        direction="column"
+        width="100%"
+        align="flex-start"
+        cssOverride={css`
+        ${containerStyle};
         position: relative;
+        box-sizing: border-box;
       `}
-    >
-      {study.profile_image
-        ? (
-          <img
-            src={study.profile_image}
-            alt="profile_image"
-            css={css`
-                    border-radius: ${theme.corners.big} ${theme.corners.big} 0 0;
-                    width: 100%;
-                    height: 40%;
-                    object-fit: cover;
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    right: 0;
-                `}
-          />
-        )
-        : (
-          <Container
-            width="100%"
-            height="40%"
-            cssOverride={css`
-                background-color: #ccc;
-                border-radius: ${theme.corners.big} ${theme.corners.big} 0 0;
-                object-fit: cover;
-                position: absolute;
-                top: 0;
-                left: 0;
-                right: 0;
-            `}
-          />
-        )}
-
-      <Container justify="space-between" align="flex-start" cssOverride={{ marginTop: '0 50px' }}>
+      >
+        <Container
+          height="180px"
+          width="100%"
+          css={{
+            backgroundImage: study.profile_image && `url(${study.profile_image})`,
+            backgroundSize: 'cover',
+            borderRadius: `${theme.corners.big} ${theme.corners.big} 0 0`,
+          }}
+        />
 
         <Container
-          padding="8px 0"
+          justify="space-between"
           align="flex-start"
-          width="auto"
-          direction="column"
-          gap="12px"
-          cssOverride={singleEllipsis}
+          cssOverride={{ marginTop: '0 50px' }}
+          padding="20px 20px 10px 20px"
         >
-          <Paragraph
-            variant="large"
-            weight="bold"
-            css={{ ...singleEllipsis, width: '100%' }}
+          <Container
+            padding="8px 0"
+            align="flex-start"
+            width="120px"
+            direction="column"
+            gap="12px"
+            cssOverride={singleEllipsis}
           >
-            {study.name}
-          </Paragraph>
-          <Paragraph variant="small" color={theme.colors.text.subtle}>
-            #
-            {study.topic}
-          </Paragraph>
+            <Paragraph
+              variant="large"
+              weight="bold"
+              css={{ ...singleEllipsis, width: '100%' }}
+            >
+              {study.name}
+            </Paragraph>
+            <Paragraph variant="small" color={theme.colors.text.subtle}>
+              #
+              {study.topic}
+            </Paragraph>
+          </Container>
+          <Tag variant={study.is_open ? 'primary' : 'default'}>
+            <Paragraph variant="small">
+              {study.is_open ? '모집중' : '마감'}
+            </Paragraph>
+          </Tag>
         </Container>
-        <Tag variant={study.is_open ? 'primary' : 'default'}>
-          <Paragraph variant="small">
-            {study.is_open ? '모집중' : '마감'}
-          </Paragraph>
-        </Tag>
+        <Container
+          justify="flex-start"
+          align="flex-start"
+          height="56px"
+          padding="0 20px 20px 20px"
+          cssOverride={doubleEllipsis}
+        >
+          <Paragraph variant="small" css={doubleEllipsis}>{study.description}</Paragraph>
+        </Container>
       </Container>
-      <Container
-        justify="flex-start"
-        align="flex-start"
-        height="56px"
-        padding="8px 0 0 0"
-        cssOverride={doubleEllipsis}
-      >
-        <Paragraph variant="small" css={doubleEllipsis}>{study.description}</Paragraph>
-      </Container>
-    </Container>
+    </Link>
   );
 }

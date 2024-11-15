@@ -1,6 +1,8 @@
 /// <reference types="vite/client" />
 /// <reference types="vite-plugin-svgr/client" />
 
+import 'axios';
+
 declare module '*.svg';
 
 interface ImportMetaEnv {
@@ -11,4 +13,10 @@ interface ImportMetaEnv {
 }
 interface ImportMeta {
   env: ImportMetaEnv;
+}
+
+declare module 'axios' {
+  export interface AxiosRequestConfig {
+    _retry?: boolean;
+  }
 }

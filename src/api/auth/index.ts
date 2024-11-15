@@ -4,5 +4,5 @@ import { TokenReIssueResponse } from '@/types/auth';
 
 export async function reIssueAccessToken() {
   const response = await axios.get<TokenReIssueResponse>(endpoints.reIssue);
-  return response.data.Access_token;
+  return response;
 }

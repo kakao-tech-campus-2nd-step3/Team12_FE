@@ -3,6 +3,7 @@ import type {
   Study,
   StudyInfoResponse,
   StudyMembersResponse,
+  StudyRoleResponse,
   StudySearchRequestQuery,
   StudySearchResponse,
 } from '@/types/study';
@@ -58,6 +59,12 @@ export async function editStudyProfile(studyId: number, profile_image: FormData)
   );
 }
 
+export async function applyStudyJoin(studyId: number, message: string) {
+  await axiosInstance.post(endpoints.applyStudyJoin(studyId), {
+    message,
+  });
+}
+
 export async function getStudyMembers(studyId: number) {
   const response = await axiosInstance.get<StudyMembersResponse>(endpoints.studyMembers(studyId));
   return response.data;
@@ -66,4 +73,9 @@ export async function getStudyMembers(studyId: number) {
 export async function getMyStudies() {
   const response = await axiosInstance.get<Study[]>(`${endpoints.myInfo}/studies`);
   return response.data;
+}
+
+export async function getMyRole(studyId: number) {
+  const response = await axiosInstance.get<StudyRoleResponse>(endpoints.studyRole(studyId));
+  return response.data.role;
 }

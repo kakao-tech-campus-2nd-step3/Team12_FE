@@ -1,6 +1,7 @@
 const routePaths = {
   MAIN: '/',
   ATTEND: '/attend',
+  MY_STUDY: '/mystudy',
   LOGIN_SUCCESS: '/auth/kakao',
   SUBMIT_PERSONAL_INFO: '/auth',
   STUDY_INFO: (studyId: string | number) => `/study/${studyId}`,
