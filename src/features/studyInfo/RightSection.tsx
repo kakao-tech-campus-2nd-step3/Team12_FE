@@ -8,7 +8,6 @@ import routePaths from '@/constants/routePaths';
 import { StudyInfoContext } from '@/providers/StudyInfoProvider';
 import EnterCodeModal from '../modal/attendance/EnterCodeModal';
 import { AttendanceInfoContextProvider } from '@/providers/AttendanceInfoProvider';
-import { getStudyRoles } from '@/api/study';
 
 export default function RightSection() {
   const navigate = useNavigate();
@@ -18,7 +17,6 @@ export default function RightSection() {
   const [isAttendTime, setIsAttendTime] = useState(false);
   const [open, setOpen] = useState(false);
   const [dateId, setDateId] = useState<number | undefined>(undefined);
-  const [role, setRole] = useState<string | undefined>(undefined);
   const [deadline, setDeadline] = useState<string | undefined>(undefined);
 
   const onClose = () => {
@@ -40,11 +38,7 @@ export default function RightSection() {
         setDeadline(date.deadline);
       }
     });
-    const response = getStudyRoles(study.id);
-    response.then((res) => {
-      setRole(res.role);
-    });
-  }, [currentDate, study.attendance_date_info, study.id]);
+  }, [currentDate, study.attendance_date_info]);
 
   return (
     <AttendanceInfoContextProvider studyId={study.id} dateId={dateId}>
@@ -100,7 +94,14 @@ export default function RightSection() {
             출석하기
           </Button>
           { open
-          && <EnterCodeModal open={open} onClose={onClose} role={role} deadline={deadline} />}
+          && (
+          <EnterCodeModal
+            open={open}
+            onClose={onClose}
+            role={study.my_role}
+            deadline={deadline}
+          />
+          )}
           <Button
             onClick={moveStudyPage}
           >

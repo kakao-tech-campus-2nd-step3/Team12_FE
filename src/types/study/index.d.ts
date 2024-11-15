@@ -62,4 +62,5 @@ export type ExtendedStudyInfo = Study &
 { study_attendance_info: AttendanceInfo } &
 { attendance_date_info: RequireAttendanceDate[] } &
 { notice?: Notice } &
-{ assignment?: Assignment };
+{ assignment?: Assignment } &
+{ my_role: string };

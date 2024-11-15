@@ -16,7 +16,7 @@ const endpoints = {
   attendance: `${prefix}/attendance`,
   getCode: `${prefix}/attendance/code`,
   checkAttendance: `${prefix}/attendance`,
-  studyRoles: (studyId: number | string) => `${prefix}/studies/${studyId}/members/role`,
+  studyRole: (studyId: number | string) => `${prefix}/studies/${studyId}/members/role`,
 };
 
 export default endpoints;

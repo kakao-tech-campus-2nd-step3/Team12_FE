@@ -2,7 +2,7 @@ import { createContext, ReactNode } from 'react';
 import { useSuspenseQueries } from '@tanstack/react-query';
 import { queryKeys } from '@constants/queryKeys';
 import type { ExtendedStudyInfo } from '@/types/study';
-import { getStudyInfo, getStudyMembers } from '@/api/study';
+import { getStudyInfo, getStudyMembers, getStudyRole } from '@/api/study';
 import { getAttendanceList, getDateList } from '@/api/attendance';
 import { getNoticeList } from '@/api/notice';
 import { getAssignList } from '@/api/assignment';
@@ -31,6 +31,7 @@ export const StudyInfoContext = createContext<StudyInfoContextValue>({
     created_at: new Date(),
     id: 0,
     profile_image: '',
+    my_role: '',
   },
   refetch: () => {},
 });
@@ -69,6 +70,11 @@ export function StudyInfoContextProvider({ studyId, children }: StudyInfoContext
           sort: 'createdAt,desc', page: 0, size: 1, studyId,
         }),
       },
+      {
+        queryKey: [queryKeys.STUDY_ROLES, studyId],
+        queryFn: () => getStudyRole(studyId),
+      },
+
     ],
     combine: (result) => {
       const [studyInfo,
@@ -77,6 +83,7 @@ export function StudyInfoContextProvider({ studyId, children }: StudyInfoContext
         dateInfo,
         noticeInfo,
         assignmentInfo,
+        roleInfo,
       ] = result;
       const data: ExtendedStudyInfo = {
         ...(studyInfo.data),
@@ -87,6 +94,7 @@ export function StudyInfoContextProvider({ studyId, children }: StudyInfoContext
         assignment: assignmentInfo.data.assignments.length === 1
           ? assignmentInfo.data.assignments[0]
           : undefined,
+        my_role: roleInfo.data.role,
       };
       const refetchInfos = () => {
         studyInfo.refetch();

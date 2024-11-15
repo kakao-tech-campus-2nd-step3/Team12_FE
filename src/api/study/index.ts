@@ -68,7 +68,7 @@ export async function getMyStudies() {
   return response.data;
 }
 
-export async function getStudyRoles(studyId: number) {
-  const response = await axiosInstance.get<{ role: string }>(endpoints.studyRoles(studyId));
+export async function getStudyRole(studyId: number) {
+  const response = await axiosInstance.get<{ role: string }>(endpoints.studyRole(studyId));
   return response.data;
 }
