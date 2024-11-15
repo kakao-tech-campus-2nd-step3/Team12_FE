@@ -46,8 +46,8 @@ export default function AttendanceCheckModal({
 
   const handleEditComplete = () => {
     try {
-      Object.entries(attendanceStatus).forEach(([memberId, isAttended]) => {
-        updateAttendance({
+      Object.entries(attendanceStatus).forEach(async ([memberId, isAttended]) => {
+        await updateAttendance({
           study_id: study.id,
           member_id: Number(memberId),
           requestData: {
@@ -56,9 +56,10 @@ export default function AttendanceCheckModal({
           },
         });
       });
+      toast.success('출석이 업데이트 되었습니다!🍀');
       onClose();
     } catch (error) {
-      toast.error('Failed to update attendance');
+      toast.error('업데이트에 실패했습니다🥲');
     }
   };
 
