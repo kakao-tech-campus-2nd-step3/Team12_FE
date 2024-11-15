@@ -34,6 +34,6 @@ export interface SubmittedAssignList {
   total_item_count: number;
 }
 
-export type AssignDetail = Notice;
+export type AssignDetail = Assignment;
 export type AssignsResponse = AssignList;
 export type SubmittedAssignResponse = SubmittedAssignList;

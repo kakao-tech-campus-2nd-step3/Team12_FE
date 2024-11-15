@@ -36,6 +36,7 @@ export default function AssignEditPage() {
       try {
         const data = await getAssignDetail(assignId);
         setTitle(data.title);
+        setDeadline(data.deadline);
         if (editorRef.current) {
           editorRef.current.getInstance().setMarkdown(data.content);
         }
