@@ -10,7 +10,7 @@ interface StudyEditModalProps {
 function StudyEditModal({ studyId, open, onClose }: StudyEditModalProps) {
   return (
     <Modal onClose={onClose} open={open}>
-      <StudyEditSection studyId={studyId} />
+      <StudyEditSection studyId={studyId} onClose={onClose} />
     </Modal>
   );
 }
