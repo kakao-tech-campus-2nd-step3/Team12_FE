@@ -102,7 +102,7 @@ export default function RightSection() {
         <div css={mainDescription}>해야하는 과제</div>
         <div css={subDescription}>{study.assignment?.title ?? '과제가 없습니다.'}</div>
         <div css={buttonDivStyle}>
-          <Button variant="primary">과제 완료하기</Button>
+          <Button variant="primary" disabled={!study.assignment?.title}>과제 완료하기</Button>
           <Button>전체 과제 확인하기</Button>
         </div>
       </Container>
