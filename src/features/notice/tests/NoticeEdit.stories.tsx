@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import '@toast-ui/editor/dist/toastui-editor.css';
-import NoticeEdit from "@features/notice/NoticeEdit.tsx";
+import NoticeEdit from "@pages/notice/NoticeEditPage";
 
 
 const meta: Meta<typeof NoticeEdit> = {
