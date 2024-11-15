@@ -12,6 +12,7 @@ import { css } from '@emotion/react';
 import { useNavigate } from 'react-router-dom';
 import routePaths from '@constants/routePaths.ts';
 import { createAssign } from '@/api/assignment';
+import colorTheme from '@/styles/theme';
 
 interface AssignCreationProps {
   studyId: number;
@@ -51,7 +52,7 @@ export default function AssignCreation({ studyId }: AssignCreationProps) {
   };
 
   return (
-    <DefaultPaddedContainer css={{ boxShadow: '0 2px 2px rgba(0, 0, 0, 0.1)' }}>
+    <DefaultPaddedContainer css={{ boxShadow: '0 2px 2px rgba(0, 0, 0, 0.1)', backgroundColor: `${colorTheme.colors.absolute.white}` }}>
       <Container direction="column" padding="60px" align="flex-start">
         <Container justify="flex-start" padding="20px 0">
           <Heading.H2 weight="bold">과제 등록하기</Heading.H2>
