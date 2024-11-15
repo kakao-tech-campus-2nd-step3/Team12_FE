@@ -9,12 +9,12 @@ import { Viewer } from '@toast-ui/react-editor';
 import routePaths from '@constants/routePaths';
 import { useNavigate, useParams } from 'react-router-dom';
 import toast from 'react-hot-toast';
+import Page from '@components/template/Page';
+import Spacing from '@components/spacing';
 import { NoticeDetail } from '@/types/notice';
 import { deleteNotice, getNoticeDetail } from '@/api/notice';
 import '@toast-ui/editor/dist/toastui-editor-viewer.css';
 import { isIntegerString } from '@/utils';
-import Page from '@components/template/Page';
-import Spacing from '@components/spacing';
 
 export default function NoticeDetailPage() {
   const { noticeId } = useParams();
