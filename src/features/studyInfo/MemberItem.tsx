@@ -37,6 +37,7 @@ function MemberItem(
       <Container justify="flex-start">
         <Avatar bordered={true} src={memberInfo.profile_image} css={css`width: 40px; height: 40px;`} />
         <Paragraph variant="large" css={{ marginLeft: '10px' }}>{memberInfo.nickname}</Paragraph>
+        <Paragraph variant="small" css={{ marginLeft: '10px' }} color={theme.colors.primary.darken}>{studyMember.role}</Paragraph>
       </Container>
       <Container justify="flex-start">
         <Paragraph variant="medium" weight="regular" css={{ lineHeight: '20px' }}>{memberInfo.description}</Paragraph>

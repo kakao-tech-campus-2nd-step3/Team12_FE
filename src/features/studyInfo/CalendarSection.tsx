@@ -1,12 +1,20 @@
 import Container from '@components/container';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { css } from '@emotion/react';
 import colorTheme from '@styles/colors';
+import { Paragraph } from '@components/text';
+import StudyEditModal from '@features/modal/studyEdit/StudyEditModal';
+import { StudyInfoContext } from '@providers/StudyInfoProvider';
 
 export default function CalendarSection() {
   const [startDate, setStartDate] = useState<Date | null>(new Date());
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const handleEditClick = () => {
+    setIsEditModalOpen(true);
+  };
+  const { study } = useContext(StudyInfoContext);
 
   return (
     <Container
@@ -24,6 +32,23 @@ export default function CalendarSection() {
         justify="flex-start"
         cssOverride={css`margin-top: 5px;`}
       />
+      <Paragraph
+        variant="small"
+        css={{ textDecoration: 'underline', cursor: 'pointer' }}
+        onClick={handleEditClick}
+      >
+        스터디 정보 수정하기
+      </Paragraph>
+      {
+        isEditModalOpen
+        && (
+        <StudyEditModal
+          studyId={study.id}
+          open={isEditModalOpen}
+          onClose={() => setIsEditModalOpen(false)}
+        />
+        )
+      }
     </Container>
   );
 }
