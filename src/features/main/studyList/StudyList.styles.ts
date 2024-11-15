@@ -1,6 +1,5 @@
 import { css, useTheme } from '@emotion/react';
 
-// eslint-disable-next-line import/prefer-default-export
 export function useStudyItemStyles() {
   const theme = useTheme();
   const containerStyle = css`
