@@ -5,7 +5,7 @@ import { css, useTheme } from '@emotion/react';
 import { useStudyItemStyles } from '@features/main/studyList/StudyList.styles';
 import { useState } from 'react';
 import { StudyMember } from '@/types/study';
-import AttendanceInfoModal from '../modal/memberAttendInfo/AttendanceInfoModal';
+import AttendanceInfoModal from '../modal/memberInfo/AttendanceInfoModal';
 
 interface MemberItemProps {
   studyMember: StudyMember;
@@ -23,6 +23,7 @@ function MemberItem(
   `;
   const textStyle = css`
     text-decoration: underline;
+    cursor: pointer;
   `;
   const memberInfo = studyMember.member;
   const [open, setOpen] = useState(false);

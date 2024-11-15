@@ -14,11 +14,13 @@ import { createDate } from '@/api/attendance';
 
 interface AttendDateCreationProps {
   studyId: number;
+  isAdmin: boolean;
 }
 
 export default function AttendDateCreation(
   {
     studyId,
+    isAdmin,
   }: AttendDateCreationProps,
 ) {
   const [currentDate] = useState(new Date());
@@ -42,7 +44,7 @@ export default function AttendDateCreation(
 
   const handleCreateClick = async () => {
     try {
-      const response = createDate({
+      await createDate({
         study_id: studyId,
         requestData: {
           start_time: `${selectedDate.toLocaleDateString('en-CA')} ${
@@ -53,10 +55,8 @@ export default function AttendDateCreation(
           time_interval: Number(timeInterval),
         },
       });
-      if ((await response).status === 201) {
-        toast.success('출석일자가 생성되었습니다🍀');
-      }
-    } catch (error: any) {
+      toast.success('출석일자가 생성되었습니다🍀');
+    } catch (error) {
       toast.error('잘못된 입력입니다🥲');
     }
   };
@@ -134,7 +134,7 @@ export default function AttendDateCreation(
                 fontSize: '13px',
               }}
               type="submit"
-              disabled={isPastDate}
+              disabled={isPastDate || !isAdmin}
             >
               생성
             </Button>

@@ -7,4 +7,5 @@ export const queryKeys = {
   STUDY_ATTENDANCE_INFO: 'study_attendance_info',
   STUDY_NOTICE_INFO: 'study_notice_info',
   STUDY_ASSIGNMENT_INFO: 'study_assignment_info',
+  STUDY_ROLES: 'study_roles',
 };

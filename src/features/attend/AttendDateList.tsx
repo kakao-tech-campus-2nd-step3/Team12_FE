@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { useParams } from 'react-router-dom';
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { DefaultPaddedContainer } from '@/components/container/variants';
 import AttendDateCreation from '@/features/attend/AttendDateCreation';
 import AttendDateListElement from './AttendDateListElement';
@@ -15,12 +15,19 @@ import { StudyInfoContext } from '@/providers/StudyInfoProvider';
 export default function AttendDateList() {
   const { studyId } = useParams<{ studyId: string }>();
   const { study } = useContext(StudyInfoContext);
+  const [isAdmin, setIsAdmin] = useState(false);
+
+  useEffect(() => {
+    if (study.my_role === '스터디장') {
+      setIsAdmin(true);
+    }
+  }, [study.my_role]);
 
   return (
     <DefaultPaddedContainer>
       <Container padding="40px" direction="column" align="flex-start" css={{ minHeight: 'calc(100vh - 210px)' }}>
         <Container padding="50px" direction="column" css={{ backgroundColor: `${theme.colors.absolute.white}`, boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)', minWidth: 'fit-content' }}>
-          <AttendDateCreation studyId={Number(studyId)} />
+          <AttendDateCreation studyId={Number(studyId)} isAdmin={isAdmin} />
           <Spacing height={20} />
           <hr css={HorizontalLine} />
           <Grid columns={6} css={{ alignItems: 'center', gridTemplateColumns: '1fr 1fr 1fr 1fr 0.5fr 0.5fr', padding: '10px 0px' }}>

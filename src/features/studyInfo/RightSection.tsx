@@ -17,6 +17,7 @@ export default function RightSection() {
   const [isAttendTime, setIsAttendTime] = useState(false);
   const [open, setOpen] = useState(false);
   const [dateId, setDateId] = useState<number | undefined>(undefined);
+  const [deadline, setDeadline] = useState<string | undefined>(undefined);
 
   const onClose = () => {
     setOpen(false);
@@ -38,6 +39,7 @@ export default function RightSection() {
       if (currentDate <= new Date(date.deadline) && currentDate >= new Date(date.start_time)) {
         setDateId(date.id);
         setIsAttendTime(true);
+        setDeadline(date.deadline);
       }
     });
   }, [currentDate, study.attendance_date_info]);
@@ -95,7 +97,15 @@ export default function RightSection() {
 
             출석하기
           </Button>
-          { open && <EnterCodeModal open={open} onClose={onClose} /> }
+          { open
+          && (
+          <EnterCodeModal
+            open={open}
+            onClose={onClose}
+            role={study.my_role}
+            deadline={deadline}
+          />
+          )}
           <Button
             onClick={moveStudyPage}
           >
