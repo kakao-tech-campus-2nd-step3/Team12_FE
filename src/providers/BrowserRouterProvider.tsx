@@ -4,8 +4,10 @@ import routePaths from '@constants/routePaths';
 import LoginSuccessPage from '@pages/LoginSuccessPage';
 import StudyInfoPage from '@pages/StudyInfoPage';
 import SubmitPersonalInfoPage from '@pages/SubmitPersonalInfoPage';
-import NoticePage from '@pages/NoticePage';
-import NoticeWritePage from '@pages/NoticeWritePage';
+import NoticePage from '@pages/notice/NoticePage';
+import NoticeWritePage from '@pages/notice/NoticeWritePage';
+import NoticeDetailPage from '@pages/notice/NoticeDetailPage';
+import NoticeEditPage from '@pages/notice/NoticeEditPage';
 import AttendDatePage from '@/pages/AttendDatePage';
 import JoinStudyPage from '@/pages/JoinStudyPage';
 
@@ -62,6 +64,18 @@ const router = createBrowserRouter([
     path: routePaths.STUDY_NOTICE_WRITE(':studyId'),
     element: (
       <NoticeWritePage />
+    ),
+  },
+  {
+    path: routePaths.STUDY_NOTICE_DETAIL(':noticeId'),
+    element: (
+      <NoticeDetailPage />
+    ),
+  },
+  {
+    path: routePaths.STUDY_NOTICE_EDIT(':noticeId'),
+    element: (
+      <NoticeEditPage />
     ),
   },
 ]);

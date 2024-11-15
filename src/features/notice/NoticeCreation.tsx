@@ -9,6 +9,7 @@ import Input from '@components/input';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import routePaths from '@constants/routePaths';
+import { css } from '@emotion/react';
 import { createNotice } from '@/api/notice';
 
 interface NoticeCreationProps {
@@ -43,28 +44,36 @@ export default function NoticeCreation({ studyId }: NoticeCreationProps) {
 
   return (
     <DefaultPaddedContainer css={{ boxShadow: '0 2px 2px rgba(0, 0, 0, 0.1)', backgroundColor: 'white' }}>
-      <Container direction="column" padding="0 10px 50px 10px">
-        <Container justify="flex-start" padding="15px">
-          <Heading.H2 css={{ margin: '20px 20px' }}>공지 쓰기</Heading.H2>
+      <Container direction="column" padding="60px" align="flex-start">
+        <Container justify="flex-start" padding="20px 0">
+          <Heading.H2 weight="bold">공지 작성하기</Heading.H2>
         </Container>
-        <Container justify="flex-start">
-          <Heading.H4 css={{ padding: '20px 15px 20px 70px' }}>제목: </Heading.H4>
+        <Container justify="flex-start" padding="0 0 20px 0">
+          <Heading.H4 css={{ padding: '' }}>제목: </Heading.H4>
           <Input
             type="text"
             value={title}
             onChange={handleTitleChange}
-            css={{ width: '300px', height: '30px' }}
+            css={{ width: '300px', height: '30px', marginLeft: '15px' }}
           />
         </Container>
-        <Editor
-          ref={editorRef}
-          previewStyle="vertical"
-          height="400px"
-          initialEditType="markdown"
-          useCommandShortcut={false}
-          hideModeSwitch={true}
-        />
-        <Container justify="flex-end" padding="20px 60px">
+        <Container css={css`
+            & > div {
+              width: 100%;
+            }
+          `}
+        >
+
+          <Editor
+            ref={editorRef}
+            previewStyle="vertical"
+            height="400px"
+            initialEditType="markdown"
+            useCommandShortcut={false}
+            hideModeSwitch={true}
+          />
+        </Container>
+        <Container justify="flex-end" padding="20px 0">
           <Button variant="primary" onClick={handleNoticeButtonClick}>제출하기</Button>
         </Container>
 

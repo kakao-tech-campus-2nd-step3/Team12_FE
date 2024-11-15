@@ -71,7 +71,7 @@ export default function NoticeList({ studyId }: NoticeListProps) {
           </Container>
           <Container justify="flex-end" padding="0 40px 20px 40px" />
           <Container direction="column" padding="10px 20px">
-            <Container justify="space-between" padding="4px" cssOverride={{ borderBottom: '2px solid #EDEDED' }}>
+            <Container justify="space-between" padding="4px 4px 12px 4px" cssOverride={{ borderBottom: '1px solid #EDEDED' }}>
               <Paragraph css={{ flex: 0.5, textAlign: 'center' }}>No.</Paragraph>
               <Paragraph css={{ flex: 5, textAlign: 'center' }}>제목</Paragraph>
               <Paragraph css={{ flex: 1, textAlign: 'center' }}>글쓴이</Paragraph>
@@ -96,22 +96,29 @@ export default function NoticeList({ studyId }: NoticeListProps) {
               }
             </Grid>
           </Container>
-
-          <Container padding="20px" gap="12px">
+          <Container css={{ position: 'relative' }}>
+            <Container padding="20px" gap="12px">
+              <Button
+                variant="default"
+                onClick={handlePreviousPage}
+                disabled={currentPage === 0}
+              >
+                이전
+              </Button>
+              <Paragraph>{`${currentPage + 1} / ${paginationInfo?.max_page}`}</Paragraph>
+              <Button
+                variant="default"
+                onClick={handleNextPage}
+                disabled={!paginationInfo?.has_next_page}
+              >
+                다음
+              </Button>
+            </Container>
             <Button
-              variant="default"
-              onClick={handlePreviousPage}
-              disabled={currentPage === 0}
+              css={{ position: 'absolute', right: 0 }}
+              onClick={() => navigate(routePaths.STUDY_INFO(studyId))}
             >
-              이전
-            </Button>
-            <Paragraph>{`${currentPage + 1} / ${paginationInfo?.max_page}`}</Paragraph>
-            <Button
-              variant="default"
-              onClick={handleNextPage}
-              disabled={!paginationInfo?.has_next_page}
-            >
-              다음
+              스터디 정보로 돌아가기
             </Button>
           </Container>
         </Container>
