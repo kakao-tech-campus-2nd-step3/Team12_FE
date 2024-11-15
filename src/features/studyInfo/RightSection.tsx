@@ -8,6 +8,7 @@ import routePaths from '@/constants/routePaths';
 import { StudyInfoContext } from '@/providers/StudyInfoProvider';
 import EnterCodeModal from '../modal/attendance/EnterCodeModal';
 import { AttendanceInfoContextProvider } from '@/providers/AttendanceInfoProvider';
+import { getStudyRoles } from '@/api/study';
 
 export default function RightSection() {
   const navigate = useNavigate();
@@ -17,6 +18,8 @@ export default function RightSection() {
   const [isAttendTime, setIsAttendTime] = useState(false);
   const [open, setOpen] = useState(false);
   const [dateId, setDateId] = useState<number | undefined>(undefined);
+  const [role, setRole] = useState<string | undefined>(undefined);
+  const [deadline, setDeadline] = useState<string | undefined>(undefined);
 
   const onClose = () => {
     setOpen(false);
@@ -34,9 +37,14 @@ export default function RightSection() {
       if (currentDate <= new Date(date.deadline) && currentDate >= new Date(date.start_time)) {
         setDateId(date.id);
         setIsAttendTime(true);
+        setDeadline(date.deadline);
       }
     });
-  }, [currentDate, study.attendance_date_info]);
+    const response = getStudyRoles(study.id);
+    response.then((res) => {
+      setRole(res.role);
+    });
+  }, [currentDate, study.attendance_date_info, study.id]);
 
   return (
     <AttendanceInfoContextProvider studyId={study.id} dateId={dateId}>
@@ -91,11 +99,8 @@ export default function RightSection() {
 
             출석하기
           </Button>
-          {
-          // 민경 TODO : 실제 역할에 따라 role을 넘겨줘야 함
-          // eslint-disable-next-line jsx-a11y/aria-role
-          open && <EnterCodeModal open={open} onClose={onClose} role="user" />
-          }
+          { open
+          && <EnterCodeModal open={open} onClose={onClose} role={role} deadline={deadline} />}
           <Button
             onClick={moveStudyPage}
           >

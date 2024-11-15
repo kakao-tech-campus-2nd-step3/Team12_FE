@@ -44,7 +44,7 @@ export const Default: Story = {
 
         <Toaster position="bottom-center" reverseOrder={false} />
         {open ? ( 
-          <EnterCodeModal open={open} onClose={onClose} role='스터디장' />
+          <EnterCodeModal open={open} onClose={onClose} role='스터디원' />
         ) : (
           <button onClick={() => setOpen(true)}>Open</button>
         )}
