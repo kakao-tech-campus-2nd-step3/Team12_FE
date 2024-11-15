@@ -14,11 +14,13 @@ import { createDate } from '@/api/attendance';
 
 interface AttendDateCreationProps {
   studyId: number;
+  isAdmin: boolean;
 }
 
 export default function AttendDateCreation(
   {
     studyId,
+    isAdmin,
   }: AttendDateCreationProps,
 ) {
   const [currentDate] = useState(new Date());
@@ -132,7 +134,7 @@ export default function AttendDateCreation(
                 fontSize: '13px',
               }}
               type="submit"
-              disabled={isPastDate}
+              disabled={isPastDate || !isAdmin}
             >
               생성
             </Button>
