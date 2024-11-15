@@ -8,6 +8,7 @@ import NoticeItem from '@features/notice/NoticeItem';
 import Spacing from '@components/spacing';
 import { useNavigate } from 'react-router-dom';
 import routePaths from '@constants/routePaths';
+import toast from 'react-hot-toast';
 import { NoticesResponse, Notice } from '@/types/notice';
 import { getNoticeList } from '@/api/notice';
 
@@ -34,7 +35,7 @@ export default function NoticeList({ studyId }: NoticeListProps) {
           total_item_count: noticesInfo.total_item_count,
         });
       } catch (e) {
-        console.error('공지사항을 불러오는 데 실패했습니다:', e);
+        toast.error('공지사항을 불러오는 데 실패했습니다.');
       }
     };
 

@@ -41,7 +41,6 @@ function MemberItem(
         <Paragraph variant="medium" weight="regular" css={{ lineHeight: '20px' }}>{memberInfo.description}</Paragraph>
       </Container>
       <Container justify="flex-end" gap="10px">
-        <Paragraph variant="small" color={theme.colors.text.moderate} css={textStyle}>과제 정보</Paragraph>
         <Paragraph variant="small" color={theme.colors.text.moderate} css={textStyle} onClick={() => { setOpen(true); }}>출석 정보</Paragraph>
         {open && <AttendanceInfoModal open={open} onClose={onClose} memberInfo={studyMember} />}
       </Container>

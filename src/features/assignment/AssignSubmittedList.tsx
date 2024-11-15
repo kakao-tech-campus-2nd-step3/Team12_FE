@@ -5,6 +5,7 @@ import Container from '@components/container';
 import Grid from '@components/grid';
 import AssignSubmittedListItem from '@features/assignment/AssignSubmittedListItem';
 import Button from '@components/button';
+import toast from 'react-hot-toast';
 import { SubmittedAssign, SubmittedAssignList } from '@/types/assignment';
 import { getSubmittedAssignList } from '@/api/assignment';
 import { NoticesResponse } from '@/types/notice';
@@ -33,7 +34,7 @@ export default function AssignSubmittedList() {
           total_item_count: submittedAssignsInfo.total_item_count,
         });
       } catch (e) {
-        console.error('과제를 불러오는 데 실패했습니다:', e);
+        toast.error('과제를 불러오는 데 실패했습니다.');
       }
     };
 

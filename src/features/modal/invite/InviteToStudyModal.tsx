@@ -2,6 +2,7 @@ import { css, useTheme } from '@emotion/react';
 import { useContext, useEffect, useState } from 'react';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import { MemberInfoContext } from '@providers/MemberInfoProvider';
+import toast from 'react-hot-toast';
 import Avatar from '@/components/avatar';
 import Button from '@/components/button';
 import Container from '@/components/container';
@@ -36,7 +37,7 @@ export default function InviteToStudyModal({
         const link = `${import.meta.env.VITE_BASE_URL}/join?study_id=${response.study_id}&token=${response.token}`;
         setInviteLink(link);
       } catch (error) {
-        console.error('초대 링크 생성 실패:', error);
+        toast.error('초대 링크 생성 실패');
       }
     };
 
