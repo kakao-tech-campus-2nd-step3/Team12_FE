@@ -7,7 +7,7 @@ import { useInView } from 'react-intersection-observer';
 import StudyItemSkeleton from '@features/main/studyList/StudyItemSkeleton';
 import type {
   StudyFilter,
-  StudySearchInfo,
+  DetailedStudyInfo,
   StudySearchRequestQuery,
 } from '@/types/study';
 import { searchStudies } from '@/api/study';
@@ -27,7 +27,7 @@ function StudyGridWrapper({ studyFilter, searchKeyword }: StudyItemWrapperProps)
     if (searchKeyword) {
       params.name = searchKeyword;
     }
-    if (studyFilter !== 'all') params.is_open = studyFilter === 'open';
+    if (studyFilter !== 'all') params.isOpen = studyFilter === 'open';
     return searchStudies(params);
   };
   const { ref, inView } = useInView({ threshold: 1 });
@@ -80,7 +80,7 @@ function StudyGridWrapper({ studyFilter, searchKeyword }: StudyItemWrapperProps)
 }
 
 interface StudyItemContainerProps {
-  studyList: StudySearchInfo[];
+  studyList: DetailedStudyInfo[];
 }
 
 function StudyItemContainer({ studyList }: StudyItemContainerProps) {

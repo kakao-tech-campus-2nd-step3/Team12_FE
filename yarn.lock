@@ -5134,6 +5134,7 @@ __metadata:
     prosemirror-transform: "npm:^1.10.2"
     react: "npm:^18.3.1"
     react-copy-to-clipboard: "npm:^5.1.0"
+    react-countdown: "npm:^2.3.6"
     react-datepicker: "npm:^7.5.0"
     react-dom: "npm:^18.3.1"
     react-hook-form: "npm:^7.53.0"
@@ -9672,6 +9673,18 @@ __metadata:
   peerDependencies:
     react: ^15.3.0 || 16 || 17 || 18
   checksum: 10c0/de70d9f9c2d17cee207888ed791d4a042c300e5ca732503434d49e6745cff56c0d5ebcc82ab86237e9c2248e636d1d031b9f9cf9913ecec61d82a0e5ebc93881
+  languageName: node
+  linkType: hard
+
+"react-countdown@npm:^2.3.6":
+  version: 2.3.6
+  resolution: "react-countdown@npm:2.3.6"
+  dependencies:
+    prop-types: "npm:^15.7.2"
+  peerDependencies:
+    react: ">= 15"
+    react-dom: ">= 15"
+  checksum: 10c0/defb75cb9802c499eb0d5f6c8c6e4269de1005f9c05d5162bccf45063782fd2f5f87acd95d11f70e623fa75085a546b9d0fb0df27c5287ed6a86334342d903cf
   languageName: node
   linkType: hard
 

@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import { useContext, useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
 import Modal from '@/components/modal';
 import Text, { Heading } from '@/components/text';
 import Grid from '@/components/grid';
@@ -14,8 +15,8 @@ import { StudyInfoContext } from '@/providers/StudyInfoProvider';
 interface AcceptInvitationProps {
   open: boolean;
   onClose: () => void;
-  editComplete: () => void;
   date: string;
+  dateId: number;
 }
 
 const HorizontalLine = styled.hr`
@@ -24,12 +25,11 @@ const HorizontalLine = styled.hr`
 `;
 
 export default function AttendanceCheckModal({
-  open, onClose, editComplete, date,
+  open, onClose, date, dateId,
 }: AcceptInvitationProps) {
   const [attendanceStatus, setAttendanceStatus] = useState<{ [memberId: string]: boolean }>({});
   const [isPastDate, setIsPastDate] = useState(false);
   const { study } = useContext(StudyInfoContext);
-  console.log(study);
 
   useEffect(() => {
     const currentDate = new Date();
@@ -46,19 +46,20 @@ export default function AttendanceCheckModal({
 
   const handleEditComplete = () => {
     try {
-      Object.entries(attendanceStatus).forEach(([memberId, isAttended]) => {
-        updateAttendance({
+      Object.entries(attendanceStatus).forEach(async ([memberId, isAttended]) => {
+        await updateAttendance({
           study_id: study.id,
           member_id: Number(memberId),
           requestData: {
-            datetime: date,
+            date_id: dateId,
             is_attended: isAttended,
           },
         });
       });
-      editComplete();
+      toast.success('출석이 업데이트 되었습니다!🍀');
+      onClose();
     } catch (error) {
-      console.error('Failed to update attendance:', error);
+      toast.error('업데이트에 실패했습니다🥲');
     }
   };
 
@@ -93,7 +94,7 @@ export default function AttendanceCheckModal({
           {study.members.map((member) => {
             const memberId = member.member.id.toString();
             const attendanceDates = study
-              .studyAttendanceInfo.member_attendance[memberId]
+              .study_attendance_info.member_attendance[memberId]
               ?.member_attendance_list ?? [];
             let time = '';
 

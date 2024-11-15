@@ -29,7 +29,7 @@ function RankingItem({ rankedStudyInfo: info }: RankingItemProps) {
         <Paragraph>{info.rank}</Paragraph>
       </Container>
       <Container>
-        <Paragraph>{info.name}</Paragraph>
+        <Paragraph>{info.study_rank_info.name}</Paragraph>
       </Container>
       <Container>
         <Paragraph>{getAssignmentInfo(info)}</Paragraph>
@@ -42,13 +42,21 @@ function RankingItem({ rankedStudyInfo: info }: RankingItemProps) {
 }
 
 function getAssignmentInfo(info: RankedStudyInfo) {
-  const percent = ((info.completedAssignments / info.totalAssignments) * 100).toFixed(2);
-  return `${info.totalAssignments} 중 ${info.completedAssignments}개 완료 (${percent}%)`;
+  // eslint-disable-next-line max-len
+  const percent = ((info.study_rank_info.completed_assignment_count / info.study_rank_info.total_assignment_count) * 100).toFixed(2);
+  if (info.study_rank_info.total_assignment_count === 0) {
+    return '과제 정보 없음';
+  }
+  return `${info.study_rank_info.total_assignment_count} 중 ${info.study_rank_info.completed_assignment_count}개 완료 (${percent}%)`;
 }
 
 function getAttendanceInfo(info: RankedStudyInfo) {
-  const percent = ((info.attendedDates / info.totalAttendanceDates) * 100).toFixed(2);
-  return `${info.attendedDates}/${info.totalAttendanceDates} (${percent}%)`;
+  // eslint-disable-next-line max-len
+  const percent = ((info.study_rank_info.attended_date_count / info.study_rank_info.total_attendance_date_count) * 100).toFixed(2);
+  if (info.study_rank_info.total_attendance_date_count === 0) {
+    return '출석 정보 없음';
+  }
+  return `${info.study_rank_info.total_attendance_date_count}/${info.study_rank_info.attended_date_count} (${percent}%)`;
 }
 
 export default RankingItem;

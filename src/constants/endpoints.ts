@@ -5,17 +5,20 @@ const endpoints = {
   reIssue: `${prefix}/reissue`,
   searchStudy: `${prefix}/studies`,
   studyInfo: (studyId: number | string) => `${prefix}/studies/${studyId}`,
+  editStudyProfile: (studyId: number | string) => `${prefix}/studies/${studyId}/profileImage`,
   studyMembers: (studyId: number | string) => `${prefix}/studies/${studyId}/members`,
+  studyRole: (studyId: number | string) => `${prefix}/studies/${studyId}/members/role`,
+  applyStudyJoin: (studyId: number | string) => `${prefix}/studies/${studyId}/members/apply`,
   submitPersonalInfo: `${prefix}/auth`,
   createStudy: `${prefix}/studies`,
   inviteToStudy: (studyId: number) => `${prefix}/studies/${studyId}/members/invites`,
-  getStudy: (studyId: number) => `${prefix}/studies/${studyId}`,
   notices: `${prefix}/notices`,
   assignments: `${prefix}/assignments`,
   attendanceDate: `${prefix}/attendance/date`,
   attendance: `${prefix}/attendance`,
-  getStudyMember: (studyId: number) => `${prefix}/studies/${studyId}/members`,
   getCode: `${prefix}/attendance/code`,
+  checkAttendance: `${prefix}/attendance`,
+  rankings: `${prefix}/rankings`,
 };
 
 export default endpoints;

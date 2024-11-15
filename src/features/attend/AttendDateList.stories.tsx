@@ -21,4 +21,7 @@ export default meta;
 type Story = StoryObj<typeof AttendDateList>;
 
 export const Default: Story = {
+  render: () => <AttendDateList />,
+  args: {
+  },
 };

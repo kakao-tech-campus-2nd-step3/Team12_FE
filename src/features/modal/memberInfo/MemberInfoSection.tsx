@@ -7,7 +7,7 @@ import { StudyMember } from '@/types/study';
 
 export interface MemberInfoSectionProps {
   memberInfo: StudyMember;
-  rate: number;
+  rate: string | number;
 }
 
 export default function MemberInfoSection({ memberInfo, rate }: MemberInfoSectionProps) {
@@ -19,10 +19,10 @@ export default function MemberInfoSection({ memberInfo, rate }: MemberInfoSectio
           <Text fontSize="24px" weight="bold">{memberInfo.member.nickname}</Text>
           <Text fontSize="13px" color={colorTheme.text.moderate}>
             가입일 :
-            {memberInfo.joined_at.toISOString()}
+            {memberInfo.joined_at.slice(0, 10)}
           </Text>
         </Container>
-        <ProgressBar progress={rate} width="250px" description="출석률" />
+        <ProgressBar progress={Number(rate)} width="250px" description="출석률" />
       </Container>
     </Container>
   );

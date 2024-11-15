@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { useState } from 'react';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 import Grid from '@/components/grid';
 import Text from '@/components/text';
 import Button from '@/components/button';
@@ -138,11 +138,10 @@ export default function AttendDateListElement(
       <AttendanceCheckModal
         open={open}
         onClose={onClose}
-        editComplete={editComplete}
         date={startDateTime}
+        dateId={dateId}
       />
       )}
-      <Toaster position="bottom-center" reverseOrder={false} />
       { editOpen ? (
         <Button
           css={commonButtonStyles}

@@ -6,6 +6,7 @@ import Avatar from '@components/avatar';
 import Button from '@components/button';
 import { MemberInfoContext } from '@providers/MemberInfoProvider.tsx';
 import Input from '@components/input';
+import toast from 'react-hot-toast';
 import { editMyInfo } from '@/api/member';
 import { EditMemberRequestBody } from '@/types/member';
 
@@ -28,7 +29,7 @@ export default function UserInfoEditSection() {
     try {
       await editMyInfo(updatedData);
     } catch (error) {
-      alert('정보 저장에 실패했습니다.');
+      toast.error('정보 저장에 실패했습니다.');
     }
   };
 
