@@ -4,10 +4,10 @@ import routePaths from '@constants/routePaths';
 import LoginSuccessPage from '@pages/LoginSuccessPage';
 import StudyInfoPage from '@pages/StudyInfoPage';
 import SubmitPersonalInfoPage from '@pages/SubmitPersonalInfoPage';
-import NoticePage from '@pages/NoticePage';
-import NoticeWritePage from '@pages/NoticeWritePage';
-import NoticeDetailPage from '@pages/NoticeDetailPage';
-import NoticeEditPage from '@pages/NoticeEditPage';
+import NoticePage from '@pages/notice/NoticePage';
+import NoticeWritePage from '@pages/notice/NoticeWritePage';
+import NoticeDetailPage from '@pages/notice/NoticeDetailPage';
+import NoticeEditPage from '@pages/notice/NoticeEditPage';
 import AttendDatePage from '@/pages/AttendDatePage';
 import JoinStudyPage from '@/pages/JoinStudyPage';
 
