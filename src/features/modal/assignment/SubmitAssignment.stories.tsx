@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react';
 import { MemoryRouter } from 'react-router-dom';
-import SubmitAssignmentModal from '@/features/modal/assignment/submitAssignment'
+import SubmitAssignmentModal from '@features/modal/assignment/SubmitAssignment'
 import { useState } from 'react';
 
 const meta: Meta<typeof SubmitAssignmentModal> = {
