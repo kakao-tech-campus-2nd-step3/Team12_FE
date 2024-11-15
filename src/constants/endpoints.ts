@@ -18,6 +18,7 @@ const endpoints = {
   attendance: `${prefix}/attendance`,
   getCode: `${prefix}/attendance/code`,
   checkAttendance: `${prefix}/attendance`,
+  rankings: `${prefix}/rankings`,
 };
 
 export default endpoints;
