@@ -14,7 +14,13 @@ export interface Study {
 }
 
 export type StudyFilter = 'all' | 'open' | 'closed';
-export type StudyRole = '스터디장' | '스터디원';
+export type StudyRole = '스터디장' | '스터디원' | '미가입';
+
+export interface StudyRoleResponse { role: StudyRole }
+
+export interface ApplyJoinStudyInputs {
+  message: string;
+}
 
 // TODO: 추후에 profileImage input 구현 후 타입 변경
 // export type StudyCreationRequestBody =
@@ -28,7 +34,7 @@ export interface StudySearchRequestQuery {
   size?: number;
   topic?: string;
   name?: string;
-  is_open?: boolean;
+  isOpen?: boolean;
 }
 
 export type DetailedStudyInfo = Study & {
