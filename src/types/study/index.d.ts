@@ -1,4 +1,7 @@
-import { RequireAttendanceDate } from '../attendance';
+import type { AttendanceInfo, RequireAttendanceDate } from '@/types/attendance';
+import type { Member } from '@/types/member';
+import type { Notice } from '@/types/notice';
+import { Assignment } from '@/types/assignment';
 
 export interface Study {
   id: number;
@@ -11,7 +14,13 @@ export interface Study {
 }
 
 export type StudyFilter = 'all' | 'open' | 'closed';
-export type StudyRole = '스터디장' | '스터디원';
+export type StudyRole = '스터디장' | '스터디원' | '미가입';
+
+export interface StudyRoleResponse { role: StudyRole }
+
+export interface ApplyJoinStudyInputs {
+  message: string;
+}
 
 // TODO: 추후에 profileImage input 구현 후 타입 변경
 // export type StudyCreationRequestBody =
@@ -25,10 +34,10 @@ export interface StudySearchRequestQuery {
   size?: number;
   topic?: string;
   name?: string;
-  is_open?: boolean;
+  isOpen?: boolean;
 }
 
-export type StudySearchInfo = Study & {
+export type DetailedStudyInfo = Study & {
   study_leader_info: {
     nickname: string;
     profile_image: string;
@@ -37,7 +46,7 @@ export type StudySearchInfo = Study & {
 };
 
 export interface StudySearchResponse {
-  study_list: StudySearchInfo[];
+  study_list: DetailedStudyInfo[];
   has_next_page: boolean;
   current_page: number;
   max_page: number;
@@ -49,12 +58,15 @@ export type StudyInfoResponse = Study;
 export type StudyMember = {
   member: Pick<Member, 'id' | 'nickname' | 'description' | 'profile_image'>;
   role: StudyRole;
-  joined_at: Date;
+  joined_at: string;
 };
 
 export type StudyMembersResponse = StudyMember[];
 
-export type StudyInfoWithMembers = Study &
+export type ExtendedStudyInfo = Study &
 { members: StudyMember[] } &
-{ studyAttendanceInfo: AttendanceInfo } &
-{ attendanceDateInfo: RequireAttendanceDate[] };
+{ study_attendance_info: AttendanceInfo } &
+{ attendance_date_info: RequireAttendanceDate[] } &
+{ notice?: Notice } &
+{ assignment?: Assignment } &
+{ my_role: string };

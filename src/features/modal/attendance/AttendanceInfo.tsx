@@ -12,7 +12,7 @@ interface AttendanceInfoProps {
   name: string;
   time: string;
   status: boolean;
-  imageUrl: string;
+  imageUrl?: string;
   onStatusChange: (isAttended: boolean) => void;
 }
 
@@ -29,11 +29,11 @@ export default function AttendanceInfo({
   imageUrl,
   onStatusChange,
 }: AttendanceInfoProps) {
-  const [isAttended, setisAttended] = useState(status);
+  const [isAttended, setIsAttended] = useState(status);
 
   const handleStatusChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newStatus = e.target.value === 'present';
-    setisAttended(newStatus);
+    setIsAttended(newStatus);
     onStatusChange(newStatus);
   };
 

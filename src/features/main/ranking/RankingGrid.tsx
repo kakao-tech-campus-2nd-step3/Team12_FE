@@ -1,13 +1,30 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Container from '@components/container';
 import { css, useTheme } from '@emotion/react';
 import { Paragraph } from '@components/text';
 import RankingItem from '@features/main/ranking/RankingItem';
-import { mockRanking } from '@/mock/ranking';
+import toast from 'react-hot-toast';
+import { RankedStudyInfo } from '@/types/ranking';
+import { getRankingList } from '@/api/study';
 
 function RankingGrid() {
+  const [rankingInfo, setRankingInfo] = useState<RankedStudyInfo[]>([]);
   const theme = useTheme();
-  const [rankingInfo] = useState(mockRanking);
+
+  useEffect(() => {
+    const fetchAssigns = async () => {
+      try {
+        const rankingListInfo = await getRankingList({ page: 0, size: 8 });
+
+        setRankingInfo(rankingListInfo.study_rank_list);
+      } catch (e) {
+        toast.error('랭킹을 불러오는 데 실패했습니다.');
+      }
+    };
+
+    fetchAssigns();
+  }, []);
+  // console.log(rankingInfo[0]);
   const headerStyle = css`
     height: 60px;
     width: 100%;
@@ -35,7 +52,7 @@ function RankingGrid() {
       </div>
       {
         rankingInfo.map((rankedStudyInfo) => {
-          const key = `study-ranking-${rankedStudyInfo.rank}-${rankedStudyInfo.name}`;
+          const key = `study-ranking-${rankedStudyInfo.rank}-${rankedStudyInfo.study_rank_info.name}`;
           return (
             <RankingItem rankedStudyInfo={rankedStudyInfo} key={key} />
           );

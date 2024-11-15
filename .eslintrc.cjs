@@ -58,5 +58,6 @@ module.exports = {
     'react/jsx-boolean-value': 'off',
     'react/jsx-no-constructed-context-values': 'off',
     'import/prefer-default-export': 'off',
+    'no-underscore-dangle': 'off'
   },
 }

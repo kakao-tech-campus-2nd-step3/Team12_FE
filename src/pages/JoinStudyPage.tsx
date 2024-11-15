@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import { toast, Toaster } from 'react-hot-toast';
+import { toast } from 'react-hot-toast';
 import { AxiosError } from 'axios';
 import routePaths from '@constants/routePaths';
 import { getStudyInfo, respondToInvitation } from '@/api/study';
@@ -51,7 +51,6 @@ export default function JoinStudyPage() {
 
   return (
     <Container width="100vw" height="100vh">
-      <Toaster position="bottom-center" reverseOrder={false} />
       {study && !inviteFailed ? (
         <AcceptInvitationModal
           open={open}

@@ -1,24 +1,29 @@
 import { createContext, ReactNode } from 'react';
 import { useSuspenseQueries } from '@tanstack/react-query';
 import { queryKeys } from '@constants/queryKeys';
-import type { StudyInfoWithMembers } from '@/types/study';
-import { getStudyInfo, getStudyMembers } from '@/api/study';
+import type { ExtendedStudyInfo } from '@/types/study';
+import { getMyRole, getStudyInfo, getStudyMembers } from '@/api/study';
 import { getAttendanceList, getDateList } from '@/api/attendance';
+import { getNoticeList } from '@/api/notice';
+import { getAssignList } from '@/api/assignment';
 
 interface StudyInfoContextProps {
   studyId: number;
   children?: ReactNode;
 }
 interface StudyInfoContextValue {
-  study: StudyInfoWithMembers;
+  study: ExtendedStudyInfo;
   refetch: () => void;
 }
 
 export const StudyInfoContext = createContext<StudyInfoContextValue>({
   study: {
     members: [],
-    studyAttendanceInfo: [],
-    attendanceDateInfo: [],
+    study_attendance_info: {
+      required_attendance: [],
+      member_attendance: {},
+    },
+    attendance_date_info: [],
     topic: '',
     name: '',
     is_open: true,
@@ -26,11 +31,12 @@ export const StudyInfoContext = createContext<StudyInfoContextValue>({
     created_at: new Date(),
     id: 0,
     profile_image: '',
+    my_role: '',
   },
   refetch: () => {},
 });
 
-function StudyInfoContextProvider({ studyId, children }: StudyInfoContextProps) {
+export function StudyInfoContextProvider({ studyId, children }: StudyInfoContextProps) {
   const {
     data: study,
     refetch,
@@ -52,14 +58,43 @@ function StudyInfoContextProvider({ studyId, children }: StudyInfoContextProps) 
         queryKey: [queryKeys.STUDY_ATTENDANCE_INFO, studyId],
         queryFn: () => getDateList(studyId),
       },
+      {
+        queryKey: [queryKeys.STUDY_NOTICE_INFO, studyId],
+        queryFn: () => getNoticeList({
+          sort: 'createdAt,desc', page: 0, size: 1, studyId,
+        }),
+      },
+      {
+        queryKey: [queryKeys.STUDY_ASSIGNMENT_INFO, studyId],
+        queryFn: () => getAssignList({
+          sort: 'createdAt,desc', page: 0, size: 1, studyId,
+        }),
+      },
+      {
+        queryKey: [queryKeys.STUDY_ROLES, studyId],
+        queryFn: () => getMyRole(studyId),
+      },
+
     ],
     combine: (result) => {
-      const [studyInfo, studyMemberInfo, attendanceInfo, dateInfo] = result;
-      const data: StudyInfoWithMembers = {
+      const [studyInfo,
+        studyMemberInfo,
+        attendanceInfo,
+        dateInfo,
+        noticeInfo,
+        assignmentInfo,
+        roleInfo,
+      ] = result;
+      const data: ExtendedStudyInfo = {
         ...(studyInfo.data),
         members: studyMemberInfo.data,
-        studyAttendanceInfo: attendanceInfo.data,
-        attendanceDateInfo: dateInfo.data.attendance_date_list,
+        study_attendance_info: attendanceInfo.data,
+        attendance_date_info: dateInfo.data.attendance_date_list,
+        notice: noticeInfo.data.notices.length === 1 ? noticeInfo.data.notices[0] : undefined,
+        assignment: assignmentInfo.data.assignments.length === 1
+          ? assignmentInfo.data.assignments[0]
+          : undefined,
+        my_role: roleInfo.data,
       };
       const refetchInfos = () => {
         studyInfo.refetch();

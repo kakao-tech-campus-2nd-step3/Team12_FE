@@ -5,11 +5,13 @@ import {
 } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import defaultBackground from '@assets/banner-background.webp';
+import toast from 'react-hot-toast';
 import Modal from '@/components/modal';
 import LeftSection from '@/features/modal/studyCreation/LeftSection';
 import RightSection from '@/features/modal/studyCreation/RightSection';
 import { type StudyCreationInputs } from '@/types/study';
 import { createStudy } from '@/api/study';
+import routePaths from '@/constants/routePaths';
 
 interface StudyCreationProps {
   open: boolean;
@@ -47,22 +49,17 @@ export default function StudyCreationModal({ open, onClose }: StudyCreationProps
     };
     formData.append('request', new Blob([JSON.stringify(requestData)], { type: 'application/json' }));
     if (data.profile_image) {
-      formData.append('profileImage', data.profile_image);
+      formData.append('profile_image', data.profile_image);
     } else {
       const defaultImageResponse = await fetch(defaultBackground);
       const blob = await defaultImageResponse.blob();
       const defaultBackgroundFile = new File([blob], 'defaultImage.webp');
-      formData.append('profileImage', defaultBackgroundFile);
-      const response = createStudy(formData);
-      if ((await response).status === 201) {
-        onClose();
-        navigate('/', { state: { message: '스터디를 생성하였습니다!' } });
-      // 민경 TODO : 추후 스터디 페이지로 이동하도록 수정
-      }
+      formData.append('profile_image', defaultBackgroundFile);
     }
-    // console.log(formData.get('request'));
-    // console.log(formData.get('profileImage'));
     createStudy(formData);
+    onClose();
+    navigate(routePaths.MAIN);
+    toast.success('스터디가 생성되었습니다!🎉');
   }
 
   return (
