@@ -10,6 +10,8 @@ const routePaths = {
   STUDY_NOTICE_EDIT: (noticeId: string | number) => `/study/notices/edit/${noticeId}`,
   STUDY_NOTICE_DETAIL: (noticeId: string | number) => `/study/notices/detail/${noticeId}`,
   STUDY_ATTENDANCE_DATE: '/study/attendance/date',
+  STUDY_ASSIGNMENT: (assignId: string | number) => `/study/assignment/${assignId}`,
+  STUDY_ASSIGNMENT_WRITE: (assignId: string | number) => `/study/assignment/write/${assignId}`,
 };
 
 export default routePaths;
